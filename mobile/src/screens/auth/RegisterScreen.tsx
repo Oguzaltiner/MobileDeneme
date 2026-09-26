@@ -1,0 +1,9 @@
+import { useState } from 'react';
+import { Pressable, Text, TextInput, View } from 'react-native';
+import { api } from '../../lib/api';
+import { useAuthStore } from '../../store/auth-store';
+export function RegisterScreen({ navigation }: { navigation: { goBack: () => void } }) {
+  const signIn = useAuthStore((s) => s.signIn); const [displayName, setDisplayName] = useState(''); const [email, setEmail] = useState(''); const [password, setPassword] = useState(''); const [error, setError] = useState(''); const [loading, setLoading] = useState(false);
+  const submit = async () => { setError(''); setLoading(true); try { await signIn(await api.register({ displayName: displayName.trim(), email: email.trim(), password })); } catch (e) { setError((e as { message?: string }).message ?? 'Kayıt oluşturulamadı.'); } finally { setLoading(false); } };
+  return <View className="flex-1 bg-background px-6 pt-16"><Pressable onPress={navigation.goBack}><Text className="text-blue-700">← Geri</Text></Pressable><Text className="mt-8 text-3xl font-bold text-foreground">Hesap oluştur</Text><TextInput accessibilityLabel="Ad" value={displayName} onChangeText={setDisplayName} placeholder="Adın" className="mt-8 rounded-2xl bg-white px-4 py-4" /><TextInput accessibilityLabel="E-posta" autoCapitalize="none" keyboardType="email-address" value={email} onChangeText={setEmail} placeholder="E-posta" className="mt-3 rounded-2xl bg-white px-4 py-4" /><TextInput accessibilityLabel="Şifre" secureTextEntry value={password} onChangeText={setPassword} placeholder="Şifre" className="mt-3 rounded-2xl bg-white px-4 py-4" />{error ? <Text className="mt-3 text-red-600">{error}</Text> : null}<Pressable disabled={loading} onPress={submit} className="mt-6 items-center rounded-2xl bg-blue-600 py-4"><Text className="font-bold text-white">{loading ? 'Oluşturuluyor…' : 'Kayıt ol'}</Text></Pressable></View>;
+}

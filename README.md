@@ -29,6 +29,8 @@ docker compose up -d postgres
 
 ```powershell
 $env:DOTNET_CLI_HOME = "$PWD/.dotnet-home"
+# Replace the username/password with the credentials configured in pgAdmin.
+$env:ConnectionStrings__Postgres = "Host=localhost;Port=5432;Database=english_learning;Username=<user>;Password=<password>"
 dotnet run --project backend/src/EnglishLearning.Api
 ```
 

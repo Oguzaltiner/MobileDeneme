@@ -1,0 +1,9 @@
+import { useState } from 'react';
+import { Pressable, Text, TextInput, View } from 'react-native';
+import { api } from '../../lib/api';
+import { useAuthStore } from '../../store/auth-store';
+export function LoginScreen({ navigation }: { navigation: { navigate: (route: 'Register') => void } }) {
+  const signIn = useAuthStore((s) => s.signIn); const [email, setEmail] = useState(''); const [password, setPassword] = useState(''); const [error, setError] = useState(''); const [loading, setLoading] = useState(false);
+  const submit = async () => { setError(''); setLoading(true); try { await signIn(await api.login({ email: email.trim(), password })); } catch (e) { setError((e as { message?: string }).message ?? 'Giriş yapılamadı.'); } finally { setLoading(false); } };
+  return <View className="flex-1 bg-background px-6 pt-20"><Text className="text-3xl font-bold text-foreground">Tekrar hoş geldin</Text><Text className="mt-2 text-muted-foreground">Öğrenme yolculuğuna devam et.</Text><TextInput accessibilityLabel="E-posta" autoCapitalize="none" keyboardType="email-address" value={email} onChangeText={setEmail} placeholder="E-posta" className="mt-10 rounded-2xl bg-white px-4 py-4 text-foreground" /><TextInput accessibilityLabel="Şifre" secureTextEntry value={password} onChangeText={setPassword} placeholder="Şifre" className="mt-3 rounded-2xl bg-white px-4 py-4 text-foreground" />{error ? <Text className="mt-3 text-red-600">{error}</Text> : null}<Pressable disabled={loading} onPress={submit} className="mt-6 items-center rounded-2xl bg-blue-600 py-4"><Text className="font-bold text-white">{loading ? 'Giriş yapılıyor…' : 'Giriş yap'}</Text></Pressable><Pressable onPress={() => navigation.navigate('Register')} className="mt-6 items-center"><Text className="text-blue-700">Hesabın yok mu? Kayıt ol</Text></Pressable></View>;
+}
