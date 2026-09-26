@@ -12,6 +12,11 @@
 - Backend Dockerfile, Docker Compose API + PostgreSQL servisi ve non-root runtime.
 - GitHub Actions CI: .NET restore/build/vulnerability audit, mobile npm ci/typecheck/Expo web export.
 - Android/iOS yayın temeli: bundle/package kimlikleri, versionCode ve EAS development/preview/production profilleri.
+- Cihaz bağlantısı için `mobile/.env.example` ve EAS profile API URL örnekleri.
+
+## Ürün kararları
+
+Memrise'in telaffuz ve konuşma pratiği, Babbel'in kısa kişiselleştirilmiş ders + aralıklı tekrar yaklaşımı ve Duolingo'nun streak/hatırlatma/haftalık ilerleme döngüsü referans alınarak Daily Mission, Coach, telaffuz, spaced review, streak, rozet ve haftalık hedef akışları birleştirildi. Gerçek konuşma yapay zekâsı ve lisanslı native-speaker video içeriği, sağlayıcı/gizlilik ve maliyet kararı gerektirdiği için sonraki ürün fazına bırakıldı.
 
 ## Doğrulamalar
 
@@ -20,6 +25,8 @@
 - `npx expo export --platform web` başarılı.
 - Dashboard smoke: haftalık hedef ve 4 rozet JSON sözleşmesi doğrulandı.
 - `docker compose convert` başarılı.
+- `npm audit --omit=dev --audit-level=high` sonucu: 0 yüksek/açık güvenlik bulgusu.
+- Auth + dashboard smoke testi: issuer doğrulandı, streak ve rozet sözleşmesi okundu.
 - Docker daemon çalışmadığı için `docker compose build api` çalıştırılamadı; Docker Desktop açıldığında tekrar edilmelidir.
 
 ## Bilinen riskler / yayın öncesi işler
@@ -29,6 +36,7 @@
 - Production ortamında `Jwt__SigningKey` güçlü secret olarak secret manager’dan verilmelidir; Compose varsayılanı yalnızca local development içindir.
 - Play Console ürünleri, Apple StoreKit ürünleri, privacy/consent, restore purchase, RTDN ve release signing yayın öncesi tamamlanmalıdır.
 - Gerçek cihaz test matrisi: Android development build, iOS development build, düşük bağlantı, büyük font, screen reader ve mağaza sandbox.
+- EAS preview/production için `https://api.example.com` örnek adresi gerçek staging/production URL ile değiştirilmelidir; fiziksel cihazda LAN IP kullanılmalıdır.
 
 ## Sonraki önerilen sıra
 
