@@ -35,6 +35,17 @@ public sealed class EntitlementService(EnglishLearningDbContext db) : IEntitleme
         return true;
     }
 
+    public async Task<bool> TryConsumeWordAsync(Guid userId, CancellationToken ct)
+    {
+        var entitlement = await GetAsync(userId, ct);
+        if (entitlement.IsPremium) return true;
+        var usage = await GetUsageAsync(userId, ct);
+        if (usage.WordsUsed >= entitlement.DailyWordLimit) return false;
+        usage.WordsUsed++;
+        await db.SaveChangesAsync(ct);
+        return true;
+    }
+
     private async Task<DailyUsage> GetUsageAsync(Guid userId, CancellationToken ct)
     {
         var today = DateOnly.FromDateTime(DateTime.UtcNow);

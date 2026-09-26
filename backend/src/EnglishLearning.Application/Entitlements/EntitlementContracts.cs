@@ -20,4 +20,5 @@ public interface IEntitlementService
     Task<EntitlementDto> GetAsync(Guid userId, CancellationToken ct);
     Task<bool> CanAccessLevelAsync(Guid userId, string? level, CancellationToken ct);
     Task<bool> TryConsumeQuizAsync(Guid userId, CancellationToken ct);
+    Task<bool> TryConsumeWordAsync(Guid userId, CancellationToken ct);
 }

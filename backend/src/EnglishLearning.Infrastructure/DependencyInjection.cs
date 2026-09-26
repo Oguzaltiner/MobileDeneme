@@ -12,6 +12,8 @@ using EnglishLearning.Application.Entitlements;
 using EnglishLearning.Infrastructure.Vocabulary;
 using EnglishLearning.Infrastructure.Dashboard;
 using EnglishLearning.Infrastructure.Entitlements;
+using EnglishLearning.Application.Reviews;
+using EnglishLearning.Infrastructure.Reviews;
 using EnglishLearning.Application.Quiz;
 using EnglishLearning.Infrastructure.Quiz;
 
@@ -36,6 +38,7 @@ public static class DependencyInjection
         services.AddScoped<IVocabularyService, VocabularyService>();
         services.AddScoped<IDashboardService, DashboardService>();
         services.AddScoped<IEntitlementService, EntitlementService>();
+        services.AddScoped<IReviewService, ReviewService>();
         services.AddScoped<IQuizService, QuizService>();
 
         return services;

@@ -15,6 +15,8 @@ public sealed class EnglishLearningDbContext(DbContextOptions<EnglishLearningDbC
     public DbSet<QuizOption> QuizOptions => Set<QuizOption>();
     public DbSet<UserEntitlement> UserEntitlements => Set<UserEntitlement>();
     public DbSet<DailyUsage> DailyUsages => Set<DailyUsage>();
+    public DbSet<UserWordProgress> UserWordProgress => Set<UserWordProgress>();
+    public DbSet<ReviewEvent> ReviewEvents => Set<ReviewEvent>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -44,6 +46,21 @@ public sealed class EnglishLearningDbContext(DbContextOptions<EnglishLearningDbC
             entity.ToTable("daily_usage"); entity.HasKey(x => new { x.UserId, x.DateUtc });
             entity.Property(x => x.DateUtc).HasColumnType("date");
             entity.HasOne(x => x.User).WithMany().HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Cascade);
+        });
+        modelBuilder.Entity<UserWordProgress>(entity =>
+        {
+            entity.ToTable("user_word_progress"); entity.HasKey(x => new { x.UserId, x.VocabularyWordId });
+            entity.Property(x => x.EaseFactor).HasPrecision(4, 2);
+            entity.HasOne(x => x.User).WithMany().HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Cascade);
+            entity.HasOne(x => x.VocabularyWord).WithMany().HasForeignKey(x => x.VocabularyWordId).OnDelete(DeleteBehavior.Cascade);
+        });
+        modelBuilder.Entity<ReviewEvent>(entity =>
+        {
+            entity.ToTable("review_events"); entity.HasKey(x => x.Id);
+            entity.Property(x => x.Rating).HasConversion<string>().HasMaxLength(10).IsRequired();
+            entity.HasIndex(x => new { x.UserId, x.CreatedAtUtc });
+            entity.HasOne(x => x.User).WithMany().HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Cascade);
+            entity.HasOne(x => x.VocabularyWord).WithMany().HasForeignKey(x => x.VocabularyWordId).OnDelete(DeleteBehavior.Cascade);
         });
         modelBuilder.Entity<RefreshToken>(entity =>
         {

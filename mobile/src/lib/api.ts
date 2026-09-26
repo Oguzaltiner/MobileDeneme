@@ -15,6 +15,7 @@ export type QuizSession = { id: string; status: number; questionCount: number; a
 export type QuizAnswerResult = { questionId: string; isCorrect: boolean; correctOptionKey: string; correctCount: number; answeredCount: number };
 export type QuizResult = { id: string; status: number; questionCount: number; answeredCount: number; correctCount: number; scorePercent: number };
 export type Entitlement = { plan: number; isPremium: boolean; maxLevel: string; dailyWordLimit: number; dailyQuizLimit: number; adsEnabled: boolean; dailyWordsUsed: number; dailyQuizzesUsed: number; features: string[] };
+export type ReviewResult = { wordId: string; rating: number; repetition: number; intervalDays: number; dueAtUtc: string; dailyWordsUsed: number; dailyWordLimit: number };
 let accessToken: string | null = null;
 export function setAccessToken(token: string | null) { accessToken = token; }
 async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
@@ -51,4 +52,5 @@ export const api = {
   completeQuiz: (id: string) => request<QuizResult>(`/quizzes/sessions/${id}/complete`, { method: 'POST' }),
   entitlement: () => request<Entitlement>('/me/entitlement'),
   verifyGooglePurchase: (body: { productId: string; purchaseToken: string }) => request<Entitlement>('/billing/google-play/verify', { method: 'POST', body: JSON.stringify(body) }),
+  submitReview: (body: { wordId: string; rating: 0 | 1 | 2 | 3 }) => request<ReviewResult>('/reviews', { method: 'POST', body: JSON.stringify(body) }),
 };

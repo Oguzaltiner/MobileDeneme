@@ -83,7 +83,7 @@ Bu dosya, ürün kararlarını uygulanabilir dikey dilimlere çeviren ortak sır
 
 ## Diğer sıralı işler
 
-1. Review event API + server-authoritative spaced repetition.
+1. Review event API + server-authoritative spaced repetition. **In progress — ilk dikey dilim tamamlandı**
 2. Quiz/Test Engine: 4 seçenekli sınav akışı (bu task).
 3. Monetization: Free + Premium paketleri.
 4. Offline review queue ve haftalık istatistikler.
