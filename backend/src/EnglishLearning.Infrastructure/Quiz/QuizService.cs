@@ -1,16 +1,20 @@
 using EnglishLearning.Application.Quiz;
+using EnglishLearning.Application.Entitlements;
 using EnglishLearning.Domain;
 using EnglishLearning.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 namespace EnglishLearning.Infrastructure.Quiz;
 
-public sealed class QuizService(EnglishLearningDbContext db) : IQuizService
+public sealed class QuizService(EnglishLearningDbContext db, IEntitlementService entitlements) : IQuizService
 {
     public async Task<QuizSessionDto?> CreateAsync(Guid userId, CreateQuizRequest request, CancellationToken ct)
     {
         var count = request.QuestionCount is 10 ? 10 : 5;
+        if (!await entitlements.CanAccessLevelAsync(userId, request.Level, ct)) return null;
         var query = db.VocabularyWords.AsNoTracking().AsQueryable();
+        var entitlement = await entitlements.GetAsync(userId, ct);
+        if (!entitlement.IsPremium) query = query.Where(x => x.Level == "A1" || x.Level == "A2");
         if (!string.IsNullOrWhiteSpace(request.Level)) query = query.Where(x => x.Level == request.Level);
         if (!string.IsNullOrWhiteSpace(request.Category)) query = query.Where(x => x.Category == request.Category);
         var words = await query.OrderBy(_ => Guid.NewGuid()).Take(count).ToListAsync(ct);

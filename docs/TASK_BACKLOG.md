@@ -50,7 +50,7 @@ Bu dosya, ürün kararlarını uygulanabilir dikey dilimlere çeviren ortak sır
 
 ## Sıradaki task — Monetization: Free + Premium paketleri
 
-**Durum:** Next — quiz akışından sonra başlayacak  
+**Durum:** In progress — entitlement sözleşmesi ve paket matrisi hazır
 **Öncelik:** P1 — ilk öğrenme döngüsü ve review API'sinden sonra  
 **Amaç:** İngilizce kelime öğrenme uygulamasını ücretsiz kullanıcı edinimi ile Premium abonelik/ürün gelirini birlikte destekleyecek şekilde paketlemek.
 

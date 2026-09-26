@@ -13,6 +13,7 @@ public sealed class EnglishLearningDbContext(DbContextOptions<EnglishLearningDbC
     public DbSet<QuizSession> QuizSessions => Set<QuizSession>();
     public DbSet<QuizQuestion> QuizQuestions => Set<QuizQuestion>();
     public DbSet<QuizOption> QuizOptions => Set<QuizOption>();
+    public DbSet<UserEntitlement> UserEntitlements => Set<UserEntitlement>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -29,6 +30,13 @@ public sealed class EnglishLearningDbContext(DbContextOptions<EnglishLearningDbC
             entity.ToTable("user_settings"); entity.HasKey(x => x.UserId);
             entity.Property(x => x.CurrentLevel).HasMaxLength(10); entity.Property(x => x.LearningPurpose).HasMaxLength(80);
             entity.Property(x => x.PreferredLanguage).HasMaxLength(10).IsRequired(); entity.Property(x => x.DailyGoal).HasDefaultValue(10);
+        });
+        modelBuilder.Entity<UserEntitlement>(entity =>
+        {
+            entity.ToTable("user_entitlements"); entity.HasKey(x => x.UserId);
+            entity.Property(x => x.Plan).HasConversion<string>().HasMaxLength(20).IsRequired();
+            entity.Property(x => x.Provider).HasMaxLength(30); entity.Property(x => x.ProductId).HasMaxLength(160);
+            entity.HasOne(x => x.User).WithOne().HasForeignKey<UserEntitlement>(x => x.UserId).OnDelete(DeleteBehavior.Cascade);
         });
         modelBuilder.Entity<RefreshToken>(entity =>
         {

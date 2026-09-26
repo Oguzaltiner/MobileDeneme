@@ -14,6 +14,7 @@ export type QuizQuestion = { id: string; order: number; type: number; prompt: st
 export type QuizSession = { id: string; status: number; questionCount: number; answeredCount: number; correctCount: number; questions: QuizQuestion[] };
 export type QuizAnswerResult = { questionId: string; isCorrect: boolean; correctOptionKey: string; correctCount: number; answeredCount: number };
 export type QuizResult = { id: string; status: number; questionCount: number; answeredCount: number; correctCount: number; scorePercent: number };
+export type Entitlement = { plan: number; isPremium: boolean; maxLevel: string; dailyWordLimit: number; dailyQuizLimit: number; adsEnabled: boolean; features: string[] };
 let accessToken: string | null = null;
 export function setAccessToken(token: string | null) { accessToken = token; }
 async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
@@ -48,4 +49,5 @@ export const api = {
   getQuiz: (id: string) => request<QuizSession>(`/quizzes/sessions/${id}`),
   answerQuiz: (sessionId: string, questionId: string, optionKey: string) => request<QuizAnswerResult>(`/quizzes/sessions/${sessionId}/questions/${questionId}/answers`, { method: 'POST', body: JSON.stringify({ optionKey }) }),
   completeQuiz: (id: string) => request<QuizResult>(`/quizzes/sessions/${id}/complete`, { method: 'POST' }),
+  entitlement: () => request<Entitlement>('/me/entitlement'),
 };

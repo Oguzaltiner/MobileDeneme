@@ -8,8 +8,10 @@ using Microsoft.AspNetCore.Identity;
 using EnglishLearning.Infrastructure.Auth;
 using EnglishLearning.Application.Vocabulary;
 using EnglishLearning.Application.Dashboard;
+using EnglishLearning.Application.Entitlements;
 using EnglishLearning.Infrastructure.Vocabulary;
 using EnglishLearning.Infrastructure.Dashboard;
+using EnglishLearning.Infrastructure.Entitlements;
 using EnglishLearning.Application.Quiz;
 using EnglishLearning.Infrastructure.Quiz;
 
@@ -33,6 +35,7 @@ public static class DependencyInjection
         services.AddSingleton<ITokenService, JwtTokenService>();
         services.AddScoped<IVocabularyService, VocabularyService>();
         services.AddScoped<IDashboardService, DashboardService>();
+        services.AddScoped<IEntitlementService, EntitlementService>();
         services.AddScoped<IQuizService, QuizService>();
 
         return services;
