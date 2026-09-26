@@ -10,8 +10,21 @@ public sealed class ReviewService(EnglishLearningDbContext db, IEntitlementServi
 {
     public async Task<ReviewResult?> SubmitAsync(Guid userId, SubmitReviewRequest request, CancellationToken ct)
     {
+        if (string.IsNullOrWhiteSpace(request.ClientEventId) || request.ClientEventId.Length > 100)
+            return null;
         var wordExists = await db.VocabularyWords.AnyAsync(x => x.Id == request.WordId, ct);
         if (!wordExists) return null;
+
+        var existingEvent = await db.ReviewEvents.AsNoTracking()
+            .SingleOrDefaultAsync(x => x.UserId == userId && x.ClientEventId == request.ClientEventId, ct);
+        if (existingEvent is not null)
+        {
+            var existingProgress = await db.UserWordProgress.AsNoTracking()
+                .SingleOrDefaultAsync(x => x.UserId == userId && x.VocabularyWordId == existingEvent.VocabularyWordId, ct);
+            if (existingProgress is null) return null;
+            var existingEntitlement = await entitlements.GetAsync(userId, ct);
+            return new(existingEvent.VocabularyWordId, existingEvent.Rating, existingProgress.Repetition, existingProgress.IntervalDays, existingProgress.DueAtUtc, existingEntitlement.DailyWordsUsed, existingEntitlement.DailyWordLimit);
+        }
         if (!await entitlements.TryConsumeWordAsync(userId, ct))
             throw new DailyLimitExceededException("Daily word limit reached. Upgrade to Premium for unlimited learning.");
 
@@ -35,7 +48,7 @@ public sealed class ReviewService(EnglishLearningDbContext db, IEntitlementServi
         progress.EaseFactor = Math.Clamp(previousEase + request.Rating switch { ReviewRating.Again => -0.2m, ReviewRating.Hard => -0.05m, ReviewRating.Easy => 0.15m, _ => 0m }, 1.3m, 3.2m);
         progress.LastReviewedAtUtc = DateTime.UtcNow;
         progress.DueAtUtc = progress.LastReviewedAtUtc.Value.AddDays(interval);
-        db.ReviewEvents.Add(new ReviewEvent { UserId = userId, VocabularyWordId = request.WordId, Rating = request.Rating });
+        db.ReviewEvents.Add(new ReviewEvent { UserId = userId, VocabularyWordId = request.WordId, Rating = request.Rating, ClientEventId = request.ClientEventId });
         await db.SaveChangesAsync(ct);
         var entitlement = await entitlements.GetAsync(userId, ct);
         return new(request.WordId, request.Rating, progress.Repetition, progress.IntervalDays, progress.DueAtUtc, entitlement.DailyWordsUsed, entitlement.DailyWordLimit);

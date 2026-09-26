@@ -86,6 +86,6 @@ Bu dosya, ürün kararlarını uygulanabilir dikey dilimlere çeviren ortak sır
 1. Review event API + server-authoritative spaced repetition. **In progress — ilk dikey dilim tamamlandı**
 2. Quiz/Test Engine: 4 seçenekli sınav akışı (bu task).
 3. Monetization: Free + Premium paketleri.
-4. Offline review queue ve haftalık istatistikler. **Haftalık istatistik API’si tamamlandı; offline queue sırada**
+4. Offline review queue ve haftalık istatistikler. **Done — haftalık istatistik API’si ve AsyncStorage tabanlı idempotent review kuyruğu tamamlandı**
 5. Audio/listening ve erişilebilirlik geçişi.
 6. Admin web uygulaması, içerik yayınlama ve audit.

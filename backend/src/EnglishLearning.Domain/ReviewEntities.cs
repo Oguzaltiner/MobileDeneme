@@ -27,6 +27,7 @@ public sealed class ReviewEvent
     public Guid UserId { get; set; }
     public Guid VocabularyWordId { get; set; }
     public ReviewRating Rating { get; set; }
+    public string ClientEventId { get; set; } = null!;
     public DateTime CreatedAtUtc { get; set; } = DateTime.UtcNow;
     public AppUser User { get; set; } = null!;
     public VocabularyWord VocabularyWord { get; set; } = null!;

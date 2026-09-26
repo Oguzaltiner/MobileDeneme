@@ -53,6 +53,6 @@ export const api = {
   completeQuiz: (id: string) => request<QuizResult>(`/quizzes/sessions/${id}/complete`, { method: 'POST' }),
   entitlement: () => request<Entitlement>('/me/entitlement'),
   verifyGooglePurchase: (body: { productId: string; purchaseToken: string }) => request<Entitlement>('/billing/google-play/verify', { method: 'POST', body: JSON.stringify(body) }),
-  submitReview: (body: { wordId: string; rating: 0 | 1 | 2 | 3 }) => request<ReviewResult>('/reviews', { method: 'POST', body: JSON.stringify(body) }),
+  submitReview: (body: { wordId: string; rating: 0 | 1 | 2 | 3; clientEventId: string }) => request<ReviewResult>('/reviews', { method: 'POST', body: JSON.stringify(body) }),
   weeklyStats: () => request<WeeklyLearningStats>('/statistics/weekly'),
 };

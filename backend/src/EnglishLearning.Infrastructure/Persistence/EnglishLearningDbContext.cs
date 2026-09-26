@@ -58,7 +58,9 @@ public sealed class EnglishLearningDbContext(DbContextOptions<EnglishLearningDbC
         {
             entity.ToTable("review_events"); entity.HasKey(x => x.Id);
             entity.Property(x => x.Rating).HasConversion<string>().HasMaxLength(10).IsRequired();
+            entity.Property(x => x.ClientEventId).HasMaxLength(100).IsRequired();
             entity.HasIndex(x => new { x.UserId, x.CreatedAtUtc });
+            entity.HasIndex(x => new { x.UserId, x.ClientEventId }).IsUnique();
             entity.HasOne(x => x.User).WithMany().HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Cascade);
             entity.HasOne(x => x.VocabularyWord).WithMany().HasForeignKey(x => x.VocabularyWordId).OnDelete(DeleteBehavior.Cascade);
         });
