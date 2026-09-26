@@ -5,6 +5,10 @@ export type AuthResponse = { accessToken: string; refreshToken: string; accessTo
 export type LoginRequest = { email: string; password: string };
 export type RegisterRequest = LoginRequest & { displayName?: string };
 export type OnboardingRequest = { currentLevel: 'A1'|'A2'|'B1'|'B2'|'C1'|'C2'; dailyGoal: number; learningPurpose: 'general'|'business'|'academic'|'travel'|'exam' };
+export type VocabularyOption = { value: string; label: string };
+export type VocabularyWord = { id: string; term: string; pronunciation: string; partOfSpeech: string; definition: string; translation: string; level: string; category: string; exampleSentence?: string | null };
+export type VocabularyPage = { items: VocabularyWord[]; page: number; pageSize: number; totalCount: number };
+export type DashboardSummary = { currentLevel?: string | null; dailyGoal: number; todayProgress: number; totalWordsLearned: number; dueReviewCount: number };
 let accessToken: string | null = null;
 export function setAccessToken(token: string | null) { accessToken = token; }
 async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
@@ -19,4 +23,15 @@ export const api = {
   refresh: (refreshToken: string) => request<AuthResponse>('/auth/refresh', { method: 'POST', body: JSON.stringify({ refreshToken }) }),
   completeOnboarding: (body: OnboardingRequest) => request<AuthUser>('/auth/onboarding', { method: 'PUT', body: JSON.stringify(body) }),
   info: () => request<{ service: string; version: string; status: string }>('/info'),
+  vocabularyLevels: () => request<VocabularyOption[]>('/vocabulary/levels'),
+  vocabularyCategories: () => request<VocabularyOption[]>('/vocabulary/categories'),
+  words: (params: { level?: string; category?: string; search?: string } = {}) => {
+    const query = new URLSearchParams();
+    if (params.level) query.set('level', params.level);
+    if (params.category) query.set('category', params.category);
+    if (params.search) query.set('search', params.search);
+    return request<VocabularyPage>(`/vocabulary/words${query.toString() ? `?${query.toString()}` : ''}`);
+  },
+  word: (id: string) => request<VocabularyWord>(`/vocabulary/words/${encodeURIComponent(id)}`),
+  dashboard: () => request<DashboardSummary>('/dashboard'),
 };

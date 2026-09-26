@@ -493,6 +493,15 @@ The implementation phase should add tests proportionate to risk:
 - Learning session and review event API.
 - FSRS-compatible scheduling adapter and basic dashboard.
 
+### Phase 1.5 — monetization discovery and entitlement foundation
+
+- Define Free/Premium feature matrix, package limits, ad placements, and trial strategy.
+- Model Play Store/App Store product identifiers and server-authoritative entitlements.
+- Build revenue scenarios for 1K/10K/50K/100K/500K active users, including store fees and adjustable assumptions.
+- Validate current store policies, Türkiye tax/invoicing obligations, privacy consent, refunds, and subscription lifecycle handling before launch.
+
+Detailed acceptance criteria and deliverables are tracked in [`docs/TASK_BACKLOG.md`](TASK_BACKLOG.md).
+
 ### Phase 2 — retention and quality
 
 - Offline review queue, weekly statistics, streak accuracy, richer empty/error states.
@@ -559,4 +568,3 @@ This baseline is ready for an architecture agent to turn into a repository scaff
 - [Expo EAS workflows](https://docs.expo.dev/eas/workflows/get-started/)
 - [NativeWind documentation](https://www.nativewind.dev/docs)
 - [NativeWind installation](https://www.nativewind.dev/docs/getting-started/installation)
-

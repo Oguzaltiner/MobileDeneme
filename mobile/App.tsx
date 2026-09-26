@@ -10,21 +10,14 @@ import { useAuthStore } from './src/store/auth-store';
 import { LoginScreen } from './src/screens/auth/LoginScreen';
 import { RegisterScreen } from './src/screens/auth/RegisterScreen';
 import { OnboardingScreen } from './src/screens/onboarding/OnboardingScreen';
+import { HomeScreen } from './src/screens/home/HomeScreen';
+import { VocabularyScreen } from './src/screens/vocabulary/VocabularyScreen';
+import { WordDetailScreen } from './src/screens/vocabulary/WordDetailScreen';
+import { LearnScreen } from './src/screens/learning/LearnScreen';
 
-type RootStackParamList = { Login: undefined; Register: undefined; Onboarding: undefined; Home: undefined };
+export type RootStackParamList = { Login: undefined; Register: undefined; Onboarding: undefined; Home: undefined; Vocabulary: undefined; WordDetail: { id: string }; Learn: undefined };
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const queryClient = new QueryClient();
-
-function HomeScreen() {
-  const signOut = useAuthStore((state) => state.signOut);
-  return (
-    <View className="flex-1 items-center justify-center bg-background px-6">
-      <Text className="text-3xl font-bold text-foreground">English Learning</Text>
-      <Text className="mt-3 text-center text-base text-muted-foreground">Öğrenmeye hazırsın.</Text>
-      <Text onPress={() => void signOut()} className="mt-8 text-blue-700">Çıkış yap</Text>
-    </View>
-  );
-}
 
 export default function App() {
   const { user, booting, restore } = useAuthStore();
@@ -35,7 +28,7 @@ export default function App() {
       <NavigationContainer>
         <StatusBar style="auto" />
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-          {!user ? <><Stack.Screen name="Login" component={LoginScreen} /><Stack.Screen name="Register" component={RegisterScreen} /></> : !user.onboardingCompleted ? <Stack.Screen name="Onboarding" component={OnboardingScreen} /> : <Stack.Screen name="Home" component={HomeScreen} />}
+          {!user ? <><Stack.Screen name="Login" component={LoginScreen} /><Stack.Screen name="Register" component={RegisterScreen} /></> : !user.onboardingCompleted ? <Stack.Screen name="Onboarding" component={OnboardingScreen} /> : <><Stack.Screen name="Home" component={HomeScreen} /><Stack.Screen name="Vocabulary" component={VocabularyScreen} /><Stack.Screen name="WordDetail" component={WordDetailScreen} /><Stack.Screen name="Learn" component={LearnScreen} /></>}
         </Stack.Navigator>
       </NavigationContainer>
     </QueryClientProvider>

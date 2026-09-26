@@ -6,6 +6,10 @@ using EnglishLearning.Application.Auth;
 using EnglishLearning.Domain;
 using Microsoft.AspNetCore.Identity;
 using EnglishLearning.Infrastructure.Auth;
+using EnglishLearning.Application.Vocabulary;
+using EnglishLearning.Application.Dashboard;
+using EnglishLearning.Infrastructure.Vocabulary;
+using EnglishLearning.Infrastructure.Dashboard;
 
 namespace EnglishLearning.Infrastructure;
 
@@ -25,6 +29,8 @@ public static class DependencyInjection
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IAuthStore, AuthStore>();
         services.AddSingleton<ITokenService, JwtTokenService>();
+        services.AddScoped<IVocabularyService, VocabularyService>();
+        services.AddScoped<IDashboardService, DashboardService>();
 
         return services;
     }
