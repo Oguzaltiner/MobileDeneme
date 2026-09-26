@@ -1,5 +1,6 @@
 using EnglishLearning.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -28,11 +29,11 @@ builder.Services.AddHealthChecks()
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment() && builder.Configuration.GetValue<bool>("Database:EnsureCreated"))
+if (app.Environment.IsDevelopment() && builder.Configuration.GetValue<bool>("Database:ApplyMigrations"))
 {
     using var scope = app.Services.CreateScope();
     var db = scope.ServiceProvider.GetRequiredService<EnglishLearning.Infrastructure.Persistence.EnglishLearningDbContext>();
-    db.Database.EnsureCreated();
+    db.Database.Migrate();
 }
 
 // Configure the HTTP request pipeline.

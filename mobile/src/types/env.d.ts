@@ -3,3 +3,5 @@ declare const process: {
     EXPO_PUBLIC_API_BASE_URL?: string;
   };
 };
+
+declare module '*.css';
