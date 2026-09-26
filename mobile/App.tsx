@@ -14,12 +14,13 @@ import { HomeScreen } from './src/screens/home/HomeScreen';
 import { VocabularyScreen } from './src/screens/vocabulary/VocabularyScreen';
 import { WordDetailScreen } from './src/screens/vocabulary/WordDetailScreen';
 import { LearnScreen } from './src/screens/learning/LearnScreen';
+import { DailyMissionScreen } from './src/screens/learning/DailyMissionScreen';
 import { QuizStartScreen } from './src/screens/quiz/QuizStartScreen';
 import { QuizQuestionScreen } from './src/screens/quiz/QuizQuestionScreen';
 import { QuizResultScreen } from './src/screens/quiz/QuizResultScreen';
 import { PremiumScreen } from './src/screens/premium/PremiumScreen';
 
-export type RootStackParamList = { Login: undefined; Register: undefined; Onboarding: undefined; Home: undefined; Vocabulary: undefined; WordDetail: { id: string }; Learn: undefined; QuizStart: undefined; QuizQuestion: { sessionId: string }; QuizResult: { sessionId: string }; Premium: undefined };
+export type RootStackParamList = { Login: undefined; Register: undefined; Onboarding: undefined; Home: undefined; Vocabulary: undefined; WordDetail: { id: string }; Learn: undefined; DailyMission: undefined; QuizStart: undefined; QuizQuestion: { sessionId: string }; QuizResult: { sessionId: string }; Premium: undefined };
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const queryClient = new QueryClient();
 
@@ -32,7 +33,7 @@ export default function App() {
       <NavigationContainer>
         <StatusBar style="auto" />
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-          {!user ? <><Stack.Screen name="Login" component={LoginScreen} /><Stack.Screen name="Register" component={RegisterScreen} /></> : !user.onboardingCompleted ? <Stack.Screen name="Onboarding" component={OnboardingScreen} /> : <><Stack.Screen name="Home" component={HomeScreen} /><Stack.Screen name="Vocabulary" component={VocabularyScreen} /><Stack.Screen name="WordDetail" component={WordDetailScreen} /><Stack.Screen name="Learn" component={LearnScreen} /><Stack.Screen name="QuizStart" component={QuizStartScreen} /><Stack.Screen name="QuizQuestion" component={QuizQuestionScreen} /><Stack.Screen name="QuizResult" component={QuizResultScreen} /><Stack.Screen name="Premium" component={PremiumScreen} /></>}
+          {!user ? <><Stack.Screen name="Login" component={LoginScreen} /><Stack.Screen name="Register" component={RegisterScreen} /></> : !user.onboardingCompleted ? <Stack.Screen name="Onboarding" component={OnboardingScreen} /> : <><Stack.Screen name="Home" component={HomeScreen} /><Stack.Screen name="Vocabulary" component={VocabularyScreen} /><Stack.Screen name="WordDetail" component={WordDetailScreen} /><Stack.Screen name="Learn" component={LearnScreen} /><Stack.Screen name="DailyMission" component={DailyMissionScreen} /><Stack.Screen name="QuizStart" component={QuizStartScreen} /><Stack.Screen name="QuizQuestion" component={QuizQuestionScreen} /><Stack.Screen name="QuizResult" component={QuizResultScreen} /><Stack.Screen name="Premium" component={PremiumScreen} /></>}
         </Stack.Navigator>
       </NavigationContainer>
     </QueryClientProvider>
