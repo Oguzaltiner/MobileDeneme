@@ -1,4 +1,21 @@
 services:
+  api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: mobiledeneme-api
+    restart: unless-stopped
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__Postgres: Host=postgres;Port=5432;Database=english_learning;Username=english_learning;Password=${POSTGRES_PASSWORD:-english_learning_local}
+      Jwt__SigningKey: ${JWT_SIGNING_KEY:-local-development-key-change-me-please-1234567890}
+      Database__ApplyMigrations: "true"
+    ports:
+      - "5057:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
   postgres:
     image: postgres:16-alpine
     container_name: mobiledeneme-postgres

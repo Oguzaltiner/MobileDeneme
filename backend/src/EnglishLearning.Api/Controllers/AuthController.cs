@@ -2,11 +2,13 @@ using System.Security.Claims;
 using EnglishLearning.Application.Auth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace EnglishLearning.Api.Controllers;
 
 [ApiController]
 [Route("api/v1/auth")]
+[EnableRateLimiting("auth")]
 public sealed class AuthController(IAuthService auth) : ControllerBase
 {
     [HttpPost("register")]
