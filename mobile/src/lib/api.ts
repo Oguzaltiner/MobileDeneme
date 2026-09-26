@@ -50,4 +50,5 @@ export const api = {
   answerQuiz: (sessionId: string, questionId: string, optionKey: string) => request<QuizAnswerResult>(`/quizzes/sessions/${sessionId}/questions/${questionId}/answers`, { method: 'POST', body: JSON.stringify({ optionKey }) }),
   completeQuiz: (id: string) => request<QuizResult>(`/quizzes/sessions/${id}/complete`, { method: 'POST' }),
   entitlement: () => request<Entitlement>('/me/entitlement'),
+  verifyGooglePurchase: (body: { productId: string; purchaseToken: string }) => request<Entitlement>('/billing/google-play/verify', { method: 'POST', body: JSON.stringify(body) }),
 };

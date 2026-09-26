@@ -33,3 +33,7 @@ Bu belge satın alma sağlayıcısı bağlanmadan önce ürün sınırlarını v
 3. Günlük kelime/quiz kullanım sayaçları ve Free limitlerinin tüm endpointlerde uygulanması.
 4. Mobil paywall, consent ve abonelik durum ekranı.
 5. Paywall görüntüleme, satın alma, yenileme ve iptal analitik olayları.
+
+## Google Play satın alma notu
+
+Mobildeki Premium ekranı Google Play Billing ürün kimlikleri `premium_monthly` ve `premium_yearly` ile hazırlandı. Gerçek satın alma için bu ürünlerin Play Console’da oluşturulması, uygulamanın `com.oguzaltiner.englishlearning` paket adıyla imzalı bir development/release build olarak kurulması ve backend’e Google Play Developer API servis hesabı eklenmesi gerekir. Expo Go native IAP modülünü çalıştırmaz; satın alma testi gerçek Android cihazda development build ile yapılmalıdır. Backend doğrulaması yapılandırılmadan entitlement verilmez.
