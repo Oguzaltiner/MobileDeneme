@@ -2,29 +2,29 @@
 max_threads = 4
 
 [agents.task_planner]
-description = "Plans complex work."
+description = "Plans complex React Native and ASP.NET Core work."
 config_file = "agents/task-planner.toml"
 [agents.solution_architect]
-description = "Analyzes architecture."
+description = "Analyzes mobile/backend architecture and chooses .NET 9 or 10 during initial setup."
 config_file = "agents/solution-architect.toml"
 [agents.implementation_worker]
-description = "Implements bounded changes; no commits or pushes."
+description = "Implements bounded mobile or backend changes without committing or pushing."
 config_file = "agents/implementation-worker.toml"
 [agents.backend_reviewer]
-description = "Reviews server code and APIs."
+description = "Reviews ASP.NET Core APIs, business rules, compatibility, and regressions."
 config_file = "agents/backend-reviewer.toml"
 [agents.db_reviewer]
-description = "Reviews persistence and data integrity."
+description = "Reviews persistence, queries, schema, migrations, transactions, and integrity."
 config_file = "agents/db-reviewer.toml"
-[agents.frontend_reviewer]
-description = "Reviews UI and client behavior."
-config_file = "agents/frontend-reviewer.toml"
+[agents.mobile_reviewer]
+description = "Reviews React Native behavior across iOS and Android, mobile state, native integration, and API compatibility."
+config_file = "agents/mobile-reviewer.toml"
 [agents.security_reviewer]
-description = "Reviews security boundaries."
+description = "Reviews mobile/backend trust boundaries, permissions, secrets, tokens, and sensitive data."
 config_file = "agents/security-reviewer.toml"
 [agents.test_agent]
-description = "Analyzes regression risk and tests."
+description = "Analyzes React Native and .NET regression risks and useful tests."
 config_file = "agents/test-agent.toml"
 [agents.reviewer]
-description = "Final production review."
+description = "Performs final production-focused review of the complete mobile/backend diff."
 config_file = "agents/reviewer.toml"

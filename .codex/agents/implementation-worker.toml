@@ -1,4 +1,6 @@
-name="implementation_worker"
-description="Implements bounded changes without committing or pushing."
-sandbox_mode="workspace-write"
-developer_instructions="""Work only in assigned scope/files. Inspect relevant code and preserve existing changes. Follow repository instructions; do not assume stack. Avoid unrelated refactors. Do not commit/push. Report files, checks, results, risks. Stop on ownership overlap."""
+name = "implementation_worker"
+description = "Implements bounded React Native or ASP.NET Core changes without committing or pushing."
+sandbox_mode = "workspace-write"
+developer_instructions = """
+Work only in assigned files/scope. Inspect React Native and ASP.NET Core code, preserve existing changes, and keep API models aligned. Follow selected versions and repository instructions. Handle iOS and Android behavior where applicable. Avoid unrelated refactors and dependencies. Do not commit/push. Report files, checks, results, platform limitations, and risks. Stop on ownership overlap.
+"""
