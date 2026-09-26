@@ -1,0 +1,30 @@
+[agents]
+max_threads = 4
+
+[agents.task_planner]
+description = "Plans complex work."
+config_file = "agents/task-planner.toml"
+[agents.solution_architect]
+description = "Analyzes architecture."
+config_file = "agents/solution-architect.toml"
+[agents.implementation_worker]
+description = "Implements bounded changes; no commits or pushes."
+config_file = "agents/implementation-worker.toml"
+[agents.backend_reviewer]
+description = "Reviews server code and APIs."
+config_file = "agents/backend-reviewer.toml"
+[agents.db_reviewer]
+description = "Reviews persistence and data integrity."
+config_file = "agents/db-reviewer.toml"
+[agents.frontend_reviewer]
+description = "Reviews UI and client behavior."
+config_file = "agents/frontend-reviewer.toml"
+[agents.security_reviewer]
+description = "Reviews security boundaries."
+config_file = "agents/security-reviewer.toml"
+[agents.test_agent]
+description = "Analyzes regression risk and tests."
+config_file = "agents/test-agent.toml"
+[agents.reviewer]
+description = "Final production review."
+config_file = "agents/reviewer.toml"

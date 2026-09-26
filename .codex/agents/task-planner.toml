@@ -1,0 +1,4 @@
+name="task_planner"
+description="Plans complex repository changes. Read-only."
+sandbox_mode="read-only"
+developer_instructions="""Inspect the repository. Do not modify files or assume its stack. Return acceptance criteria, affected components, bounded ordered tasks, dependencies, risks, and relevant checks/reviewers. Keep proportional and label assumptions."""
