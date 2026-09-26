@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: mobiledeneme-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: english_learning
+      POSTGRES_USER: english_learning
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-english_learning_local}
+    ports:
+      - "5432:5432"
+    volumes:
+      - mobiledeneme-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U english_learning -d english_learning"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  mobiledeneme-postgres-data:
