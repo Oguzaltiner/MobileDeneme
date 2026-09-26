@@ -2,7 +2,53 @@
 
 Bu dosya, ürün kararlarını uygulanabilir dikey dilimlere çeviren ortak sıradır. Her task uygulanmadan önce kapsamı, kabul kriterleri ve mağaza/uyumluluk riskleri netleştirilir.
 
-## Sıradaki task — Monetization: Free + Premium paketleri
+## Sıradaki task — Quiz/Test Engine: 4 seçenekli sınav akışı
+
+**Durum:** Queued  
+**Öncelik:** P1 — vocabulary catalog sonrası, review event kalıcılığından önce MVP öğrenme deneyimi  
+**Amaç:** Kullanıcıya yalnızca kelime göstermeyen; soruyu, dört seçeneği, cevabı ve sonucu olan ölçülebilir bir test deneyimi sunmak.
+
+### Ürün şekli
+
+- Quiz başlangıcında seviye/kategori ve soru sayısı seçilir: ilk MVP için 5 veya 10 soru.
+- Soru tipleri ilk sürümde iki türle sınırlı tutulur: İngilizce kelime → Türkçe anlam ve İngilizce tanım → kelime.
+- Her soruda tam 4 seçenek bulunur; tek doğru cevap vardır.
+- Çeldiriciler aynı seviye ve mümkünse aynı kategori/kelime türünden seçilir; tekrar eden, doğru cevaba çok benzeyen veya boş seçenek üretilmez.
+- Kullanıcı bir cevabı işaretledikten sonra doğru/yanlış sonucu ve kısa açıklama görür; soru başına tek cevap hakkı vardır.
+- Quiz sonunda skor, doğru/yanlış sayısı, başarı yüzdesi ve tekrar önerisi gösterilir.
+- İlk MVP cevapları öğrenme istatistiğine kaydedilebilir; FSRS/sınav ağırlığı ve ayrıntılı review scheduling ayrı task olarak kalır.
+
+### Backend tasarımı
+
+- Auth korumalı quiz session modeli: kullanıcı, filtre, soru sırası, durum, başlangıç/bitiş zamanı ve skor.
+- Soru cevabı mobil istemciye `correctAnswer` veya cevap anahtarı sızdırmadan gönderilir; doğrulama sunucuda yapılır.
+- Önerilen endpoint sınırı:
+  - `POST /api/v1/quizzes/sessions`
+  - `GET /api/v1/quizzes/sessions/{id}`
+  - `POST /api/v1/quizzes/sessions/{id}/answers`
+  - `POST /api/v1/quizzes/sessions/{id}/complete`
+- Session için süre/tekrar oynama/idempotency kuralları tanımlanır. Başka kullanıcının session id'si erişilemez.
+- Soru üretimi deterministik ve test edilebilir bir servis olur; içerik yoksa quiz başlatma anlamlı hata döndürür.
+
+### Mobil tasarımı
+
+- `QuizStartScreen`: seviye, kategori ve soru sayısı seçimi.
+- `QuizQuestionScreen`: ilerleme göstergesi, soru, 4 şık, seçim sonrası açıklama ve sonraki soru.
+- `QuizResultScreen`: skor, başarı yüzdesi, yanlışlar ve tekrar başlat/ana sayfaya dön aksiyonları.
+- Loading, network error, boş katalog, session expired ve tekrar gönderim durumları açıkça gösterilir.
+
+### Kabul kriterleri
+
+- Giriş yapmış kullanıcı 5/10 soruluk quiz başlatabilir.
+- Her soruda tam 4 benzersiz seçenek ve tek doğru cevap vardır.
+- Doğru cevap istemciye önceden açık edilmez; cevap sunucuda doğrulanır.
+- Kullanıcı aynı soruya ikinci kez cevap gönderemez.
+- Quiz yarıda kapanırsa session durumu güvenli biçimde devam ettirilebilir veya sonlandırılabilir.
+- Sonuç ekranı doğru sayısı, toplam soru ve yüzdeyi sunucudan gelen veriye göre gösterir.
+- Aynı kullanıcı dışındaki istekler 401/403 alır; süresi dolan session tekrar kullanılamaz.
+- Quiz akışı review/SRS altyapısına ileride bağlanabilecek event sınırını korur.
+
+## Sıralı task — Monetization: Free + Premium paketleri
 
 **Durum:** Queued  
 **Öncelik:** P1 — ilk öğrenme döngüsü ve review API'sinden sonra  
@@ -38,7 +84,8 @@ Bu dosya, ürün kararlarını uygulanabilir dikey dilimlere çeviren ortak sır
 ## Diğer sıralı işler
 
 1. Review event API + server-authoritative spaced repetition.
-2. Monetization: Free + Premium paketleri (bu task).
-3. Offline review queue ve haftalık istatistikler.
-4. Audio/listening ve erişilebilirlik geçişi.
-5. Admin web uygulaması, içerik yayınlama ve audit.
+2. Quiz/Test Engine: 4 seçenekli sınav akışı (bu task).
+3. Monetization: Free + Premium paketleri.
+4. Offline review queue ve haftalık istatistikler.
+5. Audio/listening ve erişilebilirlik geçişi.
+6. Admin web uygulaması, içerik yayınlama ve audit.

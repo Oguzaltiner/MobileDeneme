@@ -490,6 +490,7 @@ The implementation phase should add tests proportionate to risk:
 ### Phase 1 — first learning loop
 
 - Auth, onboarding, levels/categories, word catalog/detail, favorites.
+- Four-option quiz/test sessions with server-authoritative grading and result history.
 - Learning session and review event API.
 - FSRS-compatible scheduling adapter and basic dashboard.
 
@@ -509,7 +510,7 @@ Detailed acceptance criteria and deliverables are tracked in [`docs/TASK_BACKLOG
 
 ### Phase 3 — engagement
 
-- Placement test, quiz modes, notifications, achievements, and more learning modes.
+- Placement test, advanced quiz modes, notifications, achievements, and more learning modes.
 
 ### Phase 4 — administration
 
