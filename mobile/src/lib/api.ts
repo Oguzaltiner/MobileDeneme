@@ -9,6 +9,11 @@ export type VocabularyOption = { value: string; label: string };
 export type VocabularyWord = { id: string; term: string; pronunciation: string; partOfSpeech: string; definition: string; translation: string; level: string; category: string; exampleSentence?: string | null };
 export type VocabularyPage = { items: VocabularyWord[]; page: number; pageSize: number; totalCount: number };
 export type DashboardSummary = { currentLevel?: string | null; dailyGoal: number; todayProgress: number; totalWordsLearned: number; dueReviewCount: number };
+export type QuizOption = { key: string; text: string };
+export type QuizQuestion = { id: string; order: number; type: number; prompt: string; options: QuizOption[]; answered: boolean; isCorrect?: boolean | null };
+export type QuizSession = { id: string; status: number; questionCount: number; answeredCount: number; correctCount: number; questions: QuizQuestion[] };
+export type QuizAnswerResult = { questionId: string; isCorrect: boolean; correctOptionKey: string; correctCount: number; answeredCount: number };
+export type QuizResult = { id: string; status: number; questionCount: number; answeredCount: number; correctCount: number; scorePercent: number };
 let accessToken: string | null = null;
 export function setAccessToken(token: string | null) { accessToken = token; }
 async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
@@ -39,4 +44,8 @@ export const api = {
   },
   word: (id: string) => request<VocabularyWord>(`/vocabulary/words/${encodeURIComponent(id)}`),
   dashboard: () => request<DashboardSummary>('/dashboard'),
+  createQuiz: (body: { questionCount: 5 | 10; level?: string; category?: string }) => request<QuizSession>('/quizzes/sessions', { method: 'POST', body: JSON.stringify(body) }),
+  getQuiz: (id: string) => request<QuizSession>(`/quizzes/sessions/${id}`),
+  answerQuiz: (sessionId: string, questionId: string, optionKey: string) => request<QuizAnswerResult>(`/quizzes/sessions/${sessionId}/questions/${questionId}/answers`, { method: 'POST', body: JSON.stringify({ optionKey }) }),
+  completeQuiz: (id: string) => request<QuizResult>(`/quizzes/sessions/${id}/complete`, { method: 'POST' }),
 };

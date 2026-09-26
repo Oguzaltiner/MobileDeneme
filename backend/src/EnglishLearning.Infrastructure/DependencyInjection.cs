@@ -10,6 +10,8 @@ using EnglishLearning.Application.Vocabulary;
 using EnglishLearning.Application.Dashboard;
 using EnglishLearning.Infrastructure.Vocabulary;
 using EnglishLearning.Infrastructure.Dashboard;
+using EnglishLearning.Application.Quiz;
+using EnglishLearning.Infrastructure.Quiz;
 
 namespace EnglishLearning.Infrastructure;
 
@@ -31,6 +33,7 @@ public static class DependencyInjection
         services.AddSingleton<ITokenService, JwtTokenService>();
         services.AddScoped<IVocabularyService, VocabularyService>();
         services.AddScoped<IDashboardService, DashboardService>();
+        services.AddScoped<IQuizService, QuizService>();
 
         return services;
     }
