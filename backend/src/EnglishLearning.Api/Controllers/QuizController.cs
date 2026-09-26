@@ -1,5 +1,6 @@
 using System.Security.Claims;
 using EnglishLearning.Application.Quiz;
+using EnglishLearning.Application.Entitlements;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,7 +13,9 @@ public sealed class QuizController(IQuizService quiz) : ControllerBase
     public async Task<ActionResult<QuizSessionDto>> Create(CreateQuizRequest request, CancellationToken ct)
     {
         if (!UserId(out var userId)) return Unauthorized();
-        var result = await quiz.CreateAsync(userId, request, ct);
+        QuizSessionDto? result;
+        try { result = await quiz.CreateAsync(userId, request, ct); }
+        catch (DailyLimitExceededException ex) { return StatusCode(StatusCodes.Status429TooManyRequests, new { message = ex.Message }); }
         return result is null ? BadRequest(new { message = "Not enough vocabulary for this quiz." }) : Ok(result);
     }
 

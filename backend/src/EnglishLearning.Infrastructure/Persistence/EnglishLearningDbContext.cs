@@ -14,6 +14,7 @@ public sealed class EnglishLearningDbContext(DbContextOptions<EnglishLearningDbC
     public DbSet<QuizQuestion> QuizQuestions => Set<QuizQuestion>();
     public DbSet<QuizOption> QuizOptions => Set<QuizOption>();
     public DbSet<UserEntitlement> UserEntitlements => Set<UserEntitlement>();
+    public DbSet<DailyUsage> DailyUsages => Set<DailyUsage>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -37,6 +38,12 @@ public sealed class EnglishLearningDbContext(DbContextOptions<EnglishLearningDbC
             entity.Property(x => x.Plan).HasConversion<string>().HasMaxLength(20).IsRequired();
             entity.Property(x => x.Provider).HasMaxLength(30); entity.Property(x => x.ProductId).HasMaxLength(160);
             entity.HasOne(x => x.User).WithOne().HasForeignKey<UserEntitlement>(x => x.UserId).OnDelete(DeleteBehavior.Cascade);
+        });
+        modelBuilder.Entity<DailyUsage>(entity =>
+        {
+            entity.ToTable("daily_usage"); entity.HasKey(x => new { x.UserId, x.DateUtc });
+            entity.Property(x => x.DateUtc).HasColumnType("date");
+            entity.HasOne(x => x.User).WithMany().HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Cascade);
         });
         modelBuilder.Entity<RefreshToken>(entity =>
         {
@@ -96,5 +103,8 @@ internal static class VocabularySeed
         new() { Id = Guid.Parse("10000000-0000-0000-0000-000000000003"), Term="efficient", Pronunciation="/ɪˈfɪʃənt/", PartOfSpeech="adjective", Definition="working well without wasting time or energy", Translation="verimli", Level="B1", Category="Work", ExampleSentence="This is an efficient way to study." },
         new() { Id = Guid.Parse("10000000-0000-0000-0000-000000000004"), Term="journey", Pronunciation="/ˈdʒɜːni/", PartOfSpeech="noun", Definition="an act of travelling from one place to another", Translation="yolculuk", Level="B1", Category="Travel", ExampleSentence="The journey took three hours." },
         new() { Id = Guid.Parse("10000000-0000-0000-0000-000000000005"), Term="significant", Pronunciation="/sɪɡˈnɪfɪkənt/", PartOfSpeech="adjective", Definition="important or noticeable", Translation="önemli", Level="B2", Category="Academic", ExampleSentence="The study found a significant difference." }
+        ,new() { Id = Guid.Parse("10000000-0000-0000-0000-000000000006"), Term="improve", Pronunciation="/ɪmˈpruːv/", PartOfSpeech="verb", Definition="to make something better", Translation="geliştirmek", Level="A2", Category="Daily Life", ExampleSentence="Practice helps you improve." }
+        ,new() { Id = Guid.Parse("10000000-0000-0000-0000-000000000007"), Term="prepare", Pronunciation="/prɪˈpeə/", PartOfSpeech="verb", Definition="to get ready for something", Translation="hazırlanmak", Level="A2", Category="Daily Life", ExampleSentence="I prepare for the quiz every morning." }
+        ,new() { Id = Guid.Parse("10000000-0000-0000-0000-000000000008"), Term="careful", Pronunciation="/ˈkeəfəl/", PartOfSpeech="adjective", Definition="giving attention to avoid mistakes", Translation="dikkatli", Level="A2", Category="Personality", ExampleSentence="Be careful with the answer." }
     ];
 }

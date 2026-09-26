@@ -3,6 +3,7 @@ using System;
 using EnglishLearning.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EnglishLearning.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(EnglishLearningDbContext))]
-    partial class EnglishLearningDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260926210303_AddDailyUsage")]
+    partial class AddDailyUsage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -385,42 +388,6 @@ namespace EnglishLearning.Infrastructure.Persistence.Migrations
                             Pronunciation = "/sɪɡˈnɪfɪkənt/",
                             Term = "significant",
                             Translation = "önemli"
-                        },
-                        new
-                        {
-                            Id = new Guid("10000000-0000-0000-0000-000000000006"),
-                            Category = "Daily Life",
-                            Definition = "to make something better",
-                            ExampleSentence = "Practice helps you improve.",
-                            Level = "A2",
-                            PartOfSpeech = "verb",
-                            Pronunciation = "/ɪmˈpruːv/",
-                            Term = "improve",
-                            Translation = "geliştirmek"
-                        },
-                        new
-                        {
-                            Id = new Guid("10000000-0000-0000-0000-000000000007"),
-                            Category = "Daily Life",
-                            Definition = "to get ready for something",
-                            ExampleSentence = "I prepare for the quiz every morning.",
-                            Level = "A2",
-                            PartOfSpeech = "verb",
-                            Pronunciation = "/prɪˈpeə/",
-                            Term = "prepare",
-                            Translation = "hazırlanmak"
-                        },
-                        new
-                        {
-                            Id = new Guid("10000000-0000-0000-0000-000000000008"),
-                            Category = "Personality",
-                            Definition = "giving attention to avoid mistakes",
-                            ExampleSentence = "Be careful with the answer.",
-                            Level = "A2",
-                            PartOfSpeech = "adjective",
-                            Pronunciation = "/ˈkeəfəl/",
-                            Term = "careful",
-                            Translation = "dikkatli"
                         });
                 });
 

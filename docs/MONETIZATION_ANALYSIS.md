@@ -24,7 +24,7 @@ Bu belge satın alma sağlayıcısı bağlanmadan önce ürün sınırlarını v
 
 ## Backend sınırı
 
-`GET /api/v1/me/entitlement` endpoint’i mobilin kullanacağı tekil yetki kaynağıdır. Premium kararı istemcide sabitlenmez. Şimdilik kayıtlı entitlement yoksa kullanıcı Free kabul edilir; mağaza doğrulama task’ında Google Play/App Store server notification doğrulaması bu tabloyu güncelleyecek.
+`GET /api/v1/me/entitlement` endpoint’i mobilin kullanacağı tekil yetki kaynağıdır. Premium kararı istemcide sabitlenmez. Şimdilik kayıtlı entitlement yoksa kullanıcı Free kabul edilir; mağaza doğrulama task’ında Google Play/App Store server notification doğrulaması bu tabloyu güncelleyecek. Günlük quiz sayacı UTC tarihine göre backend’de tutulur ve Free kullanıcı ikinci quiz başlatırsa `429 Too Many Requests` döner.
 
 ## Sonraki monetization task’ları
 

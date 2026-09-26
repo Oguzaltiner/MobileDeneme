@@ -34,6 +34,7 @@ public sealed class QuizService(EnglishLearningDbContext db, IEntitlementService
             foreach (var option in candidates.OrderBy(_ => Guid.NewGuid()).Select((text, index) => new QuizOption { Question = question, Key = ((char)('A' + index)).ToString(), Text = text, IsCorrect = text == correct })) question.Options.Add(option);
             session.Questions.Add(question);
         }
+        if (!await entitlements.TryConsumeQuizAsync(userId, ct)) throw new DailyLimitExceededException("Daily quiz limit reached. Upgrade to Premium for unlimited quizzes.");
         db.QuizSessions.Add(session);
         await db.SaveChangesAsync(ct);
         return await GetAsync(userId, session.Id, ct);
