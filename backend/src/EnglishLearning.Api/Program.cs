@@ -1,6 +1,8 @@
 using EnglishLearning.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using EnglishLearning.Domain;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -34,6 +36,11 @@ if (app.Environment.IsDevelopment() && builder.Configuration.GetValue<bool>("Dat
     using var scope = app.Services.CreateScope();
     var db = scope.ServiceProvider.GetRequiredService<EnglishLearning.Infrastructure.Persistence.EnglishLearningDbContext>();
     db.Database.Migrate();
+    if (builder.Configuration.GetValue<bool>("Database:SeedDevelopmentUser"))
+    {
+        var hasher = scope.ServiceProvider.GetRequiredService<IPasswordHasher<AppUser>>();
+        EnglishLearning.Infrastructure.Persistence.DevelopmentDataSeeder.SeedAsync(db, hasher).GetAwaiter().GetResult();
+    }
 }
 
 // Configure the HTTP request pipeline.

@@ -13,7 +13,12 @@ let accessToken: string | null = null;
 export function setAccessToken(token: string | null) { accessToken = token; }
 async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
   const headers = new Headers(init.headers); headers.set('Content-Type', 'application/json'); if (accessToken) headers.set('Authorization', `Bearer ${accessToken}`);
-  const response = await fetch(`${apiConfig.baseUrl}${path}`, { ...init, headers });
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 15000);
+  let response: Response;
+  try { response = await fetch(`${apiConfig.baseUrl}${path}`, { ...init, headers, signal: controller.signal }); }
+  catch (error) { throw { status: 0, message: (error as { name?: string }).name === 'AbortError' ? 'Sunucu yanıt vermedi. API adresini ve bağlantıyı kontrol edin.' : 'Sunucuya bağlanılamadı.' } satisfies ApiError; }
+  finally { clearTimeout(timeout); }
   if (!response.ok) { let message = 'İstek başarısız oldu.'; try { message = ((await response.json()) as { message?: string }).message ?? message; } catch { /* empty */ } throw { status: response.status, message } satisfies ApiError; }
   return response.status === 204 ? (undefined as T) : await response.json() as T;
 }
