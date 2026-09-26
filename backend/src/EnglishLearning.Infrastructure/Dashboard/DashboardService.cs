@@ -14,6 +14,8 @@ public sealed class DashboardService(EnglishLearningDbContext db) : IDashboardSe
         var todayProgress = await db.ReviewEvents.AsNoTracking().CountAsync(x => x.UserId == userId && x.CreatedAtUtc >= today, ct);
         var totalWordsLearned = await db.UserWordProgress.AsNoTracking().CountAsync(x => x.UserId == userId && x.Repetition > 0, ct);
         var dueReviewCount = await db.UserWordProgress.AsNoTracking().CountAsync(x => x.UserId == userId && x.DueAtUtc <= DateTime.UtcNow, ct);
+        var weekStart = today.AddDays(-6);
+        var weeklyReviewProgress = await db.ReviewEvents.AsNoTracking().CountAsync(x => x.UserId == userId && x.CreatedAtUtc >= weekStart, ct);
         var reviewDays = await db.ReviewEvents.AsNoTracking().Where(x => x.UserId == userId).Select(x => x.CreatedAtUtc.Date).Distinct().OrderByDescending(x => x).ToListAsync(ct);
         var currentStreak = CalculateCurrentStreak(reviewDays, today);
         var longestStreak = CalculateLongestStreak(reviewDays);
@@ -24,7 +26,14 @@ public sealed class DashboardService(EnglishLearningDbContext db) : IDashboardSe
             : todayProgress >= settings.DailyGoal
                 ? "Bugünkü hedefini tamamladın. İstersen mini quiz ile bilgini test et."
                 : $"Bugün {recommended} kelimelik kısa bir seansla ritmini koruyalım.";
-        return new DashboardSummary(settings.CurrentLevel, settings.DailyGoal, todayProgress, totalWordsLearned, dueReviewCount, currentStreak, longestStreak, coachTitle, coachMessage, recommended);
+        var achievements = new[]
+        {
+            new AchievementDto("first-review", "İlk adım", "İlk kelime değerlendirmesini tamamla.", totalWordsLearned >= 1),
+            new AchievementDto("streak-3", "Ritmi yakaladın", "3 gün üst üste çalış.", currentStreak >= 3 || longestStreak >= 3),
+            new AchievementDto("words-25", "Kelime avcısı", "25 kelime öğren.", totalWordsLearned >= 25),
+            new AchievementDto("words-100", "Ustalık yolu", "100 kelime öğren.", totalWordsLearned >= 100)
+        };
+        return new DashboardSummary(settings.CurrentLevel, settings.DailyGoal, todayProgress, totalWordsLearned, dueReviewCount, currentStreak, longestStreak, settings.DailyGoal * 5, weeklyReviewProgress, achievements, coachTitle, coachMessage, recommended);
     }
 
     private static int CalculateCurrentStreak(IReadOnlyList<DateTime> days, DateTime today)
