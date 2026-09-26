@@ -89,3 +89,7 @@ Bu dosya, ürün kararlarını uygulanabilir dikey dilimlere çeviren ortak sır
 4. Offline review queue ve haftalık istatistikler. **Done — haftalık istatistik API’si ve AsyncStorage tabanlı idempotent review kuyruğu tamamlandı**
 5. Audio/listening ve erişilebilirlik geçişi.
 6. Admin web uygulaması, içerik yayınlama ve audit.
+
+## Ürünleşme notu — Personal Coach başlangıcı
+
+İlk öğrenme döngüsünü satılabilir bir “kişisel koç” deneyimine taşımak için dashboard artık gerçek review verilerinden günlük ilerleme, öğrenilen kelime, bekleyen tekrar ve önerilen seans boyutu üretiyor. Mobil ana sayfa bu veriyi kişisel koç kartında gösteriyor. Sonraki adım: bu öneriyi dinleme + recall + review adımlarından oluşan tek bir Daily Mission akışına bağlamak.
