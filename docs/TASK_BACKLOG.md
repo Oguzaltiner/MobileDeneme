@@ -2,9 +2,9 @@
 
 Bu dosya, ürün kararlarını uygulanabilir dikey dilimlere çeviren ortak sıradır. Her task uygulanmadan önce kapsamı, kabul kriterleri ve mağaza/uyumluluk riskleri netleştirilir.
 
-## Sıradaki task — Quiz/Test Engine: 4 seçenekli sınav akışı
+## Tamamlandı — Quiz/Test Engine: 4 seçenekli sınav akışı
 
-**Durum:** Queued  
+**Durum:** Done — `4e91d42`  
 **Öncelik:** P1 — vocabulary catalog sonrası, review event kalıcılığından önce MVP öğrenme deneyimi  
 **Amaç:** Kullanıcıya yalnızca kelime göstermeyen; soruyu, dört seçeneği, cevabı ve sonucu olan ölçülebilir bir test deneyimi sunmak.
 
@@ -48,9 +48,9 @@ Bu dosya, ürün kararlarını uygulanabilir dikey dilimlere çeviren ortak sır
 - Aynı kullanıcı dışındaki istekler 401/403 alır; süresi dolan session tekrar kullanılamaz.
 - Quiz akışı review/SRS altyapısına ileride bağlanabilecek event sınırını korur.
 
-## Sıralı task — Monetization: Free + Premium paketleri
+## Sıradaki task — Monetization: Free + Premium paketleri
 
-**Durum:** Queued  
+**Durum:** Next — quiz akışından sonra başlayacak  
 **Öncelik:** P1 — ilk öğrenme döngüsü ve review API'sinden sonra  
 **Amaç:** İngilizce kelime öğrenme uygulamasını ücretsiz kullanıcı edinimi ile Premium abonelik/ürün gelirini birlikte destekleyecek şekilde paketlemek.
 
