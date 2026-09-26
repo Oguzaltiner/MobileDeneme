@@ -14,6 +14,9 @@ public sealed class DashboardService(EnglishLearningDbContext db) : IDashboardSe
         var todayProgress = await db.ReviewEvents.AsNoTracking().CountAsync(x => x.UserId == userId && x.CreatedAtUtc >= today, ct);
         var totalWordsLearned = await db.UserWordProgress.AsNoTracking().CountAsync(x => x.UserId == userId && x.Repetition > 0, ct);
         var dueReviewCount = await db.UserWordProgress.AsNoTracking().CountAsync(x => x.UserId == userId && x.DueAtUtc <= DateTime.UtcNow, ct);
+        var reviewDays = await db.ReviewEvents.AsNoTracking().Where(x => x.UserId == userId).Select(x => x.CreatedAtUtc.Date).Distinct().OrderByDescending(x => x).ToListAsync(ct);
+        var currentStreak = CalculateCurrentStreak(reviewDays, today);
+        var longestStreak = CalculateLongestStreak(reviewDays);
         var recommended = Math.Clamp(dueReviewCount > 0 ? dueReviewCount : 5, 1, Math.Max(1, settings.DailyGoal));
         var coachTitle = dueReviewCount > 0 ? "Tekrar zamanı" : todayProgress >= settings.DailyGoal ? "Hedef tamamlandı" : "Bugünün mini görevi";
         var coachMessage = dueReviewCount > 0
@@ -21,6 +24,29 @@ public sealed class DashboardService(EnglishLearningDbContext db) : IDashboardSe
             : todayProgress >= settings.DailyGoal
                 ? "Bugünkü hedefini tamamladın. İstersen mini quiz ile bilgini test et."
                 : $"Bugün {recommended} kelimelik kısa bir seansla ritmini koruyalım.";
-        return new DashboardSummary(settings.CurrentLevel, settings.DailyGoal, todayProgress, totalWordsLearned, dueReviewCount, coachTitle, coachMessage, recommended);
+        return new DashboardSummary(settings.CurrentLevel, settings.DailyGoal, todayProgress, totalWordsLearned, dueReviewCount, currentStreak, longestStreak, coachTitle, coachMessage, recommended);
+    }
+
+    private static int CalculateCurrentStreak(IReadOnlyList<DateTime> days, DateTime today)
+    {
+        var cursor = days.Contains(today) ? today : today.AddDays(-1);
+        var streak = 0;
+        foreach (var day in days)
+        {
+            if (day != cursor) break;
+            streak++; cursor = cursor.AddDays(-1);
+        }
+        return streak;
+    }
+
+    private static int CalculateLongestStreak(IReadOnlyList<DateTime> days)
+    {
+        var longest = 0; var current = 0; DateTime? previous = null;
+        foreach (var day in days.OrderBy(x => x))
+        {
+            current = previous is not null && day == previous.Value.AddDays(1) ? current + 1 : 1;
+            longest = Math.Max(longest, current); previous = day;
+        }
+        return longest;
     }
 }
