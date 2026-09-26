@@ -15,7 +15,11 @@ English vocabulary learning platform: React Native mobile client, ASP.NET Core A
 - .NET SDK 10.0.401 or newer 10.0.x SDK
 - Docker Desktop with Compose
 
-## Run local PostgreSQL
+## PostgreSQL
+
+PostgreSQL 15 is already installed as the local Windows service `postgresql-x64-15` and listens on `localhost:5432`. The default development connection string uses that service. Create the `english_learning` database and configure the local password through user secrets or a local `.env` file; never commit the real password.
+
+If a disposable Docker database is preferred instead, use the optional service below. It maps container PostgreSQL to host port `5433` so it does not conflict with the installed service.
 
 ```powershell
 docker compose up -d postgres
@@ -47,4 +51,3 @@ Set `EXPO_PUBLIC_API_BASE_URL` in a local `.env` when the API is not reachable a
 
 - `dev`: integration and active development.
 - `master`: release/mainline branch.
-
