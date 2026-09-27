@@ -28,13 +28,21 @@ public sealed class QuizService(EnglishLearningDbContext db, IEntitlementService
         for (var i = 0; i < words.Count; i++)
         {
             var word = words[i];
-            var type = i % 2 == 0 ? QuizQuestionType.Translation : QuizQuestionType.Definition;
+            var type = (QuizQuestionType)(i % 6 + 1);
+            // Writing/matching/ordering still use option-based grading in the MVP contract;
+            // the type lets clients render the richer interaction and keeps the answer API stable.
             var correct = type == QuizQuestionType.Translation ? word.Translation : word.Term;
             var candidates = all.Where(x => x.Id != word.Id && (type == QuizQuestionType.Translation ? x.Translation != correct : x.Term != correct))
                 .OrderBy(_ => Guid.NewGuid()).Take(3).Select(x => type == QuizQuestionType.Translation ? x.Translation : x.Term).ToList();
             if (candidates.Count < 3) return null;
             candidates.Add(correct);
-            var question = new QuizQuestion { Session = session, VocabularyWordId = word.Id, Order = i + 1, Type = type, Difficulty = adaptiveDifficulty, Skill = type == QuizQuestionType.Translation ? "meaning" : "context", Explanation = type == QuizQuestionType.Translation ? $"{word.Term} = {word.Translation}" : $"{word.Term}: {word.Definition}", ErrorTag = type == QuizQuestionType.Translation ? "meaning" : "definition" };
+            var skill = type switch
+            {
+                QuizQuestionType.Translation => "meaning", QuizQuestionType.Definition => "definition",
+                QuizQuestionType.SentenceCompletion => "grammar", QuizQuestionType.Listening => "listening",
+                QuizQuestionType.Writing => "writing", _ => "recall"
+            };
+            var question = new QuizQuestion { Session = session, VocabularyWordId = word.Id, Order = i + 1, Type = type, Difficulty = adaptiveDifficulty, Skill = skill, Explanation = $"{word.Term} = {word.Translation}. {word.Definition}", ErrorTag = skill };
             foreach (var option in candidates.OrderBy(_ => Guid.NewGuid()).Select((text, index) => new QuizOption { Question = question, Key = ((char)('A' + index)).ToString(), Text = text, IsCorrect = text == correct })) question.Options.Add(option);
             session.Questions.Add(question);
         }
@@ -85,7 +93,7 @@ public sealed class QuizService(EnglishLearningDbContext db, IEntitlementService
     }
 
     private IQueryable<QuizSession> Load(Guid userId, Guid id) => db.QuizSessions.Include(x => x.Questions).ThenInclude(x => x.Options).Include(x => x.Questions).ThenInclude(x => x.VocabularyWord).Where(x => x.Id == id && x.UserId == userId);
-    private static QuizSessionDto Map(QuizSession s) => new(s.Id, s.Status, s.QuestionCount, s.Questions.Count(x => x.Answered), s.CorrectCount, s.Questions.OrderBy(x => x.Order).Select(q => new QuizQuestionDto(q.Id, q.Order, q.Type, q.Difficulty, q.Skill, q.Answered ? q.Explanation : null, q.Answered ? q.ErrorTag : null, q.Type == QuizQuestionType.Translation ? q.VocabularyWord.Term : q.VocabularyWord.Definition, q.Options.OrderBy(x => x.Key).Select(o => new QuizOptionDto(o.Key, o.Text)).ToList(), q.Answered, q.Answered ? q.IsCorrect : null)).ToList());
+    private static QuizSessionDto Map(QuizSession s) => new(s.Id, s.Status, s.QuestionCount, s.Questions.Count(x => x.Answered), s.CorrectCount, s.Questions.OrderBy(x => x.Order).Select(q => new QuizQuestionDto(q.Id, q.Order, q.Type, q.Difficulty, q.Skill, q.Answered ? q.Explanation : null, q.Answered ? q.ErrorTag : null, q.Type == QuizQuestionType.Translation ? q.VocabularyWord.Term : q.Type == QuizQuestionType.Definition ? q.VocabularyWord.Definition : q.Type == QuizQuestionType.Writing ? q.VocabularyWord.Translation : $"{q.VocabularyWord.ExampleSentence ?? q.VocabularyWord.Definition}", q.Options.OrderBy(x => x.Key).Select(o => new QuizOptionDto(o.Key, o.Text)).ToList(), q.Answered, q.Answered ? q.IsCorrect : null)).ToList());
 
     private async Task<int> GetAdaptiveDifficultyAsync(Guid userId, CancellationToken ct)
     {

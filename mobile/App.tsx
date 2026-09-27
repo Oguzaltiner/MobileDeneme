@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { StatusBar } from 'expo-status-bar';
 import { Text, View } from 'react-native';
 import { useEffect } from 'react';
+import { AppState } from 'react-native';
 
 import './global.css';
 import { useAuthStore } from './src/store/auth-store';
@@ -29,6 +30,9 @@ import { PracticeSessionScreen } from './src/screens/learning/PracticeSessionScr
 import { ConversationPracticeScreen } from './src/screens/learning/ConversationPracticeScreen';
 import { ListeningLabScreen } from './src/screens/learning/ListeningLabScreen';
 import { AppErrorBoundary } from './src/components/AppErrorBoundary';
+import { api } from './src/lib/api';
+import { flushReviewQueue } from './src/lib/offline-review-queue';
+import { scheduleLocalReminder } from './src/lib/notification-scheduler';
 
 export type RootStackParamList = { Login: undefined; Register: undefined; Onboarding: undefined; PlacementTest: undefined; Home: undefined; Vocabulary: undefined; WordDetail: { id: string }; Learn: undefined; DailyMission: undefined; SentenceChallenge: undefined; WritingChallenge: undefined; MatchingChallenge: undefined; PracticeSession: undefined; ConversationPractice: undefined; ListeningLab: undefined; Leaderboard: undefined; LearningPaths: undefined; QuizStart: undefined; QuizQuestion: { sessionId: string }; QuizResult: { sessionId: string }; Premium: undefined };
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -37,6 +41,19 @@ const queryClient = new QueryClient();
 export default function App() {
   const { user, booting, restore } = useAuthStore();
   useEffect(() => { void restore(); }, [restore]);
+  useEffect(() => {
+    if (!user) return;
+    const sync = async () => {
+      try {
+        await flushReviewQueue(item => api.submitReview(item));
+        const preferences = await api.notificationPreferences();
+        await scheduleLocalReminder(preferences);
+      } catch { /* Offline: keep the queue and retry on the next foreground event. */ }
+    };
+    void sync();
+    const subscription = AppState.addEventListener('change', state => { if (state === 'active') void sync(); });
+    return () => subscription.remove();
+  }, [user]);
   if (booting) return <View className="flex-1 items-center justify-center bg-background"><Text>Yükleniyor…</Text></View>;
   return (
     <AppErrorBoundary>

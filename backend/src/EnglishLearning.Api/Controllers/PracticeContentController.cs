@@ -15,4 +15,10 @@ public sealed class PracticeContentController(IPracticeContentService content) :
 
     [HttpPost("pronunciation/assess")]
     public ActionResult<PronunciationAssessmentDto> Assess([FromBody] PronunciationAssessmentRequest request) => Ok(content.AssessPronunciation(request));
+
+    [HttpPost("conversation/reply")]
+    public async Task<ActionResult<ConversationReplyDto>> Reply([FromBody] ConversationReplyRequest request, CancellationToken ct) => Ok(await content.GenerateReplyAsync(request, ct));
+
+    [HttpPost("speech/transcribe")]
+    public async Task<ActionResult<TranscriptionDto>> Transcribe([FromBody] TranscriptionRequest request, CancellationToken ct) => Ok(await content.TranscribeAsync(request, ct));
 }

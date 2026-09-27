@@ -55,6 +55,8 @@ public static class DependencyInjection
         services.AddScoped<IQuizService, QuizService>();
         services.AddScoped<IPracticeService, PracticeService>();
         services.AddSingleton<IPracticeContentService, PracticeContentService>();
+        services.AddSingleton<IConversationAiProvider, FallbackConversationAiProvider>();
+        services.AddSingleton<ITranscriptionProvider, FallbackTranscriptionProvider>();
         services.AddScoped<IPlacementTestService, PlacementTestService>();
 
         return services;

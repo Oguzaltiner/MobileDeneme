@@ -26,6 +26,9 @@ public sealed class EnglishLearningDbContext(DbContextOptions<EnglishLearningDbC
     public DbSet<PracticeEvent> PracticeEvents => Set<PracticeEvent>();
     public DbSet<CommunitySubmission> CommunitySubmissions => Set<CommunitySubmission>();
     public DbSet<CommunityFeedback> CommunityFeedback => Set<CommunityFeedback>();
+    public DbSet<MediaAsset> MediaAssets => Set<MediaAsset>();
+    public DbSet<LeagueRewardRecord> LeagueRewardRecords => Set<LeagueRewardRecord>();
+    public DbSet<LearningContentItem> LearningContentItems => Set<LearningContentItem>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -103,6 +106,33 @@ public sealed class EnglishLearningDbContext(DbContextOptions<EnglishLearningDbC
             entity.HasIndex(x => new { x.SubmissionId, x.CreatedAtUtc });
             entity.HasOne(x => x.Submission).WithMany(x => x.Feedback).HasForeignKey(x => x.SubmissionId).OnDelete(DeleteBehavior.Cascade);
             entity.HasOne(x => x.User).WithMany().HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Restrict);
+        });
+        modelBuilder.Entity<MediaAsset>(entity =>
+        {
+            entity.ToTable("media_assets"); entity.HasKey(x => x.Id);
+            entity.Property(x => x.Key).HasMaxLength(120).IsRequired(); entity.HasIndex(x => x.Key).IsUnique();
+            entity.Property(x => x.Title).HasMaxLength(160).IsRequired(); entity.Property(x => x.Url).HasMaxLength(1000).IsRequired();
+            entity.Property(x => x.Transcript).HasMaxLength(10000); entity.Property(x => x.AltText).HasMaxLength(500);
+            entity.Property(x => x.Level).HasMaxLength(10).IsRequired(); entity.Property(x => x.DurationSeconds).HasMaxLength(20);
+            entity.Property(x => x.Kind).HasConversion<string>().HasMaxLength(20).IsRequired();
+            entity.Property(x => x.Status).HasConversion<string>().HasMaxLength(20).IsRequired();
+            entity.HasIndex(x => new { x.Status, x.Level });
+        });
+        modelBuilder.Entity<LeagueRewardRecord>(entity =>
+        {
+            entity.ToTable("league_reward_records"); entity.HasKey(x => x.Id);
+            entity.Property(x => x.SeasonKey).HasMaxLength(20).IsRequired(); entity.Property(x => x.RewardTier).HasMaxLength(30).IsRequired();
+            entity.Property(x => x.Status).HasConversion<string>().HasMaxLength(20).IsRequired();
+            entity.HasIndex(x => new { x.UserId, x.SeasonKey }).IsUnique();
+            entity.HasOne(x => x.User).WithMany().HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Cascade);
+        });
+        modelBuilder.Entity<LearningContentItem>(entity =>
+        {
+            entity.ToTable("learning_content_items"); entity.HasKey(x => x.Id);
+            entity.Property(x => x.Key).HasMaxLength(100).IsRequired(); entity.HasIndex(x => x.Key).IsUnique();
+            entity.Property(x => x.Title).HasMaxLength(200).IsRequired(); entity.Property(x => x.Type).HasMaxLength(40).IsRequired();
+            entity.Property(x => x.Level).HasMaxLength(10).IsRequired(); entity.Property(x => x.Category).HasMaxLength(80).IsRequired();
+            entity.Property(x => x.PayloadJson).HasColumnType("jsonb").IsRequired(); entity.Property(x => x.Status).HasConversion<string>().HasMaxLength(20).IsRequired();
         });
         modelBuilder.Entity<PracticeSession>(entity =>
         {

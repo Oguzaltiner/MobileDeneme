@@ -1,6 +1,10 @@
 namespace EnglishLearning.Domain;
 
-public enum QuizQuestionType { Translation = 1, Definition = 2 }
+public enum QuizQuestionType
+{
+    Translation = 1, Definition = 2, SentenceCompletion = 3, Listening = 4,
+    Writing = 5, Matching = 6, Ordering = 7, PictureChoice = 8
+}
 public enum QuizSessionStatus { InProgress = 1, Completed = 2 }
 
 public sealed class QuizSession

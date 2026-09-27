@@ -2,7 +2,7 @@ using EnglishLearning.Application.Practice;
 
 namespace EnglishLearning.Infrastructure.Practice;
 
-public sealed class PracticeContentService : IPracticeContentService
+public sealed class PracticeContentService(IConversationAiProvider conversationAi, ITranscriptionProvider transcription) : IPracticeContentService
 {
     private static readonly IReadOnlyList<ConversationScenarioDto> Scenarios =
     [
@@ -44,6 +44,9 @@ public sealed class PracticeContentService : IPracticeContentService
         var feedback = score >= 90 ? "Cümlenin tamamı net anlaşılıyor." : missing.Length > 0 ? $"Şu kelimeleri daha belirgin söyle: {string.Join(", ", missing)}." : "Ritmi koru ve cümleyi bir kez daha dene.";
         return new(score, grade, feedback, missing);
     }
+
+    public Task<ConversationReplyDto> GenerateReplyAsync(ConversationReplyRequest request, CancellationToken ct = default) => conversationAi.ReplyAsync(request, ct);
+    public Task<TranscriptionDto> TranscribeAsync(TranscriptionRequest request, CancellationToken ct = default) => transcription.TranscribeAsync(request, ct);
 
     private static string Normalize(string value) => new(value.ToLowerInvariant().Where(c => char.IsLetterOrDigit(c) || char.IsWhiteSpace(c)).ToArray());
     private static IReadOnlyList<T> Filter<T>(IReadOnlyList<T> items, string? level) where T : class => string.IsNullOrWhiteSpace(level) ? items : items.Where(x => x switch { ConversationScenarioDto s => s.Level.Equals(level, StringComparison.OrdinalIgnoreCase), ListeningExerciseDto l => l.Level.Equals(level, StringComparison.OrdinalIgnoreCase), _ => true }).ToList();

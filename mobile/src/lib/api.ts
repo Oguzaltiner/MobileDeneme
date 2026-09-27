@@ -34,6 +34,7 @@ export type PlacementAnswer = { questionId: string; isCorrect: boolean; correctO
 export type PlacementResult = { id: string; status: number; questionCount: number; answeredCount: number; correctCount: number; scorePercent: number; estimatedLevel: string };
 export type NotificationPreferences = { enabled: boolean; reminderHour: number; quietHoursStart: number; quietHoursEnd: number };
 export type PracticeEventSync = { clientEventId: string; sessionId: string; stepKey: string; vocabularyWordId?: string; isCorrect?: boolean; rating?: 0 | 1 | 2 | 3; occurredAtUtc?: string };
+export type FeatureFlags = { version: string; flags: Record<string, boolean> };
 let accessToken: string | null = null;
 export function setAccessToken(token: string | null) { accessToken = token; }
 async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
@@ -93,4 +94,5 @@ export const api = {
   notificationPreferences: () => request<NotificationPreferences>('/me/notifications'),
   updateNotificationPreferences: (body: NotificationPreferences) => request<NotificationPreferences>('/me/notifications', { method: 'PUT', body: JSON.stringify(body) }),
   syncPracticeEvents: (events: PracticeEventSync[]) => request<{ accepted: number; alreadyProcessed: number; total: number }>('/sync/practice-events', { method: 'POST', body: JSON.stringify({ events }) }),
+  features: () => request<FeatureFlags>('/features'),
 };
