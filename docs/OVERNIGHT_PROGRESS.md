@@ -34,7 +34,7 @@ Memrise'in telaffuz ve konuşma pratiği, Babbel'in kısa kişiselleştirilmiş 
 
 ## Bilinen riskler / yayın öncesi işler
 
-- `System.Security.Cryptography.Xml 9.0.0` için 8 adet NU1903 güvenlik uyarısı var; bağımlılık güncellemesi planlanmalı.
+- `System.Security.Cryptography.Xml` ve IdentityModel bağımlılıkları güncellendi; `dotnet list package --vulnerable --include-transitive` artık açık paket raporlamıyor.
 - Google Play/App Store satın alma doğrulaması henüz yapılandırılmadı; mevcut billing endpoint’i bilinçli olarak 501 döner.
 - Production ortamında `Jwt__SigningKey` güçlü secret olarak secret manager’dan verilmelidir; Compose varsayılanı yalnızca local development içindir.
 - Play Console ürünleri, Apple StoreKit ürünleri, privacy/consent, restore purchase, RTDN ve release signing yayın öncesi tamamlanmalıdır.
