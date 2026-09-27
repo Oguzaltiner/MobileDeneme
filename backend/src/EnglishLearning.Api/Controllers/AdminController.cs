@@ -57,6 +57,40 @@ public sealed class AdminController(EnglishLearningDbContext db) : ControllerBas
         });
     }
 
+    [HttpGet("vocabulary")]
+    public async Task<IActionResult> Vocabulary(
+        [FromQuery] string? search = null,
+        [FromQuery] string? level = null,
+        [FromQuery] string? category = null,
+        [FromQuery] VocabularyPublicationStatus? status = null,
+        [FromQuery] int page = 1,
+        [FromQuery] int pageSize = 50,
+        CancellationToken ct = default)
+    {
+        page = Math.Max(1, page);
+        pageSize = Math.Clamp(pageSize, 10, 100);
+        var query = db.VocabularyWords.AsNoTracking().AsQueryable();
+        if (!string.IsNullOrWhiteSpace(search))
+        {
+            var term = search.Trim();
+            query = query.Where(x => x.Term.Contains(term) || x.Translation.Contains(term) || x.Definition.Contains(term));
+        }
+        if (!string.IsNullOrWhiteSpace(level)) query = query.Where(x => x.Level == level.Trim().ToUpper());
+        if (!string.IsNullOrWhiteSpace(category)) query = query.Where(x => x.Category == category.Trim());
+        if (status is not null) query = query.Where(x => x.PublicationStatus == status.Value);
+
+        var totalCount = await query.CountAsync(ct);
+        var items = await query.OrderBy(x => x.Term)
+            .Skip((page - 1) * pageSize).Take(pageSize)
+            .Select(x => new
+            {
+                x.Id, x.Term, x.Pronunciation, x.PartOfSpeech, x.Definition, x.Translation,
+                x.Level, x.Category, x.ExampleSentence,
+                status = x.PublicationStatus.ToString(), x.PublishedAtUtc
+            }).ToListAsync(ct);
+        return Ok(new { items, page, pageSize, totalCount, totalPages = (int)Math.Ceiling(totalCount / (double)pageSize) });
+    }
+
     [HttpGet("analytics/learning")]
     public async Task<IActionResult> LearningAnalytics([FromQuery] int days = 30, CancellationToken ct = default)
     {
