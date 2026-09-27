@@ -23,6 +23,10 @@ Bu belge mevcut MVP'nin üzerine kurulacak üretim kalitesindeki öğrenme siste
 - **15–17 ilk production slice tamamlandı:** API kontrollü konuşma senaryoları, dinleme laboratuvarı, cihaz TTS ve transcript tabanlı telaffuz değerlendirmesi eklendi.
 - **20–22 ilk production slice tamamlandı:** admin öğrenme analitiği, review metadata kalite skoru ve idempotent offline PracticeEvent batch sync endpoint'i eklendi.
 - **23 ilk slice tamamlandı:** bildirim açık/kapalı, hatırlatma saati ve sessiz saatler kullanıcı ayarlarında saklanıyor.
+- **19 ilk production slice tamamlandı:** writing/speaking submission, feedback, report ve üç raporda otomatik gizleme moderasyon temeli.
+- **24 tamamlandı (entitlement çekirdeği):** Free, Premium ve Premium Plus feature/limit sözleşmeleri ve server-side feature checks.
+- **25 ilk slice tamamlandı:** mobil global error boundary ve erişilebilir fallback aksiyonu.
+- **26 ilk slice tamamlandı:** problem details, trace ID, correlation ID, security headers, body limit ve live/ready health endpoint'leri.
 
 ## Task sırası
 
