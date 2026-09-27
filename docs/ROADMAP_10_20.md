@@ -12,6 +12,15 @@ Bu belge mevcut MVP'nin üzerine kurulacak üretim kalitesindeki öğrenme siste
 - Ürün analitiği, deney/feature flag, retention ve funnel ölçümleri eksik.
 - Erişilebilirlik, crash telemetry ve store doğrulaması yayın öncesi tamamlanmalı.
 
+## Güncel ilerleme
+
+- **10 tamamlandı (ilk sürüm):** mastery, tekrar sayısı, doğru oranı, lapse ve server-authoritative due planı.
+- **11 tamamlandı (ilk sürüm):** son quiz performansına göre zorluk bandı 1–4 arasında ayarlanıyor.
+- **12 tamamlandı (ilk sürüm):** placement test, CEFR tahmini ve mobil seviye testi akışı.
+- **13 ilk dilim tamamlandı:** soru becerisi, açıklama ve hata etiketi metadata'sı.
+- **14 ilk dilim tamamlandı:** Coach önerileri artık aksiyon anahtarı, rota, beceri ve CTA döndürüyor.
+- **18 ilk dilim tamamlandı:** leaderboard sezon anahtarı, yükselme/düşme eşikleri ve ödül katmanı döndürülüyor; kalıcı sezon kapanışı sonraki alt iştir.
+
 ## Task sırası
 
 | No | Task | Öncelik | Bağımlılık | Bitti kabulü |
