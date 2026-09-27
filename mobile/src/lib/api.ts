@@ -19,6 +19,7 @@ export type Entitlement = { plan: number; isPremium: boolean; maxLevel: string; 
 export type ReviewResult = { wordId: string; rating: number; repetition: number; intervalDays: number; dueAtUtc: string; dailyWordsUsed: number; dailyWordLimit: number };
 export type WeeklyLearningStats = { totalReviews: number; successfulReviews: number; successPercent: number; learnedWords: number; days: { date: string; reviews: number; successfulReviews: number }[] };
 export type SentenceChallenge = { wordId: string; sentence: string; answer: string; options: string[]; translation: string; explanation: string };
+export type WritingChallenge = { wordId: string; prompt: string; answer: string; translation: string; hint: string };
 export type LeaderboardEntry = { rank: number; displayName: string; points: number; isCurrentUser: boolean };
 export type LeaderboardSummary = { league: string; periodEndsAtUtc: string; entries: LeaderboardEntry[]; currentUserRank: number; currentUserPoints: number };
 export type LearningPath = { key: string; title: string; description: string; purpose: string; recommended: boolean };
@@ -62,6 +63,7 @@ export const api = {
   weeklyStats: () => request<WeeklyLearningStats>('/statistics/weekly'),
   dueWords: (limit = 20) => request<VocabularyWord[]>(`/reviews/due?limit=${Math.min(Math.max(limit, 1), 50)}`),
   sentenceChallenge: () => request<SentenceChallenge>('/vocabulary/sentence-challenge'),
+  writingChallenge: () => request<WritingChallenge>('/vocabulary/writing-challenge'),
   weeklyLeaderboard: () => request<LeaderboardSummary>('/leaderboard/weekly'),
   learningPaths: () => request<LearningPath[]>('/learning-paths'),
   selectLearningPath: (key: string) => request<void>(`/learning-paths/${encodeURIComponent(key)}/select`, { method: 'PUT' }),

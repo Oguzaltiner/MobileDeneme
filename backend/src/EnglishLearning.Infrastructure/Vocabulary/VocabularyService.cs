@@ -17,6 +17,14 @@ public sealed class VocabularyService(EnglishLearningDbContext db) : IVocabulary
         return new(target.Id, blanked, target.Term, options, target.Translation, $"Bu cümlede doğru kelime: {target.Term}.");
     }
 
+    public async Task<WritingChallenge?> GetWritingChallengeAsync(CancellationToken ct)
+    {
+        var words = await db.VocabularyWords.AsNoTracking().Where(x => x.ExampleSentence != null && x.ExampleSentence != "").OrderBy(x => x.Term).Take(100).ToListAsync(ct);
+        if (words.Count == 0) return null;
+        var target = words[Random.Shared.Next(words.Count)];
+        return new(target.Id, target.Definition, target.Term, target.Translation, $"İlk harf: {target.Term[0]}");
+    }
+
     public async Task<VocabularyPage> SearchAsync(VocabularyFilter filter, CancellationToken ct)
     {
         var query = db.VocabularyWords.AsNoTracking();
