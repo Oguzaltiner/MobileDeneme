@@ -4,12 +4,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using EnglishLearning.Domain;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
 
 namespace EnglishLearning.Api.Controllers;
 
 [ApiController, Authorize(Policy = "AdminOnly"), Route("api/v1/admin")]
 public sealed class AdminController(EnglishLearningDbContext db) : ControllerBase
 {
+    private bool TryGetAdminId(out Guid userId) => Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? User.FindFirstValue("sub"), out userId);
+    private async Task AuditAsync(Guid userId, string action, Guid? entityId, CancellationToken ct)
+    {
+        db.AdminAuditLogs.Add(new AdminAuditLog { UserId = userId, Action = action, EntityType = "VocabularyWord", EntityId = entityId });
+        await db.SaveChangesAsync(ct);
+    }
     public sealed record VocabularyWriteRequest(
         [property: Required, StringLength(120)] string Term,
         [property: StringLength(120)] string? Pronunciation,
@@ -33,30 +40,36 @@ public sealed class AdminController(EnglishLearningDbContext db) : ControllerBas
     [HttpPost("vocabulary")]
     public async Task<ActionResult<object>> CreateVocabulary(VocabularyWriteRequest request, CancellationToken ct)
     {
+        if (!TryGetAdminId(out var adminId)) return Unauthorized();
         var term = request.Term.Trim();
         if (await db.VocabularyWords.AnyAsync(x => x.Term == term, ct)) return Conflict(new { message = "A vocabulary word with this term already exists." });
         var word = new VocabularyWord { Term = term, Pronunciation = request.Pronunciation?.Trim() ?? string.Empty, PartOfSpeech = request.PartOfSpeech.Trim(), Definition = request.Definition.Trim(), Translation = request.Translation.Trim(), Level = request.Level.Trim().ToUpperInvariant(), Category = request.Category.Trim(), ExampleSentence = request.ExampleSentence?.Trim() };
-        db.VocabularyWords.Add(word); await db.SaveChangesAsync(ct);
+        db.VocabularyWords.Add(word); await db.SaveChangesAsync(ct); await AuditAsync(adminId, "create", word.Id, ct);
         return Created($"/api/v1/vocabulary/words/{word.Id}", new { word.Id });
     }
 
     [HttpPut("vocabulary/{id:guid}")]
     public async Task<IActionResult> UpdateVocabulary(Guid id, VocabularyWriteRequest request, CancellationToken ct)
     {
+        if (!TryGetAdminId(out var adminId)) return Unauthorized();
         var word = await db.VocabularyWords.SingleOrDefaultAsync(x => x.Id == id, ct);
         if (word is null) return NotFound();
         var term = request.Term.Trim();
         if (await db.VocabularyWords.AnyAsync(x => x.Id != id && x.Term == term, ct)) return Conflict(new { message = "A vocabulary word with this term already exists." });
         word.Term = term; word.Pronunciation = request.Pronunciation?.Trim() ?? string.Empty; word.PartOfSpeech = request.PartOfSpeech.Trim(); word.Definition = request.Definition.Trim(); word.Translation = request.Translation.Trim(); word.Level = request.Level.Trim().ToUpperInvariant(); word.Category = request.Category.Trim(); word.ExampleSentence = request.ExampleSentence?.Trim();
-        await db.SaveChangesAsync(ct); return NoContent();
+        await db.SaveChangesAsync(ct); await AuditAsync(adminId, "update", id, ct); return NoContent();
     }
 
     [HttpDelete("vocabulary/{id:guid}")]
     public async Task<IActionResult> DeleteVocabulary(Guid id, CancellationToken ct)
     {
+        if (!TryGetAdminId(out var adminId)) return Unauthorized();
         var word = await db.VocabularyWords.SingleOrDefaultAsync(x => x.Id == id, ct);
         if (word is null) return NotFound();
         if (await db.QuizQuestions.AnyAsync(x => x.VocabularyWordId == id, ct)) return Conflict(new { message = "This word is referenced by quiz history and cannot be deleted." });
-        db.VocabularyWords.Remove(word); await db.SaveChangesAsync(ct); return NoContent();
+        db.VocabularyWords.Remove(word); await db.SaveChangesAsync(ct); await AuditAsync(adminId, "delete", id, ct); return NoContent();
     }
+
+    [HttpGet("audit")]
+    public async Task<IActionResult> Audit([FromQuery] int limit = 50, CancellationToken ct = default) => Ok(await db.AdminAuditLogs.AsNoTracking().OrderByDescending(x => x.CreatedAtUtc).Take(Math.Clamp(limit, 1, 200)).Select(x => new { x.Id, x.UserId, x.Action, x.EntityType, x.EntityId, x.CreatedAtUtc }).ToListAsync(ct));
 }

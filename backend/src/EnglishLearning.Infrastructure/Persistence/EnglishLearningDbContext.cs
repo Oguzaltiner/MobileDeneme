@@ -17,6 +17,7 @@ public sealed class EnglishLearningDbContext(DbContextOptions<EnglishLearningDbC
     public DbSet<DailyUsage> DailyUsages => Set<DailyUsage>();
     public DbSet<UserWordProgress> UserWordProgress => Set<UserWordProgress>();
     public DbSet<ReviewEvent> ReviewEvents => Set<ReviewEvent>();
+    public DbSet<AdminAuditLog> AdminAuditLogs => Set<AdminAuditLog>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -64,6 +65,14 @@ public sealed class EnglishLearningDbContext(DbContextOptions<EnglishLearningDbC
             entity.HasIndex(x => new { x.UserId, x.ClientEventId }).IsUnique();
             entity.HasOne(x => x.User).WithMany().HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Cascade);
             entity.HasOne(x => x.VocabularyWord).WithMany().HasForeignKey(x => x.VocabularyWordId).OnDelete(DeleteBehavior.Cascade);
+        });
+        modelBuilder.Entity<AdminAuditLog>(entity =>
+        {
+            entity.ToTable("admin_audit_logs"); entity.HasKey(x => x.Id);
+            entity.Property(x => x.Action).HasMaxLength(40).IsRequired();
+            entity.Property(x => x.EntityType).HasMaxLength(80).IsRequired();
+            entity.HasIndex(x => x.CreatedAtUtc);
+            entity.HasOne(x => x.User).WithMany().HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Restrict);
         });
         modelBuilder.Entity<RefreshToken>(entity =>
         {
