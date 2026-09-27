@@ -55,3 +55,5 @@ Memrise'in telaffuz ve konuşma pratiği, Babbel'in kısa kişiselleştirilmiş 
 3. Android/iOS EAS development build ve gerçek cihaz accessibility testi.
 4. Google Play/App Store server-side billing ve restore akışı.
 5. Admin web paneli ve içerik yayınlama/audit.
+
+Detaylı önceliklendirme: `docs/PRODUCT_ROADMAP.md`.
