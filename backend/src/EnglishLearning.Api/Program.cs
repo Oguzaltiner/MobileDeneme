@@ -83,6 +83,7 @@ if (app.Environment.IsDevelopment() && builder.Configuration.GetValue<bool>("Dat
         var hasher = scope.ServiceProvider.GetRequiredService<IPasswordHasher<AppUser>>();
         EnglishLearning.Infrastructure.Persistence.DevelopmentDataSeeder.SeedAsync(db, hasher).GetAwaiter().GetResult();
     }
+    EnglishLearning.Infrastructure.Persistence.VocabularyCatalogSeeder.SeedAsync(db).GetAwaiter().GetResult();
 }
 
 // Configure the HTTP request pipeline.

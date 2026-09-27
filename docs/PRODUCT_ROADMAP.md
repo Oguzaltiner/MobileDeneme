@@ -87,3 +87,9 @@ Babbel’in hedefe göre rota, kısa pratik ders, konuşma ve kişiselleştirilm
 1. `PracticeSession` ortak sözleşmesi ve cümle/dinleme/yazma modları.
 2. Admin rol + içerik taslak/yayın modeli.
 3. XP kaynakları, lig haftası kapanışı ve ödül özeti.
+
+## Kalite düzeltme görevleri — aktif
+
+- **Listening audio correctness:** transcript ve cevap ifadeleri aynı ekran bağlamında seslendirilmeli; cevap açıldığında doğru ifade tekrar dinlenebilmeli.
+- **Pronunciation assessment reliability:** metin tabanlı değerlendirme tüm planlarda çalışmalı; boş/uygunsuz transcript için anlaşılır hata ve skor geri bildirimi vermeli.
+- **Vocabulary catalog expansion:** development kataloğu küçük seed listesinden çıkarılmalı; başlangıçta 50+ yayınlanmış kelime, sonrasında admin content studio üzerinden 2.000 kelime kalite sınırına kadar büyütülmeli.

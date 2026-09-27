@@ -93,3 +93,28 @@ Bu dosya, ürün kararlarını uygulanabilir dikey dilimlere çeviren ortak sır
 ## Ürünleşme notu — Personal Coach başlangıcı
 
 İlk öğrenme döngüsünü satılabilir bir “kişisel koç” deneyimine taşımak için dashboard artık gerçek review verilerinden günlük ilerleme, öğrenilen kelime, bekleyen tekrar ve önerilen seans boyutu üretiyor. Mobil ana sayfa bu veriyi kişisel koç kartında gösteriyor. Sonraki adım: bu öneriyi dinleme + recall + review adımlarından oluşan tek bir Daily Mission akışına bağlamak.
+
+## Kalite görevleri — Listening, pronunciation ve catalog
+
+### Listening Lab ses doğruluğu
+
+**Durum:** Done — transcript ve doğru seçenek ayrı ayrı seslendiriliyor; TTS hatası kullanıcıya gösteriliyor.
+
+- Dinleme ekranındaki metin API’den gelen `transcript` ile aynı olmalı.
+- Cevap açıldığında doğru seçenek tekrar dinlenebilmeli.
+- TTS hatası sessizce yutulmamalı; tekrar deneme mesajı gösterilmeli.
+
+### Telaffuz değerlendirme akışı
+
+**Durum:** Done — hedef cümle güvenli seçiliyor, hata/tekrar akışı ve odak kelimeleri gösteriliyor.
+
+- Seçili senaryonun son hedef cümlesi kullanılmalı.
+- Boş veya hatalı değerlendirme anlaşılır geri bildirim vermeli.
+- Metin tabanlı assessment Free kullanıcıda da çalışmalı; gerçek STT ayrı premium sağlayıcı entegrasyonudur.
+
+### Vocabulary catalog genişletme
+
+**Durum:** Done — development başlangıç kataloğu 8 kelimeden 52 yayınlanmış kelimeye çıkarıldı.
+
+- Yeni kelimeler migration gerektirmeden development seeding ile ekleniyor.
+- Hedef kalite sınırı 2.000 yayınlanmış kelime; sonraki içerikler admin studio/reviewer akışından gelmeli.

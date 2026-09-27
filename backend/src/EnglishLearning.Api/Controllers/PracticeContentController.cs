@@ -15,9 +15,8 @@ public sealed class PracticeContentController(IPracticeContentService content, I
     public ActionResult<IReadOnlyList<ListeningExerciseDto>> Listening([FromQuery] string? level) => Ok(content.GetListeningExercises(level));
 
     [HttpPost("pronunciation/assess")]
-    public async Task<ActionResult<PronunciationAssessmentDto>> Assess([FromBody] PronunciationAssessmentRequest request, CancellationToken ct)
+    public ActionResult<PronunciationAssessmentDto> Assess([FromBody] PronunciationAssessmentRequest request)
     {
-        if (!await HasFeature("pronunciation_analysis", ct)) return StatusCode(StatusCodes.Status403Forbidden, new { message = "Pronunciation analysis requires Premium." });
         return Ok(content.AssessPronunciation(request));
     }
 
