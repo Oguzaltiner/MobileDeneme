@@ -24,6 +24,7 @@ export type MatchingChallenge = { wordId: string; term: string; answer: string; 
 export type LeaderboardEntry = { rank: number; displayName: string; points: number; isCurrentUser: boolean };
 export type LeaderboardSummary = { league: string; periodEndsAtUtc: string; entries: LeaderboardEntry[]; currentUserRank: number; currentUserPoints: number; xpBreakdown: { reviewXp: number; quizXp: number; reviewCount: number; quizCount: number }; reward: { title: string; description: string } };
 export type LearningPath = { key: string; title: string; description: string; purpose: string; recommended: boolean };
+export type PracticePlan = { pathKey: string; pathTitle: string; estimatedMinutes: number; steps: { key: string; title: string; description: string; route: string; estimatedMinutes: number }[] };
 let accessToken: string | null = null;
 export function setAccessToken(token: string | null) { accessToken = token; }
 async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
@@ -69,4 +70,5 @@ export const api = {
   weeklyLeaderboard: () => request<LeaderboardSummary>('/leaderboard/weekly'),
   learningPaths: () => request<LearningPath[]>('/learning-paths'),
   selectLearningPath: (key: string) => request<void>(`/learning-paths/${encodeURIComponent(key)}/select`, { method: 'PUT' }),
+  practicePlan: () => request<PracticePlan>('/practice/plan'),
 };

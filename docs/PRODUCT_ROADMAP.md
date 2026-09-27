@@ -13,7 +13,7 @@ Babbel’in hedefe göre rota, kısa pratik ders, konuşma ve kişiselleştirilm
 ### 1. Öğrenme motoru ve içerik kalitesi — P0
 
 - Learning path seçimini tüm dersleri filtreleyecek şekilde bağla.
-- Cümle tamamlama, dinleme, yazma, eşleştirme ve telaffuz modlarını ortak `PracticeSession` sözleşmesine taşı.
+- Cümle tamamlama, dinleme, yazma, eşleştirme ve telaffuz modlarını ortak `PracticeSession` sözleşmesine taşı. İlk ortak plan giriş noktası tamamlandı; kalıcı seans/cevap olayları sonraki alt iş.
 - Her soruya zorluk, beceri ve hata etiketi ekle.
 - Cümle/örnek içeriklerini seed yerine admin içerik tablosundan yönet.
 

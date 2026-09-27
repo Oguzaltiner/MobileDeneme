@@ -23,6 +23,7 @@
 - Cihaz bağlantısı için `mobile/.env.example` ve EAS profile API URL örnekleri.
 - Admin içerik yönetimi için rol kontrollü vocabulary CRUD ve `admin_audit_logs` tabanlı değişiklik geçmişi.
 - Mavi Lig’de haftalık XP kaynakları (tekrar/quiz) ve sıra bazlı ödül hedefi mobilde görünür hale getirildi.
+- Öğrenme amacına göre yaklaşık 8 dakikalık kişisel pratik planı ve ortak seans giriş ekranı eklendi.
 
 ## Ürün kararları
 
@@ -41,6 +42,7 @@ Memrise'in telaffuz ve konuşma pratiği, Babbel'in kısa kişiselleştirilmiş 
 - Çalışan API smoke: `GET /health` → `Healthy`.
 - Admin smoke: test kullanıcı girişi ve `GET /api/v1/admin/audit` sözleşmesi doğrulandı.
 - Leaderboard smoke: `GET /api/v1/leaderboard/weekly` XP kırılımı ve ödül sözleşmesi doğrulandı.
+- Practice smoke: `GET /api/v1/practice/plan` kullanıcı amacıyla 4 adımlı plan döndürüyor.
 - Docker daemon çalışmadığı için `docker compose build api` çalıştırılamadı; Docker Desktop açıldığında tekrar edilmelidir.
 
 ## Bilinen riskler / yayın öncesi işler
