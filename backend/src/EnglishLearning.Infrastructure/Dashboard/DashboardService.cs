@@ -31,6 +31,10 @@ public sealed class DashboardService(EnglishLearningDbContext db) : IDashboardSe
                 ? "Bugünkü hedefini tamamladın. İstersen mini quiz ile bilgini test et."
                 : $"Bugün {recommended} kelimelik kısa bir seansla ritmini koruyalım.";
         var coachReason = dueReviewCount > 0 ? $"{dueReviewCount} zamanlanmış tekrar" : recentReviews.Count >= 5 && recentSuccessRate < .65 ? $"Son 7 gün başarı: %{Math.Round(recentSuccessRate * 100)}" : "Son 7 günlük ritmine göre";
+        var coachActionKey = dueReviewCount > 0 ? "due-review" : recentReviews.Count >= 5 && recentSuccessRate < .65 ? "skill-recovery" : todayProgress >= settings.DailyGoal ? "knowledge-check" : "daily-practice";
+        var coachRoute = dueReviewCount > 0 ? "DailyMission" : recentReviews.Count >= 5 && recentSuccessRate < .65 ? "WritingChallenge" : todayProgress >= settings.DailyGoal ? "QuizStart" : "PracticeSession";
+        var coachCta = dueReviewCount > 0 ? "Tekrarı başlat" : recentReviews.Count >= 5 && recentSuccessRate < .65 ? "Zayıf alanı çalış" : todayProgress >= settings.DailyGoal ? "Mini quiz başlat" : "Pratiğe başla";
+        var coachSkill = dueReviewCount > 0 ? "review" : recentReviews.Count >= 5 && recentSuccessRate < .65 ? "active-recall" : todayProgress >= settings.DailyGoal ? "assessment" : "vocabulary";
         var achievements = new[]
         {
             new AchievementDto("first-review", "İlk adım", "İlk kelime değerlendirmesini tamamla.", totalWordsLearned >= 1),
@@ -38,7 +42,7 @@ public sealed class DashboardService(EnglishLearningDbContext db) : IDashboardSe
             new AchievementDto("words-25", "Kelime avcısı", "25 kelime öğren.", totalWordsLearned >= 25),
             new AchievementDto("words-100", "Ustalık yolu", "100 kelime öğren.", totalWordsLearned >= 100)
         };
-        return new DashboardSummary(settings.CurrentLevel, settings.DailyGoal, todayProgress, totalWordsLearned, dueReviewCount, currentStreak, longestStreak, settings.DailyGoal * 5, weeklyReviewProgress, achievements, coachTitle, coachMessage, recommended, coachReason);
+        return new DashboardSummary(settings.CurrentLevel, settings.DailyGoal, todayProgress, totalWordsLearned, dueReviewCount, currentStreak, longestStreak, settings.DailyGoal * 5, weeklyReviewProgress, achievements, coachTitle, coachMessage, recommended, coachReason, coachActionKey, coachRoute, coachCta, coachSkill);
     }
 
     private static int CalculateCurrentStreak(IReadOnlyList<DateTime> days, DateTime today)
