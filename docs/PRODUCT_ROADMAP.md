@@ -31,7 +31,7 @@ Babbel’in hedefe göre rota, kısa pratik ders, konuşma ve kişiselleştirilm
 
 ### 3. Oyunlaştırma ve sosyal döngü — P1
 
-- Mevcut Mavi Lig’e haftalık XP kazanım kaynaklarını göster.
+- ~~Mevcut Mavi Lig’e haftalık XP kazanım kaynaklarını göster.~~ Tamamlandı: tekrar ve quiz XP kırılımı mobilde gösteriliyor.
 - Lig yükselme/düşme, haftalık ödül ve kişisel rekorlar ekle.
 - Streak koruma, günlük görev serisi ve arkadaş daveti ekle.
 - Bildirim tercihleri ve sessiz saatler ekle.
