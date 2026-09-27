@@ -1,4 +1,4 @@
-export type Overview = { users: number; vocabularyWords: number; reviewEvents: number; completedQuizzes: number; premiumUsers: number };
+export type Overview = { users: number; vocabularyWords: number; publishedVocabularyWords: number; vocabularyCapacity: number; reviewEvents: number; completedQuizzes: number; premiumUsers: number };
 export type QueueItem = { id: string; term: string; translation: string; level: string; category: string; status: string; publishedAtUtc: string | null };
 export type AuditItem = { id: string; userId: string; action: string; entityType: string; entityId: string | null; createdAtUtc: string };
 export type VocabularyInput = { term: string; pronunciation: string; partOfSpeech: string; definition: string; translation: string; level: string; category: string; exampleSentence: string };

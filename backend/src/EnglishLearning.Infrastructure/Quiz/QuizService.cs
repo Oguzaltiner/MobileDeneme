@@ -12,14 +12,14 @@ public sealed class QuizService(EnglishLearningDbContext db, IEntitlementService
     {
         var count = request.QuestionCount is 10 ? 10 : 5;
         if (!await entitlements.CanAccessLevelAsync(userId, request.Level, ct)) return null;
-        var query = db.VocabularyWords.AsNoTracking().AsQueryable();
+        var query = db.VocabularyWords.AsNoTracking().Where(x => x.PublicationStatus == Domain.VocabularyPublicationStatus.Published).AsQueryable();
         var entitlement = await entitlements.GetAsync(userId, ct);
         if (!entitlement.IsPremium) query = query.Where(x => x.Level == "A1" || x.Level == "A2");
         if (!string.IsNullOrWhiteSpace(request.Level)) query = query.Where(x => x.Level == request.Level);
         if (!string.IsNullOrWhiteSpace(request.Category)) query = query.Where(x => x.Category == request.Category);
         var words = await query.OrderBy(_ => Guid.NewGuid()).Take(count).ToListAsync(ct);
         if (words.Count < count) return null;
-        var all = await db.VocabularyWords.AsNoTracking().ToListAsync(ct);
+        var all = await db.VocabularyWords.AsNoTracking().Where(x => x.PublicationStatus == Domain.VocabularyPublicationStatus.Published).ToListAsync(ct);
         var session = new QuizSession { UserId = userId, Level = request.Level, Category = request.Category, QuestionCount = count };
         for (var i = 0; i < words.Count; i++)
         {

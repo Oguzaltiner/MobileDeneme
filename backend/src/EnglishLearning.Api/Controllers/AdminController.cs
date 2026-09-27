@@ -32,6 +32,8 @@ public sealed class AdminController(EnglishLearningDbContext db) : ControllerBas
     {
         users = await db.Users.CountAsync(ct),
         vocabularyWords = await db.VocabularyWords.CountAsync(ct),
+        publishedVocabularyWords = await db.VocabularyWords.CountAsync(x => x.PublicationStatus == VocabularyPublicationStatus.Published, ct),
+        vocabularyCapacity = VocabularyLimits.MaxPublishedWords,
         reviewEvents = await db.ReviewEvents.CountAsync(ct),
         completedQuizzes = await db.QuizSessions.CountAsync(x => x.Status == EnglishLearning.Domain.QuizSessionStatus.Completed, ct),
         premiumUsers = await db.UserEntitlements.CountAsync(x => x.Plan != EnglishLearning.Domain.SubscriptionPlan.Free, ct)
@@ -54,6 +56,8 @@ public sealed class AdminController(EnglishLearningDbContext db) : ControllerBas
         if (!TryGetAdminId(out var adminId)) return Unauthorized();
         var word = await db.VocabularyWords.SingleOrDefaultAsync(x => x.Id == id, ct);
         if (word is null) return NotFound();
+        if (word.PublicationStatus != VocabularyPublicationStatus.Published && await db.VocabularyWords.CountAsync(x => x.PublicationStatus == VocabularyPublicationStatus.Published, ct) >= VocabularyLimits.MaxPublishedWords)
+            return Conflict(new { message = $"Published vocabulary limit ({VocabularyLimits.MaxPublishedWords}) has been reached." });
         word.PublicationStatus = VocabularyPublicationStatus.Published;
         word.PublishedAtUtc = DateTime.UtcNow;
         await db.SaveChangesAsync(ct);

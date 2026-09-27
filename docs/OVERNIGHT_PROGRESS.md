@@ -27,6 +27,7 @@
 - Vocabulary içerikleri için taslak/yayın durumu, yayın migration’ı ve admin publish endpoint’i eklendi; mobil yalnızca yayınlanmış içeriği alıyor.
 - Reviewer iş akışı eklendi: taslak kuyruğu, incelemeye gönderme, yayınlama ve reddetme; Admin/Editor/Reviewer policy ayrımı tanımlandı.
 - React admin web paneli (`admin-web/`) eklendi: güvenli login, overview, içerik kuyruğu, taslak oluşturma, yayın/red aksiyonları ve audit görünümü.
+- Yayınlanmış kelime havuzu için 2.000 kelimelik kalite kapasitesi eklendi; quiz ve tekrar motoru taslak içerikleri dışlıyor.
 
 ## Ürün kararları
 

@@ -14,7 +14,7 @@ public sealed class ReviewService(EnglishLearningDbContext db, IEntitlementServi
         var size = Math.Clamp(limit, 1, 50);
         var now = DateTime.UtcNow;
         var due = await db.UserWordProgress.AsNoTracking()
-            .Where(x => x.UserId == userId && x.DueAtUtc <= now)
+            .Where(x => x.UserId == userId && x.DueAtUtc <= now && x.VocabularyWord.PublicationStatus == VocabularyPublicationStatus.Published)
             .OrderBy(x => x.DueAtUtc)
             .Take(size)
             .Select(x => new VocabularyWordDto(x.VocabularyWord.Id, x.VocabularyWord.Term, x.VocabularyWord.Pronunciation, x.VocabularyWord.PartOfSpeech, x.VocabularyWord.Definition, x.VocabularyWord.Translation, x.VocabularyWord.Level, x.VocabularyWord.Category, x.VocabularyWord.ExampleSentence))
@@ -23,7 +23,7 @@ public sealed class ReviewService(EnglishLearningDbContext db, IEntitlementServi
         var existingIds = await db.UserWordProgress.AsNoTracking().Where(x => x.UserId == userId).Select(x => x.VocabularyWordId).ToListAsync(ct);
         var remaining = size - due.Count;
         var fresh = await db.VocabularyWords.AsNoTracking()
-            .Where(x => !existingIds.Contains(x.Id))
+            .Where(x => !existingIds.Contains(x.Id) && x.PublicationStatus == VocabularyPublicationStatus.Published)
             .OrderBy(x => x.Level).ThenBy(x => x.Term)
             .Take(remaining)
             .Select(x => new VocabularyWordDto(x.Id, x.Term, x.Pronunciation, x.PartOfSpeech, x.Definition, x.Translation, x.Level, x.Category, x.ExampleSentence))
@@ -35,7 +35,7 @@ public sealed class ReviewService(EnglishLearningDbContext db, IEntitlementServi
     {
         if (string.IsNullOrWhiteSpace(request.ClientEventId) || request.ClientEventId.Length > 100)
             return null;
-        var wordExists = await db.VocabularyWords.AnyAsync(x => x.Id == request.WordId, ct);
+        var wordExists = await db.VocabularyWords.AnyAsync(x => x.Id == request.WordId && x.PublicationStatus == Domain.VocabularyPublicationStatus.Published, ct);
         if (!wordExists) return null;
 
         var existingEvent = await db.ReviewEvents.AsNoTracking()
