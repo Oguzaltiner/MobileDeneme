@@ -2,6 +2,7 @@ using EnglishLearning.Application.Entitlements;
 using EnglishLearning.Domain;
 using EnglishLearning.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace EnglishLearning.Infrastructure.Entitlements;
 
@@ -29,21 +30,30 @@ public sealed class EntitlementService(EnglishLearningDbContext db) : IEntitleme
     {
         var entitlement = await GetAsync(userId, ct);
         if (entitlement.IsPremium) return true;
-        var usage = await GetUsageAsync(userId, ct);
-        if (usage.QuizzesStarted >= entitlement.DailyQuizLimit) return false;
-        usage.QuizzesStarted++;
-        await db.SaveChangesAsync(ct);
-        return true;
+        return await TryConsumeAsync(userId, entitlement.DailyQuizLimit, static usage => usage.QuizzesStarted++, static usage => usage.QuizzesStarted, ct);
     }
 
     public async Task<bool> TryConsumeWordAsync(Guid userId, CancellationToken ct)
     {
         var entitlement = await GetAsync(userId, ct);
         if (entitlement.IsPremium) return true;
+        return await TryConsumeAsync(userId, entitlement.DailyWordLimit, static usage => usage.WordsUsed++, static usage => usage.WordsUsed, ct);
+    }
+
+    private async Task<bool> TryConsumeAsync(Guid userId, int limit, Action<DailyUsage> increment, Func<DailyUsage, int> read, CancellationToken ct)
+    {
+        // Serialize the read-modify-write against concurrent requests for this user/day.
+        // This prevents parallel mobile retries from bypassing the free plan quota.
+        await using var transaction = await db.Database.BeginTransactionAsync(IsolationLevel.Serializable, ct);
         var usage = await GetUsageAsync(userId, ct);
-        if (usage.WordsUsed >= entitlement.DailyWordLimit) return false;
-        usage.WordsUsed++;
+        if (read(usage) >= limit)
+        {
+            await transaction.RollbackAsync(ct);
+            return false;
+        }
+        increment(usage);
         await db.SaveChangesAsync(ct);
+        await transaction.CommitAsync(ct);
         return true;
     }
 
