@@ -27,6 +27,9 @@ public sealed class QuizQuestion
     public QuizQuestionType Type { get; set; }
     /// <summary>Adaptive difficulty band: 1 (foundation) through 4 (advanced).</summary>
     public int Difficulty { get; set; } = 2;
+    public string Skill { get; set; } = "vocabulary";
+    public string? Explanation { get; set; }
+    public string? ErrorTag { get; set; }
     public bool Answered { get; set; }
     public bool IsCorrect { get; set; }
     public QuizSession Session { get; set; } = null!;

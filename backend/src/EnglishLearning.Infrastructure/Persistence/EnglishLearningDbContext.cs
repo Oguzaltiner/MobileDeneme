@@ -146,6 +146,9 @@ public sealed class EnglishLearningDbContext(DbContextOptions<EnglishLearningDbC
             entity.ToTable("quiz_questions"); entity.HasKey(x => x.Id);
             entity.Property(x => x.Type).HasConversion<string>().HasMaxLength(20).IsRequired();
             entity.Property(x => x.Difficulty).HasDefaultValue(2).IsRequired();
+            entity.Property(x => x.Skill).HasMaxLength(40).HasDefaultValue("vocabulary").IsRequired();
+            entity.Property(x => x.Explanation).HasMaxLength(1000);
+            entity.Property(x => x.ErrorTag).HasMaxLength(80);
             entity.HasIndex(x => new { x.SessionId, x.Order }).IsUnique();
             entity.HasOne(x => x.Session).WithMany(x => x.Questions).HasForeignKey(x => x.SessionId).OnDelete(DeleteBehavior.Cascade);
             entity.HasOne(x => x.VocabularyWord).WithMany().HasForeignKey(x => x.VocabularyWordId).OnDelete(DeleteBehavior.Restrict);

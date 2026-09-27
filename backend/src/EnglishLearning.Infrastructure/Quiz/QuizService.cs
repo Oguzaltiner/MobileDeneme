@@ -34,7 +34,7 @@ public sealed class QuizService(EnglishLearningDbContext db, IEntitlementService
                 .OrderBy(_ => Guid.NewGuid()).Take(3).Select(x => type == QuizQuestionType.Translation ? x.Translation : x.Term).ToList();
             if (candidates.Count < 3) return null;
             candidates.Add(correct);
-            var question = new QuizQuestion { Session = session, VocabularyWordId = word.Id, Order = i + 1, Type = type, Difficulty = adaptiveDifficulty };
+            var question = new QuizQuestion { Session = session, VocabularyWordId = word.Id, Order = i + 1, Type = type, Difficulty = adaptiveDifficulty, Skill = type == QuizQuestionType.Translation ? "meaning" : "context", Explanation = type == QuizQuestionType.Translation ? $"{word.Term} = {word.Translation}" : $"{word.Term}: {word.Definition}", ErrorTag = type == QuizQuestionType.Translation ? "meaning" : "definition" };
             foreach (var option in candidates.OrderBy(_ => Guid.NewGuid()).Select((text, index) => new QuizOption { Question = question, Key = ((char)('A' + index)).ToString(), Text = text, IsCorrect = text == correct })) question.Options.Add(option);
             session.Questions.Add(question);
         }
@@ -70,7 +70,7 @@ public sealed class QuizService(EnglishLearningDbContext db, IEntitlementService
     }
 
     private IQueryable<QuizSession> Load(Guid userId, Guid id) => db.QuizSessions.Include(x => x.Questions).ThenInclude(x => x.Options).Include(x => x.Questions).ThenInclude(x => x.VocabularyWord).Where(x => x.Id == id && x.UserId == userId);
-    private static QuizSessionDto Map(QuizSession s) => new(s.Id, s.Status, s.QuestionCount, s.Questions.Count(x => x.Answered), s.CorrectCount, s.Questions.OrderBy(x => x.Order).Select(q => new QuizQuestionDto(q.Id, q.Order, q.Type, q.Difficulty, q.Type == QuizQuestionType.Translation ? q.VocabularyWord.Term : q.VocabularyWord.Definition, q.Options.OrderBy(x => x.Key).Select(o => new QuizOptionDto(o.Key, o.Text)).ToList(), q.Answered, q.Answered ? q.IsCorrect : null)).ToList());
+    private static QuizSessionDto Map(QuizSession s) => new(s.Id, s.Status, s.QuestionCount, s.Questions.Count(x => x.Answered), s.CorrectCount, s.Questions.OrderBy(x => x.Order).Select(q => new QuizQuestionDto(q.Id, q.Order, q.Type, q.Difficulty, q.Skill, q.Answered ? q.Explanation : null, q.Answered ? q.ErrorTag : null, q.Type == QuizQuestionType.Translation ? q.VocabularyWord.Term : q.VocabularyWord.Definition, q.Options.OrderBy(x => x.Key).Select(o => new QuizOptionDto(o.Key, o.Text)).ToList(), q.Answered, q.Answered ? q.IsCorrect : null)).ToList());
 
     private async Task<int> GetAdaptiveDifficultyAsync(Guid userId, CancellationToken ct)
     {
