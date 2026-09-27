@@ -5,4 +5,5 @@ public sealed record LearningPath(string Key, string Title, string Description, 
 public interface ILearningPathService
 {
     Task<IReadOnlyList<LearningPath>> GetAsync(Guid userId, CancellationToken ct);
+    Task<bool> SelectAsync(Guid userId, string key, CancellationToken ct);
 }

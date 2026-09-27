@@ -64,4 +64,5 @@ export const api = {
   sentenceChallenge: () => request<SentenceChallenge>('/vocabulary/sentence-challenge'),
   weeklyLeaderboard: () => request<LeaderboardSummary>('/leaderboard/weekly'),
   learningPaths: () => request<LearningPath[]>('/learning-paths'),
+  selectLearningPath: (key: string) => request<void>(`/learning-paths/${encodeURIComponent(key)}/select`, { method: 'PUT' }),
 };

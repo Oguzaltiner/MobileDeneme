@@ -22,4 +22,15 @@ public sealed class LearningPathService(EnglishLearningDbContext db) : ILearning
         var purpose = await db.UserSettings.AsNoTracking().Where(x => x.UserId == userId).Select(x => x.LearningPurpose).SingleOrDefaultAsync(ct);
         return Paths.Select(x => new LearningPath(x.Key, x.Title, x.Description, x.Purpose, x.Purpose == purpose || (purpose == "general" && x.Key == "full-course"))).ToList();
     }
+
+    public async Task<bool> SelectAsync(Guid userId, string key, CancellationToken ct)
+    {
+        var path = Paths.FirstOrDefault(x => x.Key.Equals(key.Trim(), StringComparison.OrdinalIgnoreCase));
+        if (path == default) return false;
+        var settings = await db.UserSettings.SingleOrDefaultAsync(x => x.UserId == userId, ct);
+        if (settings is null) return false;
+        settings.LearningPurpose = path.Purpose;
+        await db.SaveChangesAsync(ct);
+        return true;
+    }
 }

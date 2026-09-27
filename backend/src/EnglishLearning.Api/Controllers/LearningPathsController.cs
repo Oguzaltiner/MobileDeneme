@@ -15,4 +15,12 @@ public sealed class LearningPathsController(ILearningPathService paths) : Contro
         if (!Guid.TryParse(rawId, out var userId)) return Unauthorized();
         return Ok(await paths.GetAsync(userId, ct));
     }
+
+    [HttpPut("{key}/select")]
+    public async Task<IActionResult> Select(string key, CancellationToken ct)
+    {
+        var rawId = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? User.FindFirstValue("sub");
+        if (!Guid.TryParse(rawId, out var userId)) return Unauthorized();
+        return await paths.SelectAsync(userId, key, ct) ? NoContent() : NotFound(new { message = "Learning path was not found." });
+    }
 }
