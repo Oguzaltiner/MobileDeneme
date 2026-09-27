@@ -24,7 +24,8 @@ public sealed class PracticeService(EnglishLearningDbContext db) : IPracticeServ
             new("sentence", "Cümleyi tamamla", "Kelimeyi gerçek bağlamda seç.", "SentenceChallenge", 2),
             new("matching", "Eşleştirme", "İngilizce kelimeyi doğru anlamla eşleştir.", "MatchingChallenge", 1),
             new("writing", "Yazarak hatırla", "Tanımdan kelimeyi üret.", "WritingChallenge", 2),
-            new("conversation", "Konuşma pratiği", "Gerçek hayat cümlelerini dinle ve tekrar et.", "ConversationPractice", 2)
+            new("conversation", "Konuşma pratiği", "Gerçek hayat cümlelerini dinle ve tekrar et.", "ConversationPractice", 2),
+            new("listening", "Dinleme laboratuvarı", "Dinle, anlamı seç ve bağlamı çöz.", "ListeningLab", 2)
         };
         if (purpose == "exam") steps.Reverse();
         return new(path.Item1, path.Item2, steps.Sum(x => x.EstimatedMinutes), steps);

@@ -48,6 +48,35 @@ public sealed class AdminController(EnglishLearningDbContext db) : ControllerBas
         });
     }
 
+    [HttpGet("analytics/learning")]
+    public async Task<IActionResult> LearningAnalytics([FromQuery] int days = 30, CancellationToken ct = default)
+    {
+        days = Math.Clamp(days, 7, 90);
+        var since = DateTime.UtcNow.Date.AddDays(-days + 1);
+        var reviews = await db.ReviewEvents.AsNoTracking().Where(x => x.CreatedAtUtc >= since)
+            .Select(x => new { x.CreatedAtUtc, x.Rating }).ToListAsync(ct);
+        var quizQuestions = await db.QuizQuestions.AsNoTracking().Where(x => x.Answered && x.Session.CreatedAtUtc >= since)
+            .Select(x => new { x.Session.CreatedAtUtc, x.IsCorrect }).ToListAsync(ct);
+        var daily = Enumerable.Range(0, days).Select(offset =>
+        {
+            var date = since.AddDays(offset);
+            var dayReviews = reviews.Where(x => x.CreatedAtUtc.Date == date).ToList();
+            var dayQuiz = quizQuestions.Where(x => x.CreatedAtUtc.Date == date).ToList();
+            return new
+            {
+                date = date.ToString("yyyy-MM-dd"),
+                reviewEvents = dayReviews.Count,
+                successfulReviews = dayReviews.Count(x => x.Rating != ReviewRating.Again),
+                quizAnswers = dayQuiz.Count,
+                correctQuizAnswers = dayQuiz.Count(x => x.IsCorrect)
+            };
+        });
+        var content = await db.VocabularyWords.AsNoTracking().GroupBy(x => new { x.Level, x.Category })
+            .Select(g => new { level = g.Key.Level, category = g.Key.Category, total = g.Count(), published = g.Count(x => x.PublicationStatus == VocabularyPublicationStatus.Published) })
+            .OrderBy(x => x.level).ThenBy(x => x.category).ToListAsync(ct);
+        return Ok(new { days, since, daily, contentCoverage = content });
+    }
+
     [HttpPost("vocabulary")]
     public async Task<ActionResult<object>> CreateVocabulary(VocabularyWriteRequest request, CancellationToken ct)
     {

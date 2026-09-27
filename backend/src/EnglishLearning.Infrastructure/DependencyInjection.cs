@@ -54,6 +54,7 @@ public static class DependencyInjection
         services.AddScoped<IStatisticsService, StatisticsService>();
         services.AddScoped<IQuizService, QuizService>();
         services.AddScoped<IPracticeService, PracticeService>();
+        services.AddSingleton<IPracticeContentService, PracticeContentService>();
         services.AddScoped<IPlacementTestService, PlacementTestService>();
 
         return services;

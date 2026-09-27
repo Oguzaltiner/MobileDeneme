@@ -17,7 +17,12 @@ public sealed class ContentWorkflowController(EnglishLearningDbContext db) : Con
     {
         var query = db.VocabularyWords.AsNoTracking().Where(x => x.PublicationStatus != VocabularyPublicationStatus.Published);
         if (status is not null) query = query.Where(x => x.PublicationStatus == status);
-        return Ok(await query.OrderBy(x => x.Term).Select(x => new { x.Id, x.Term, x.Translation, x.Level, x.Category, Status = x.PublicationStatus.ToString(), x.PublishedAtUtc }).ToListAsync(ct));
+        return Ok(await query.OrderBy(x => x.Term).Select(x => new
+        {
+            x.Id, x.Term, x.Translation, x.Level, x.Category, x.PartOfSpeech, x.Definition, x.ExampleSentence,
+            Status = x.PublicationStatus.ToString(), x.PublishedAtUtc,
+            qualityScore = (x.Pronunciation != "" ? 20 : 0) + (x.Definition != "" ? 20 : 0) + (x.ExampleSentence != null && x.ExampleSentence != "" ? 20 : 0) + (x.Translation != "" ? 20 : 0) + (x.Category != "" ? 20 : 0)
+        }).ToListAsync(ct));
     }
 
     [Authorize(Policy = "ContentEditor"), HttpPost("vocabulary/{id:guid}/submit-review")]

@@ -26,6 +26,9 @@ export type LeaderboardSummary = { league: string; periodEndsAtUtc: string; entr
 export type LearningPath = { key: string; title: string; description: string; purpose: string; recommended: boolean };
 export type PracticePlan = { pathKey: string; pathTitle: string; estimatedMinutes: number; steps: { key: string; title: string; description: string; route: string; estimatedMinutes: number }[] };
 export type PracticeSession = { id: string; pathKey: string; status: number; startedAtUtc: string; completedAtUtc?: string | null; steps: { id: string; order: number; key: string; title: string; estimatedMinutes: number; completed: boolean }[] };
+export type ConversationScenario = { key: string; title: string; description: string; level: string; goal: string; turns: { speaker: string; english: string; turkish: string; focus: string }[] };
+export type PronunciationAssessment = { score: number; grade: string; feedback: string; focusWords: string[] };
+export type ListeningExercise = { key: string; title: string; level: string; prompt: string; transcript: string; translation: string; options: string[]; correctOption: string; tip: string };
 export type PlacementTest = { id: string; status: number; questionCount: number; answeredCount: number; correctCount: number; estimatedLevel?: string | null; questions: { id: string; order: number; difficulty: number; type: number; prompt: string; options: { key: string; text: string }[]; answered: boolean; isCorrect?: boolean | null }[] };
 export type PlacementAnswer = { questionId: string; isCorrect: boolean; correctOptionKey: string; correctCount: number; answeredCount: number };
 export type PlacementResult = { id: string; status: number; questionCount: number; answeredCount: number; correctCount: number; scorePercent: number; estimatedLevel: string };
@@ -82,4 +85,7 @@ export const api = {
   startPracticeSession: (pathKey?: string) => request<PracticeSession>('/practice/sessions', { method: 'POST', body: JSON.stringify({ pathKey }) }),
   completePracticeStep: (sessionId: string, stepId: string) => request<PracticeSession>(`/practice/sessions/${sessionId}/steps/${stepId}/complete`, { method: 'POST' }),
   completePracticeSession: (sessionId: string) => request<PracticeSession>(`/practice/sessions/${sessionId}/complete`, { method: 'POST' }),
+  conversationScenarios: (level?: string) => request<ConversationScenario[]>(`/practice/content/conversations${level ? `?level=${encodeURIComponent(level)}` : ''}`),
+  listeningExercises: (level?: string) => request<ListeningExercise[]>(`/practice/content/listening${level ? `?level=${encodeURIComponent(level)}` : ''}`),
+  assessPronunciation: (text: string, transcript: string) => request<PronunciationAssessment>('/practice/content/pronunciation/assess', { method: 'POST', body: JSON.stringify({ text, transcript }) }),
 };
