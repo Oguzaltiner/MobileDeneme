@@ -1,7 +1,8 @@
 import { Pressable, ScrollView, Text, View } from 'react-native';
 
-type GameRoute = 'QuizStart' | 'SentenceChallenge' | 'MatchingChallenge' | 'WritingChallenge' | 'ListeningLab';
+type GameRoute = 'QuizStart' | 'SentenceChallenge' | 'MatchingChallenge' | 'WritingChallenge' | 'ListeningLab' | 'MillionaireGame';
 const games: { title: string; description: string; icon: string; route: GameRoute }[] = [
+  { title: 'Word Millionaire', description: 'Ödül merdiveninde yüksel, doğru bildikçe risk al ve büyük ödüle ulaş.', icon: '💰', route: 'MillionaireGame' },
   { title: 'Word Arena', description: '4 şıklı hızlı quiz ile kelime bilgini test et.', icon: '⚔️', route: 'QuizStart' },
   { title: 'Sentence Builder', description: 'Cümleyi tamamla ve İngilizce kelime sırasını öğren.', icon: '🧩', route: 'SentenceChallenge' },
   { title: 'Memory Match', description: 'İngilizce kelimeyi doğru anlamla eşleştir.', icon: '🔗', route: 'MatchingChallenge' },
