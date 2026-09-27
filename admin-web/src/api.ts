@@ -4,6 +4,7 @@ export type AuditItem = { id: string; userId: string; action: string; entityType
 export type VocabularyInput = { term: string; pronunciation: string; partOfSpeech: string; definition: string; translation: string; level: string; category: string; exampleSentence: string };
 export type VocabularyItem = VocabularyInput & { id: string; status: string; publishedAtUtc: string | null };
 export type VocabularyPage = { items: VocabularyItem[]; page: number; pageSize: number; totalCount: number; totalPages: number };
+export type ContentItem = { id: string; key: string; title: string; type: string; level: string; category: string; payloadJson: string; status: string; version: number; createdAtUtc: string; updatedAtUtc: string };
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:5057/api/v1';
 const tokenKey = 'english-learning-admin-token';
@@ -24,6 +25,7 @@ export const adminApi = {
     const query = new URLSearchParams(); Object.entries(params).forEach(([key, value]) => { if (value) query.set(key, String(value)); });
     return request<VocabularyPage>(`/admin/vocabulary?${query.toString()}`);
   },
+  content: (status = '') => request<ContentItem[]>(`/admin/content${status ? `?status=${encodeURIComponent(status)}` : ''}`),
   queue: (status = '') => request<QueueItem[]>(`/admin/content/vocabulary/review-queue${status ? `?status=${status}` : ''}`),
   audit: () => request<AuditItem[]>('/admin/audit?limit=50'),
   createVocabulary: (body: VocabularyInput) => request<{ id: string }>('/admin/vocabulary', { method: 'POST', body: JSON.stringify(body) }),
