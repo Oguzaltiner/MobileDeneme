@@ -28,6 +28,11 @@
 - Reviewer iş akışı eklendi: taslak kuyruğu, incelemeye gönderme, yayınlama ve reddetme; Admin/Editor/Reviewer policy ayrımı tanımlandı.
 - React admin web paneli (`admin-web/`) eklendi: güvenli login, overview, içerik kuyruğu, taslak oluşturma, yayın/red aksiyonları ve audit görünümü.
 - Yayınlanmış kelime havuzu için 2.000 kelimelik kalite kapasitesi eklendi; quiz ve tekrar motoru taslak içerikleri dışlıyor.
+- Kalıcı PracticeSession, PracticeStep ve PracticeEvent tabloları ile seans başlatma/adım tamamlama/oturum kapatma API'leri eklendi; migration uygulandı.
+- Koç özeti son 7 günlük review başarısına göre açıklama üretmeye başladı; leaderboard özetine kişisel rekor ve kapanış sinyali eklendi.
+- Havaalanı, restoran ve toplantı için Conversation Practice mobil ekranı eklendi ve ortak pratik planına bağlandı.
+- Offline review kuyruğuna schema version, retry count, son hata ve kuyruk sayısı eklendi.
+- Admin overview'a quiz doğruluk ve review başarı yüzdeleri eklendi; admin web kartlarında görünür.
 
 ## Ürün kararları
 
@@ -47,6 +52,8 @@ Memrise'in telaffuz ve konuşma pratiği, Babbel'in kısa kişiselleştirilmiş 
 - Admin smoke: test kullanıcı girişi ve `GET /api/v1/admin/audit` sözleşmesi doğrulandı.
 - Leaderboard smoke: `GET /api/v1/leaderboard/weekly` XP kırılımı ve ödül sözleşmesi doğrulandı.
 - Practice smoke: `GET /api/v1/practice/plan` kullanıcı amacıyla 4 adımlı plan döndürüyor.
+- Practice session smoke: seans oluşturma (5 adım), ilk adım tamamlama ve seans kapatma başarılı.
+- Admin analytics smoke: overview quiz/review yüzdelerini döndürdü; yayın kapasitesi `8/2000` doğrulandı.
 - Content workflow smoke: taslak içerik mobil katalogda görünmedi, yayın sonrası göründü ve test kaydı temizlendi.
 - Reviewer workflow smoke: Draft → InReview → Published geçişleri ve review queue doğrulandı.
 - Admin web doğrulama: `npm run typecheck` ve yetkili Vite production build başarılı; Vite geliştirme sunucusu `http://localhost:5173` üzerinde açıldı.

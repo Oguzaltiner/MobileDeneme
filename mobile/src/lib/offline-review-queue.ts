@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export type QueuedReview = { clientEventId: string; wordId: string; rating: 0 | 1 | 2 | 3 };
+export type QueuedReview = { clientEventId: string; wordId: string; rating: 0 | 1 | 2 | 3; schemaVersion?: 1; retryCount?: number; lastError?: string };
 const STORAGE_KEY = 'offline-review-queue-v1';
 
 async function readQueue(): Promise<QueuedReview[]> {
@@ -19,6 +19,8 @@ export async function enqueueReview(item: QueuedReview) {
   if (!queue.some(x => x.clientEventId === item.clientEventId)) await writeQueue([...queue, item]);
 }
 
+export async function getQueuedReviewCount() { return (await readQueue()).length; }
+
 export async function flushReviewQueue(submit: (item: QueuedReview) => Promise<unknown>) {
   const queue = await readQueue();
   for (const item of queue) {
@@ -26,7 +28,10 @@ export async function flushReviewQueue(submit: (item: QueuedReview) => Promise<u
       await submit(item);
       const latest = await readQueue();
       await writeQueue(latest.filter(x => x.clientEventId !== item.clientEventId));
-    } catch {
+    } catch (error) {
+      const latest = await readQueue();
+      const failed = latest.find(x => x.clientEventId === item.clientEventId);
+      if (failed) { failed.retryCount = (failed.retryCount ?? 0) + 1; failed.lastError = error instanceof Error ? error.message : 'Sunucuya gönderilemedi'; await writeQueue(latest); }
       break;
     }
   }

@@ -27,7 +27,7 @@ export function DailyMissionScreen({ navigation }: { navigation: MissionNavigati
 
   const chooseAnswer = (answer: string) => { setSelectedAnswer(answer); if (answer === current.translation) setCorrectAnswers(x => x + 1); };
   const submitReview = async (rating: 0 | 1 | 2 | 3) => {
-    setSubmitting(true); setError(''); const item = { wordId: current.id, rating, clientEventId: createReviewEventId() } as const;
+    setSubmitting(true); setError(''); const item = { wordId: current.id, rating, clientEventId: createReviewEventId(), schemaVersion: 1 as const, retryCount: 0 };
     try { await api.submitReview(item); setIndex(x => x + 1); setStep('listen'); setSelectedAnswer(undefined); }
     catch (e) { const apiError = e as { status?: number; message?: string }; if (apiError.status === 0) { await enqueueReview(item); setIndex(x => x + 1); setStep('listen'); setSelectedAnswer(undefined); } else setError(apiError.message ?? 'Değerlendirme kaydedilemedi.'); }
     finally { setSubmitting(false); }

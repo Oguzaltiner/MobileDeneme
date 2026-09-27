@@ -29,6 +29,8 @@ public sealed class LeaderboardService(EnglishLearningDbContext db) : ILeaderboa
             <= 10 => new LeaderboardReward("Haftalık sandık", "İlk 10'da kalırsan haftalık ödül sandığını açarsın."),
             _ => new LeaderboardReward("İlk 10 hedefi", "Bir sonraki hedefin ilk 10'a girip haftalık sandığı kazanmak.")
         };
-        return new("Mavi Lig", start.AddDays(7), entries, current.Rank, current.Points, breakdown, reward);
+        var periodEnds = start.AddDays(7);
+        var personalBest = await db.ReviewEvents.AsNoTracking().Where(x => x.UserId == userId).GroupBy(x => x.CreatedAtUtc.Date).Select(x => x.Count()).OrderByDescending(x => x).FirstOrDefaultAsync(ct);
+        return new("Mavi Lig", periodEnds, entries, current.Rank, current.Points, breakdown, reward, personalBest, periodEnds - DateTime.UtcNow <= TimeSpan.FromHours(24));
     }
 }

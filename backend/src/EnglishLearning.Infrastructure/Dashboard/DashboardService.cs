@@ -16,16 +16,21 @@ public sealed class DashboardService(EnglishLearningDbContext db) : IDashboardSe
         var dueReviewCount = await db.UserWordProgress.AsNoTracking().CountAsync(x => x.UserId == userId && x.DueAtUtc <= DateTime.UtcNow, ct);
         var weekStart = today.AddDays(-6);
         var weeklyReviewProgress = await db.ReviewEvents.AsNoTracking().CountAsync(x => x.UserId == userId && x.CreatedAtUtc >= weekStart, ct);
+        var recentReviews = await db.ReviewEvents.AsNoTracking().Where(x => x.UserId == userId && x.CreatedAtUtc >= today.AddDays(-7)).Select(x => x.Rating).ToListAsync(ct);
+        var recentSuccessRate = recentReviews.Count == 0 ? 1d : recentReviews.Count(x => x != Domain.ReviewRating.Again) / (double)recentReviews.Count;
         var reviewDays = await db.ReviewEvents.AsNoTracking().Where(x => x.UserId == userId).Select(x => x.CreatedAtUtc.Date).Distinct().OrderByDescending(x => x).ToListAsync(ct);
         var currentStreak = CalculateCurrentStreak(reviewDays, today);
         var longestStreak = CalculateLongestStreak(reviewDays);
         var recommended = Math.Clamp(dueReviewCount > 0 ? dueReviewCount : 5, 1, Math.Max(1, settings.DailyGoal));
-        var coachTitle = dueReviewCount > 0 ? "Tekrar zamanı" : todayProgress >= settings.DailyGoal ? "Hedef tamamlandı" : "Bugünün mini görevi";
+        var coachTitle = dueReviewCount > 0 ? "Tekrar zamanı" : recentReviews.Count >= 5 && recentSuccessRate < .65 ? "Zayıf alanını güçlendir" : todayProgress >= settings.DailyGoal ? "Hedef tamamlandı" : "Bugünün mini görevi";
         var coachMessage = dueReviewCount > 0
             ? $"{dueReviewCount} kelimenin tekrar zamanı geldi. Önce zorlandıklarını pekiştirelim."
-            : todayProgress >= settings.DailyGoal
+            : recentReviews.Count >= 5 && recentSuccessRate < .65
+                ? "Son haftada bazı kelimelerde zorlandın. Cümle ve yazma pratiğiyle bu alanı güçlendirelim."
+                : todayProgress >= settings.DailyGoal
                 ? "Bugünkü hedefini tamamladın. İstersen mini quiz ile bilgini test et."
                 : $"Bugün {recommended} kelimelik kısa bir seansla ritmini koruyalım.";
+        var coachReason = dueReviewCount > 0 ? $"{dueReviewCount} zamanlanmış tekrar" : recentReviews.Count >= 5 && recentSuccessRate < .65 ? $"Son 7 gün başarı: %{Math.Round(recentSuccessRate * 100)}" : "Son 7 günlük ritmine göre";
         var achievements = new[]
         {
             new AchievementDto("first-review", "İlk adım", "İlk kelime değerlendirmesini tamamla.", totalWordsLearned >= 1),
@@ -33,7 +38,7 @@ public sealed class DashboardService(EnglishLearningDbContext db) : IDashboardSe
             new AchievementDto("words-25", "Kelime avcısı", "25 kelime öğren.", totalWordsLearned >= 25),
             new AchievementDto("words-100", "Ustalık yolu", "100 kelime öğren.", totalWordsLearned >= 100)
         };
-        return new DashboardSummary(settings.CurrentLevel, settings.DailyGoal, todayProgress, totalWordsLearned, dueReviewCount, currentStreak, longestStreak, settings.DailyGoal * 5, weeklyReviewProgress, achievements, coachTitle, coachMessage, recommended);
+        return new DashboardSummary(settings.CurrentLevel, settings.DailyGoal, todayProgress, totalWordsLearned, dueReviewCount, currentStreak, longestStreak, settings.DailyGoal * 5, weeklyReviewProgress, achievements, coachTitle, coachMessage, recommended, coachReason);
     }
 
     private static int CalculateCurrentStreak(IReadOnlyList<DateTime> days, DateTime today)

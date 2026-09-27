@@ -28,16 +28,25 @@ public sealed class AdminController(EnglishLearningDbContext db) : ControllerBas
         [param: StringLength(500)] string? ExampleSentence);
 
     [HttpGet("overview")]
-    public async Task<IActionResult> Overview(CancellationToken ct) => Ok(new
+    public async Task<IActionResult> Overview(CancellationToken ct)
     {
+        var answeredQuizCount = await db.QuizQuestions.CountAsync(x => x.Answered, ct);
+        var correctQuizCount = await db.QuizQuestions.CountAsync(x => x.Answered && x.IsCorrect, ct);
+        var reviewCount = await db.ReviewEvents.CountAsync(ct);
+        var successfulReviewCount = await db.ReviewEvents.CountAsync(x => x.Rating != EnglishLearning.Domain.ReviewRating.Again, ct);
+        return Ok(new
+        {
         users = await db.Users.CountAsync(ct),
         vocabularyWords = await db.VocabularyWords.CountAsync(ct),
         publishedVocabularyWords = await db.VocabularyWords.CountAsync(x => x.PublicationStatus == VocabularyPublicationStatus.Published, ct),
         vocabularyCapacity = VocabularyLimits.MaxPublishedWords,
         reviewEvents = await db.ReviewEvents.CountAsync(ct),
         completedQuizzes = await db.QuizSessions.CountAsync(x => x.Status == EnglishLearning.Domain.QuizSessionStatus.Completed, ct),
-        premiumUsers = await db.UserEntitlements.CountAsync(x => x.Plan != EnglishLearning.Domain.SubscriptionPlan.Free, ct)
-    });
+        premiumUsers = await db.UserEntitlements.CountAsync(x => x.Plan != EnglishLearning.Domain.SubscriptionPlan.Free, ct),
+        quizAccuracyPercent = answeredQuizCount == 0 ? 0 : correctQuizCount * 100d / answeredQuizCount,
+        reviewSuccessPercent = reviewCount == 0 ? 0 : successfulReviewCount * 100d / reviewCount
+        });
+    }
 
     [HttpPost("vocabulary")]
     public async Task<ActionResult<object>> CreateVocabulary(VocabularyWriteRequest request, CancellationToken ct)

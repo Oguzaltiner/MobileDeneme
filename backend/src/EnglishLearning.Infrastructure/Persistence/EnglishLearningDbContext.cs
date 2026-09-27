@@ -18,6 +18,9 @@ public sealed class EnglishLearningDbContext(DbContextOptions<EnglishLearningDbC
     public DbSet<UserWordProgress> UserWordProgress => Set<UserWordProgress>();
     public DbSet<ReviewEvent> ReviewEvents => Set<ReviewEvent>();
     public DbSet<AdminAuditLog> AdminAuditLogs => Set<AdminAuditLog>();
+    public DbSet<PracticeSession> PracticeSessions => Set<PracticeSession>();
+    public DbSet<PracticeSessionStep> PracticeSessionSteps => Set<PracticeSessionStep>();
+    public DbSet<PracticeEvent> PracticeEvents => Set<PracticeEvent>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -73,6 +76,32 @@ public sealed class EnglishLearningDbContext(DbContextOptions<EnglishLearningDbC
             entity.Property(x => x.EntityType).HasMaxLength(80).IsRequired();
             entity.HasIndex(x => x.CreatedAtUtc);
             entity.HasOne(x => x.User).WithMany().HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Restrict);
+        });
+        modelBuilder.Entity<PracticeSession>(entity =>
+        {
+            entity.ToTable("practice_sessions"); entity.HasKey(x => x.Id);
+            entity.Property(x => x.PathKey).HasMaxLength(40).IsRequired();
+            entity.Property(x => x.Status).HasConversion<string>().HasMaxLength(20).IsRequired();
+            entity.HasIndex(x => new { x.UserId, x.StartedAtUtc });
+            entity.HasOne(x => x.User).WithMany().HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Cascade);
+        });
+        modelBuilder.Entity<PracticeSessionStep>(entity =>
+        {
+            entity.ToTable("practice_session_steps"); entity.HasKey(x => x.Id);
+            entity.Property(x => x.Key).HasMaxLength(40).IsRequired(); entity.Property(x => x.Title).HasMaxLength(120).IsRequired();
+            entity.HasIndex(x => new { x.SessionId, x.Order }).IsUnique();
+            entity.HasOne(x => x.Session).WithMany(x => x.Steps).HasForeignKey(x => x.SessionId).OnDelete(DeleteBehavior.Cascade);
+        });
+        modelBuilder.Entity<PracticeEvent>(entity =>
+        {
+            entity.ToTable("practice_events"); entity.HasKey(x => x.Id);
+            entity.Property(x => x.StepKey).HasMaxLength(40).IsRequired(); entity.Property(x => x.Rating).HasConversion<string>().HasMaxLength(10);
+            entity.Property(x => x.ClientEventId).HasMaxLength(100);
+            entity.HasIndex(x => new { x.UserId, x.CreatedAtUtc });
+            entity.HasIndex(x => new { x.UserId, x.ClientEventId }).IsUnique().HasFilter("\"ClientEventId\" IS NOT NULL");
+            entity.HasOne(x => x.User).WithMany().HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Cascade);
+            entity.HasOne(x => x.Session).WithMany().HasForeignKey(x => x.SessionId).OnDelete(DeleteBehavior.Cascade);
+            entity.HasOne(x => x.VocabularyWord).WithMany().HasForeignKey(x => x.VocabularyWordId).OnDelete(DeleteBehavior.SetNull);
         });
         modelBuilder.Entity<RefreshToken>(entity =>
         {

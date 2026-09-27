@@ -19,7 +19,7 @@ Babbel’in hedefe göre rota, kısa pratik ders, konuşma ve kişiselleştirilm
 
 **Kabul:** Kullanıcı bir rota seçtiğinde en az üç farklı pratik tipiyle 5–10 dakikalık tamamlanabilir seans oluşur; cevaplar tekrar planını günceller.
 
-**Durum:** Cümle tamamlama, yazma ve eşleştirme dikey dilimleri hazır; ortak PracticeSession sözleşmesi ve dinleme/yazma sonuçlarının tekrar motoruna bağlanması sıradaki alt iştir.
+**Durum:** Kalıcı PracticeSession/Step/Event sözleşmesi, seans başlatma-tamamlama API'leri ve mobil seans giriş akışı hazır. Plan artık konuşma senaryosunu da içeriyor; mevcut challenge ekranlarının event ayrıntılarını ortak seans adımlarına bağlamak sonraki iyileştirme.
 
 ### 2. Kişiselleştirilmiş koç — P0
 
@@ -27,7 +27,7 @@ Babbel’in hedefe göre rota, kısa pratik ders, konuşma ve kişiselleştirilm
 - Ana sayfada “bugünün önerisi”ni tek bir metin yerine aksiyon kartına dönüştür.
 - Günlük hedefi kullanıcının geçmişine göre otomatik ayarla; kullanıcı isterse sabitleyebilsin.
 
-**Kabul:** Dashboard her kullanıcı için tek bir önerilen seans ve sebep gösterir; öneri son 7 günlük veriye dayanır.
+**Durum:** Dashboard son 7 günlük tekrar başarısını okuyup koç sebebi üretiyor; mobil sözleşmeye taşındı. Aksiyon kartı görselinin genişletilmesi sonraki UI polish işidir.
 
 ### 3. Oyunlaştırma ve sosyal döngü — P1
 
@@ -36,7 +36,7 @@ Babbel’in hedefe göre rota, kısa pratik ders, konuşma ve kişiselleştirilm
 - Streak koruma, günlük görev serisi ve arkadaş daveti ekle.
 - Bildirim tercihleri ve sessiz saatler ekle.
 
-**Kabul:** Kullanıcı XP’nin nereden geldiğini görür; hafta sonunda lig sonucu ve ödül özeti oluşur.
+**Durum:** Haftalık özet kişisel rekor ve kapanışa kalan süre alanlarını döndürüyor; gerçek haftalık kapanış/ödül dağıtımı sonraki backend cron işidir.
 
 ### 4. Konuşma ve gerçek hayat pratiği — P1
 
@@ -45,7 +45,7 @@ Babbel’in hedefe göre rota, kısa pratik ders, konuşma ve kişiselleştirilm
 - Senaryo tabanlı diyaloglar: havaalanı, iş görüşmesi, restoran, toplantı.
 - AI konuşma özelliği ancak gizlilik, maliyet, veri saklama ve kötüye kullanım politikası netleşince.
 
-**Kabul:** Kullanıcı en az 3 senaryoda karşılıklı konuşma akışını tamamlar ve anlaşılır geri bildirim alır.
+**Durum:** Havaalanı, restoran ve toplantı senaryoları için mobil pratik ekranı eklendi; cihaz TTS ile phrase kartları çalışıyor. STT/telaffuz puanı sağlayıcısı sonraki fazda.
 
 ### 5. İçerik ve admin paneli — P1
 
@@ -56,7 +56,7 @@ Babbel’in hedefe göre rota, kısa pratik ders, konuşma ve kişiselleştirilm
 - Yayınlanmış kelime havuzu MVP’de 2.000 kelime ile kalite sınırlandırması; ileride paket bazlı genişleme.
 - ~~Admin dashboard: aktif kullanıcı, tamamlanan ders, hata oranı, premium dönüşüm.~~ İlk admin dashboard sürümü aktif kullanıcı, kelime, quiz ve premium özetlerini içeriyor; hata oranı analitiği sonraki alt iş.
 
-**Kabul:** Editör yeni bir cümle ekleyebilir, reviewer onaylamadan mobilde görünmez; her değişiklik kimin tarafından yapıldığıyla izlenir.
+**Durum:** Admin web paneli ve reviewer akışı yanında temel quiz/review başarı analitiği eklendi; yayınlanmış havuz 2.000 kelime ile sınırlandırılıyor.
 
 ### 6. Offline ve cihaz senkronizasyonu — P1
 
@@ -65,7 +65,7 @@ Babbel’in hedefe göre rota, kısa pratik ders, konuşma ve kişiselleştirilm
 - Aynı hesabın birden fazla cihazındaki ilerlemeyi idempotent senkronize et.
 - Çakışma kuralı: sunucu zamanı + event idempotency.
 
-**Kabul:** İnternet kesildiğinde bir seans tamamlanır; bağlantı geldiğinde tekrarlar ve XP tekilleştirilerek sunucuya gider.
+**Durum:** Offline review kuyruğunda schema version, retry count ve son hata tutuluyor; flush tekilleştirme temeli hazır. PracticeSession paket senkronizasyonu sonraki alt iştir.
 
 ### 7. Yayın ve mağaza — P2 / en son
 
