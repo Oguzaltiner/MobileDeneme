@@ -31,6 +31,10 @@ public sealed class LeaderboardService(EnglishLearningDbContext db) : ILeaderboa
         };
         var periodEnds = start.AddDays(7);
         var personalBest = await db.ReviewEvents.AsNoTracking().Where(x => x.UserId == userId).GroupBy(x => x.CreatedAtUtc.Date).Select(x => x.Count()).OrderByDescending(x => x).FirstOrDefaultAsync(ct);
-        return new("Mavi Lig", periodEnds, entries, current.Rank, current.Points, breakdown, reward, personalBest, periodEnds - DateTime.UtcNow <= TimeSpan.FromHours(24));
+        var seasonKey = $"{start:yyyy-MM-dd}";
+        var promotionCutoff = 10;
+        var demotionCutoff = Math.Max(10, entries.Count - 3);
+        var rewardTier = current.Rank <= 3 ? "podium" : current.Rank <= promotionCutoff ? "chest" : "progress";
+        return new("Mavi Lig", periodEnds, entries, current.Rank, current.Points, breakdown, reward, personalBest, periodEnds - DateTime.UtcNow <= TimeSpan.FromHours(24), seasonKey, promotionCutoff, demotionCutoff, rewardTier);
     }
 }
