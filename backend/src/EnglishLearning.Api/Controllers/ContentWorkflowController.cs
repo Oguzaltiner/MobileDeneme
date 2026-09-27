@@ -45,6 +45,8 @@ public sealed class ContentWorkflowController(EnglishLearningDbContext db) : Con
         var word = await db.VocabularyWords.SingleOrDefaultAsync(x => x.Id == id, ct);
         if (word is null) return NotFound();
         if (word.PublicationStatus != VocabularyPublicationStatus.InReview) return Conflict(new { message = "Only content in review can be approved or rejected." });
+        if (status == VocabularyPublicationStatus.Published && await db.VocabularyWords.CountAsync(x => x.PublicationStatus == VocabularyPublicationStatus.Published, ct) >= VocabularyLimits.MaxPublishedWords)
+            return Conflict(new { message = $"Published vocabulary limit ({VocabularyLimits.MaxPublishedWords}) has been reached." });
         word.PublicationStatus = status;
         word.PublishedAtUtc = status == VocabularyPublicationStatus.Published ? DateTime.UtcNow : null;
         await db.SaveChangesAsync(ct);
