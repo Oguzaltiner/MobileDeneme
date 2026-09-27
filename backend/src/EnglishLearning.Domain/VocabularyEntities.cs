@@ -1,5 +1,13 @@
 namespace EnglishLearning.Domain;
 
+public enum VocabularyPublicationStatus
+{
+    Draft,
+    InReview,
+    Published,
+    Rejected
+}
+
 public sealed class VocabularyWord
 {
     public Guid Id { get; set; }
@@ -11,4 +19,6 @@ public sealed class VocabularyWord
     public required string Level { get; set; }
     public required string Category { get; set; }
     public string? ExampleSentence { get; set; }
+    public VocabularyPublicationStatus PublicationStatus { get; set; } = VocabularyPublicationStatus.Published;
+    public DateTime? PublishedAtUtc { get; set; }
 }

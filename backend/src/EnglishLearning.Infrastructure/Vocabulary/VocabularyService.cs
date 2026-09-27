@@ -8,7 +8,7 @@ public sealed class VocabularyService(EnglishLearningDbContext db) : IVocabulary
 {
     public async Task<SentenceChallenge?> GetSentenceChallengeAsync(CancellationToken ct)
     {
-        var words = await db.VocabularyWords.AsNoTracking().Where(x => x.ExampleSentence != null && x.ExampleSentence != "").OrderBy(x => x.Term).Take(100).ToListAsync(ct);
+        var words = await db.VocabularyWords.AsNoTracking().Where(x => x.PublicationStatus == Domain.VocabularyPublicationStatus.Published && x.ExampleSentence != null && x.ExampleSentence != "").OrderBy(x => x.Term).Take(100).ToListAsync(ct);
         if (words.Count < 4) return null;
         var target = words[Random.Shared.Next(words.Count)];
         var sentence = target.ExampleSentence!;
@@ -19,7 +19,7 @@ public sealed class VocabularyService(EnglishLearningDbContext db) : IVocabulary
 
     public async Task<WritingChallenge?> GetWritingChallengeAsync(CancellationToken ct)
     {
-        var words = await db.VocabularyWords.AsNoTracking().Where(x => x.ExampleSentence != null && x.ExampleSentence != "").OrderBy(x => x.Term).Take(100).ToListAsync(ct);
+        var words = await db.VocabularyWords.AsNoTracking().Where(x => x.PublicationStatus == Domain.VocabularyPublicationStatus.Published && x.ExampleSentence != null && x.ExampleSentence != "").OrderBy(x => x.Term).Take(100).ToListAsync(ct);
         if (words.Count == 0) return null;
         var target = words[Random.Shared.Next(words.Count)];
         return new(target.Id, target.Definition, target.Term, target.Translation, $"İlk harf: {target.Term[0]}");
@@ -27,7 +27,7 @@ public sealed class VocabularyService(EnglishLearningDbContext db) : IVocabulary
 
     public async Task<MatchingChallenge?> GetMatchingChallengeAsync(CancellationToken ct)
     {
-        var words = await db.VocabularyWords.AsNoTracking().OrderBy(x => x.Term).Take(100).ToListAsync(ct);
+        var words = await db.VocabularyWords.AsNoTracking().Where(x => x.PublicationStatus == Domain.VocabularyPublicationStatus.Published).OrderBy(x => x.Term).Take(100).ToListAsync(ct);
         if (words.Count < 4) return null;
         var target = words[Random.Shared.Next(words.Count)];
         var options = words.Where(x => x.Id != target.Id).OrderBy(_ => Random.Shared.Next()).Take(3).Select(x => x.Translation).Append(target.Translation).OrderBy(_ => Random.Shared.Next()).ToList();
@@ -36,7 +36,7 @@ public sealed class VocabularyService(EnglishLearningDbContext db) : IVocabulary
 
     public async Task<VocabularyPage> SearchAsync(VocabularyFilter filter, CancellationToken ct)
     {
-        var query = db.VocabularyWords.AsNoTracking();
+        var query = db.VocabularyWords.AsNoTracking().Where(x => x.PublicationStatus == Domain.VocabularyPublicationStatus.Published);
         if (!string.IsNullOrWhiteSpace(filter.Level)) query = query.Where(x => x.Level == filter.Level);
         if (!string.IsNullOrWhiteSpace(filter.Category)) query = query.Where(x => x.Category == filter.Category);
         if (!string.IsNullOrWhiteSpace(filter.Search)) query = query.Where(x => x.Term.Contains(filter.Search) || x.Translation.Contains(filter.Search));
@@ -45,7 +45,7 @@ public sealed class VocabularyService(EnglishLearningDbContext db) : IVocabulary
         var items = await query.OrderBy(x => x.Term).Skip((page - 1) * size).Take(size).Select(x => new VocabularyWordDto(x.Id, x.Term, x.Pronunciation, x.PartOfSpeech, x.Definition, x.Translation, x.Level, x.Category, x.ExampleSentence)).ToListAsync(ct);
         return new(items, page, size, total);
     }
-    public async Task<VocabularyWordDto?> GetAsync(Guid id, CancellationToken ct) => await db.VocabularyWords.AsNoTracking().Where(x => x.Id == id).Select(x => new VocabularyWordDto(x.Id, x.Term, x.Pronunciation, x.PartOfSpeech, x.Definition, x.Translation, x.Level, x.Category, x.ExampleSentence)).SingleOrDefaultAsync(ct);
-    public async Task<IReadOnlyList<VocabularyOption>> GetLevelsAsync(CancellationToken ct) => await db.VocabularyWords.AsNoTracking().Where(x => x.Level != null).Select(x => x.Level).Distinct().OrderBy(x => x).Select(x => new VocabularyOption(x, x)).ToListAsync(ct);
-    public async Task<IReadOnlyList<VocabularyOption>> GetCategoriesAsync(CancellationToken ct) => await db.VocabularyWords.AsNoTracking().Select(x => x.Category).Distinct().OrderBy(x => x).Select(x => new VocabularyOption(x, x)).ToListAsync(ct);
+    public async Task<VocabularyWordDto?> GetAsync(Guid id, CancellationToken ct) => await db.VocabularyWords.AsNoTracking().Where(x => x.PublicationStatus == Domain.VocabularyPublicationStatus.Published && x.Id == id).Select(x => new VocabularyWordDto(x.Id, x.Term, x.Pronunciation, x.PartOfSpeech, x.Definition, x.Translation, x.Level, x.Category, x.ExampleSentence)).SingleOrDefaultAsync(ct);
+    public async Task<IReadOnlyList<VocabularyOption>> GetLevelsAsync(CancellationToken ct) => await db.VocabularyWords.AsNoTracking().Where(x => x.PublicationStatus == Domain.VocabularyPublicationStatus.Published && x.Level != null).Select(x => x.Level).Distinct().OrderBy(x => x).Select(x => new VocabularyOption(x, x)).ToListAsync(ct);
+    public async Task<IReadOnlyList<VocabularyOption>> GetCategoriesAsync(CancellationToken ct) => await db.VocabularyWords.AsNoTracking().Where(x => x.PublicationStatus == Domain.VocabularyPublicationStatus.Published).Select(x => x.Category).Distinct().OrderBy(x => x).Select(x => new VocabularyOption(x, x)).ToListAsync(ct);
 }

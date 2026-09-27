@@ -92,6 +92,8 @@ public sealed class EnglishLearningDbContext(DbContextOptions<EnglishLearningDbC
             entity.Property(x => x.Level).HasMaxLength(10).IsRequired();
             entity.Property(x => x.Category).HasMaxLength(80).IsRequired();
             entity.Property(x => x.ExampleSentence).HasMaxLength(500);
+            entity.Property(x => x.PublicationStatus).HasConversion<string>().HasMaxLength(20).IsRequired();
+            entity.HasIndex(x => x.PublicationStatus);
             entity.HasIndex(x => new { x.Level, x.Category });
             entity.HasIndex(x => x.Term).IsUnique();
             var seed = VocabularySeed.Words;

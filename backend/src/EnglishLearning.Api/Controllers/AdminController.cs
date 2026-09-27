@@ -18,14 +18,14 @@ public sealed class AdminController(EnglishLearningDbContext db) : ControllerBas
         await db.SaveChangesAsync(ct);
     }
     public sealed record VocabularyWriteRequest(
-        [property: Required, StringLength(120)] string Term,
-        [property: StringLength(120)] string? Pronunciation,
-        [property: Required, StringLength(40)] string PartOfSpeech,
-        [property: Required, StringLength(500)] string Definition,
-        [property: Required, StringLength(160)] string Translation,
-        [property: Required, StringLength(10)] string Level,
-        [property: Required, StringLength(80)] string Category,
-        [property: StringLength(500)] string? ExampleSentence);
+        [param: Required, StringLength(120)] string Term,
+        [param: StringLength(120)] string? Pronunciation,
+        [param: Required, StringLength(40)] string PartOfSpeech,
+        [param: Required, StringLength(500)] string Definition,
+        [param: Required, StringLength(160)] string Translation,
+        [param: Required, StringLength(10)] string Level,
+        [param: Required, StringLength(80)] string Category,
+        [param: StringLength(500)] string? ExampleSentence);
 
     [HttpGet("overview")]
     public async Task<IActionResult> Overview(CancellationToken ct) => Ok(new
@@ -43,9 +43,22 @@ public sealed class AdminController(EnglishLearningDbContext db) : ControllerBas
         if (!TryGetAdminId(out var adminId)) return Unauthorized();
         var term = request.Term.Trim();
         if (await db.VocabularyWords.AnyAsync(x => x.Term == term, ct)) return Conflict(new { message = "A vocabulary word with this term already exists." });
-        var word = new VocabularyWord { Term = term, Pronunciation = request.Pronunciation?.Trim() ?? string.Empty, PartOfSpeech = request.PartOfSpeech.Trim(), Definition = request.Definition.Trim(), Translation = request.Translation.Trim(), Level = request.Level.Trim().ToUpperInvariant(), Category = request.Category.Trim(), ExampleSentence = request.ExampleSentence?.Trim() };
+        var word = new VocabularyWord { Term = term, Pronunciation = request.Pronunciation?.Trim() ?? string.Empty, PartOfSpeech = request.PartOfSpeech.Trim(), Definition = request.Definition.Trim(), Translation = request.Translation.Trim(), Level = request.Level.Trim().ToUpperInvariant(), Category = request.Category.Trim(), ExampleSentence = request.ExampleSentence?.Trim(), PublicationStatus = VocabularyPublicationStatus.Draft };
         db.VocabularyWords.Add(word); await db.SaveChangesAsync(ct); await AuditAsync(adminId, "create", word.Id, ct);
         return Created($"/api/v1/vocabulary/words/{word.Id}", new { word.Id });
+    }
+
+    [HttpPost("vocabulary/{id:guid}/publish")]
+    public async Task<IActionResult> PublishVocabulary(Guid id, CancellationToken ct)
+    {
+        if (!TryGetAdminId(out var adminId)) return Unauthorized();
+        var word = await db.VocabularyWords.SingleOrDefaultAsync(x => x.Id == id, ct);
+        if (word is null) return NotFound();
+        word.PublicationStatus = VocabularyPublicationStatus.Published;
+        word.PublishedAtUtc = DateTime.UtcNow;
+        await db.SaveChangesAsync(ct);
+        await AuditAsync(adminId, "publish", id, ct);
+        return NoContent();
     }
 
     [HttpPut("vocabulary/{id:guid}")]
