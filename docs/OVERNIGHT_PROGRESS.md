@@ -28,6 +28,8 @@ Memrise'in telaffuz ve konuşma pratiği, Babbel'in kısa kişiselleştirilmiş 
 - `docker compose convert` başarılı.
 - `npm audit --omit=dev --audit-level=high` sonucu: 0 yüksek/açık güvenlik bulgusu.
 - Auth + dashboard smoke testi: issuer doğrulandı, streak ve rozet sözleşmesi okundu.
+- Release backend build: başarılı (8 mevcut NU1903 uyarısı, 0 hata).
+- Çalışan API smoke: `GET /health` → `Healthy`.
 - Docker daemon çalışmadığı için `docker compose build api` çalıştırılamadı; Docker Desktop açıldığında tekrar edilmelidir.
 
 ## Bilinen riskler / yayın öncesi işler
