@@ -7,6 +7,7 @@
 - Kişisel tekrar kuyruğu: zamanı gelen kelimeler önce, yeni kelimeler eksik seansı tamamlayacak şekilde `/reviews/due` akışı.
 - Haftalık Mavi Lig liderlik panosu ve puanlama API'si.
 - Cümle tamamlama challenge API'si: örnek cümlede boşluk, dört seçenek ve açıklama.
+- Mobilde Mavi Lig ve Cümle Tamamla ekranları, ana sayfadan erişilebilir.
 - Telaffuz: `expo-speech` ile native TTS ve durdurma/fallback davranışı.
 - Streak, haftalık tekrar hedefi ve achievement rozetleri.
 - Home, auth, onboarding, vocabulary, quiz ve premium ekranlarında ortak business görsel dili.
