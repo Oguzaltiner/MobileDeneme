@@ -9,6 +9,7 @@
 - Home, auth, onboarding, vocabulary, quiz ve premium ekranlarında ortak business görsel dili.
 - Mobil alt taşma sorunları için ScrollView, liste flex ve alt güvenli boşlukları.
 - Backend güvenlik tabanı: auth rate limit (IP başına 30/dk) ve temel güvenlik header’ları.
+- Auth request sözleşmelerinde e-posta, parola, refresh token ve onboarding sınırları için API validation.
 - Backend Dockerfile, Docker Compose API + PostgreSQL servisi ve non-root runtime.
 - Production Compose override: development fallback secreti kapatıldı ve production'da otomatik migration devre dışı bırakıldı.
 - GitHub Actions CI: .NET restore/build/vulnerability audit, mobile npm ci/typecheck/Expo web export.
