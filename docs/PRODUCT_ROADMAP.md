@@ -19,7 +19,7 @@ Babbel’in hedefe göre rota, kısa pratik ders, konuşma ve kişiselleştirilm
 
 **Kabul:** Kullanıcı bir rota seçtiğinde en az üç farklı pratik tipiyle 5–10 dakikalık tamamlanabilir seans oluşur; cevaplar tekrar planını günceller.
 
-**Durum:** Kalıcı PracticeSession/Step/Event sözleşmesi, seans başlatma-tamamlama API'leri ve mobil seans giriş akışı hazır. Plan artık konuşma senaryosunu da içeriyor; mevcut challenge ekranlarının event ayrıntılarını ortak seans adımlarına bağlamak sonraki iyileştirme.
+**Durum:** Kalıcı PracticeSession/Step/Event sözleşmesi, seans başlatma-tamamlama API'leri ve mobil seans giriş akışı hazır. Plan artık konuşma senaryosunu da içeriyor. Rota anahtarları server-authoritative doğrulanıyor ve adım tamamlama idempotent event kimliğiyle offline tekrarlarında çift kayıt üretmiyor.
 
 ### 2. Kişiselleştirilmiş koç — P0
 

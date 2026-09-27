@@ -30,15 +30,23 @@ public sealed class SyncController(EnglishLearningDbContext db) : ControllerBase
         if (!Guid.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? User.FindFirstValue("sub"), out var userId))
             return Unauthorized();
 
-        var inputs = request.Events.Where(x => !string.IsNullOrWhiteSpace(x.ClientEventId)).ToList();
+        var inputs = request.Events
+            .Select(x => x with { ClientEventId = x.ClientEventId.Trim(), StepKey = x.StepKey.Trim() })
+            .Where(x => !string.IsNullOrWhiteSpace(x.ClientEventId))
+            .ToList();
         if (inputs.Count != request.Events.Count || inputs.Select(x => x.ClientEventId).Distinct(StringComparer.Ordinal).Count() != inputs.Count)
             return BadRequest(new { message = "Client event ids must be unique and non-empty." });
 
         var sessionIds = inputs.Select(x => x.SessionId).Distinct().ToArray();
         var ownedSessions = await db.PracticeSessions.AsNoTracking()
-            .Where(x => x.UserId == userId && sessionIds.Contains(x.Id)).Select(x => x.Id).ToListAsync(ct);
+            .Where(x => x.UserId == userId && sessionIds.Contains(x.Id))
+            .Select(x => new { x.Id, StepKeys = x.Steps.Select(step => step.Key) })
+            .ToListAsync(ct);
         if (ownedSessions.Count != sessionIds.Length)
             return BadRequest(new { message = "One or more practice sessions do not belong to this user." });
+        var sessionSteps = ownedSessions.ToDictionary(x => x.Id, x => x.StepKeys.ToHashSet(StringComparer.OrdinalIgnoreCase));
+        if (inputs.Any(x => !sessionSteps.TryGetValue(x.SessionId, out var steps) || !steps.Contains(x.StepKey)))
+            return BadRequest(new { message = "One or more practice steps do not belong to the session." });
 
         var clientIds = inputs.Select(x => x.ClientEventId).ToArray();
         var existing = await db.PracticeEvents.AsNoTracking()
@@ -53,10 +61,10 @@ public sealed class SyncController(EnglishLearningDbContext db) : ControllerBase
                 UserId = userId,
                 SessionId = input.SessionId,
                 VocabularyWordId = input.VocabularyWordId,
-                StepKey = input.StepKey.Trim(),
+                StepKey = input.StepKey,
                 IsCorrect = input.IsCorrect,
                 Rating = input.Rating,
-                ClientEventId = input.ClientEventId.Trim(),
+                ClientEventId = input.ClientEventId,
                 CreatedAtUtc = input.OccurredAtUtc is { } occurred && occurred <= DateTime.UtcNow.AddMinutes(5) ? occurred.ToUniversalTime() : DateTime.UtcNow
             });
             accepted++;

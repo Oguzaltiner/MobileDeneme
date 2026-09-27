@@ -7,6 +7,11 @@ namespace EnglishLearning.Infrastructure.Practice;
 
 public sealed class PracticeService(EnglishLearningDbContext db) : IPracticeService
 {
+    private static readonly HashSet<string> SupportedPathKeys = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "general", "travel", "business", "academic", "exam"
+    };
+
     public async Task<PracticePlan> GetPlanAsync(Guid userId, CancellationToken ct)
     {
         var purpose = await db.UserSettings.AsNoTracking().Where(x => x.UserId == userId).Select(x => x.LearningPurpose).SingleOrDefaultAsync(ct) ?? "general";
@@ -34,7 +39,13 @@ public sealed class PracticeService(EnglishLearningDbContext db) : IPracticeServ
     public async Task<PracticeSessionDto> StartAsync(Guid userId, StartPracticeSessionRequest request, CancellationToken ct)
     {
         var plan = await GetPlanAsync(userId, ct);
-        var pathKey = string.IsNullOrWhiteSpace(request.PathKey) ? plan.PathKey : request.PathKey.Trim().ToLowerInvariant();
+        var requestedPathKey = string.IsNullOrWhiteSpace(request.PathKey) ? plan.PathKey : request.PathKey.Trim();
+        // The server owns the available curriculum. Unknown keys (or paths that are not
+        // the user's selected route) cannot create a session with arbitrary content.
+        var pathKey = SupportedPathKeys.Contains(requestedPathKey) &&
+                      string.Equals(requestedPathKey, plan.PathKey, StringComparison.OrdinalIgnoreCase)
+            ? requestedPathKey.ToLowerInvariant()
+            : plan.PathKey;
         var session = new PracticeSession { UserId = userId, PathKey = pathKey };
         session.Steps = plan.Steps.Select((x, i) => new PracticeSessionStep { SessionId = session.Id, Order = i + 1, Key = x.Key, Title = x.Title, EstimatedMinutes = x.EstimatedMinutes }).ToList();
         db.PracticeSessions.Add(session);
@@ -53,8 +64,17 @@ public sealed class PracticeService(EnglishLearningDbContext db) : IPracticeServ
         var session = await Load(userId, sessionId).SingleOrDefaultAsync(ct);
         var step = session?.Steps.SingleOrDefault(x => x.Id == stepId);
         if (session is null || step is null || session.Status != PracticeSessionStatus.InProgress) return null;
+        // Completion is intentionally idempotent: mobile retries and offline replay must
+        // not award XP or create duplicate learning events.
+        if (step.Completed) return Map(session);
         step.Completed = true; step.CompletedAtUtc = DateTime.UtcNow;
-        db.PracticeEvents.Add(new PracticeEvent { UserId = userId, SessionId = sessionId, StepKey = step.Key });
+        db.PracticeEvents.Add(new PracticeEvent
+        {
+            UserId = userId,
+            SessionId = sessionId,
+            StepKey = step.Key,
+            ClientEventId = $"session-step:{sessionId:N}:{stepId:N}"
+        });
         await db.SaveChangesAsync(ct);
         return Map(session);
     }

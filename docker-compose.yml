@@ -9,8 +9,9 @@ services:
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_URLS: http://+:8080
       ConnectionStrings__Postgres: Host=postgres;Port=5432;Database=english_learning;Username=english_learning;Password=${POSTGRES_PASSWORD:-english_learning_local}
-      Jwt__SigningKey: ${JWT_SIGNING_KEY:-local-development-key-change-me-please-1234567890}
+      Jwt__SigningKey: ${JWT_SIGNING_KEY:?Set JWT_SIGNING_KEY to a random value of at least 32 characters}
       Database__ApplyMigrations: "true"
+      Database__SeedDevelopmentUser: "false"
     ports:
       - "5057:8080"
     depends_on:

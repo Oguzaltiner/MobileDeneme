@@ -32,6 +32,9 @@
 - Koç özeti son 7 günlük review başarısına göre açıklama üretmeye başladı; leaderboard özetine kişisel rekor ve kapanış sinyali eklendi.
 - Havaalanı, restoran ve toplantı için Conversation Practice mobil ekranı eklendi ve ortak pratik planına bağlandı.
 - Offline review kuyruğuna schema version, retry count, son hata ve kuyruk sayısı eklendi.
+- Practice session rota anahtarları server-authoritative doğrulanıyor; adım tamamlama event'leri idempotent hale getirildi.
+- Offline practice-event sync artık client id'lerini normalize ediyor ve step/session sahipliğini doğruluyor.
+- AI konuşma, transkripsiyon ve telaffuz endpoint'leri entitlement kontrolü olmadan çağrılamıyor.
 - Admin overview'a quiz doğruluk ve review başarı yüzdeleri eklendi; admin web kartlarında görünür.
 
 ## Ürün kararları
@@ -66,6 +69,7 @@ Memrise'in telaffuz ve konuşma pratiği, Babbel'in kısa kişiselleştirilmiş 
 - Production ortamında `Jwt__SigningKey` güçlü secret olarak secret manager’dan verilmelidir; Compose varsayılanı yalnızca local development içindir.
 - Play Console ürünleri, Apple StoreKit ürünleri, privacy/consent, restore purchase, RTDN ve release signing yayın öncesi tamamlanmalıdır.
 - Gerçek cihaz test matrisi: Android development build, iOS development build, düşük bağlantı, büyük font, screen reader ve mağaza sandbox.
+- `docker-compose.yml` artık varsayılan JWT anahtarı veya bilinen development kullanıcısı üretmiyor; local compose için `JWT_SIGNING_KEY` açıkça verilmelidir.
 - EAS preview/production için `https://api.example.com` örnek adresi gerçek staging/production URL ile değiştirilmelidir; fiziksel cihazda LAN IP kullanılmalıdır.
 
 ## Sonraki önerilen sıra
