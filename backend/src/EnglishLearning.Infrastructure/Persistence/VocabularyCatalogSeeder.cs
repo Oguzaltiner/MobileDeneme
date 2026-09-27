@@ -71,8 +71,21 @@ public static class VocabularyCatalogSeeder
 
     public static async Task SeedAsync(EnglishLearningDbContext db, CancellationToken ct = default)
     {
+        // The old bootstrap paired two independent frequency lists by index.
+        // Those rows are not trustworthy translations, so keep them recoverable
+        // as drafts until they are reviewed in the admin content studio.
+        var verifiedTerms = Catalog.Select(x => x.Term).ToHashSet(StringComparer.OrdinalIgnoreCase);
+        var importedTerms = VocabularyCatalogData.English.ToHashSet(StringComparer.OrdinalIgnoreCase);
+        var unsafeRows = await db.VocabularyWords.Where(x => importedTerms.Contains(x.Term) && !verifiedTerms.Contains(x.Term) && x.PublicationStatus == VocabularyPublicationStatus.Published).ToListAsync(ct);
+        foreach (var row in unsafeRows)
+        {
+            row.PublicationStatus = VocabularyPublicationStatus.Draft;
+            row.Translation = "Çeviri inceleme bekliyor";
+            row.Definition = "Bu kelimenin Türkçe karşılığı içerik ekibi tarafından doğrulanıyor.";
+            row.ExampleSentence = null;
+        }
         var existing = await db.VocabularyWords.AsNoTracking().Select(x => x.Term).ToListAsync(ct);
-        var missing = Catalog.Concat(BuildExpandedCatalog())
+        var missing = Catalog
             .GroupBy(x => x.Term, StringComparer.OrdinalIgnoreCase)
             .Select(group => group.First())
             .Where(x => !existing.Contains(x.Term, StringComparer.OrdinalIgnoreCase))
@@ -83,8 +96,7 @@ public static class VocabularyCatalogSeeder
                 Category = x.Category, ExampleSentence = x.Example, PublicationStatus = VocabularyPublicationStatus.Published,
                 PublishedAtUtc = DateTime.UtcNow
             }).ToList();
-        if (missing.Count == 0) return;
-        db.VocabularyWords.AddRange(missing);
-        await db.SaveChangesAsync(ct);
+        if (missing.Count > 0) db.VocabularyWords.AddRange(missing);
+        if (missing.Count > 0 || unsafeRows.Count > 0) await db.SaveChangesAsync(ct);
     }
 }

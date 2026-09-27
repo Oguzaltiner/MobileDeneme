@@ -124,7 +124,7 @@ Bu dosya, ürün kararlarını uygulanabilir dikey dilimlere çeviren ortak sır
 
 ### Vocabulary catalog genişletme
 
-**Durum:** Done — development başlangıç kataloğu 8 kelimeden 1.000+ yayınlanmış İngilizce-Türkçe çifte çıkarıldı.
+**Durum:** Quality fix applied — doğrulanmamış indeks eşleşmeleri yayından taslağa alındı; yalnızca doğrulanmış çiftler yayınlanıyor. Hedef 1.000+ çift, admin reviewer onayıyla kademeli büyütülecek.
 
 - Yeni kelimeler migration gerektirmeden development seeding ile ekleniyor.
 - Hedef kalite sınırı 2.000 yayınlanmış kelime; sonraki içerikler admin studio/reviewer akışından gelmeli.
