@@ -11,7 +11,16 @@ public sealed record EntitlementDto(
     bool AdsEnabled,
     int DailyWordsUsed,
     int DailyQuizzesUsed,
-    IReadOnlyList<string> Features);
+    IReadOnlyList<string> Features,
+    string PlanKey = "free",
+    int MaxDailyPracticeMinutes = 10,
+    bool CanUseAiConversation = false,
+    bool CanUsePronunciationAnalysis = false,
+    bool CanUseOfflinePacks = false,
+    bool CanUseAdvancedAnalytics = false,
+    bool CanUseCommunityFeedback = false,
+    int MaxOfflinePacks = 0,
+    int MaxSavedLists = 3);
 
 public sealed class DailyLimitExceededException(string message) : Exception(message);
 
@@ -21,4 +30,5 @@ public interface IEntitlementService
     Task<bool> CanAccessLevelAsync(Guid userId, string? level, CancellationToken ct);
     Task<bool> TryConsumeQuizAsync(Guid userId, CancellationToken ct);
     Task<bool> TryConsumeWordAsync(Guid userId, CancellationToken ct);
+    Task<bool> HasFeatureAsync(Guid userId, string featureKey, CancellationToken ct);
 }

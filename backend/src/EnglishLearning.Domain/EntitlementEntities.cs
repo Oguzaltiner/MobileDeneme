@@ -3,7 +3,8 @@ namespace EnglishLearning.Domain;
 public enum SubscriptionPlan
 {
     Free = 1,
-    Premium = 2
+    Premium = 2,
+    PremiumPlus = 3
 }
 
 public sealed class UserEntitlement

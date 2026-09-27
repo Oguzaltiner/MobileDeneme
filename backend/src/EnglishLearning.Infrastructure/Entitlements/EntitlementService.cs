@@ -11,9 +11,10 @@ public sealed class EntitlementService(EnglishLearningDbContext db) : IEntitleme
     {
         var entitlement = await db.UserEntitlements.AsNoTracking().SingleOrDefaultAsync(x => x.UserId == userId, ct);
         var usage = await GetUsageAsync(userId, ct);
-        var premium = entitlement?.Plan == SubscriptionPlan.Premium &&
-                      (entitlement.ExpiresAtUtc is null || entitlement.ExpiresAtUtc > DateTime.UtcNow);
-        var plan = premium ? Premium() : Free();
+        var activePlan = entitlement?.Plan ?? SubscriptionPlan.Free;
+        var premium = activePlan is SubscriptionPlan.Premium or SubscriptionPlan.PremiumPlus &&
+                      (entitlement?.ExpiresAtUtc is null || entitlement.ExpiresAtUtc > DateTime.UtcNow);
+        var plan = !premium ? Free() : activePlan == SubscriptionPlan.PremiumPlus ? PremiumPlus() : Premium();
         return plan with { DailyWordsUsed = usage.WordsUsed, DailyQuizzesUsed = usage.QuizzesStarted };
     }
 
@@ -46,6 +47,22 @@ public sealed class EntitlementService(EnglishLearningDbContext db) : IEntitleme
         return true;
     }
 
+    public async Task<bool> HasFeatureAsync(Guid userId, string featureKey, CancellationToken ct)
+    {
+        if (string.IsNullOrWhiteSpace(featureKey)) return false;
+        var entitlement = await GetAsync(userId, ct);
+        return entitlement.Features.Any(x => string.Equals(x, featureKey, StringComparison.OrdinalIgnoreCase))
+            || featureKey.Trim().ToLowerInvariant() switch
+            {
+                "ai_conversation" => entitlement.CanUseAiConversation,
+                "pronunciation_analysis" => entitlement.CanUsePronunciationAnalysis,
+                "offline_packs" => entitlement.CanUseOfflinePacks,
+                "advanced_analytics" => entitlement.CanUseAdvancedAnalytics,
+                "community_feedback" => entitlement.CanUseCommunityFeedback,
+                _ => false
+            };
+    }
+
     private async Task<DailyUsage> GetUsageAsync(Guid userId, CancellationToken ct)
     {
         var today = DateOnly.FromDateTime(DateTime.UtcNow);
@@ -58,8 +75,11 @@ public sealed class EntitlementService(EnglishLearningDbContext db) : IEntitleme
     }
 
     private static EntitlementDto Free() => new(SubscriptionPlan.Free, false, "A2", 20, 1, true, 0, 0,
-        ["A1-A2 vocabulary", "Daily 20 word limit", "Daily 1 quiz", "Ads"]);
+        ["A1-A2 vocabulary", "Daily 20 word limit", "Daily 1 quiz", "Ads"], "free", 10, false, false, false, false, false, 0, 3);
 
     private static EntitlementDto Premium() => new(SubscriptionPlan.Premium, true, "C2", -1, -1, false, 0, 0,
-        ["A1-C2 vocabulary", "Unlimited learning", "Unlimited quizzes", "Listening and pronunciation", "Personal lists", "Ad-free"]);
+        ["A1-C2 vocabulary", "Unlimited learning", "Unlimited quizzes", "Listening and pronunciation", "Personal lists", "Ad-free"], "premium", 30, false, true, true, true, false, 3, 20);
+
+    private static EntitlementDto PremiumPlus() => new(SubscriptionPlan.PremiumPlus, true, "C2", -1, -1, false, 0, 0,
+        ["A1-C2 vocabulary", "Unlimited learning", "Unlimited quizzes", "AI conversation coach", "Pronunciation analysis", "Offline learning packs", "Advanced analytics", "Community feedback", "Personal lists", "Ad-free"], "premium_plus", 60, true, true, true, true, true, 20, 100);
 }

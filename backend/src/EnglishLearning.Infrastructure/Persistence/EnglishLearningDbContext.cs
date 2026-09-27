@@ -24,6 +24,8 @@ public sealed class EnglishLearningDbContext(DbContextOptions<EnglishLearningDbC
     public DbSet<PracticeSession> PracticeSessions => Set<PracticeSession>();
     public DbSet<PracticeSessionStep> PracticeSessionSteps => Set<PracticeSessionStep>();
     public DbSet<PracticeEvent> PracticeEvents => Set<PracticeEvent>();
+    public DbSet<CommunitySubmission> CommunitySubmissions => Set<CommunitySubmission>();
+    public DbSet<CommunityFeedback> CommunityFeedback => Set<CommunityFeedback>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -84,6 +86,22 @@ public sealed class EnglishLearningDbContext(DbContextOptions<EnglishLearningDbC
             entity.Property(x => x.Action).HasMaxLength(40).IsRequired();
             entity.Property(x => x.EntityType).HasMaxLength(80).IsRequired();
             entity.HasIndex(x => x.CreatedAtUtc);
+            entity.HasOne(x => x.User).WithMany().HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Restrict);
+        });
+        modelBuilder.Entity<CommunitySubmission>(entity =>
+        {
+            entity.ToTable("community_submissions"); entity.HasKey(x => x.Id);
+            entity.Property(x => x.Type).HasMaxLength(30).IsRequired(); entity.Property(x => x.Content).HasMaxLength(2000).IsRequired(); entity.Property(x => x.Prompt).HasMaxLength(500);
+            entity.Property(x => x.Status).HasConversion<string>().HasMaxLength(20).IsRequired();
+            entity.HasIndex(x => new { x.Status, x.CreatedAtUtc });
+            entity.HasOne(x => x.User).WithMany().HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Cascade);
+        });
+        modelBuilder.Entity<CommunityFeedback>(entity =>
+        {
+            entity.ToTable("community_feedback"); entity.HasKey(x => x.Id);
+            entity.Property(x => x.Body).HasMaxLength(1000).IsRequired(); entity.Property(x => x.Rating);
+            entity.HasIndex(x => new { x.SubmissionId, x.CreatedAtUtc });
+            entity.HasOne(x => x.Submission).WithMany(x => x.Feedback).HasForeignKey(x => x.SubmissionId).OnDelete(DeleteBehavior.Cascade);
             entity.HasOne(x => x.User).WithMany().HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Restrict);
         });
         modelBuilder.Entity<PracticeSession>(entity =>
