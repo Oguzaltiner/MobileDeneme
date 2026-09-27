@@ -21,6 +21,7 @@
 - Dependabot: NuGet, npm ve GitHub Actions güncellemeleri haftalık takipte.
 - Android/iOS yayın temeli: bundle/package kimlikleri, versionCode ve EAS development/preview/production profilleri.
 - Cihaz bağlantısı için `mobile/.env.example` ve EAS profile API URL örnekleri.
+- Admin içerik yönetimi için rol kontrollü vocabulary CRUD ve `admin_audit_logs` tabanlı değişiklik geçmişi.
 
 ## Ürün kararları
 
@@ -37,6 +38,7 @@ Memrise'in telaffuz ve konuşma pratiği, Babbel'in kısa kişiselleştirilmiş 
 - Auth + dashboard smoke testi: issuer doğrulandı, streak ve rozet sözleşmesi okundu.
 - Release backend build: başarılı (8 mevcut NU1903 uyarısı, 0 hata).
 - Çalışan API smoke: `GET /health` → `Healthy`.
+- Admin smoke: test kullanıcı girişi ve `GET /api/v1/admin/audit` sözleşmesi doğrulandı.
 - Docker daemon çalışmadığı için `docker compose build api` çalıştırılamadı; Docker Desktop açıldığında tekrar edilmelidir.
 
 ## Bilinen riskler / yayın öncesi işler
