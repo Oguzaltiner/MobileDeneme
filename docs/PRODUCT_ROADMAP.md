@@ -53,10 +53,10 @@ Babbel’in hedefe göre rota, kısa pratik ders, konuşma ve kişiselleştirilm
 - Kelime, cümle, ses, kategori ve rota CRUD.
 - ~~Taslak → inceleme → yayın akışı.~~ Reviewer rolü, inceleme kuyruğu ve Draft → InReview → Published/Rejected geçişleri tamamlandı.
 - İçerik değişiklikleri için audit log.
-- Yayınlanmış kelime havuzu MVP’de 2.000 kelime ile kalite sınırlandırması; ileride paket bazlı genişleme.
+- Yayınlanmış kelime havuzu MVP’de 2.500 kelime ile kalite sınırlandırması; ileride paket bazlı genişleme.
 - ~~Admin dashboard: aktif kullanıcı, tamamlanan ders, hata oranı, premium dönüşüm.~~ İlk admin dashboard sürümü aktif kullanıcı, kelime, quiz ve premium özetlerini içeriyor; hata oranı analitiği sonraki alt iş.
 
-**Durum:** Admin web paneli ve reviewer akışı yanında temel quiz/review başarı analitiği eklendi; yayınlanmış havuz 2.000 kelime ile sınırlandırılıyor.
+**Durum:** Admin web paneli ve reviewer akışı yanında temel quiz/review başarı analitiği eklendi; yayınlanmış havuz 2.500 kelime ile sınırlandırılıyor.
 
 ### 6. Offline ve cihaz senkronizasyonu — P1
 
