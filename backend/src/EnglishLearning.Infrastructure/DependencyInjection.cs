@@ -24,6 +24,8 @@ using EnglishLearning.Application.Quiz;
 using EnglishLearning.Application.Practice;
 using EnglishLearning.Infrastructure.Quiz;
 using EnglishLearning.Infrastructure.Practice;
+using EnglishLearning.Application.Placement;
+using EnglishLearning.Infrastructure.Placement;
 
 namespace EnglishLearning.Infrastructure;
 
@@ -52,6 +54,7 @@ public static class DependencyInjection
         services.AddScoped<IStatisticsService, StatisticsService>();
         services.AddScoped<IQuizService, QuizService>();
         services.AddScoped<IPracticeService, PracticeService>();
+        services.AddScoped<IPlacementTestService, PlacementTestService>();
 
         return services;
     }

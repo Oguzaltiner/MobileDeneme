@@ -46,7 +46,7 @@ public sealed class ReviewService(EnglishLearningDbContext db, IEntitlementServi
                 .SingleOrDefaultAsync(x => x.UserId == userId && x.VocabularyWordId == existingEvent.VocabularyWordId, ct);
             if (existingProgress is null) return null;
             var existingEntitlement = await entitlements.GetAsync(userId, ct);
-            return new(existingEvent.VocabularyWordId, existingEvent.Rating, existingProgress.Repetition, existingProgress.IntervalDays, existingProgress.DueAtUtc, existingEntitlement.DailyWordsUsed, existingEntitlement.DailyWordLimit);
+            return new(existingEvent.VocabularyWordId, existingEvent.Rating, existingProgress.Repetition, existingProgress.IntervalDays, existingProgress.DueAtUtc, existingEntitlement.DailyWordsUsed, existingEntitlement.DailyWordLimit, existingProgress.MasteryScore, existingProgress.TotalReviews, existingProgress.Lapses);
         }
         if (!await entitlements.TryConsumeWordAsync(userId, ct))
             throw new DailyLimitExceededException("Daily word limit reached. Upgrade to Premium for unlimited learning.");
@@ -69,11 +69,23 @@ public sealed class ReviewService(EnglishLearningDbContext db, IEntitlementServi
         progress.Repetition = request.Rating == ReviewRating.Again ? 0 : progress.Repetition + 1;
         progress.IntervalDays = interval;
         progress.EaseFactor = Math.Clamp(previousEase + request.Rating switch { ReviewRating.Again => -0.2m, ReviewRating.Hard => -0.05m, ReviewRating.Easy => 0.15m, _ => 0m }, 1.3m, 3.2m);
+        progress.TotalReviews++;
+        if (request.Rating != ReviewRating.Again) progress.CorrectReviews++;
+        if (request.Rating == ReviewRating.Again) progress.Lapses++;
+        progress.LastRating = request.Rating;
+        var reviewSignal = request.Rating switch { ReviewRating.Again => 0m, ReviewRating.Hard => 0.45m, ReviewRating.Good => 0.75m, ReviewRating.Easy => 1m, _ => 0m };
+        progress.MasteryScore = Math.Clamp(progress.MasteryScore * 0.8m + reviewSignal * 20m, 0m, 100m);
         progress.LastReviewedAtUtc = DateTime.UtcNow;
         progress.DueAtUtc = progress.LastReviewedAtUtc.Value.AddDays(interval);
         db.ReviewEvents.Add(new ReviewEvent { UserId = userId, VocabularyWordId = request.WordId, Rating = request.Rating, ClientEventId = request.ClientEventId });
+        if (request.PracticeSessionId is not null)
+        {
+            var sessionExists = await db.PracticeSessions.AnyAsync(x => x.Id == request.PracticeSessionId && x.UserId == userId, ct);
+            if (sessionExists)
+                db.PracticeEvents.Add(new PracticeEvent { UserId = userId, SessionId = request.PracticeSessionId.Value, VocabularyWordId = request.WordId, StepKey = request.PracticeStepKey ?? "review", Rating = request.Rating, IsCorrect = request.IsCorrect ?? request.Rating != ReviewRating.Again, ClientEventId = request.ClientEventId });
+        }
         await db.SaveChangesAsync(ct);
         var entitlement = await entitlements.GetAsync(userId, ct);
-        return new(request.WordId, request.Rating, progress.Repetition, progress.IntervalDays, progress.DueAtUtc, entitlement.DailyWordsUsed, entitlement.DailyWordLimit);
+        return new(request.WordId, request.Rating, progress.Repetition, progress.IntervalDays, progress.DueAtUtc, entitlement.DailyWordsUsed, entitlement.DailyWordLimit, progress.MasteryScore, progress.TotalReviews, progress.Lapses);
     }
 }

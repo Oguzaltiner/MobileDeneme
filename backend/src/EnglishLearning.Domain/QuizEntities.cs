@@ -25,6 +25,8 @@ public sealed class QuizQuestion
     public Guid VocabularyWordId { get; set; }
     public int Order { get; set; }
     public QuizQuestionType Type { get; set; }
+    /// <summary>Adaptive difficulty band: 1 (foundation) through 4 (advanced).</summary>
+    public int Difficulty { get; set; } = 2;
     public bool Answered { get; set; }
     public bool IsCorrect { get; set; }
     public QuizSession Session { get; set; } = null!;

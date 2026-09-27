@@ -13,6 +13,9 @@ public sealed class EnglishLearningDbContext(DbContextOptions<EnglishLearningDbC
     public DbSet<QuizSession> QuizSessions => Set<QuizSession>();
     public DbSet<QuizQuestion> QuizQuestions => Set<QuizQuestion>();
     public DbSet<QuizOption> QuizOptions => Set<QuizOption>();
+    public DbSet<PlacementTestAttempt> PlacementTestAttempts => Set<PlacementTestAttempt>();
+    public DbSet<PlacementTestQuestion> PlacementTestQuestions => Set<PlacementTestQuestion>();
+    public DbSet<PlacementTestOption> PlacementTestOptions => Set<PlacementTestOption>();
     public DbSet<UserEntitlement> UserEntitlements => Set<UserEntitlement>();
     public DbSet<DailyUsage> DailyUsages => Set<DailyUsage>();
     public DbSet<UserWordProgress> UserWordProgress => Set<UserWordProgress>();
@@ -56,6 +59,8 @@ public sealed class EnglishLearningDbContext(DbContextOptions<EnglishLearningDbC
         {
             entity.ToTable("user_word_progress"); entity.HasKey(x => new { x.UserId, x.VocabularyWordId });
             entity.Property(x => x.EaseFactor).HasPrecision(4, 2);
+            entity.Property(x => x.MasteryScore).HasPrecision(5, 2);
+            entity.Property(x => x.LastRating).HasConversion<string>().HasMaxLength(10);
             entity.HasOne(x => x.User).WithMany().HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Cascade);
             entity.HasOne(x => x.VocabularyWord).WithMany().HasForeignKey(x => x.VocabularyWordId).OnDelete(DeleteBehavior.Cascade);
         });
@@ -140,6 +145,7 @@ public sealed class EnglishLearningDbContext(DbContextOptions<EnglishLearningDbC
         {
             entity.ToTable("quiz_questions"); entity.HasKey(x => x.Id);
             entity.Property(x => x.Type).HasConversion<string>().HasMaxLength(20).IsRequired();
+            entity.Property(x => x.Difficulty).HasDefaultValue(2).IsRequired();
             entity.HasIndex(x => new { x.SessionId, x.Order }).IsUnique();
             entity.HasOne(x => x.Session).WithMany(x => x.Questions).HasForeignKey(x => x.SessionId).OnDelete(DeleteBehavior.Cascade);
             entity.HasOne(x => x.VocabularyWord).WithMany().HasForeignKey(x => x.VocabularyWordId).OnDelete(DeleteBehavior.Restrict);
@@ -147,6 +153,29 @@ public sealed class EnglishLearningDbContext(DbContextOptions<EnglishLearningDbC
         modelBuilder.Entity<QuizOption>(entity =>
         {
             entity.ToTable("quiz_options"); entity.HasKey(x => x.Id);
+            entity.Property(x => x.Key).HasMaxLength(1).IsRequired(); entity.Property(x => x.Text).HasMaxLength(500).IsRequired();
+            entity.HasIndex(x => new { x.QuestionId, x.Key }).IsUnique();
+            entity.HasOne(x => x.Question).WithMany(x => x.Options).HasForeignKey(x => x.QuestionId).OnDelete(DeleteBehavior.Cascade);
+        });
+        modelBuilder.Entity<PlacementTestAttempt>(entity =>
+        {
+            entity.ToTable("placement_test_attempts"); entity.HasKey(x => x.Id);
+            entity.Property(x => x.Status).HasConversion<string>().HasMaxLength(20).IsRequired();
+            entity.Property(x => x.EstimatedLevel).HasMaxLength(10);
+            entity.HasIndex(x => new { x.UserId, x.StartedAtUtc });
+            entity.HasOne(x => x.User).WithMany().HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Cascade);
+        });
+        modelBuilder.Entity<PlacementTestQuestion>(entity =>
+        {
+            entity.ToTable("placement_test_questions"); entity.HasKey(x => x.Id);
+            entity.Property(x => x.Type).HasConversion<string>().HasMaxLength(20).IsRequired();
+            entity.HasIndex(x => new { x.AttemptId, x.Order }).IsUnique();
+            entity.HasOne(x => x.Attempt).WithMany(x => x.Questions).HasForeignKey(x => x.AttemptId).OnDelete(DeleteBehavior.Cascade);
+            entity.HasOne(x => x.VocabularyWord).WithMany().HasForeignKey(x => x.VocabularyWordId).OnDelete(DeleteBehavior.Restrict);
+        });
+        modelBuilder.Entity<PlacementTestOption>(entity =>
+        {
+            entity.ToTable("placement_test_options"); entity.HasKey(x => x.Id);
             entity.Property(x => x.Key).HasMaxLength(1).IsRequired(); entity.Property(x => x.Text).HasMaxLength(500).IsRequired();
             entity.HasIndex(x => new { x.QuestionId, x.Key }).IsUnique();
             entity.HasOne(x => x.Question).WithMany(x => x.Options).HasForeignKey(x => x.QuestionId).OnDelete(DeleteBehavior.Cascade);

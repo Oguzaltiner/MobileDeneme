@@ -15,6 +15,11 @@ public sealed class UserWordProgress
     public int Repetition { get; set; }
     public int IntervalDays { get; set; }
     public decimal EaseFactor { get; set; } = 2.5m;
+    public decimal MasteryScore { get; set; }
+    public int TotalReviews { get; set; }
+    public int CorrectReviews { get; set; }
+    public int Lapses { get; set; }
+    public ReviewRating? LastRating { get; set; }
     public DateTime? LastReviewedAtUtc { get; set; }
     public DateTime DueAtUtc { get; set; } = DateTime.UtcNow;
     public AppUser User { get; set; } = null!;

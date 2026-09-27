@@ -3,6 +3,7 @@ using System;
 using EnglishLearning.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EnglishLearning.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(EnglishLearningDbContext))]
-    partial class EnglishLearningDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260927090220_AddReviewMastery")]
+    partial class AddReviewMastery
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -110,118 +113,6 @@ namespace EnglishLearning.Infrastructure.Persistence.Migrations
                     b.HasKey("UserId", "DateUtc");
 
                     b.ToTable("daily_usage", (string)null);
-                });
-
-            modelBuilder.Entity("EnglishLearning.Domain.PlacementTestAttempt", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<int>("AnsweredCount")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime?>("CompletedAtUtc")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<int>("CorrectCount")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("EstimatedLevel")
-                        .HasMaxLength(10)
-                        .HasColumnType("character varying(10)");
-
-                    b.Property<int>("QuestionCount")
-                        .HasColumnType("integer");
-
-                    b.Property<int?>("ScorePercent")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("StartedAtUtc")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId", "StartedAtUtc");
-
-                    b.ToTable("placement_test_attempts", (string)null);
-                });
-
-            modelBuilder.Entity("EnglishLearning.Domain.PlacementTestOption", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<bool>("IsCorrect")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Key")
-                        .IsRequired()
-                        .HasMaxLength(1)
-                        .HasColumnType("character varying(1)");
-
-                    b.Property<Guid>("QuestionId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("character varying(500)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("QuestionId", "Key")
-                        .IsUnique();
-
-                    b.ToTable("placement_test_options", (string)null);
-                });
-
-            modelBuilder.Entity("EnglishLearning.Domain.PlacementTestQuestion", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<bool>("Answered")
-                        .HasColumnType("boolean");
-
-                    b.Property<Guid>("AttemptId")
-                        .HasColumnType("uuid");
-
-                    b.Property<int>("Difficulty")
-                        .HasColumnType("integer");
-
-                    b.Property<bool>("IsCorrect")
-                        .HasColumnType("boolean");
-
-                    b.Property<int>("Order")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)");
-
-                    b.Property<Guid>("VocabularyWordId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("VocabularyWordId");
-
-                    b.HasIndex("AttemptId", "Order")
-                        .IsUnique();
-
-                    b.ToTable("placement_test_questions", (string)null);
                 });
 
             modelBuilder.Entity("EnglishLearning.Domain.PracticeEvent", b =>
@@ -382,11 +273,6 @@ namespace EnglishLearning.Infrastructure.Persistence.Migrations
 
                     b.Property<bool>("Answered")
                         .HasColumnType("boolean");
-
-                    b.Property<int>("Difficulty")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasDefaultValue(2);
 
                     b.Property<bool>("IsCorrect")
                         .HasColumnType("boolean");
@@ -827,47 +713,6 @@ namespace EnglishLearning.Infrastructure.Persistence.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("EnglishLearning.Domain.PlacementTestAttempt", b =>
-                {
-                    b.HasOne("EnglishLearning.Domain.AppUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("EnglishLearning.Domain.PlacementTestOption", b =>
-                {
-                    b.HasOne("EnglishLearning.Domain.PlacementTestQuestion", "Question")
-                        .WithMany("Options")
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Question");
-                });
-
-            modelBuilder.Entity("EnglishLearning.Domain.PlacementTestQuestion", b =>
-                {
-                    b.HasOne("EnglishLearning.Domain.PlacementTestAttempt", "Attempt")
-                        .WithMany("Questions")
-                        .HasForeignKey("AttemptId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EnglishLearning.Domain.VocabularyWord", "VocabularyWord")
-                        .WithMany()
-                        .HasForeignKey("VocabularyWordId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Attempt");
-
-                    b.Navigation("VocabularyWord");
-                });
-
             modelBuilder.Entity("EnglishLearning.Domain.PracticeEvent", b =>
                 {
                     b.HasOne("EnglishLearning.Domain.PracticeSession", "Session")
@@ -1034,16 +879,6 @@ namespace EnglishLearning.Infrastructure.Persistence.Migrations
 
                     b.Navigation("Settings")
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("EnglishLearning.Domain.PlacementTestAttempt", b =>
-                {
-                    b.Navigation("Questions");
-                });
-
-            modelBuilder.Entity("EnglishLearning.Domain.PlacementTestQuestion", b =>
-                {
-                    b.Navigation("Options");
                 });
 
             modelBuilder.Entity("EnglishLearning.Domain.PracticeSession", b =>

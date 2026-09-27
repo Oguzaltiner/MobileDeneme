@@ -12,12 +12,16 @@ public sealed class QuizService(EnglishLearningDbContext db, IEntitlementService
     {
         var count = request.QuestionCount is 10 ? 10 : 5;
         if (!await entitlements.CanAccessLevelAsync(userId, request.Level, ct)) return null;
+        var adaptiveDifficulty = request.Difficulty is >= 1 and <= 4 ? request.Difficulty.Value : await GetAdaptiveDifficultyAsync(userId, ct);
         var query = db.VocabularyWords.AsNoTracking().Where(x => x.PublicationStatus == Domain.VocabularyPublicationStatus.Published).AsQueryable();
         var entitlement = await entitlements.GetAsync(userId, ct);
         if (!entitlement.IsPremium) query = query.Where(x => x.Level == "A1" || x.Level == "A2");
         if (!string.IsNullOrWhiteSpace(request.Level)) query = query.Where(x => x.Level == request.Level);
         if (!string.IsNullOrWhiteSpace(request.Category)) query = query.Where(x => x.Category == request.Category);
-        var words = await query.OrderBy(_ => Guid.NewGuid()).Take(count).ToListAsync(ct);
+        var targetLevel = BandToLevel(adaptiveDifficulty);
+        var words = await query.Where(x => x.Level == targetLevel).OrderBy(_ => Guid.NewGuid()).Take(count).ToListAsync(ct);
+        if (words.Count < count)
+            words = await query.OrderBy(_ => Guid.NewGuid()).Take(count).ToListAsync(ct);
         if (words.Count < count) return null;
         var all = await db.VocabularyWords.AsNoTracking().Where(x => x.PublicationStatus == Domain.VocabularyPublicationStatus.Published).ToListAsync(ct);
         var session = new QuizSession { UserId = userId, Level = request.Level, Category = request.Category, QuestionCount = count };
@@ -30,7 +34,7 @@ public sealed class QuizService(EnglishLearningDbContext db, IEntitlementService
                 .OrderBy(_ => Guid.NewGuid()).Take(3).Select(x => type == QuizQuestionType.Translation ? x.Translation : x.Term).ToList();
             if (candidates.Count < 3) return null;
             candidates.Add(correct);
-            var question = new QuizQuestion { Session = session, VocabularyWordId = word.Id, Order = i + 1, Type = type };
+            var question = new QuizQuestion { Session = session, VocabularyWordId = word.Id, Order = i + 1, Type = type, Difficulty = adaptiveDifficulty };
             foreach (var option in candidates.OrderBy(_ => Guid.NewGuid()).Select((text, index) => new QuizOption { Question = question, Key = ((char)('A' + index)).ToString(), Text = text, IsCorrect = text == correct })) question.Options.Add(option);
             session.Questions.Add(question);
         }
@@ -66,5 +70,25 @@ public sealed class QuizService(EnglishLearningDbContext db, IEntitlementService
     }
 
     private IQueryable<QuizSession> Load(Guid userId, Guid id) => db.QuizSessions.Include(x => x.Questions).ThenInclude(x => x.Options).Include(x => x.Questions).ThenInclude(x => x.VocabularyWord).Where(x => x.Id == id && x.UserId == userId);
-    private static QuizSessionDto Map(QuizSession s) => new(s.Id, s.Status, s.QuestionCount, s.Questions.Count(x => x.Answered), s.CorrectCount, s.Questions.OrderBy(x => x.Order).Select(q => new QuizQuestionDto(q.Id, q.Order, q.Type, q.Type == QuizQuestionType.Translation ? q.VocabularyWord.Term : q.VocabularyWord.Definition, q.Options.OrderBy(x => x.Key).Select(o => new QuizOptionDto(o.Key, o.Text)).ToList(), q.Answered, q.Answered ? q.IsCorrect : null)).ToList());
+    private static QuizSessionDto Map(QuizSession s) => new(s.Id, s.Status, s.QuestionCount, s.Questions.Count(x => x.Answered), s.CorrectCount, s.Questions.OrderBy(x => x.Order).Select(q => new QuizQuestionDto(q.Id, q.Order, q.Type, q.Difficulty, q.Type == QuizQuestionType.Translation ? q.VocabularyWord.Term : q.VocabularyWord.Definition, q.Options.OrderBy(x => x.Key).Select(o => new QuizOptionDto(o.Key, o.Text)).ToList(), q.Answered, q.Answered ? q.IsCorrect : null)).ToList());
+
+    private async Task<int> GetAdaptiveDifficultyAsync(Guid userId, CancellationToken ct)
+    {
+        var recent = await db.QuizQuestions.AsNoTracking()
+            .Where(x => x.Session.UserId == userId && x.Answered)
+            .OrderByDescending(x => x.Session.CreatedAtUtc).ThenByDescending(x => x.Order)
+            .Take(20).Select(x => x.IsCorrect).ToListAsync(ct);
+        if (recent.Count == 0) return 2;
+        var success = recent.Count(x => x) / (double)recent.Count;
+        var latestDifficulty = await db.QuizQuestions.AsNoTracking()
+            .Where(x => x.Session.UserId == userId && x.Answered)
+            .OrderByDescending(x => x.Session.CreatedAtUtc).ThenByDescending(x => x.Order)
+            .Select(x => (int?)x.Difficulty).FirstOrDefaultAsync(ct) ?? 2;
+        return Math.Clamp(latestDifficulty + (success >= 0.85 ? 1 : success <= 0.55 ? -1 : 0), 1, 4);
+    }
+
+    private static string BandToLevel(int difficulty) => difficulty switch
+    {
+        1 => "A1", 2 => "A2", 3 => "B1", _ => "B2"
+    };
 }
