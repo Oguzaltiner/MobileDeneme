@@ -21,6 +21,7 @@ export type WeeklyLearningStats = { totalReviews: number; successfulReviews: num
 export type SentenceChallenge = { wordId: string; sentence: string; answer: string; options: string[]; translation: string; explanation: string };
 export type LeaderboardEntry = { rank: number; displayName: string; points: number; isCurrentUser: boolean };
 export type LeaderboardSummary = { league: string; periodEndsAtUtc: string; entries: LeaderboardEntry[]; currentUserRank: number; currentUserPoints: number };
+export type LearningPath = { key: string; title: string; description: string; purpose: string; recommended: boolean };
 let accessToken: string | null = null;
 export function setAccessToken(token: string | null) { accessToken = token; }
 async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
@@ -62,4 +63,5 @@ export const api = {
   dueWords: (limit = 20) => request<VocabularyWord[]>(`/reviews/due?limit=${Math.min(Math.max(limit, 1), 50)}`),
   sentenceChallenge: () => request<SentenceChallenge>('/vocabulary/sentence-challenge'),
   weeklyLeaderboard: () => request<LeaderboardSummary>('/leaderboard/weekly'),
+  learningPaths: () => request<LearningPath[]>('/learning-paths'),
 };

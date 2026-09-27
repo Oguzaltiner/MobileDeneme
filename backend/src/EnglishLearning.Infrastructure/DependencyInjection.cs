@@ -12,6 +12,8 @@ using EnglishLearning.Application.Entitlements;
 using EnglishLearning.Infrastructure.Vocabulary;
 using EnglishLearning.Infrastructure.Leaderboard;
 using EnglishLearning.Application.Leaderboard;
+using EnglishLearning.Application.LearningPaths;
+using EnglishLearning.Infrastructure.LearningPaths;
 using EnglishLearning.Infrastructure.Dashboard;
 using EnglishLearning.Infrastructure.Entitlements;
 using EnglishLearning.Application.Reviews;
@@ -41,6 +43,7 @@ public static class DependencyInjection
         services.AddSingleton<ITokenService, JwtTokenService>();
         services.AddScoped<IVocabularyService, VocabularyService>();
         services.AddScoped<ILeaderboardService, LeaderboardService>();
+        services.AddScoped<ILearningPathService, LearningPathService>();
         services.AddScoped<IDashboardService, DashboardService>();
         services.AddScoped<IEntitlementService, EntitlementService>();
         services.AddScoped<IReviewService, ReviewService>();

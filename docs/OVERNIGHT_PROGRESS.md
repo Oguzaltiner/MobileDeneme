@@ -8,6 +8,7 @@
 - Haftalık Mavi Lig liderlik panosu ve puanlama API'si.
 - Cümle tamamlama challenge API'si: örnek cümlede boşluk, dört seçenek ve açıklama.
 - Mobilde Mavi Lig ve Cümle Tamamla ekranları, ana sayfadan erişilebilir.
+- Öğrenme rotaları: onboarding amacıyla eşleşen önerilen rota ve iş/seyahat/akademik/sınav/telaffuz seçenekleri.
 - Telaffuz: `expo-speech` ile native TTS ve durdurma/fallback davranışı.
 - Streak, haftalık tekrar hedefi ve achievement rozetleri.
 - Home, auth, onboarding, vocabulary, quiz ve premium ekranlarında ortak business görsel dili.
