@@ -33,6 +33,7 @@ export const adminApi = {
   createVocabulary: (body: VocabularyInput) => request<{ id: string }>('/admin/vocabulary', { method: 'POST', body: JSON.stringify(body) }),
   submitReview: (id: string) => request<void>(`/admin/content/vocabulary/${id}/submit-review`, { method: 'POST' }),
   publish: (id: string) => request<void>(`/admin/content/vocabulary/${id}/publish`, { method: 'POST' }),
+  bulkPublish: (ids: string[]) => request<{ published: number }>('/admin/content/vocabulary/bulk-publish', { method: 'POST', body: JSON.stringify({ ids }) }),
   reject: (id: string) => request<void>(`/admin/content/vocabulary/${id}/reject`, { method: 'POST' })
 };
 
