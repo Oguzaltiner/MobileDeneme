@@ -25,6 +25,15 @@ public sealed class VocabularyService(EnglishLearningDbContext db) : IVocabulary
         return new(target.Id, target.Definition, target.Term, target.Translation, $"İlk harf: {target.Term[0]}");
     }
 
+    public async Task<MatchingChallenge?> GetMatchingChallengeAsync(CancellationToken ct)
+    {
+        var words = await db.VocabularyWords.AsNoTracking().OrderBy(x => x.Term).Take(100).ToListAsync(ct);
+        if (words.Count < 4) return null;
+        var target = words[Random.Shared.Next(words.Count)];
+        var options = words.Where(x => x.Id != target.Id).OrderBy(_ => Random.Shared.Next()).Take(3).Select(x => x.Translation).Append(target.Translation).OrderBy(_ => Random.Shared.Next()).ToList();
+        return new(target.Id, target.Term, target.Translation, options);
+    }
+
     public async Task<VocabularyPage> SearchAsync(VocabularyFilter filter, CancellationToken ct)
     {
         var query = db.VocabularyWords.AsNoTracking();
