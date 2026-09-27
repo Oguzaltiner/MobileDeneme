@@ -56,6 +56,21 @@ public sealed class QuizService(EnglishLearningDbContext db, IEntitlementService
         if (selected is null) return null;
         question.Answered = true; question.IsCorrect = selected.IsCorrect;
         session.CorrectCount = session.Questions.Count(x => x.Answered && x.IsCorrect);
+        var rating = selected.IsCorrect ? ReviewRating.Good : ReviewRating.Again;
+        var progress = await db.UserWordProgress.SingleOrDefaultAsync(x => x.UserId == userId && x.VocabularyWordId == question.VocabularyWordId, ct);
+        if (progress is null)
+        {
+            progress = new UserWordProgress { UserId = userId, VocabularyWordId = question.VocabularyWordId };
+            db.UserWordProgress.Add(progress);
+        }
+        progress.TotalReviews++;
+        progress.LastRating = rating;
+        if (selected.IsCorrect) progress.CorrectReviews++; else { progress.Lapses++; progress.Repetition = 0; }
+        progress.Repetition = selected.IsCorrect ? progress.Repetition + 1 : 0;
+        progress.MasteryScore = Math.Clamp(progress.MasteryScore * 0.8m + (selected.IsCorrect ? 15m : 0m), 0m, 100m);
+        progress.LastReviewedAtUtc = DateTime.UtcNow;
+        progress.DueAtUtc = progress.LastReviewedAtUtc.Value.AddDays(selected.IsCorrect ? Math.Max(1, progress.IntervalDays) : 1);
+        db.ReviewEvents.Add(new ReviewEvent { UserId = userId, VocabularyWordId = question.VocabularyWordId, Rating = rating, ClientEventId = $"quiz:{sessionId}:{questionId}" });
         await db.SaveChangesAsync(ct);
         return new(question.Id, selected.IsCorrect, question.Options.Single(x => x.IsCorrect).Key, session.CorrectCount, session.Questions.Count(x => x.Answered));
     }
