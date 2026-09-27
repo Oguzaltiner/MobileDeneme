@@ -55,10 +55,27 @@ public static class VocabularyCatalogSeeder
         ("valuable", "/ˈvæljuəbəl/", "adjective", "useful or important", "değerli", "B1", "Academic", "Your feedback is valuable.")
     ];
 
+    private static IEnumerable<(string Term, string Pronunciation, string PartOfSpeech, string Definition, string Translation, string Level, string Category, string Example)> BuildExpandedCatalog()
+    {
+        var count = Math.Min(VocabularyCatalogData.English.Length, VocabularyCatalogData.Turkish.Length);
+        return Enumerable.Range(0, count)
+            .Where(i => VocabularyCatalogData.English[i].All(char.IsLetter) && VocabularyCatalogData.English[i].Length >= 2)
+            .Select(i =>
+            {
+                var term = VocabularyCatalogData.English[i].ToLowerInvariant();
+                var level = i < 250 ? "A1" : i < 500 ? "A2" : i < 750 ? "B1" : "B2";
+                var category = (i % 5) switch { 0 => "Daily Life", 1 => "Travel", 2 => "Work", 3 => "Academic", _ => "General" };
+                return (term, "", "word", "Common English word used in everyday context.", VocabularyCatalogData.Turkish[i], level, category, $"Learn to use {term} in context.");
+            });
+    }
+
     public static async Task SeedAsync(EnglishLearningDbContext db, CancellationToken ct = default)
     {
         var existing = await db.VocabularyWords.AsNoTracking().Select(x => x.Term).ToListAsync(ct);
-        var missing = Catalog.Where(x => !existing.Contains(x.Term, StringComparer.OrdinalIgnoreCase))
+        var missing = Catalog.Concat(BuildExpandedCatalog())
+            .GroupBy(x => x.Term, StringComparer.OrdinalIgnoreCase)
+            .Select(group => group.First())
+            .Where(x => !existing.Contains(x.Term, StringComparer.OrdinalIgnoreCase))
             .Select(x => new VocabularyWord
             {
                 Term = x.Term, Pronunciation = x.Pronunciation, PartOfSpeech = x.PartOfSpeech,

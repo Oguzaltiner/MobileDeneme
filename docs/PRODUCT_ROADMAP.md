@@ -92,4 +92,4 @@ Babbel’in hedefe göre rota, kısa pratik ders, konuşma ve kişiselleştirilm
 
 - **Listening audio correctness:** transcript ve cevap ifadeleri aynı ekran bağlamında seslendirilmeli; cevap açıldığında doğru ifade tekrar dinlenebilmeli.
 - **Pronunciation assessment reliability:** metin tabanlı değerlendirme tüm planlarda çalışmalı; boş/uygunsuz transcript için anlaşılır hata ve skor geri bildirimi vermeli.
-- **Vocabulary catalog expansion:** development kataloğu küçük seed listesinden çıkarılmalı; başlangıçta 50+ yayınlanmış kelime, sonrasında admin content studio üzerinden 2.000 kelime kalite sınırına kadar büyütülmeli.
+- **Vocabulary catalog expansion:** development kataloğu artık 1.000+ İngilizce-Türkçe başlangıç çiftini seed ediyor; sonraki içerikler admin content studio üzerinden 2.000 kelime kalite sınırına kadar reviewer onayıyla büyütülmeli.
