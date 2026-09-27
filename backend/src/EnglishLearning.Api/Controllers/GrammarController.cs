@@ -1,10 +1,13 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using EnglishLearning.Infrastructure.Persistence;
+using System.Text.Json;
 
 namespace EnglishLearning.Api.Controllers;
 
 [ApiController, Authorize, Route("api/v1/grammar")]
-public sealed class GrammarController : ControllerBase
+public sealed class GrammarController(EnglishLearningDbContext db) : ControllerBase
 {
     private static readonly IReadOnlyList<GrammarLessonDto> Lessons =
     [
@@ -23,13 +26,36 @@ public sealed class GrammarController : ControllerBase
     ];
 
     [HttpGet("lessons")]
-    public ActionResult<IReadOnlyList<GrammarLessonDto>> GetLessons([FromQuery] string? level = null) =>
-        Ok(string.IsNullOrWhiteSpace(level) ? Lessons : Lessons.Where(x => x.Level.Equals(level.Trim(), StringComparison.OrdinalIgnoreCase)).ToList());
+    public async Task<ActionResult<IReadOnlyList<GrammarLessonDto>>> GetLessons([FromQuery] string? level = null, CancellationToken ct = default)
+    {
+        var query = db.LearningContentItems.AsNoTracking().Where(x => x.Status == EnglishLearning.Domain.ContentStudioStatus.Published && x.Type == "grammar");
+        if (!string.IsNullOrWhiteSpace(level)) query = query.Where(x => x.Level == level.Trim().ToUpperInvariant());
+        var published = await query.OrderBy(x => x.Level).ThenBy(x => x.Title).ToListAsync(ct);
+        var dynamicLessons = published.Select(MapPublished).Where(x => x is not null).Cast<GrammarLessonDto>().ToList();
+        var result = dynamicLessons.Count == 0 ? Lessons : dynamicLessons;
+        return Ok(result);
+    }
 
     [HttpGet("lessons/{key}")]
-    public ActionResult<GrammarLessonDto> GetLesson(string key) => Lessons.FirstOrDefault(x => x.Key.Equals(key, StringComparison.OrdinalIgnoreCase)) is { } lesson ? Ok(lesson) : NotFound();
+    public async Task<ActionResult<GrammarLessonDto>> GetLesson(string key, CancellationToken ct = default)
+    {
+        var item = await db.LearningContentItems.AsNoTracking().SingleOrDefaultAsync(x => x.Key == key && x.Type == "grammar" && x.Status == EnglishLearning.Domain.ContentStudioStatus.Published, ct);
+        if (item is not null && MapPublished(item) is { } dynamicLesson) return Ok(dynamicLesson);
+        return Lessons.FirstOrDefault(x => x.Key.Equals(key, StringComparison.OrdinalIgnoreCase)) is { } lesson ? Ok(lesson) : NotFound();
+    }
+
+    private static GrammarLessonDto? MapPublished(EnglishLearning.Domain.LearningContentItem item)
+    {
+        try
+        {
+            var payload = JsonSerializer.Deserialize<GrammarPayload>(item.PayloadJson, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            return payload is null ? null : new(item.Key, item.Title, item.Level, payload.Summary ?? item.Title, payload.ContrastNote ?? "Bu derste Türkçe ve İngilizce yapılarını karşılaştır.", payload.Rules ?? [], payload.Exercises ?? []);
+        }
+        catch (JsonException) { return null; }
+    }
 
     public sealed record GrammarLessonDto(string Key, string Title, string Level, string Summary, string ContrastNote, IReadOnlyList<GrammarRuleDto> Rules, IReadOnlyList<GrammarExerciseDto> Exercises);
     public sealed record GrammarRuleDto(string Title, string Explanation, string Focus);
     public sealed record GrammarExerciseDto(string Prompt, IReadOnlyList<string> Options, string Answer, string Explanation);
+    private sealed record GrammarPayload(string? Summary, string? ContrastNote, IReadOnlyList<GrammarRuleDto>? Rules, IReadOnlyList<GrammarExerciseDto>? Exercises);
 }
