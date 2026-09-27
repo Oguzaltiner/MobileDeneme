@@ -19,6 +19,8 @@ Babbel’in hedefe göre rota, kısa pratik ders, konuşma ve kişiselleştirilm
 
 **Kabul:** Kullanıcı bir rota seçtiğinde en az üç farklı pratik tipiyle 5–10 dakikalık tamamlanabilir seans oluşur; cevaplar tekrar planını günceller.
 
+**Durum:** Cümle tamamlama, yazma ve eşleştirme dikey dilimleri hazır; ortak PracticeSession sözleşmesi ve dinleme/yazma sonuçlarının tekrar motoruna bağlanması sıradaki alt iştir.
+
 ### 2. Kişiselleştirilmiş koç — P0
 
 - Hatalı beceriyi tespit et: ör. telaffuz, cümle kurma, kelime anlamı.
