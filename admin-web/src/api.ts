@@ -26,6 +26,8 @@ export const adminApi = {
     return request<VocabularyPage>(`/admin/vocabulary?${query.toString()}`);
   },
   content: (status = '') => request<ContentItem[]>(`/admin/content${status ? `?status=${encodeURIComponent(status)}` : ''}`),
+  createContent: (body: { key: string; title: string; type: string; level: string; category: string; payloadJson: string }) => request<{ id: string }>('/admin/content', { method: 'POST', body: JSON.stringify(body) }),
+  contentAction: (id: string, action: 'submit' | 'publish' | 'archive' | 'draft') => request<void>(`/admin/content/${id}/${action}`, { method: 'POST' }),
   queue: (status = '') => request<QueueItem[]>(`/admin/content/vocabulary/review-queue${status ? `?status=${status}` : ''}`),
   audit: () => request<AuditItem[]>('/admin/audit?limit=50'),
   createVocabulary: (body: VocabularyInput) => request<{ id: string }>('/admin/vocabulary', { method: 'POST', body: JSON.stringify(body) }),
