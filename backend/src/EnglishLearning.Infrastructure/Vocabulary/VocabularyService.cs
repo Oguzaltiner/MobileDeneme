@@ -6,6 +6,17 @@ namespace EnglishLearning.Infrastructure.Vocabulary;
 
 public sealed class VocabularyService(EnglishLearningDbContext db) : IVocabularyService
 {
+    public async Task<SentenceChallenge?> GetSentenceChallengeAsync(CancellationToken ct)
+    {
+        var words = await db.VocabularyWords.AsNoTracking().Where(x => x.ExampleSentence != null && x.ExampleSentence != "").OrderBy(x => x.Term).Take(100).ToListAsync(ct);
+        if (words.Count < 4) return null;
+        var target = words[Random.Shared.Next(words.Count)];
+        var sentence = target.ExampleSentence!;
+        var blanked = sentence.Replace(target.Term, "_____", StringComparison.OrdinalIgnoreCase);
+        var options = words.Where(x => x.Id != target.Id).OrderBy(_ => Random.Shared.Next()).Take(3).Select(x => x.Term).Append(target.Term).OrderBy(_ => Random.Shared.Next()).ToList();
+        return new(target.Id, blanked, target.Term, options, target.Translation, $"Bu cümlede doğru kelime: {target.Term}.");
+    }
+
     public async Task<VocabularyPage> SearchAsync(VocabularyFilter filter, CancellationToken ct)
     {
         var query = db.VocabularyWords.AsNoTracking();

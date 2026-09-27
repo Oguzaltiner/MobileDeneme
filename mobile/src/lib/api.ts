@@ -18,6 +18,9 @@ export type QuizResult = { id: string; status: number; questionCount: number; an
 export type Entitlement = { plan: number; isPremium: boolean; maxLevel: string; dailyWordLimit: number; dailyQuizLimit: number; adsEnabled: boolean; dailyWordsUsed: number; dailyQuizzesUsed: number; features: string[] };
 export type ReviewResult = { wordId: string; rating: number; repetition: number; intervalDays: number; dueAtUtc: string; dailyWordsUsed: number; dailyWordLimit: number };
 export type WeeklyLearningStats = { totalReviews: number; successfulReviews: number; successPercent: number; learnedWords: number; days: { date: string; reviews: number; successfulReviews: number }[] };
+export type SentenceChallenge = { wordId: string; sentence: string; answer: string; options: string[]; translation: string; explanation: string };
+export type LeaderboardEntry = { rank: number; displayName: string; points: number; isCurrentUser: boolean };
+export type LeaderboardSummary = { league: string; periodEndsAtUtc: string; entries: LeaderboardEntry[]; currentUserRank: number; currentUserPoints: number };
 let accessToken: string | null = null;
 export function setAccessToken(token: string | null) { accessToken = token; }
 async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
@@ -57,4 +60,6 @@ export const api = {
   submitReview: (body: { wordId: string; rating: 0 | 1 | 2 | 3; clientEventId: string }) => request<ReviewResult>('/reviews', { method: 'POST', body: JSON.stringify(body) }),
   weeklyStats: () => request<WeeklyLearningStats>('/statistics/weekly'),
   dueWords: (limit = 20) => request<VocabularyWord[]>(`/reviews/due?limit=${Math.min(Math.max(limit, 1), 50)}`),
+  sentenceChallenge: () => request<SentenceChallenge>('/vocabulary/sentence-challenge'),
+  weeklyLeaderboard: () => request<LeaderboardSummary>('/leaderboard/weekly'),
 };
