@@ -258,7 +258,7 @@ public sealed class AdminController(EnglishLearningDbContext db) : ControllerBas
     [HttpPost("content")]
     public async Task<IActionResult> CreateContent(ContentWriteRequest request, CancellationToken ct)
     {
-        if (!TryGetAdminId(out var adminId)) return Unauthorized(); if (!TryValidatePayload(request.PayloadJson, out var error)) return BadRequest(new { message = error });
+        if (!TryGetAdminId(out var adminId)) return Unauthorized(); if (!TryValidateContentPayload(request.Type, request.PayloadJson, out var error)) return BadRequest(new { message = error });
         if (await db.LearningContentItems.AnyAsync(x => x.Key == request.Key.Trim(), ct)) return Conflict(new { message = "Content key already exists." });
         var item = new LearningContentItem { Key = request.Key.Trim(), Title = request.Title.Trim(), Type = request.Type.Trim().ToLowerInvariant(), Level = request.Level.Trim().ToUpperInvariant(), Category = request.Category.Trim(), PayloadJson = request.PayloadJson };
         db.LearningContentItems.Add(item); await db.SaveChangesAsync(ct); await AuditAsync(adminId, "content_create", item.Id, ct); return Created($"/api/v1/admin/content/{item.Id}", new { item.Id });
@@ -267,7 +267,7 @@ public sealed class AdminController(EnglishLearningDbContext db) : ControllerBas
     [HttpPut("content/{id:guid}")]
     public async Task<IActionResult> UpdateContent(Guid id, ContentWriteRequest request, CancellationToken ct)
     {
-        if (!TryGetAdminId(out var adminId)) return Unauthorized(); if (!TryValidatePayload(request.PayloadJson, out var error)) return BadRequest(new { message = error });
+        if (!TryGetAdminId(out var adminId)) return Unauthorized(); if (!TryValidateContentPayload(request.Type, request.PayloadJson, out var error)) return BadRequest(new { message = error });
         var item = await db.LearningContentItems.SingleOrDefaultAsync(x => x.Id == id, ct); if (item is null) return NotFound();
         item.Title = request.Title.Trim(); item.Type = request.Type.Trim().ToLowerInvariant(); item.Level = request.Level.Trim().ToUpperInvariant(); item.Category = request.Category.Trim(); item.PayloadJson = request.PayloadJson; item.Version++; item.UpdatedAtUtc = DateTime.UtcNow;
         await db.SaveChangesAsync(ct); await AuditAsync(adminId, "content_update", id, ct); return NoContent();
@@ -281,5 +281,23 @@ public sealed class AdminController(EnglishLearningDbContext db) : ControllerBas
         item.UpdatedAtUtc = DateTime.UtcNow; await db.SaveChangesAsync(ct); await AuditAsync(adminId, $"content_{action}", id, ct); return Ok(new { status = item.Status.ToString(), item.Version });
     }
 
-    private static bool TryValidatePayload(string payload, out string? error) { try { System.Text.Json.JsonDocument.Parse(payload); error = null; return true; } catch { error = "PayloadJson must be valid JSON."; return false; } }
+    private static bool TryValidateContentPayload(string type, string payload, out string? error)
+    {
+        try
+        {
+            using var document = System.Text.Json.JsonDocument.Parse(payload);
+            if (!string.Equals(type.Trim(), "grammar", StringComparison.OrdinalIgnoreCase)) { error = null; return true; }
+            var root = document.RootElement;
+            if (root.ValueKind != System.Text.Json.JsonValueKind.Object || !root.TryGetProperty("summary", out _) || !root.TryGetProperty("contrastNote", out _) || !root.TryGetProperty("rules", out var rules) || !root.TryGetProperty("exercises", out var exercises)) { error = "Grammar content requires summary, contrastNote, rules and exercises."; return false; }
+            if (rules.ValueKind != System.Text.Json.JsonValueKind.Array || rules.GetArrayLength() == 0 || exercises.ValueKind != System.Text.Json.JsonValueKind.Array || exercises.GetArrayLength() == 0) { error = "Grammar content must include at least one rule and one exercise."; return false; }
+            foreach (var exercise in exercises.EnumerateArray())
+            {
+                if (!exercise.TryGetProperty("prompt", out _) || !exercise.TryGetProperty("answer", out _) || !exercise.TryGetProperty("explanation", out _) || !exercise.TryGetProperty("options", out var options) || options.ValueKind != System.Text.Json.JsonValueKind.Array || options.GetArrayLength() != 4) { error = "Each grammar exercise requires prompt, answer, explanation and exactly four options."; return false; }
+                var answer = exercise.GetProperty("answer").GetString();
+                if (string.IsNullOrWhiteSpace(answer) || !options.EnumerateArray().Any(x => string.Equals(x.GetString(), answer, StringComparison.OrdinalIgnoreCase))) { error = "Each grammar exercise answer must match one of its options."; return false; }
+            }
+            error = null; return true;
+        }
+        catch (System.Text.Json.JsonException) { error = "PayloadJson must be valid JSON."; return false; }
+    }
 }

@@ -31,8 +31,9 @@ public sealed class GrammarController(EnglishLearningDbContext db) : ControllerB
         var query = db.LearningContentItems.AsNoTracking().Where(x => x.Status == EnglishLearning.Domain.ContentStudioStatus.Published && x.Type == "grammar");
         if (!string.IsNullOrWhiteSpace(level)) query = query.Where(x => x.Level == level.Trim().ToUpperInvariant());
         var published = await query.OrderBy(x => x.Level).ThenBy(x => x.Title).ToListAsync(ct);
-        var dynamicLessons = published.Select(MapPublished).Where(x => x is not null).Cast<GrammarLessonDto>().ToList();
-        var result = dynamicLessons.Count == 0 ? Lessons : dynamicLessons;
+        var dynamicLessons = published.Select(MapPublished).Where(x => x is not null).Cast<GrammarLessonDto>();
+        var staticLessons = string.IsNullOrWhiteSpace(level) ? Lessons : Lessons.Where(x => x.Level.Equals(level.Trim(), StringComparison.OrdinalIgnoreCase));
+        var result = staticLessons.Concat(dynamicLessons).GroupBy(x => x.Key, StringComparer.OrdinalIgnoreCase).Select(x => x.First()).ToList();
         return Ok(result);
     }
 
