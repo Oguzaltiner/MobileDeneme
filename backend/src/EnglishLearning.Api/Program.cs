@@ -14,6 +14,10 @@ builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
+builder.Services.AddCors(options => options.AddPolicy("AdminWeb", policy => policy
+    .WithOrigins(builder.Configuration["AdminWeb:Origin"] ?? "http://localhost:5173")
+    .AllowAnyHeader()
+    .AllowAnyMethod()));
 builder.Services.AddAuthorization(options => options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin")));
 builder.Services.AddAuthorization(options =>
 {
@@ -81,6 +85,7 @@ app.Use(async (context, next) =>
 });
 
 app.UseRateLimiter();
+app.UseCors("AdminWeb");
 app.UseAuthentication();
 app.UseAuthorization();
 

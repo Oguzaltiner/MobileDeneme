@@ -53,7 +53,7 @@ Babbel’in hedefe göre rota, kısa pratik ders, konuşma ve kişiselleştirilm
 - Kelime, cümle, ses, kategori ve rota CRUD.
 - ~~Taslak → inceleme → yayın akışı.~~ Reviewer rolü, inceleme kuyruğu ve Draft → InReview → Published/Rejected geçişleri tamamlandı.
 - İçerik değişiklikleri için audit log.
-- Admin dashboard: aktif kullanıcı, tamamlanan ders, hata oranı, premium dönüşüm.
+- ~~Admin dashboard: aktif kullanıcı, tamamlanan ders, hata oranı, premium dönüşüm.~~ İlk admin dashboard sürümü aktif kullanıcı, kelime, quiz ve premium özetlerini içeriyor; hata oranı analitiği sonraki alt iş.
 
 **Kabul:** Editör yeni bir cümle ekleyebilir, reviewer onaylamadan mobilde görünmez; her değişiklik kimin tarafından yapıldığıyla izlenir.
 
