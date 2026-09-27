@@ -51,7 +51,7 @@ Babbel’in hedefe göre rota, kısa pratik ders, konuşma ve kişiselleştirilm
 
 - Rol/izin modeli: admin, editor, reviewer.
 - Kelime, cümle, ses, kategori ve rota CRUD.
-- Taslak → inceleme → yayın akışı. Taslak ve yayın geçişi tamamlandı; reviewer rolü ve inceleme kuyruğu sonraki alt iş.
+- ~~Taslak → inceleme → yayın akışı.~~ Reviewer rolü, inceleme kuyruğu ve Draft → InReview → Published/Rejected geçişleri tamamlandı.
 - İçerik değişiklikleri için audit log.
 - Admin dashboard: aktif kullanıcı, tamamlanan ders, hata oranı, premium dönüşüm.
 

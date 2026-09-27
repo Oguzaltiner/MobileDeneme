@@ -15,6 +15,11 @@ builder.Logging.AddConsole();
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddAuthorization(options => options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin")));
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("ContentEditor", policy => policy.RequireRole("Admin", "Editor", "Reviewer"));
+    options.AddPolicy("ContentReviewer", policy => policy.RequireRole("Admin", "Reviewer"));
+});
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddRateLimiter(options => options.AddPolicy("auth", context => RateLimitPartition.GetFixedWindowLimiter(
     context.Connection.RemoteIpAddress?.ToString() ?? "unknown",
