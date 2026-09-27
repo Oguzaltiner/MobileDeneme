@@ -20,6 +20,9 @@ Bu belge mevcut MVP'nin üzerine kurulacak üretim kalitesindeki öğrenme siste
 - **13 ilk dilim tamamlandı:** soru becerisi, açıklama ve hata etiketi metadata'sı.
 - **14 ilk dilim tamamlandı:** Coach önerileri artık aksiyon anahtarı, rota, beceri ve CTA döndürüyor.
 - **18 ilk dilim tamamlandı:** leaderboard sezon anahtarı, yükselme/düşme eşikleri ve ödül katmanı döndürülüyor; kalıcı sezon kapanışı sonraki alt iştir.
+- **15–17 ilk production slice tamamlandı:** API kontrollü konuşma senaryoları, dinleme laboratuvarı, cihaz TTS ve transcript tabanlı telaffuz değerlendirmesi eklendi.
+- **20–22 ilk production slice tamamlandı:** admin öğrenme analitiği, review metadata kalite skoru ve idempotent offline PracticeEvent batch sync endpoint'i eklendi.
+- **23 ilk slice tamamlandı:** bildirim açık/kapalı, hatırlatma saati ve sessiz saatler kullanıcı ayarlarında saklanıyor.
 
 ## Task sırası
 

@@ -32,6 +32,8 @@ export type ListeningExercise = { key: string; title: string; level: string; pro
 export type PlacementTest = { id: string; status: number; questionCount: number; answeredCount: number; correctCount: number; estimatedLevel?: string | null; questions: { id: string; order: number; difficulty: number; type: number; prompt: string; options: { key: string; text: string }[]; answered: boolean; isCorrect?: boolean | null }[] };
 export type PlacementAnswer = { questionId: string; isCorrect: boolean; correctOptionKey: string; correctCount: number; answeredCount: number };
 export type PlacementResult = { id: string; status: number; questionCount: number; answeredCount: number; correctCount: number; scorePercent: number; estimatedLevel: string };
+export type NotificationPreferences = { enabled: boolean; reminderHour: number; quietHoursStart: number; quietHoursEnd: number };
+export type PracticeEventSync = { clientEventId: string; sessionId: string; stepKey: string; vocabularyWordId?: string; isCorrect?: boolean; rating?: 0 | 1 | 2 | 3; occurredAtUtc?: string };
 let accessToken: string | null = null;
 export function setAccessToken(token: string | null) { accessToken = token; }
 async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
@@ -88,4 +90,7 @@ export const api = {
   conversationScenarios: (level?: string) => request<ConversationScenario[]>(`/practice/content/conversations${level ? `?level=${encodeURIComponent(level)}` : ''}`),
   listeningExercises: (level?: string) => request<ListeningExercise[]>(`/practice/content/listening${level ? `?level=${encodeURIComponent(level)}` : ''}`),
   assessPronunciation: (text: string, transcript: string) => request<PronunciationAssessment>('/practice/content/pronunciation/assess', { method: 'POST', body: JSON.stringify({ text, transcript }) }),
+  notificationPreferences: () => request<NotificationPreferences>('/me/notifications'),
+  updateNotificationPreferences: (body: NotificationPreferences) => request<NotificationPreferences>('/me/notifications', { method: 'PUT', body: JSON.stringify(body) }),
+  syncPracticeEvents: (events: PracticeEventSync[]) => request<{ accepted: number; alreadyProcessed: number; total: number }>('/sync/practice-events', { method: 'POST', body: JSON.stringify({ events }) }),
 };
