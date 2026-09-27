@@ -5,7 +5,7 @@ import { api } from '../../lib/api';
 import { createReviewEventId, enqueueReview, flushReviewQueue } from '../../lib/offline-review-queue';
 import { PronunciationButton } from '../../components/PronunciationButton';
 export function LearnScreen({ navigation }: { navigation: { goBack: () => void; navigate: (route: 'WordDetail', params: { id: string }) => void } }) {
-  const [index, setIndex] = useState(0); const [submitting, setSubmitting] = useState(false); const [error, setError] = useState(''); const query = useQuery({ queryKey: ['learn', 'words'], queryFn: () => api.words({}) }); const words = query.data?.items ?? []; const current = words[index];
+  const [index, setIndex] = useState(0); const [submitting, setSubmitting] = useState(false); const [error, setError] = useState(''); const query = useQuery({ queryKey: ['learn', 'due'], queryFn: () => api.dueWords(20) }); const words = query.data ?? []; const current = words[index];
   useEffect(() => { void flushReviewQueue(item => api.submitReview(item)); }, []);
   if (query.isLoading) return <View className="flex-1 items-center justify-center bg-background"><Text>Çalışma hazırlanıyor…</Text></View>;
   if (query.isError) return <View className="flex-1 items-center justify-center bg-background px-6"><Text className="text-center text-red-700">Çalışma yüklenemedi.</Text></View>;

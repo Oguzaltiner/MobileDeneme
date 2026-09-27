@@ -1,4 +1,5 @@
 using EnglishLearning.Domain;
+using EnglishLearning.Application.Vocabulary;
 
 namespace EnglishLearning.Application.Reviews;
 
@@ -8,4 +9,5 @@ public sealed record ReviewResult(Guid WordId, ReviewRating Rating, int Repetiti
 public interface IReviewService
 {
     Task<ReviewResult?> SubmitAsync(Guid userId, SubmitReviewRequest request, CancellationToken ct);
+    Task<IReadOnlyList<VocabularyWordDto>> GetDueAsync(Guid userId, int limit, CancellationToken ct);
 }

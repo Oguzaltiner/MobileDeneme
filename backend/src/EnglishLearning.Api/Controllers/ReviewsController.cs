@@ -9,6 +9,14 @@ namespace EnglishLearning.Api.Controllers;
 [ApiController, Authorize, Route("api/v1/reviews")]
 public sealed class ReviewsController(IReviewService reviews) : ControllerBase
 {
+    [HttpGet("due")]
+    public async Task<ActionResult<IReadOnlyList<EnglishLearning.Application.Vocabulary.VocabularyWordDto>>> Due([FromQuery] int limit = 20, CancellationToken ct = default)
+    {
+        var rawId = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? User.FindFirstValue("sub");
+        if (!Guid.TryParse(rawId, out var userId)) return Unauthorized();
+        return Ok(await reviews.GetDueAsync(userId, limit, ct));
+    }
+
     [HttpPost]
     public async Task<ActionResult<ReviewResult>> Submit(SubmitReviewRequest request, CancellationToken ct)
     {

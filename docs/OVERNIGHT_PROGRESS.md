@@ -4,6 +4,7 @@
 
 - Personal Coach dashboard: gerçek review verisiyle bugünkü ilerleme, bekleyen tekrar, önerilen seans ve öğrenme mesajı.
 - Daily Mission: dinle → anlamı hatırla → 4 seçenekten seç → zorlukla değerlendir akışı.
+- Kişisel tekrar kuyruğu: zamanı gelen kelimeler önce, yeni kelimeler eksik seansı tamamlayacak şekilde `/reviews/due` akışı.
 - Telaffuz: `expo-speech` ile native TTS ve durdurma/fallback davranışı.
 - Streak, haftalık tekrar hedefi ve achievement rozetleri.
 - Home, auth, onboarding, vocabulary, quiz ve premium ekranlarında ortak business görsel dili.
