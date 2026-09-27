@@ -67,7 +67,7 @@ public sealed class AdminController(EnglishLearningDbContext db) : ControllerBas
         [FromQuery] int pageSize = 50,
         CancellationToken ct = default)
     {
-        page = Math.Max(1, page);
+        page = Math.Clamp(page, 1, 10_000);
         pageSize = Math.Clamp(pageSize, 10, 100);
         var query = db.VocabularyWords.AsNoTracking().AsQueryable();
         if (!string.IsNullOrWhiteSpace(search))
