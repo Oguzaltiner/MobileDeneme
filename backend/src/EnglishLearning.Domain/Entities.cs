@@ -19,6 +19,10 @@ public sealed class UserSettings
     public int DailyGoal { get; set; } = 10;
     public string? LearningPurpose { get; set; }
     public string PreferredLanguage { get; set; } = "tr";
+    public bool NotificationsEnabled { get; set; } = true;
+    public int ReminderHour { get; set; } = 19;
+    public int QuietHoursStart { get; set; } = 22;
+    public int QuietHoursEnd { get; set; } = 8;
     public AppUser User { get; set; } = null!;
 }
 

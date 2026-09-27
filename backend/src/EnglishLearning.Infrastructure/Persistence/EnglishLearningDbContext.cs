@@ -41,6 +41,10 @@ public sealed class EnglishLearningDbContext(DbContextOptions<EnglishLearningDbC
             entity.ToTable("user_settings"); entity.HasKey(x => x.UserId);
             entity.Property(x => x.CurrentLevel).HasMaxLength(10); entity.Property(x => x.LearningPurpose).HasMaxLength(80);
             entity.Property(x => x.PreferredLanguage).HasMaxLength(10).IsRequired(); entity.Property(x => x.DailyGoal).HasDefaultValue(10);
+            entity.Property(x => x.NotificationsEnabled).HasDefaultValue(true);
+            entity.Property(x => x.ReminderHour).HasDefaultValue(19);
+            entity.Property(x => x.QuietHoursStart).HasDefaultValue(22);
+            entity.Property(x => x.QuietHoursEnd).HasDefaultValue(8);
         });
         modelBuilder.Entity<UserEntitlement>(entity =>
         {
