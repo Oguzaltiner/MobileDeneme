@@ -36,6 +36,13 @@ docker compose up --build
 
 The API is exposed at `http://localhost:5057` in local Compose. Set `JWT_SIGNING_KEY` in a local `.env` before using Compose beyond disposable development.
 
+Production override (requires a strong secret and a separate migration step):
+
+```powershell
+$env:JWT_SIGNING_KEY = "replace-with-a-strong-secret-at-least-32-chars"
+docker compose -f docker-compose.yml -f docker-compose.production.yml up --build -d
+```
+
 ## Run the API
 
 ```powershell

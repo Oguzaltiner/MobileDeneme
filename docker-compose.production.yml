@@ -1,0 +1,6 @@
+services:
+  api:
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      Jwt__SigningKey: ${JWT_SIGNING_KEY:?Set a strong JWT_SIGNING_KEY before starting production}
+      Database__ApplyMigrations: "false"

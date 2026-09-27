@@ -10,6 +10,7 @@
 - Mobil alt taşma sorunları için ScrollView, liste flex ve alt güvenli boşlukları.
 - Backend güvenlik tabanı: auth rate limit (IP başına 30/dk) ve temel güvenlik header’ları.
 - Backend Dockerfile, Docker Compose API + PostgreSQL servisi ve non-root runtime.
+- Production Compose override: development fallback secreti kapatıldı ve production'da otomatik migration devre dışı bırakıldı.
 - GitHub Actions CI: .NET restore/build/vulnerability audit, mobile npm ci/typecheck/Expo web export.
 - Android/iOS yayın temeli: bundle/package kimlikleri, versionCode ve EAS development/preview/production profilleri.
 - Cihaz bağlantısı için `mobile/.env.example` ve EAS profile API URL örnekleri.
