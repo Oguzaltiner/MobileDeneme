@@ -83,6 +83,16 @@ Bu dosya, ürün kararlarını uygulanabilir dikey dilimlere çeviren ortak sır
 
 ## Diğer sıralı işler
 
+## Yeni ürün dilimi — Gramer laboratuvarı ve oyun merkezi
+
+**Durum:** In progress — ilk API sözleşmesi ve mobil giriş ekranları hazır
+
+- Türkçe–İngilizce karşılaştırmalı gramer dersleri için `GET /api/v1/grammar/lessons` ve detay endpointi eklendi.
+- İlk içerik seti: Present Simple/Continuous, artikeller ve soru cümlesi sırası.
+- Mobilde Gramer Lab; kural kartları, Türkçe notlar ve cevap sonrası açıklamalı mini pratik içeriyor.
+- Oyun Merkezi; quiz, cümle tamamlama, eşleştirme, yazma ve dinleme modlarını tek girişte topluyor.
+- Sonraki iş: gramer içeriklerini admin CMS'e taşımak, cevapları PracticeEvent/XP ile bağlamak ve gerçek Sentence Builder oyun motorunu eklemek.
+
 1. Review event API + server-authoritative spaced repetition. **In progress — ilk dikey dilim tamamlandı**
 2. Quiz/Test Engine: 4 seçenekli sınav akışı (bu task).
 3. Monetization: Free + Premium paketleri.
