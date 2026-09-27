@@ -2,12 +2,24 @@ using EnglishLearning.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using EnglishLearning.Domain;
+using System.ComponentModel.DataAnnotations;
 
 namespace EnglishLearning.Api.Controllers;
 
 [ApiController, Authorize(Policy = "AdminOnly"), Route("api/v1/admin")]
 public sealed class AdminController(EnglishLearningDbContext db) : ControllerBase
 {
+    public sealed record VocabularyWriteRequest(
+        [property: Required, StringLength(120)] string Term,
+        [property: StringLength(120)] string? Pronunciation,
+        [property: Required, StringLength(40)] string PartOfSpeech,
+        [property: Required, StringLength(500)] string Definition,
+        [property: Required, StringLength(160)] string Translation,
+        [property: Required, StringLength(10)] string Level,
+        [property: Required, StringLength(80)] string Category,
+        [property: StringLength(500)] string? ExampleSentence);
+
     [HttpGet("overview")]
     public async Task<IActionResult> Overview(CancellationToken ct) => Ok(new
     {
@@ -17,4 +29,34 @@ public sealed class AdminController(EnglishLearningDbContext db) : ControllerBas
         completedQuizzes = await db.QuizSessions.CountAsync(x => x.Status == EnglishLearning.Domain.QuizSessionStatus.Completed, ct),
         premiumUsers = await db.UserEntitlements.CountAsync(x => x.Plan != EnglishLearning.Domain.SubscriptionPlan.Free, ct)
     });
+
+    [HttpPost("vocabulary")]
+    public async Task<ActionResult<object>> CreateVocabulary(VocabularyWriteRequest request, CancellationToken ct)
+    {
+        var term = request.Term.Trim();
+        if (await db.VocabularyWords.AnyAsync(x => x.Term == term, ct)) return Conflict(new { message = "A vocabulary word with this term already exists." });
+        var word = new VocabularyWord { Term = term, Pronunciation = request.Pronunciation?.Trim() ?? string.Empty, PartOfSpeech = request.PartOfSpeech.Trim(), Definition = request.Definition.Trim(), Translation = request.Translation.Trim(), Level = request.Level.Trim().ToUpperInvariant(), Category = request.Category.Trim(), ExampleSentence = request.ExampleSentence?.Trim() };
+        db.VocabularyWords.Add(word); await db.SaveChangesAsync(ct);
+        return Created($"/api/v1/vocabulary/words/{word.Id}", new { word.Id });
+    }
+
+    [HttpPut("vocabulary/{id:guid}")]
+    public async Task<IActionResult> UpdateVocabulary(Guid id, VocabularyWriteRequest request, CancellationToken ct)
+    {
+        var word = await db.VocabularyWords.SingleOrDefaultAsync(x => x.Id == id, ct);
+        if (word is null) return NotFound();
+        var term = request.Term.Trim();
+        if (await db.VocabularyWords.AnyAsync(x => x.Id != id && x.Term == term, ct)) return Conflict(new { message = "A vocabulary word with this term already exists." });
+        word.Term = term; word.Pronunciation = request.Pronunciation?.Trim() ?? string.Empty; word.PartOfSpeech = request.PartOfSpeech.Trim(); word.Definition = request.Definition.Trim(); word.Translation = request.Translation.Trim(); word.Level = request.Level.Trim().ToUpperInvariant(); word.Category = request.Category.Trim(); word.ExampleSentence = request.ExampleSentence?.Trim();
+        await db.SaveChangesAsync(ct); return NoContent();
+    }
+
+    [HttpDelete("vocabulary/{id:guid}")]
+    public async Task<IActionResult> DeleteVocabulary(Guid id, CancellationToken ct)
+    {
+        var word = await db.VocabularyWords.SingleOrDefaultAsync(x => x.Id == id, ct);
+        if (word is null) return NotFound();
+        if (await db.QuizQuestions.AnyAsync(x => x.VocabularyWordId == id, ct)) return Conflict(new { message = "This word is referenced by quiz history and cannot be deleted." });
+        db.VocabularyWords.Remove(word); await db.SaveChangesAsync(ct); return NoContent();
+    }
 }
