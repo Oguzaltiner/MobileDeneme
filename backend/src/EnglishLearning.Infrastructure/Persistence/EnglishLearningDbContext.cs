@@ -26,6 +26,7 @@ public sealed class EnglishLearningDbContext(DbContextOptions<EnglishLearningDbC
             entity.Property(x => x.Email).HasMaxLength(320).IsRequired();
             entity.HasIndex(x => x.Email).IsUnique();
             entity.Property(x => x.PasswordHash).IsRequired(); entity.Property(x => x.DisplayName).HasMaxLength(120);
+            entity.Property(x => x.Role).HasMaxLength(20).HasDefaultValue("Learner").IsRequired();
             entity.HasOne(x => x.Settings).WithOne(x => x.User).HasForeignKey<UserSettings>(x => x.UserId).OnDelete(DeleteBehavior.Cascade);
         });
         modelBuilder.Entity<UserSettings>(entity =>

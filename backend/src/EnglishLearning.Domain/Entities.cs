@@ -6,6 +6,7 @@ public sealed class AppUser
     public required string Email { get; set; }
     public required string PasswordHash { get; set; }
     public string? DisplayName { get; set; }
+    public string Role { get; set; } = "Learner";
     public DateTime CreatedAtUtc { get; set; } = DateTime.UtcNow;
     public UserSettings Settings { get; set; } = new();
     public List<RefreshToken> RefreshTokens { get; set; } = [];

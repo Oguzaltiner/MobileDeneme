@@ -11,12 +11,18 @@ public static class DevelopmentDataSeeder
 
     public static async Task SeedAsync(EnglishLearningDbContext db, IPasswordHasher<AppUser> hasher, CancellationToken ct = default)
     {
-        if (await db.Users.AnyAsync(x => x.Email == TestEmail, ct)) return;
+        var existing = await db.Users.SingleOrDefaultAsync(x => x.Email == TestEmail, ct);
+        if (existing is not null)
+        {
+            if (existing.Role != "Admin") { existing.Role = "Admin"; await db.SaveChangesAsync(ct); }
+            return;
+        }
 
         var user = new AppUser
         {
             Email = TestEmail,
             DisplayName = "Test User",
+            Role = "Admin",
             PasswordHash = string.Empty,
             Settings = new UserSettings { PreferredLanguage = "tr", DailyGoal = 20 }
         };
