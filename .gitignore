@@ -14,3 +14,8 @@ build/
 
 .npm-cache/
 .dotnet-home/
+
+# Local agent/tool state
+.claude/settings.local.json
+.codex-remote-attachments/
+*.log
