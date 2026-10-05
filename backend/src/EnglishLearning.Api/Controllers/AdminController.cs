@@ -173,6 +173,7 @@ public sealed class AdminController(EnglishLearningDbContext db) : ControllerBas
         if (!TryGetAdminId(out var adminId)) return Unauthorized();
         var word = await db.VocabularyWords.SingleOrDefaultAsync(x => x.Id == id, ct);
         if (word is null) return NotFound();
+        if (!VocabularyQuality.IsPublishable(word)) return Conflict(new { message = "Kalite alanları eksik olan kelimeler yayınlanamaz." });
         if (word.PublicationStatus != VocabularyPublicationStatus.Published && await db.VocabularyWords.CountAsync(x => x.PublicationStatus == VocabularyPublicationStatus.Published, ct) >= VocabularyLimits.MaxPublishedWords)
             return Conflict(new { message = $"Published vocabulary limit ({VocabularyLimits.MaxPublishedWords}) has been reached." });
         word.PublicationStatus = VocabularyPublicationStatus.Published;
@@ -191,6 +192,9 @@ public sealed class AdminController(EnglishLearningDbContext db) : ControllerBas
         var term = request.Term.Trim();
         if (await db.VocabularyWords.AnyAsync(x => x.Id != id && x.Term == term, ct)) return Conflict(new { message = "A vocabulary word with this term already exists." });
         word.Term = term; word.Pronunciation = request.Pronunciation?.Trim() ?? string.Empty; word.PartOfSpeech = request.PartOfSpeech.Trim(); word.Definition = request.Definition.Trim(); word.Translation = request.Translation.Trim(); word.Level = request.Level.Trim().ToUpperInvariant(); word.Category = request.Category.Trim(); word.ExampleSentence = request.ExampleSentence?.Trim();
+        // Edits are not saved, so published content cannot be degraded below the publish quality bar.
+        if (word.PublicationStatus == VocabularyPublicationStatus.Published && !VocabularyQuality.IsPublishable(word))
+            return Conflict(new { message = "Yayındaki kelime kalite alanları eksik olacak şekilde güncellenemez." });
         await db.SaveChangesAsync(ct); await AuditAsync(adminId, "update", id, ct); return NoContent();
     }
 

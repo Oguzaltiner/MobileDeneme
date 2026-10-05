@@ -1,4 +1,5 @@
 using EnglishLearning.Application.Vocabulary;
+using EnglishLearning.Domain;
 using EnglishLearning.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,18 +9,20 @@ public sealed class VocabularyService(EnglishLearningDbContext db) : IVocabulary
 {
     public async Task<SentenceChallenge?> GetSentenceChallengeAsync(CancellationToken ct)
     {
-        var words = await db.VocabularyWords.AsNoTracking().Where(x => x.PublicationStatus == Domain.VocabularyPublicationStatus.Published && x.ExampleSentence != null && x.ExampleSentence != "").OrderBy(x => x.Term).Take(100).ToListAsync(ct);
-        if (words.Count < 4) return null;
-        var target = words[Random.Shared.Next(words.Count)];
-        var sentence = target.ExampleSentence!;
-        var blanked = sentence.Replace(target.Term, "_____", StringComparison.OrdinalIgnoreCase);
-        var options = words.Where(x => x.Id != target.Id).OrderBy(_ => Random.Shared.Next()).Take(3).Select(x => x.Term).Append(target.Term).OrderBy(_ => Random.Shared.Next()).ToList();
+        var words = await db.VocabularyWords.AsNoTracking().Where(x => x.PublicationStatus == Domain.VocabularyPublicationStatus.Published && x.ExampleSentence != null && x.ExampleSentence != "").OrderBy(_ => EF.Functions.Random()).Take(100).ToListAsync(ct);
+        var targets = words.Where(x => VocabularyQuality.ContainsWholeWord(x.ExampleSentence, x.Term)).ToList();
+        if (targets.Count == 0) return null;
+        var target = targets[Random.Shared.Next(targets.Count)];
+        var blanked = VocabularyQuality.BlankWholeWord(target.ExampleSentence!, target.Term);
+        var distractors = DistinctOptions(words.Where(x => x.Id != target.Id).Select(x => x.Term), target.Term);
+        if (distractors.Count < 3) return null;
+        var options = distractors.Append(target.Term).OrderBy(_ => Random.Shared.Next()).ToList();
         return new(target.Id, blanked, target.Term, options, target.Translation, $"Bu cümlede doğru kelime: {target.Term}.");
     }
 
     public async Task<WritingChallenge?> GetWritingChallengeAsync(CancellationToken ct)
     {
-        var words = await db.VocabularyWords.AsNoTracking().Where(x => x.PublicationStatus == Domain.VocabularyPublicationStatus.Published && x.ExampleSentence != null && x.ExampleSentence != "").OrderBy(x => x.Term).Take(100).ToListAsync(ct);
+        var words = await db.VocabularyWords.AsNoTracking().Where(x => x.PublicationStatus == Domain.VocabularyPublicationStatus.Published && x.ExampleSentence != null && x.ExampleSentence != "").OrderBy(_ => EF.Functions.Random()).Take(100).ToListAsync(ct);
         if (words.Count == 0) return null;
         var target = words[Random.Shared.Next(words.Count)];
         return new(target.Id, target.Definition, target.Term, target.Translation, $"İlk harf: {target.Term[0]}");
@@ -27,12 +30,18 @@ public sealed class VocabularyService(EnglishLearningDbContext db) : IVocabulary
 
     public async Task<MatchingChallenge?> GetMatchingChallengeAsync(CancellationToken ct)
     {
-        var words = await db.VocabularyWords.AsNoTracking().Where(x => x.PublicationStatus == Domain.VocabularyPublicationStatus.Published).OrderBy(x => x.Term).Take(100).ToListAsync(ct);
+        var words = await db.VocabularyWords.AsNoTracking().Where(x => x.PublicationStatus == Domain.VocabularyPublicationStatus.Published).OrderBy(_ => EF.Functions.Random()).Take(100).ToListAsync(ct);
         if (words.Count < 4) return null;
         var target = words[Random.Shared.Next(words.Count)];
-        var options = words.Where(x => x.Id != target.Id).OrderBy(_ => Random.Shared.Next()).Take(3).Select(x => x.Translation).Append(target.Translation).OrderBy(_ => Random.Shared.Next()).ToList();
+        var distractors = DistinctOptions(words.Where(x => x.Id != target.Id).Select(x => x.Translation), target.Translation);
+        if (distractors.Count < 3) return null;
+        var options = distractors.Append(target.Translation).OrderBy(_ => Random.Shared.Next()).ToList();
         return new(target.Id, target.Term, target.Translation, options);
     }
+
+    private static List<string> DistinctOptions(IEnumerable<string> candidates, string answer) => candidates
+        .Where(x => !string.IsNullOrWhiteSpace(x) && !x.Equals(answer, StringComparison.OrdinalIgnoreCase))
+        .Distinct(StringComparer.OrdinalIgnoreCase).OrderBy(_ => Random.Shared.Next()).Take(3).ToList();
 
     public async Task<VocabularyPage> SearchAsync(VocabularyFilter filter, CancellationToken ct)
     {

@@ -1,0 +1,5736 @@
+{
+  "version": 1,
+  "level": "A1",
+  "words": [
+    {
+      "term": "afternoon",
+      "pronunciation": "/ˌæftɚˈnun/",
+      "partOfSpeech": "noun",
+      "definition": "the part of the day between lunch and evening",
+      "translation": "öğleden sonra",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "We play football in the park in the afternoon."
+    },
+    {
+      "term": "again",
+      "pronunciation": "/əˈɡɛn/",
+      "partOfSpeech": "adverb",
+      "definition": "one more time, once more",
+      "translation": "tekrar, yine",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "Can you say that again, please?"
+    },
+    {
+      "term": "age",
+      "pronunciation": "/eɪdʒ/",
+      "partOfSpeech": "noun",
+      "definition": "how many years someone has lived",
+      "translation": "yaş",
+      "level": "A1",
+      "category": "People & Family",
+      "exampleSentence": "Children start school at the age of six."
+    },
+    {
+      "term": "air",
+      "pronunciation": "/ɛr/",
+      "partOfSpeech": "noun",
+      "definition": "the gas around us that we breathe",
+      "translation": "hava",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "The air in the mountains is fresh and clean."
+    },
+    {
+      "term": "airport",
+      "pronunciation": "/ˈɛrˌpɔrt/",
+      "partOfSpeech": "noun",
+      "definition": "a place where planes take off and land",
+      "translation": "havalimanı, havaalanı",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "We need to be at the airport by six."
+    },
+    {
+      "term": "also",
+      "pronunciation": "/ˈɔlsoʊ/",
+      "partOfSpeech": "adverb",
+      "definition": "in addition; as well",
+      "translation": "de, da, ayrıca",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "She plays the piano and also sings."
+    },
+    {
+      "term": "always",
+      "pronunciation": "/ˈɔlweɪz/",
+      "partOfSpeech": "adverb",
+      "definition": "at all times; every time",
+      "translation": "her zaman, daima",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "She always takes the bus to work."
+    },
+    {
+      "term": "animal",
+      "pronunciation": "/ˈænəməl/",
+      "partOfSpeech": "noun",
+      "definition": "a living thing that can move, like a dog or a bird",
+      "translation": "hayvan",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "What is your favorite animal at the zoo?"
+    },
+    {
+      "term": "answer",
+      "pronunciation": "/ˈænsɚ/",
+      "partOfSpeech": "noun",
+      "definition": "what you say or write when someone asks you something",
+      "translation": "cevap, yanıt",
+      "level": "A1",
+      "category": "Academic",
+      "exampleSentence": "Write your answer on the board, please."
+    },
+    {
+      "term": "ant",
+      "pronunciation": "/ænt/",
+      "partOfSpeech": "noun",
+      "definition": "a very small insect that lives in large groups",
+      "translation": "karınca",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "An ant is carrying a crumb across the table."
+    },
+    {
+      "term": "apple",
+      "pronunciation": "/ˈæpəl/",
+      "partOfSpeech": "noun",
+      "definition": "a round fruit with red or green skin and white flesh",
+      "translation": "elma",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "She puts an apple in her lunch box every day."
+    },
+    {
+      "term": "April",
+      "pronunciation": "/ˈeɪprəl/",
+      "partOfSpeech": "noun",
+      "definition": "the fourth month of the year, after March",
+      "translation": "nisan",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "There is a lot of rain in April."
+    },
+    {
+      "term": "arm",
+      "pronunciation": "/ɑrm/",
+      "partOfSpeech": "noun",
+      "definition": "the long body part between your shoulder and your hand",
+      "translation": "kol",
+      "level": "A1",
+      "category": "Health",
+      "exampleSentence": "He broke his arm when he fell off his bike."
+    },
+    {
+      "term": "arrive",
+      "pronunciation": "/əˈraɪv/",
+      "partOfSpeech": "verb",
+      "definition": "to reach a place at the end of a trip",
+      "translation": "varmak, ulaşmak",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "The train will arrive at noon."
+    },
+    {
+      "term": "artist",
+      "pronunciation": "/ˈɑrtɪst/",
+      "partOfSpeech": "noun",
+      "definition": "a person who paints, draws or makes art",
+      "translation": "sanatçı, ressam",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "The artist paints pictures of the sea."
+    },
+    {
+      "term": "ask",
+      "pronunciation": "/æsk/",
+      "partOfSpeech": "verb",
+      "definition": "to speak to get information from someone",
+      "translation": "sormak",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "You can ask the teacher if you don't understand."
+    },
+    {
+      "term": "August",
+      "pronunciation": "/ˈɔɡəst/",
+      "partOfSpeech": "noun",
+      "definition": "the eighth month of the year, after July",
+      "translation": "ağustos",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "August is usually the hottest month here."
+    },
+    {
+      "term": "aunt",
+      "pronunciation": "/ænt/",
+      "partOfSpeech": "noun",
+      "definition": "the sister of your mother or father, or your uncle's wife",
+      "translation": "teyze, hala, yenge",
+      "level": "A1",
+      "category": "People & Family",
+      "exampleSentence": "My aunt visits us every summer with her children."
+    },
+    {
+      "term": "autumn",
+      "pronunciation": "/ˈɔtəm/",
+      "partOfSpeech": "noun",
+      "definition": "the season after summer when leaves fall from trees",
+      "translation": "sonbahar",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "The park is beautiful in autumn."
+    },
+    {
+      "term": "baby",
+      "pronunciation": "/ˈbeɪbi/",
+      "partOfSpeech": "noun",
+      "definition": "a very young child who cannot walk or talk yet",
+      "translation": "bebek",
+      "level": "A1",
+      "category": "People & Family",
+      "exampleSentence": "The baby is sleeping, so please be quiet."
+    },
+    {
+      "term": "back",
+      "pronunciation": "/bæk/",
+      "partOfSpeech": "noun",
+      "definition": "the part of your body behind you, from neck to waist",
+      "translation": "sırt",
+      "level": "A1",
+      "category": "Health",
+      "exampleSentence": "My back hurts after carrying the heavy box."
+    },
+    {
+      "term": "bad",
+      "pronunciation": "/bæd/",
+      "partOfSpeech": "adjective",
+      "definition": "not nice or not of good quality",
+      "translation": "kötü",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "The weather was bad, so we stayed home."
+    },
+    {
+      "term": "bag",
+      "pronunciation": "/bæɡ/",
+      "partOfSpeech": "noun",
+      "definition": "a soft container that you use to carry things",
+      "translation": "çanta",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "My school bag is very heavy today."
+    },
+    {
+      "term": "ball",
+      "pronunciation": "/bɔl/",
+      "partOfSpeech": "noun",
+      "definition": "a round object that you throw, kick, or hit in games",
+      "translation": "top",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "Throw the ball to me, please!"
+    },
+    {
+      "term": "banana",
+      "pronunciation": "/bəˈnænə/",
+      "partOfSpeech": "noun",
+      "definition": "a long curved fruit with yellow skin",
+      "translation": "muz",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "The monkey is eating a banana."
+    },
+    {
+      "term": "bank",
+      "pronunciation": "/bæŋk/",
+      "partOfSpeech": "noun",
+      "definition": "a place that keeps people's money safe",
+      "translation": "banka",
+      "level": "A1",
+      "category": "Shopping & Money",
+      "exampleSentence": "My mother works at a bank in the city."
+    },
+    {
+      "term": "bath",
+      "pronunciation": "/bæθ/",
+      "partOfSpeech": "noun",
+      "definition": "washing your body while you sit in a tub of water",
+      "translation": "banyo",
+      "level": "A1",
+      "category": "Home",
+      "exampleSentence": "The baby has a bath every evening."
+    },
+    {
+      "term": "bathroom",
+      "pronunciation": "/ˈbæθˌrum/",
+      "partOfSpeech": "noun",
+      "definition": "a room with a toilet, a sink and a bath or shower",
+      "translation": "banyo, tuvalet",
+      "level": "A1",
+      "category": "Home",
+      "exampleSentence": "Excuse me, where is the bathroom?"
+    },
+    {
+      "term": "beach",
+      "pronunciation": "/bitʃ/",
+      "partOfSpeech": "noun",
+      "definition": "an area of sand or small stones next to the sea",
+      "translation": "plaj, sahil",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "The children build sandcastles on the beach."
+    },
+    {
+      "term": "bear",
+      "pronunciation": "/bɛr/",
+      "partOfSpeech": "noun",
+      "definition": "a big heavy wild animal with thick fur",
+      "translation": "ayı",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "A brown bear lives in these mountains."
+    },
+    {
+      "term": "beard",
+      "pronunciation": "/bɪrd/",
+      "partOfSpeech": "noun",
+      "definition": "hair that grows on a man's chin and cheeks",
+      "translation": "sakal",
+      "level": "A1",
+      "category": "People & Family",
+      "exampleSentence": "My grandfather has a long white beard."
+    },
+    {
+      "term": "beautiful",
+      "pronunciation": "/ˈbjutəfəl/",
+      "partOfSpeech": "adjective",
+      "definition": "very nice to look at",
+      "translation": "güzel",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "What a beautiful garden you have!"
+    },
+    {
+      "term": "bed",
+      "pronunciation": "/bɛd/",
+      "partOfSpeech": "noun",
+      "definition": "a piece of furniture that you sleep on",
+      "translation": "yatak",
+      "level": "A1",
+      "category": "Home",
+      "exampleSentence": "I usually go to bed at ten o'clock."
+    },
+    {
+      "term": "bedroom",
+      "pronunciation": "/ˈbɛdˌrum/",
+      "partOfSpeech": "noun",
+      "definition": "a room where you sleep",
+      "translation": "yatak odası",
+      "level": "A1",
+      "category": "Home",
+      "exampleSentence": "My bedroom has a big window and a small desk."
+    },
+    {
+      "term": "begin",
+      "pronunciation": "/bɪˈɡɪn/",
+      "partOfSpeech": "verb",
+      "definition": "to start doing something or to happen first",
+      "translation": "başlamak",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Classes begin at nine o'clock every day."
+    },
+    {
+      "term": "bicycle",
+      "pronunciation": "/ˈbaɪsɪkəl/",
+      "partOfSpeech": "noun",
+      "definition": "a vehicle with two wheels that you ride by pushing pedals",
+      "translation": "bisiklet",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "She rides her bicycle to school when it is sunny."
+    },
+    {
+      "term": "big",
+      "pronunciation": "/bɪɡ/",
+      "partOfSpeech": "adjective",
+      "definition": "large in size or amount",
+      "translation": "büyük",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "An elephant is a very big animal."
+    },
+    {
+      "term": "bird",
+      "pronunciation": "/bɝd/",
+      "partOfSpeech": "noun",
+      "definition": "an animal with feathers and wings that usually flies",
+      "translation": "kuş",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "A little bird is singing outside my window."
+    },
+    {
+      "term": "birthday",
+      "pronunciation": "/ˈbɝθˌdeɪ/",
+      "partOfSpeech": "noun",
+      "definition": "the date each year when someone was born",
+      "translation": "doğum günü",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "My birthday is in April, and I want a party."
+    },
+    {
+      "term": "black",
+      "pronunciation": "/blæk/",
+      "partOfSpeech": "adjective",
+      "definition": "having the darkest color, like the sky at night",
+      "translation": "siyah",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "He has a black cat called Shadow."
+    },
+    {
+      "term": "blue",
+      "pronunciation": "/blu/",
+      "partOfSpeech": "adjective",
+      "definition": "having the color of the sky on a clear day",
+      "translation": "mavi",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "The sea looks very blue today."
+    },
+    {
+      "term": "board",
+      "pronunciation": "/bɔrd/",
+      "partOfSpeech": "noun",
+      "definition": "a flat surface on a classroom wall for writing",
+      "translation": "yazı tahtası, tahta",
+      "level": "A1",
+      "category": "Academic",
+      "exampleSentence": "The teacher writes the new words on the board."
+    },
+    {
+      "term": "boat",
+      "pronunciation": "/boʊt/",
+      "partOfSpeech": "noun",
+      "definition": "a small vehicle for going on water",
+      "translation": "tekne, kayık",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "We rent a small boat on the lake."
+    },
+    {
+      "term": "body",
+      "pronunciation": "/ˈbɑdi/",
+      "partOfSpeech": "noun",
+      "definition": "all the physical parts of a person or animal",
+      "translation": "vücut, beden",
+      "level": "A1",
+      "category": "Health",
+      "exampleSentence": "Swimming is good for your whole body."
+    },
+    {
+      "term": "book",
+      "pronunciation": "/bʊk/",
+      "partOfSpeech": "noun",
+      "definition": "a set of printed pages inside a cover that you read",
+      "translation": "kitap",
+      "level": "A1",
+      "category": "Academic",
+      "exampleSentence": "My sister reads a book every night before bed."
+    },
+    {
+      "term": "boring",
+      "pronunciation": "/ˈbɔrɪŋ/",
+      "partOfSpeech": "adjective",
+      "definition": "not interesting at all",
+      "translation": "sıkıcı",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "The movie was long and boring."
+    },
+    {
+      "term": "bottle",
+      "pronunciation": "/ˈbɑtəl/",
+      "partOfSpeech": "noun",
+      "definition": "a tall container with a narrow top for liquids",
+      "translation": "şişe",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "I always carry a bottle of water in my bag."
+    },
+    {
+      "term": "bowl",
+      "pronunciation": "/boʊl/",
+      "partOfSpeech": "noun",
+      "definition": "a deep round dish for soup or cereal",
+      "translation": "kâse",
+      "level": "A1",
+      "category": "Home",
+      "exampleSentence": "I eat a bowl of soup for lunch."
+    },
+    {
+      "term": "box",
+      "pronunciation": "/bɑks/",
+      "partOfSpeech": "noun",
+      "definition": "a container with straight sides, often made of card or wood",
+      "translation": "kutu",
+      "level": "A1",
+      "category": "Home",
+      "exampleSentence": "Put your old toys in this box."
+    },
+    {
+      "term": "boy",
+      "pronunciation": "/bɔɪ/",
+      "partOfSpeech": "noun",
+      "definition": "a male child or young male person",
+      "translation": "erkek çocuk, oğlan",
+      "level": "A1",
+      "category": "People & Family",
+      "exampleSentence": "The boy is playing with a big red ball."
+    },
+    {
+      "term": "bread",
+      "pronunciation": "/brɛd/",
+      "partOfSpeech": "noun",
+      "definition": "a food made from flour and water and baked",
+      "translation": "ekmek",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "Please buy some fresh bread from the bakery."
+    },
+    {
+      "term": "breakfast",
+      "pronunciation": "/ˈbrɛkfəst/",
+      "partOfSpeech": "noun",
+      "definition": "the first meal of the day, eaten in the morning",
+      "translation": "kahvaltı",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "We have eggs and bread for breakfast."
+    },
+    {
+      "term": "bridge",
+      "pronunciation": "/brɪdʒ/",
+      "partOfSpeech": "noun",
+      "definition": "a structure that goes over a river or another road",
+      "translation": "köprü",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "We walk across the bridge to get to the market."
+    },
+    {
+      "term": "bring",
+      "pronunciation": "/brɪŋ/",
+      "partOfSpeech": "verb",
+      "definition": "to come to a place with something or someone",
+      "translation": "getirmek",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Please bring your notebook to class tomorrow."
+    },
+    {
+      "term": "brother",
+      "pronunciation": "/ˈbrʌðɚ/",
+      "partOfSpeech": "noun",
+      "definition": "a boy or man who has the same parents as you",
+      "translation": "erkek kardeş, ağabey",
+      "level": "A1",
+      "category": "People & Family",
+      "exampleSentence": "My little brother likes to play football in the park."
+    },
+    {
+      "term": "brown",
+      "pronunciation": "/braʊn/",
+      "partOfSpeech": "adjective",
+      "definition": "having the color of chocolate or wood",
+      "translation": "kahverengi",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "My dog has big brown eyes."
+    },
+    {
+      "term": "bus",
+      "pronunciation": "/bʌs/",
+      "partOfSpeech": "noun",
+      "definition": "a large vehicle that carries many passengers on roads",
+      "translation": "otobüs",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "I take the bus to work every morning."
+    },
+    {
+      "term": "busy",
+      "pronunciation": "/ˈbɪzi/",
+      "partOfSpeech": "adjective",
+      "definition": "having a lot of things to do",
+      "translation": "meşgul, yoğun",
+      "level": "A1",
+      "category": "Work",
+      "exampleSentence": "I'm busy now; can I call you later?"
+    },
+    {
+      "term": "butter",
+      "pronunciation": "/ˈbʌtɚ/",
+      "partOfSpeech": "noun",
+      "definition": "a soft yellow food made from milk that you put on bread",
+      "translation": "tereyağı",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "I like butter and honey on my toast."
+    },
+    {
+      "term": "buy",
+      "pronunciation": "/baɪ/",
+      "partOfSpeech": "verb",
+      "definition": "to get something by paying money for it",
+      "translation": "satın almak",
+      "level": "A1",
+      "category": "Shopping & Money",
+      "exampleSentence": "I want to buy a new bag for school."
+    },
+    {
+      "term": "cake",
+      "pronunciation": "/keɪk/",
+      "partOfSpeech": "noun",
+      "definition": "a sweet baked food made with flour, eggs and sugar",
+      "translation": "pasta, kek",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "We have a chocolate cake for her party."
+    },
+    {
+      "term": "calendar",
+      "pronunciation": "/ˈkæləndɚ/",
+      "partOfSpeech": "noun",
+      "definition": "a chart that shows the days, weeks, and months of a year",
+      "translation": "takvim",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "I wrote her birthday on the calendar."
+    },
+    {
+      "term": "call",
+      "pronunciation": "/kɔl/",
+      "partOfSpeech": "verb",
+      "definition": "to phone someone to talk to them",
+      "translation": "aramak, telefon etmek",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "I will call you when I get home."
+    },
+    {
+      "term": "camera",
+      "pronunciation": "/ˈkæmərə/",
+      "partOfSpeech": "noun",
+      "definition": "a device for taking pictures or videos",
+      "translation": "fotoğraf makinesi, kamera",
+      "level": "A1",
+      "category": "Technology",
+      "exampleSentence": "My aunt bought a new camera for her trip."
+    },
+    {
+      "term": "camp",
+      "pronunciation": "/kæmp/",
+      "partOfSpeech": "noun",
+      "definition": "a place where people stay in tents for a short time",
+      "translation": "kamp",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "The children are staying at a summer camp."
+    },
+    {
+      "term": "candy",
+      "pronunciation": "/ˈkændi/",
+      "partOfSpeech": "noun",
+      "definition": "a small sweet food made with sugar",
+      "translation": "şeker, şekerleme",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "Too much candy is bad for your teeth."
+    },
+    {
+      "term": "cap",
+      "pronunciation": "/kæp/",
+      "partOfSpeech": "noun",
+      "definition": "a soft hat with a stiff part at the front",
+      "translation": "şapka, kep",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "He wears a blue cap in the sun."
+    },
+    {
+      "term": "car",
+      "pronunciation": "/kɑr/",
+      "partOfSpeech": "noun",
+      "definition": "a vehicle with four wheels and an engine for a few people",
+      "translation": "araba, otomobil",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "My parents have a small white car."
+    },
+    {
+      "term": "card",
+      "pronunciation": "/kɑrd/",
+      "partOfSpeech": "noun",
+      "definition": "a folded piece of stiff paper with a message on it",
+      "translation": "kart, tebrik kartı",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "I made a birthday card for my best friend."
+    },
+    {
+      "term": "carrot",
+      "pronunciation": "/ˈkærət/",
+      "partOfSpeech": "noun",
+      "definition": "a long orange vegetable that grows under the ground",
+      "translation": "havuç",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "The rabbit is eating a carrot in the garden."
+    },
+    {
+      "term": "carry",
+      "pronunciation": "/ˈkɛri/",
+      "partOfSpeech": "verb",
+      "definition": "to hold something and take it with you",
+      "translation": "taşımak",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Can you carry this box to the car?"
+    },
+    {
+      "term": "cat",
+      "pronunciation": "/kæt/",
+      "partOfSpeech": "noun",
+      "definition": "a small furry pet that likes to catch mice",
+      "translation": "kedi",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "The cat is sleeping in the sun."
+    },
+    {
+      "term": "chair",
+      "pronunciation": "/tʃɛr/",
+      "partOfSpeech": "noun",
+      "definition": "a seat with a back and legs for one person",
+      "translation": "sandalye",
+      "level": "A1",
+      "category": "Home",
+      "exampleSentence": "There is one chair for each student in the room."
+    },
+    {
+      "term": "cheap",
+      "pronunciation": "/tʃip/",
+      "partOfSpeech": "adjective",
+      "definition": "not costing much money",
+      "translation": "ucuz",
+      "level": "A1",
+      "category": "Shopping & Money",
+      "exampleSentence": "These shoes were very cheap at the market."
+    },
+    {
+      "term": "cheese",
+      "pronunciation": "/tʃiz/",
+      "partOfSpeech": "noun",
+      "definition": "a white or yellow food made from milk",
+      "translation": "peynir",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "Do you want cheese on your sandwich?"
+    },
+    {
+      "term": "chicken",
+      "pronunciation": "/ˈtʃɪkən/",
+      "partOfSpeech": "noun",
+      "definition": "the meat of a farm bird that people often cook",
+      "translation": "tavuk",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "Mom is cooking chicken and potatoes tonight."
+    },
+    {
+      "term": "child",
+      "pronunciation": "/tʃaɪld/",
+      "partOfSpeech": "noun",
+      "definition": "a young boy or girl",
+      "translation": "çocuk",
+      "level": "A1",
+      "category": "People & Family",
+      "exampleSentence": "Every child in the class has a new book."
+    },
+    {
+      "term": "chocolate",
+      "pronunciation": "/ˈtʃɔklət/",
+      "partOfSpeech": "noun",
+      "definition": "a sweet brown food made from cocoa",
+      "translation": "çikolata",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "My sister loves milk chocolate more than anything."
+    },
+    {
+      "term": "choose",
+      "pronunciation": "/tʃuz/",
+      "partOfSpeech": "verb",
+      "definition": "to pick one thing from several things",
+      "translation": "seçmek",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "You can choose any color you like."
+    },
+    {
+      "term": "church",
+      "pronunciation": "/tʃɝtʃ/",
+      "partOfSpeech": "noun",
+      "definition": "a building where Christians go to pray",
+      "translation": "kilise",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "There is an old church in the middle of the village."
+    },
+    {
+      "term": "cinema",
+      "pronunciation": "/ˈsɪnəmə/",
+      "partOfSpeech": "noun",
+      "definition": "a place where you go to watch films on a big screen",
+      "translation": "sinema",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "Do you want to go to the cinema tonight?"
+    },
+    {
+      "term": "circle",
+      "pronunciation": "/ˈsɜrkəl/",
+      "partOfSpeech": "noun",
+      "definition": "a perfectly round shape",
+      "translation": "daire, çember",
+      "level": "A1",
+      "category": "Academic",
+      "exampleSentence": "The children sat in a circle on the floor."
+    },
+    {
+      "term": "city",
+      "pronunciation": "/ˈsɪti/",
+      "partOfSpeech": "noun",
+      "definition": "a very large and important town",
+      "translation": "şehir, kent",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "Istanbul is a big city with many bridges."
+    },
+    {
+      "term": "clap",
+      "pronunciation": "/klæp/",
+      "partOfSpeech": "verb",
+      "definition": "to hit your hands together to make a sound",
+      "translation": "alkışlamak, el çırpmak",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "Everyone began to clap at the end of the show."
+    },
+    {
+      "term": "class",
+      "pronunciation": "/klæs/",
+      "partOfSpeech": "noun",
+      "definition": "a group of students who learn together",
+      "translation": "sınıf",
+      "level": "A1",
+      "category": "Academic",
+      "exampleSentence": "There are twenty students in our class."
+    },
+    {
+      "term": "classroom",
+      "pronunciation": "/ˈklæsˌrum/",
+      "partOfSpeech": "noun",
+      "definition": "a room in a school where students have lessons",
+      "translation": "derslik, sınıf",
+      "level": "A1",
+      "category": "Academic",
+      "exampleSentence": "Our classroom has big windows and a whiteboard."
+    },
+    {
+      "term": "clean",
+      "pronunciation": "/klin/",
+      "partOfSpeech": "verb",
+      "definition": "to remove dirt and dust from something",
+      "translation": "temizlemek",
+      "level": "A1",
+      "category": "Home",
+      "exampleSentence": "We clean the kitchen together every Sunday."
+    },
+    {
+      "term": "climb",
+      "pronunciation": "/klaɪm/",
+      "partOfSpeech": "verb",
+      "definition": "to go up something using your hands and feet",
+      "translation": "tırmanmak",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "The boys like to climb the old tree."
+    },
+    {
+      "term": "clock",
+      "pronunciation": "/klɑk/",
+      "partOfSpeech": "noun",
+      "definition": "a machine on a wall or table that shows the time",
+      "translation": "saat, duvar saati",
+      "level": "A1",
+      "category": "Home",
+      "exampleSentence": "The clock in the kitchen is five minutes fast."
+    },
+    {
+      "term": "close",
+      "pronunciation": "/kloʊz/",
+      "partOfSpeech": "verb",
+      "definition": "to shut a door, window, or box",
+      "translation": "kapatmak, kapamak",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Please close your books and look at me."
+    },
+    {
+      "term": "closed",
+      "pronunciation": "/kloʊzd/",
+      "partOfSpeech": "adjective",
+      "definition": "not open for people to go in",
+      "translation": "kapalı",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "The bank is closed on Sundays."
+    },
+    {
+      "term": "clothes",
+      "pronunciation": "/kloʊz/",
+      "partOfSpeech": "noun",
+      "definition": "the things people wear, like shirts, dresses and pants",
+      "translation": "kıyafet, giysi",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "I need to wash my clothes this weekend."
+    },
+    {
+      "term": "cloud",
+      "pronunciation": "/klaʊd/",
+      "partOfSpeech": "noun",
+      "definition": "a white or gray mass in the sky made of tiny water drops",
+      "translation": "bulut",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "A big gray cloud is moving over the hills."
+    },
+    {
+      "term": "cloudy",
+      "pronunciation": "/ˈklaʊdi/",
+      "partOfSpeech": "adjective",
+      "definition": "with many clouds in the sky",
+      "translation": "bulutlu",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "The sky is cloudy, but it isn't raining."
+    },
+    {
+      "term": "club",
+      "pronunciation": "/klʌb/",
+      "partOfSpeech": "noun",
+      "definition": "a group of people who meet to share an interest",
+      "translation": "kulüp",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "I joined the chess club at school."
+    },
+    {
+      "term": "coat",
+      "pronunciation": "/koʊt/",
+      "partOfSpeech": "noun",
+      "definition": "a long warm piece of clothing you wear outside",
+      "translation": "palto, kaban",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "It is snowing, so wear your warm coat."
+    },
+    {
+      "term": "coffee",
+      "pronunciation": "/ˈkɔfi/",
+      "partOfSpeech": "noun",
+      "definition": "a hot brown drink made from roasted beans",
+      "translation": "kahve",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "Dad has a cup of coffee before work."
+    },
+    {
+      "term": "coin",
+      "pronunciation": "/kɔɪn/",
+      "partOfSpeech": "noun",
+      "definition": "a small round piece of metal money",
+      "translation": "madeni para, bozuk para",
+      "level": "A1",
+      "category": "Shopping & Money",
+      "exampleSentence": "I found a coin under the sofa."
+    },
+    {
+      "term": "cold",
+      "pronunciation": "/koʊld/",
+      "partOfSpeech": "adjective",
+      "definition": "having a very low temperature",
+      "translation": "soğuk",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "Put on your coat because it is cold outside."
+    },
+    {
+      "term": "color",
+      "pronunciation": "/ˈkʌlɚ/",
+      "partOfSpeech": "noun",
+      "definition": "red, blue, green and yellow are examples of this",
+      "translation": "renk",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "What color is your new bike?"
+    },
+    {
+      "term": "come",
+      "pronunciation": "/kʌm/",
+      "partOfSpeech": "verb",
+      "definition": "to move toward the speaker or toward a place",
+      "translation": "gelmek",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Can you come to my house on Saturday?"
+    },
+    {
+      "term": "computer",
+      "pronunciation": "/kəmˈpjutɚ/",
+      "partOfSpeech": "noun",
+      "definition": "an electronic machine for working with information and using the internet",
+      "translation": "bilgisayar",
+      "level": "A1",
+      "category": "Technology",
+      "exampleSentence": "I use my computer to do homework."
+    },
+    {
+      "term": "cook",
+      "pronunciation": "/kʊk/",
+      "partOfSpeech": "verb",
+      "definition": "to make food hot so it is ready to eat",
+      "translation": "yemek pişirmek, pişirmek",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "My father likes to cook on Sundays."
+    },
+    {
+      "term": "cool",
+      "pronunciation": "/kul/",
+      "partOfSpeech": "adjective",
+      "definition": "a little cold in a pleasant way",
+      "translation": "serin",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "In the evening, the air is cool and fresh."
+    },
+    {
+      "term": "correct",
+      "pronunciation": "/kəˈrɛkt/",
+      "partOfSpeech": "adjective",
+      "definition": "having no mistakes; right or true",
+      "translation": "doğru, hatasız",
+      "level": "A1",
+      "category": "Academic",
+      "exampleSentence": "Circle the correct word in each sentence."
+    },
+    {
+      "term": "country",
+      "pronunciation": "/ˈkʌntri/",
+      "partOfSpeech": "noun",
+      "definition": "a land with its own government, like Turkey or Japan",
+      "translation": "ülke",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "Which country do you want to visit next?"
+    },
+    {
+      "term": "cousin",
+      "pronunciation": "/ˈkʌzən/",
+      "partOfSpeech": "noun",
+      "definition": "the child of your aunt or uncle",
+      "translation": "kuzen",
+      "level": "A1",
+      "category": "People & Family",
+      "exampleSentence": "My cousin and I go to the same school."
+    },
+    {
+      "term": "cow",
+      "pronunciation": "/kaʊ/",
+      "partOfSpeech": "noun",
+      "definition": "a large farm animal that gives us milk",
+      "translation": "inek",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "The cow is eating grass in the field."
+    },
+    {
+      "term": "cry",
+      "pronunciation": "/kraɪ/",
+      "partOfSpeech": "verb",
+      "definition": "to have tears come from your eyes",
+      "translation": "ağlamak",
+      "level": "A1",
+      "category": "Personality",
+      "exampleSentence": "Babies often cry when they are hungry."
+    },
+    {
+      "term": "cup",
+      "pronunciation": "/kʌp/",
+      "partOfSpeech": "noun",
+      "definition": "a small round container with a handle for hot drinks",
+      "translation": "fincan, kupa",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "Would you like a cup of tea?"
+    },
+    {
+      "term": "cute",
+      "pronunciation": "/kjut/",
+      "partOfSpeech": "adjective",
+      "definition": "pretty and sweet, like a baby or small animal",
+      "translation": "sevimli, şirin",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Look at that cute little puppy in the window!"
+    },
+    {
+      "term": "dad",
+      "pronunciation": "/dæd/",
+      "partOfSpeech": "noun",
+      "definition": "an informal word for father",
+      "translation": "baba",
+      "level": "A1",
+      "category": "People & Family",
+      "exampleSentence": "My dad cooks breakfast on Sunday mornings."
+    },
+    {
+      "term": "dance",
+      "pronunciation": "/dæns/",
+      "partOfSpeech": "verb",
+      "definition": "to move your body to music",
+      "translation": "dans etmek",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "Everyone likes to dance at the party."
+    },
+    {
+      "term": "dark",
+      "pronunciation": "/dɑrk/",
+      "partOfSpeech": "adjective",
+      "definition": "having little or no light",
+      "translation": "karanlık",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "It gets dark early in winter."
+    },
+    {
+      "term": "date",
+      "pronunciation": "/deɪt/",
+      "partOfSpeech": "noun",
+      "definition": "the day, month, and year when something happens",
+      "translation": "tarih",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "Please write the date at the top of your paper."
+    },
+    {
+      "term": "daughter",
+      "pronunciation": "/ˈdɔtɚ/",
+      "partOfSpeech": "noun",
+      "definition": "a female child of a mother or father",
+      "translation": "kız evlat",
+      "level": "A1",
+      "category": "People & Family",
+      "exampleSentence": "Our daughter loves reading books before bed."
+    },
+    {
+      "term": "day",
+      "pronunciation": "/deɪ/",
+      "partOfSpeech": "noun",
+      "definition": "a period of 24 hours, from midnight to midnight",
+      "translation": "gün",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "I walk my dog twice a day."
+    },
+    {
+      "term": "December",
+      "pronunciation": "/dɪˈsɛmbɚ/",
+      "partOfSpeech": "noun",
+      "definition": "the twelfth and last month of the year",
+      "translation": "aralık",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "It often snows in the mountains in December."
+    },
+    {
+      "term": "delicious",
+      "pronunciation": "/dɪˈlɪʃəs/",
+      "partOfSpeech": "adjective",
+      "definition": "having a very good taste",
+      "translation": "lezzetli, nefis",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "The pizza at this little place is really delicious!"
+    },
+    {
+      "term": "desk",
+      "pronunciation": "/dɛsk/",
+      "partOfSpeech": "noun",
+      "definition": "a table where you sit to write, study, or work",
+      "translation": "çalışma masası, sıra",
+      "level": "A1",
+      "category": "Academic",
+      "exampleSentence": "My desk is next to the window at school."
+    },
+    {
+      "term": "different",
+      "pronunciation": "/ˈdɪfərənt/",
+      "partOfSpeech": "adjective",
+      "definition": "not like something else",
+      "translation": "farklı, değişik",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "My brother and I like different kinds of music."
+    },
+    {
+      "term": "difficult",
+      "pronunciation": "/ˈdɪfəkəlt/",
+      "partOfSpeech": "adjective",
+      "definition": "not easy to do or understand",
+      "translation": "zor",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "This math problem is too difficult for me."
+    },
+    {
+      "term": "dinner",
+      "pronunciation": "/ˈdɪnɚ/",
+      "partOfSpeech": "noun",
+      "definition": "the main meal of the day, usually in the evening",
+      "translation": "akşam yemeği",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "What are we having for dinner tonight?"
+    },
+    {
+      "term": "dirty",
+      "pronunciation": "/ˈdɜrti/",
+      "partOfSpeech": "adjective",
+      "definition": "covered with dust, mud, or marks; not clean",
+      "translation": "kirli",
+      "level": "A1",
+      "category": "Home",
+      "exampleSentence": "Put your dirty clothes in the basket."
+    },
+    {
+      "term": "doctor",
+      "pronunciation": "/ˈdɑktɚ/",
+      "partOfSpeech": "noun",
+      "definition": "a person whose job is to help sick people get well",
+      "translation": "doktor",
+      "level": "A1",
+      "category": "Health",
+      "exampleSentence": "You should see a doctor about your cough."
+    },
+    {
+      "term": "dog",
+      "pronunciation": "/dɔɡ/",
+      "partOfSpeech": "noun",
+      "definition": "an animal that barks and that people often keep as a pet",
+      "translation": "köpek",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "We take our dog for a walk every evening."
+    },
+    {
+      "term": "doll",
+      "pronunciation": "/dɑl/",
+      "partOfSpeech": "noun",
+      "definition": "a toy that looks like a small person or baby",
+      "translation": "oyuncak bebek",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "My little sister sleeps with her favorite doll."
+    },
+    {
+      "term": "donkey",
+      "pronunciation": "/ˈdɑŋki/",
+      "partOfSpeech": "noun",
+      "definition": "an animal like a small horse with long ears",
+      "translation": "eşek",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "The farmer uses a donkey to carry water."
+    },
+    {
+      "term": "door",
+      "pronunciation": "/dɔr/",
+      "partOfSpeech": "noun",
+      "definition": "the thing you open to go into a room or building",
+      "translation": "kapı",
+      "level": "A1",
+      "category": "Home",
+      "exampleSentence": "Please close the door when you leave."
+    },
+    {
+      "term": "draw",
+      "pronunciation": "/drɔ/",
+      "partOfSpeech": "verb",
+      "definition": "to make a picture with a pen or pencil",
+      "translation": "çizmek, resim çizmek",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "Can you draw a cat for me?"
+    },
+    {
+      "term": "dream",
+      "pronunciation": "/drim/",
+      "partOfSpeech": "noun",
+      "definition": "pictures and stories in your mind while you sleep",
+      "translation": "rüya",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Last night I had a strange dream about a dragon."
+    },
+    {
+      "term": "dress",
+      "pronunciation": "/drɛs/",
+      "partOfSpeech": "noun",
+      "definition": "a piece of clothing for a woman or girl that covers the body and legs",
+      "translation": "elbise",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "She has a beautiful blue dress for the party."
+    },
+    {
+      "term": "drink",
+      "pronunciation": "/drɪŋk/",
+      "partOfSpeech": "verb",
+      "definition": "to take a liquid like water or milk into your mouth",
+      "translation": "içmek",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "You should drink more water when it is hot."
+    },
+    {
+      "term": "drive",
+      "pronunciation": "/draɪv/",
+      "partOfSpeech": "verb",
+      "definition": "to control a car and make it move",
+      "translation": "araba sürmek, sürmek",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "My uncle can drive a big truck."
+    },
+    {
+      "term": "driver",
+      "pronunciation": "/ˈdraɪvɚ/",
+      "partOfSpeech": "noun",
+      "definition": "a person who controls a car, bus or truck",
+      "translation": "sürücü, şoför",
+      "level": "A1",
+      "category": "Work",
+      "exampleSentence": "The bus driver says good morning to everyone."
+    },
+    {
+      "term": "drop",
+      "pronunciation": "/drɑp/",
+      "partOfSpeech": "verb",
+      "definition": "to let something fall by accident",
+      "translation": "düşürmek",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Be careful not to drop the eggs!"
+    },
+    {
+      "term": "drum",
+      "pronunciation": "/drʌm/",
+      "partOfSpeech": "noun",
+      "definition": "a musical instrument that you hit with sticks or hands",
+      "translation": "davul",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "The boy hits the drum very loudly."
+    },
+    {
+      "term": "duck",
+      "pronunciation": "/dʌk/",
+      "partOfSpeech": "noun",
+      "definition": "a bird with a flat beak that swims on water",
+      "translation": "ördek",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "A duck and her babies are swimming on the lake."
+    },
+    {
+      "term": "ear",
+      "pronunciation": "/ɪr/",
+      "partOfSpeech": "noun",
+      "definition": "one of the two body parts you hear with",
+      "translation": "kulak",
+      "level": "A1",
+      "category": "Health",
+      "exampleSentence": "The doctor looks inside my left ear."
+    },
+    {
+      "term": "early",
+      "pronunciation": "/ˈɝli/",
+      "partOfSpeech": "adverb",
+      "definition": "before the usual or planned time",
+      "translation": "erken",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "I get up early on school days."
+    },
+    {
+      "term": "east",
+      "pronunciation": "/ist/",
+      "partOfSpeech": "noun",
+      "definition": "the direction where the sun comes up",
+      "translation": "doğu",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "The sun rises in the east every morning."
+    },
+    {
+      "term": "easy",
+      "pronunciation": "/ˈizi/",
+      "partOfSpeech": "adjective",
+      "definition": "not hard to do or understand",
+      "translation": "kolay",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "This puzzle is easy for my little sister."
+    },
+    {
+      "term": "eat",
+      "pronunciation": "/it/",
+      "partOfSpeech": "verb",
+      "definition": "to put food in your mouth and swallow it",
+      "translation": "yemek",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "We usually eat dinner at seven o'clock."
+    },
+    {
+      "term": "egg",
+      "pronunciation": "/ɛɡ/",
+      "partOfSpeech": "noun",
+      "definition": "a round food with a shell that comes from a chicken",
+      "translation": "yumurta",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "I eat a boiled egg every morning."
+    },
+    {
+      "term": "eight",
+      "pronunciation": "/eɪt/",
+      "partOfSpeech": "number",
+      "definition": "the number 8, which comes after 7",
+      "translation": "sekiz",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "Our school starts at eight o'clock every day."
+    },
+    {
+      "term": "elephant",
+      "pronunciation": "/ˈɛləfənt/",
+      "partOfSpeech": "noun",
+      "definition": "a very large gray animal with big ears and a long nose",
+      "translation": "fil",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "An elephant can drink a lot of water."
+    },
+    {
+      "term": "eleven",
+      "pronunciation": "/ɪˈlɛvən/",
+      "partOfSpeech": "number",
+      "definition": "the number 11, which comes after 10",
+      "translation": "on bir",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "A football team has eleven players."
+    },
+    {
+      "term": "empty",
+      "pronunciation": "/ˈɛmpti/",
+      "partOfSpeech": "adjective",
+      "definition": "having nothing or nobody inside",
+      "translation": "boş",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "My glass is empty; can I have more juice?"
+    },
+    {
+      "term": "enjoy",
+      "pronunciation": "/ɪnˈdʒɔɪ/",
+      "partOfSpeech": "verb",
+      "definition": "to get pleasure from something",
+      "translation": "keyif almak, zevk almak",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "I enjoy reading books in the garden."
+    },
+    {
+      "term": "eraser",
+      "pronunciation": "/ɪˈreɪsɚ/",
+      "partOfSpeech": "noun",
+      "definition": "a small object for removing pencil marks",
+      "translation": "silgi",
+      "level": "A1",
+      "category": "Academic",
+      "exampleSentence": "I need an eraser to fix this mistake."
+    },
+    {
+      "term": "evening",
+      "pronunciation": "/ˈivnɪŋ/",
+      "partOfSpeech": "noun",
+      "definition": "the part of the day between afternoon and night",
+      "translation": "akşam",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "My parents watch the news in the evening."
+    },
+    {
+      "term": "expensive",
+      "pronunciation": "/ɪkˈspɛnsɪv/",
+      "partOfSpeech": "adjective",
+      "definition": "costing a lot of money",
+      "translation": "pahalı",
+      "level": "A1",
+      "category": "Shopping & Money",
+      "exampleSentence": "That watch is too expensive for me."
+    },
+    {
+      "term": "eye",
+      "pronunciation": "/aɪ/",
+      "partOfSpeech": "noun",
+      "definition": "one of the two body parts you see with",
+      "translation": "göz",
+      "level": "A1",
+      "category": "Health",
+      "exampleSentence": "I have something in my eye."
+    },
+    {
+      "term": "face",
+      "pronunciation": "/feɪs/",
+      "partOfSpeech": "noun",
+      "definition": "the front of the head, with the eyes, nose and mouth",
+      "translation": "yüz",
+      "level": "A1",
+      "category": "Health",
+      "exampleSentence": "Wash your face and brush your teeth before bed."
+    },
+    {
+      "term": "family",
+      "pronunciation": "/ˈfæməli/",
+      "partOfSpeech": "noun",
+      "definition": "a group of people who are related, like parents and children",
+      "translation": "aile",
+      "level": "A1",
+      "category": "People & Family",
+      "exampleSentence": "My family eats dinner together every Sunday."
+    },
+    {
+      "term": "farm",
+      "pronunciation": "/fɑrm/",
+      "partOfSpeech": "noun",
+      "definition": "land and buildings used for growing food and keeping animals",
+      "translation": "çiftlik",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "My uncle has a farm with cows and chickens."
+    },
+    {
+      "term": "farmer",
+      "pronunciation": "/ˈfɑrmɚ/",
+      "partOfSpeech": "noun",
+      "definition": "a person who grows food or keeps animals on land",
+      "translation": "çiftçi",
+      "level": "A1",
+      "category": "Work",
+      "exampleSentence": "The farmer gets up very early to feed the cows."
+    },
+    {
+      "term": "fast",
+      "pronunciation": "/fæst/",
+      "partOfSpeech": "adjective",
+      "definition": "moving or doing something quickly",
+      "translation": "hızlı",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "That red car is very fast."
+    },
+    {
+      "term": "father",
+      "pronunciation": "/ˈfɑðɚ/",
+      "partOfSpeech": "noun",
+      "definition": "a man who has a child",
+      "translation": "baba",
+      "level": "A1",
+      "category": "People & Family",
+      "exampleSentence": "Her father drives her to school in the morning."
+    },
+    {
+      "term": "favorite",
+      "pronunciation": "/ˈfeɪvərɪt/",
+      "partOfSpeech": "adjective",
+      "definition": "liked more than all the others",
+      "translation": "en sevilen, favori",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Pizza is my favorite food in the whole world."
+    },
+    {
+      "term": "February",
+      "pronunciation": "/ˈfɛbruˌɛri/",
+      "partOfSpeech": "noun",
+      "definition": "the second month of the year, after January",
+      "translation": "şubat",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "February is the shortest month of the year."
+    },
+    {
+      "term": "find",
+      "pronunciation": "/faɪnd/",
+      "partOfSpeech": "verb",
+      "definition": "to discover something you were looking for",
+      "translation": "bulmak",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "I can't find my keys anywhere!"
+    },
+    {
+      "term": "fine",
+      "pronunciation": "/faɪn/",
+      "partOfSpeech": "adjective",
+      "definition": "healthy and well; okay",
+      "translation": "iyi, sağlıklı",
+      "level": "A1",
+      "category": "Health",
+      "exampleSentence": "I was sick last week, but now I'm fine."
+    },
+    {
+      "term": "finger",
+      "pronunciation": "/ˈfɪŋɡɚ/",
+      "partOfSpeech": "noun",
+      "definition": "one of the five long thin parts of your hand",
+      "translation": "parmak",
+      "level": "A1",
+      "category": "Health",
+      "exampleSentence": "She wears a gold ring on her finger."
+    },
+    {
+      "term": "finish",
+      "pronunciation": "/ˈfɪnɪʃ/",
+      "partOfSpeech": "verb",
+      "definition": "to come to the end of doing something",
+      "translation": "bitirmek",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "I need to finish my homework first."
+    },
+    {
+      "term": "fire",
+      "pronunciation": "/ˈfaɪɚ/",
+      "partOfSpeech": "noun",
+      "definition": "the heat and flames that come when something burns",
+      "translation": "ateş, yangın",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "We sat around the fire and sang songs."
+    },
+    {
+      "term": "first",
+      "pronunciation": "/fɝst/",
+      "partOfSpeech": "number",
+      "definition": "coming before all the others in order",
+      "translation": "birinci, ilk",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "January is the first month of the year."
+    },
+    {
+      "term": "fish",
+      "pronunciation": "/fɪʃ/",
+      "partOfSpeech": "noun",
+      "definition": "an animal that lives in water, or its meat as food",
+      "translation": "balık",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "We eat fish by the sea on holiday."
+    },
+    {
+      "term": "five",
+      "pronunciation": "/faɪv/",
+      "partOfSpeech": "number",
+      "definition": "the number 5, which comes after 4",
+      "translation": "beş",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "My little cousin is five years old."
+    },
+    {
+      "term": "fix",
+      "pronunciation": "/fɪks/",
+      "partOfSpeech": "verb",
+      "definition": "to make something broken work again",
+      "translation": "tamir etmek, onarmak",
+      "level": "A1",
+      "category": "Home",
+      "exampleSentence": "My dad can fix the broken chair."
+    },
+    {
+      "term": "flag",
+      "pronunciation": "/flæɡ/",
+      "partOfSpeech": "noun",
+      "definition": "a piece of colored cloth that represents a country",
+      "translation": "bayrak",
+      "level": "A1",
+      "category": "Society",
+      "exampleSentence": "Each country in the world has its own flag."
+    },
+    {
+      "term": "floor",
+      "pronunciation": "/flɔr/",
+      "partOfSpeech": "noun",
+      "definition": "the flat part of a room that you walk on",
+      "translation": "zemin, yer",
+      "level": "A1",
+      "category": "Home",
+      "exampleSentence": "The cat is sleeping on the kitchen floor."
+    },
+    {
+      "term": "flower",
+      "pronunciation": "/ˈflaʊɚ/",
+      "partOfSpeech": "noun",
+      "definition": "the colorful part of a plant that often smells nice",
+      "translation": "çiçek",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "He gives his mother a flower on her birthday."
+    },
+    {
+      "term": "fly",
+      "pronunciation": "/flaɪ/",
+      "partOfSpeech": "verb",
+      "definition": "to move through the air with wings",
+      "translation": "uçmak",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "Many birds fly to warm countries in winter."
+    },
+    {
+      "term": "food",
+      "pronunciation": "/fud/",
+      "partOfSpeech": "noun",
+      "definition": "things that people and animals eat",
+      "translation": "yiyecek, yemek",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "We need to buy some food for the weekend."
+    },
+    {
+      "term": "foot",
+      "pronunciation": "/fʊt/",
+      "partOfSpeech": "noun",
+      "definition": "the part at the end of your leg that you stand on",
+      "translation": "ayak",
+      "level": "A1",
+      "category": "Health",
+      "exampleSentence": "This shoe is too small for my foot."
+    },
+    {
+      "term": "football",
+      "pronunciation": "/ˈfʊtbɔl/",
+      "partOfSpeech": "noun",
+      "definition": "a game where two teams kick a ball into a goal",
+      "translation": "futbol",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "We play football in the park after school."
+    },
+    {
+      "term": "forest",
+      "pronunciation": "/ˈfɔrɪst/",
+      "partOfSpeech": "noun",
+      "definition": "a large area of land covered with trees",
+      "translation": "orman",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "Many wild animals live in the forest."
+    },
+    {
+      "term": "forget",
+      "pronunciation": "/fɚˈɡɛt/",
+      "partOfSpeech": "verb",
+      "definition": "to not remember something",
+      "translation": "unutmak",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Don't forget to bring your lunch."
+    },
+    {
+      "term": "fork",
+      "pronunciation": "/fɔrk/",
+      "partOfSpeech": "noun",
+      "definition": "a small tool with points that you use to eat food",
+      "translation": "çatal",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "Can I have a fork for my salad?"
+    },
+    {
+      "term": "four",
+      "pronunciation": "/fɔr/",
+      "partOfSpeech": "number",
+      "definition": "the number 4, which comes after 3",
+      "translation": "dört",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "A table usually has four legs."
+    },
+    {
+      "term": "free",
+      "pronunciation": "/fri/",
+      "partOfSpeech": "adjective",
+      "definition": "costing no money at all",
+      "translation": "ücretsiz, bedava",
+      "level": "A1",
+      "category": "Shopping & Money",
+      "exampleSentence": "The museum is free on Sundays."
+    },
+    {
+      "term": "Friday",
+      "pronunciation": "/ˈfraɪdeɪ/",
+      "partOfSpeech": "noun",
+      "definition": "the day after Thursday and before Saturday",
+      "translation": "cuma",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "On Friday evening we often order pizza."
+    },
+    {
+      "term": "friend",
+      "pronunciation": "/frɛnd/",
+      "partOfSpeech": "noun",
+      "definition": "a person you know well and like",
+      "translation": "arkadaş",
+      "level": "A1",
+      "category": "People & Family",
+      "exampleSentence": "Can my friend stay for lunch today?"
+    },
+    {
+      "term": "friendly",
+      "pronunciation": "/ˈfrɛndli/",
+      "partOfSpeech": "adjective",
+      "definition": "nice and happy to talk to people",
+      "translation": "cana yakın, arkadaş canlısı",
+      "level": "A1",
+      "category": "Personality",
+      "exampleSentence": "The people in this town are very friendly."
+    },
+    {
+      "term": "fruit",
+      "pronunciation": "/frut/",
+      "partOfSpeech": "noun",
+      "definition": "the sweet part of a plant that you can eat, like an apple",
+      "translation": "meyve",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "Eating fruit every day is good for you."
+    },
+    {
+      "term": "full",
+      "pronunciation": "/fʊl/",
+      "partOfSpeech": "adjective",
+      "definition": "having no more space inside",
+      "translation": "dolu",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "The bus is full, so we will wait."
+    },
+    {
+      "term": "funny",
+      "pronunciation": "/ˈfʌni/",
+      "partOfSpeech": "adjective",
+      "definition": "making you laugh or smile",
+      "translation": "komik, eğlenceli",
+      "level": "A1",
+      "category": "Personality",
+      "exampleSentence": "My uncle tells funny jokes at dinner."
+    },
+    {
+      "term": "game",
+      "pronunciation": "/ɡeɪm/",
+      "partOfSpeech": "noun",
+      "definition": "an activity with rules that you play for fun",
+      "translation": "oyun",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "Let's play a game after dinner."
+    },
+    {
+      "term": "garden",
+      "pronunciation": "/ˈɡɑrdən/",
+      "partOfSpeech": "noun",
+      "definition": "an area next to a house with grass, flowers or plants",
+      "translation": "bahçe",
+      "level": "A1",
+      "category": "Home",
+      "exampleSentence": "The children are playing in the garden."
+    },
+    {
+      "term": "gift",
+      "pronunciation": "/ɡɪft/",
+      "partOfSpeech": "noun",
+      "definition": "something you give to someone, often on a special day",
+      "translation": "hediye",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Thank you for the lovely birthday gift!"
+    },
+    {
+      "term": "girl",
+      "pronunciation": "/ɡɝl/",
+      "partOfSpeech": "noun",
+      "definition": "a female child or young female person",
+      "translation": "kız, kız çocuğu",
+      "level": "A1",
+      "category": "People & Family",
+      "exampleSentence": "That girl can speak three languages."
+    },
+    {
+      "term": "give",
+      "pronunciation": "/ɡɪv/",
+      "partOfSpeech": "verb",
+      "definition": "to let someone have something",
+      "translation": "vermek",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Please give this book to your sister."
+    },
+    {
+      "term": "glad",
+      "pronunciation": "/ɡlæd/",
+      "partOfSpeech": "adjective",
+      "definition": "pleased and happy about something",
+      "translation": "memnun, sevinçli",
+      "level": "A1",
+      "category": "Personality",
+      "exampleSentence": "I'm glad you came to my party!"
+    },
+    {
+      "term": "glass",
+      "pronunciation": "/ɡlæs/",
+      "partOfSpeech": "noun",
+      "definition": "a clear container without a handle for cold drinks",
+      "translation": "bardak",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "She drinks a glass of milk before bed."
+    },
+    {
+      "term": "glasses",
+      "pronunciation": "/ˈɡlæsɪz/",
+      "partOfSpeech": "noun",
+      "definition": "two lenses in a frame that help you see better",
+      "translation": "gözlük",
+      "level": "A1",
+      "category": "Health",
+      "exampleSentence": "My grandfather needs his glasses to read."
+    },
+    {
+      "term": "go",
+      "pronunciation": "/ɡoʊ/",
+      "partOfSpeech": "verb",
+      "definition": "to move from one place to another",
+      "translation": "gitmek",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "We go to school by bus every morning."
+    },
+    {
+      "term": "goat",
+      "pronunciation": "/ɡoʊt/",
+      "partOfSpeech": "noun",
+      "definition": "a farm animal with horns that gives milk",
+      "translation": "keçi",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "The goat is eating grass on the hill."
+    },
+    {
+      "term": "good",
+      "pronunciation": "/ɡʊd/",
+      "partOfSpeech": "adjective",
+      "definition": "nice, pleasant, or of high quality",
+      "translation": "iyi",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "This is a really good book."
+    },
+    {
+      "term": "grandfather",
+      "pronunciation": "/ˈɡrænˌfɑðɚ/",
+      "partOfSpeech": "noun",
+      "definition": "the father of your mother or father",
+      "translation": "büyükbaba, dede",
+      "level": "A1",
+      "category": "People & Family",
+      "exampleSentence": "Their grandfather tells funny stories about his old village."
+    },
+    {
+      "term": "grandmother",
+      "pronunciation": "/ˈɡrænˌmʌðɚ/",
+      "partOfSpeech": "noun",
+      "definition": "the mother of your mother or father",
+      "translation": "büyükanne, nine",
+      "level": "A1",
+      "category": "People & Family",
+      "exampleSentence": "My grandmother makes the best soup in the world."
+    },
+    {
+      "term": "grass",
+      "pronunciation": "/ɡræs/",
+      "partOfSpeech": "noun",
+      "definition": "a low green plant with thin leaves that covers fields",
+      "translation": "çim, ot",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "Please don't walk on the grass."
+    },
+    {
+      "term": "gray",
+      "pronunciation": "/ɡreɪ/",
+      "partOfSpeech": "adjective",
+      "definition": "having a color between black and white",
+      "translation": "gri",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "The sky is gray, so it may rain."
+    },
+    {
+      "term": "great",
+      "pronunciation": "/ɡreɪt/",
+      "partOfSpeech": "adjective",
+      "definition": "very good or enjoyable",
+      "translation": "harika, çok iyi",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "We had a great time at the beach."
+    },
+    {
+      "term": "green",
+      "pronunciation": "/ɡrin/",
+      "partOfSpeech": "adjective",
+      "definition": "having the color of grass and leaves",
+      "translation": "yeşil",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "In spring, the hills are green and beautiful."
+    },
+    {
+      "term": "guitar",
+      "pronunciation": "/ɡɪˈtɑr/",
+      "partOfSpeech": "noun",
+      "definition": "a musical instrument with strings that you play with your fingers",
+      "translation": "gitar",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "My brother plays the guitar in a band."
+    },
+    {
+      "term": "hair",
+      "pronunciation": "/hɛr/",
+      "partOfSpeech": "noun",
+      "definition": "the thin threads that grow on your head",
+      "translation": "saç",
+      "level": "A1",
+      "category": "Health",
+      "exampleSentence": "Her hair is long and brown."
+    },
+    {
+      "term": "half",
+      "pronunciation": "/hæf/",
+      "partOfSpeech": "noun",
+      "definition": "one of two equal parts of something",
+      "translation": "yarım, yarı",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "I ate half of the pizza by myself."
+    },
+    {
+      "term": "hand",
+      "pronunciation": "/hænd/",
+      "partOfSpeech": "noun",
+      "definition": "the part at the end of your arm with five fingers",
+      "translation": "el",
+      "level": "A1",
+      "category": "Health",
+      "exampleSentence": "Raise your hand if you know the answer."
+    },
+    {
+      "term": "happy",
+      "pronunciation": "/ˈhæpi/",
+      "partOfSpeech": "adjective",
+      "definition": "feeling pleased and in a good mood",
+      "translation": "mutlu",
+      "level": "A1",
+      "category": "Personality",
+      "exampleSentence": "The children are happy because it is summer."
+    },
+    {
+      "term": "hard",
+      "pronunciation": "/hɑrd/",
+      "partOfSpeech": "adjective",
+      "definition": "needing a lot of effort to do",
+      "translation": "zor, güç",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Learning to swim was hard at first."
+    },
+    {
+      "term": "hat",
+      "pronunciation": "/hæt/",
+      "partOfSpeech": "noun",
+      "definition": "a piece of clothing that you wear on your head",
+      "translation": "şapka",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "My grandfather always wears a hat in the sun."
+    },
+    {
+      "term": "head",
+      "pronunciation": "/hɛd/",
+      "partOfSpeech": "noun",
+      "definition": "the top part of the body, with the eyes and mouth",
+      "translation": "baş, kafa",
+      "level": "A1",
+      "category": "Health",
+      "exampleSentence": "Put a hat on your head because it is cold."
+    },
+    {
+      "term": "hear",
+      "pronunciation": "/hɪr/",
+      "partOfSpeech": "verb",
+      "definition": "to notice sounds with your ears",
+      "translation": "duymak, işitmek",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Can you hear the music from next door?"
+    },
+    {
+      "term": "heart",
+      "pronunciation": "/hɑrt/",
+      "partOfSpeech": "noun",
+      "definition": "the organ in your chest that pumps blood",
+      "translation": "kalp",
+      "level": "A1",
+      "category": "Health",
+      "exampleSentence": "Your heart beats faster when you run."
+    },
+    {
+      "term": "heavy",
+      "pronunciation": "/ˈhɛvi/",
+      "partOfSpeech": "adjective",
+      "definition": "weighing a lot; hard to lift",
+      "translation": "ağır",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "This suitcase is too heavy for me."
+    },
+    {
+      "term": "help",
+      "pronunciation": "/hɛlp/",
+      "partOfSpeech": "verb",
+      "definition": "to make it easier for someone to do something",
+      "translation": "yardım etmek",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Can you help me carry these bags?"
+    },
+    {
+      "term": "here",
+      "pronunciation": "/hɪr/",
+      "partOfSpeech": "adverb",
+      "definition": "in or to this place",
+      "translation": "burada, buraya",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Please come here and sit with me."
+    },
+    {
+      "term": "hobby",
+      "pronunciation": "/ˈhɑbi/",
+      "partOfSpeech": "noun",
+      "definition": "an activity you do for fun in your free time",
+      "translation": "hobi",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "My favorite hobby is collecting stamps."
+    },
+    {
+      "term": "holiday",
+      "pronunciation": "/ˈhɑləˌdeɪ/",
+      "partOfSpeech": "noun",
+      "definition": "a day or time when people do not go to work or school",
+      "translation": "tatil, bayram",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Tomorrow is a holiday, so there is no school."
+    },
+    {
+      "term": "home",
+      "pronunciation": "/hoʊm/",
+      "partOfSpeech": "noun",
+      "definition": "the place where you live and feel you belong",
+      "translation": "ev, yuva",
+      "level": "A1",
+      "category": "Home",
+      "exampleSentence": "After school, I like to relax at home."
+    },
+    {
+      "term": "homework",
+      "pronunciation": "/ˈhoʊmˌwɜrk/",
+      "partOfSpeech": "noun",
+      "definition": "school work that students do at home",
+      "translation": "ev ödevi, ödev",
+      "level": "A1",
+      "category": "Academic",
+      "exampleSentence": "I always finish my homework before dinner."
+    },
+    {
+      "term": "honey",
+      "pronunciation": "/ˈhʌni/",
+      "partOfSpeech": "noun",
+      "definition": "a sweet thick food that bees make",
+      "translation": "bal",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "Grandma puts honey in her tea."
+    },
+    {
+      "term": "horse",
+      "pronunciation": "/hɔrs/",
+      "partOfSpeech": "noun",
+      "definition": "a large strong animal that people ride",
+      "translation": "at",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "She learns to ride a horse on her uncle's farm."
+    },
+    {
+      "term": "hospital",
+      "pronunciation": "/ˈhɑspɪtəl/",
+      "partOfSpeech": "noun",
+      "definition": "a building where doctors and nurses look after sick people",
+      "translation": "hastane",
+      "level": "A1",
+      "category": "Health",
+      "exampleSentence": "Her mother works at the hospital as a nurse."
+    },
+    {
+      "term": "hot",
+      "pronunciation": "/hɑt/",
+      "partOfSpeech": "adjective",
+      "definition": "having a very high temperature",
+      "translation": "sıcak",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "Be careful, the soup is very hot!"
+    },
+    {
+      "term": "hotel",
+      "pronunciation": "/hoʊˈtɛl/",
+      "partOfSpeech": "noun",
+      "definition": "a building where you pay to sleep when you travel",
+      "translation": "otel",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "Our hotel is very close to the beach."
+    },
+    {
+      "term": "hour",
+      "pronunciation": "/ˈaʊɚ/",
+      "partOfSpeech": "noun",
+      "definition": "a period of sixty minutes",
+      "translation": "saat",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "The train journey takes one hour."
+    },
+    {
+      "term": "house",
+      "pronunciation": "/haʊs/",
+      "partOfSpeech": "noun",
+      "definition": "a building where a family or a few people live",
+      "translation": "ev, konut",
+      "level": "A1",
+      "category": "Home",
+      "exampleSentence": "They live in a big house with a garden."
+    },
+    {
+      "term": "hug",
+      "pronunciation": "/hʌɡ/",
+      "partOfSpeech": "verb",
+      "definition": "to put your arms around someone with love",
+      "translation": "sarılmak",
+      "level": "A1",
+      "category": "People & Family",
+      "exampleSentence": "I always hug my grandma when I see her."
+    },
+    {
+      "term": "hundred",
+      "pronunciation": "/ˈhʌndrəd/",
+      "partOfSpeech": "number",
+      "definition": "the number 100, which is ten times 10",
+      "translation": "yüz",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "This old bridge is more than a hundred years old."
+    },
+    {
+      "term": "hungry",
+      "pronunciation": "/ˈhʌŋɡri/",
+      "partOfSpeech": "adjective",
+      "definition": "wanting or needing to eat",
+      "translation": "aç",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "Are you hungry? I can make you a sandwich."
+    },
+    {
+      "term": "husband",
+      "pronunciation": "/ˈhʌzbənd/",
+      "partOfSpeech": "noun",
+      "definition": "the man a woman is married to",
+      "translation": "koca, eş",
+      "level": "A1",
+      "category": "People & Family",
+      "exampleSentence": "Her husband cooks dinner for the whole family."
+    },
+    {
+      "term": "idea",
+      "pronunciation": "/aɪˈdiə/",
+      "partOfSpeech": "noun",
+      "definition": "a thought or plan in your mind",
+      "translation": "fikir",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Going to the beach is a good idea."
+    },
+    {
+      "term": "important",
+      "pronunciation": "/ɪmˈpɔrtənt/",
+      "partOfSpeech": "adjective",
+      "definition": "having great value or meaning",
+      "translation": "önemli",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Sleep is very important for your health."
+    },
+    {
+      "term": "insect",
+      "pronunciation": "/ˈɪnsɛkt/",
+      "partOfSpeech": "noun",
+      "definition": "a very small animal with six legs, like an ant or a bee",
+      "translation": "böcek",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "A small insect is walking on my arm."
+    },
+    {
+      "term": "inside",
+      "pronunciation": "/ˌɪnˈsaɪd/",
+      "partOfSpeech": "adverb",
+      "definition": "in or into a building or room",
+      "translation": "içeride, içeri",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "It's raining, so let's play inside."
+    },
+    {
+      "term": "interesting",
+      "pronunciation": "/ˈɪntrəstɪŋ/",
+      "partOfSpeech": "adjective",
+      "definition": "making you want to know more",
+      "translation": "ilginç",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "This is an interesting book about space."
+    },
+    {
+      "term": "island",
+      "pronunciation": "/ˈaɪlənd/",
+      "partOfSpeech": "noun",
+      "definition": "a piece of land with water all around it",
+      "translation": "ada",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "We take a boat to the island in summer."
+    },
+    {
+      "term": "jacket",
+      "pronunciation": "/ˈdʒækɪt/",
+      "partOfSpeech": "noun",
+      "definition": "a short coat that you wear outside",
+      "translation": "ceket, mont",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Take a jacket because it might rain later."
+    },
+    {
+      "term": "January",
+      "pronunciation": "/ˈdʒænjuˌɛri/",
+      "partOfSpeech": "noun",
+      "definition": "the first month of the year",
+      "translation": "ocak",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "It is very cold here in January."
+    },
+    {
+      "term": "jeans",
+      "pronunciation": "/dʒinz/",
+      "partOfSpeech": "noun",
+      "definition": "pants made of strong blue cotton cloth",
+      "translation": "kot pantolon",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Most students wear jeans and a T-shirt to class."
+    },
+    {
+      "term": "job",
+      "pronunciation": "/dʒɑb/",
+      "partOfSpeech": "noun",
+      "definition": "the work you do regularly to earn money",
+      "translation": "iş, meslek",
+      "level": "A1",
+      "category": "Work",
+      "exampleSentence": "My sister has a new job at a bank."
+    },
+    {
+      "term": "juice",
+      "pronunciation": "/dʒus/",
+      "partOfSpeech": "noun",
+      "definition": "a drink made from fruit or vegetables",
+      "translation": "meyve suyu",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "Would you like some orange juice?"
+    },
+    {
+      "term": "July",
+      "pronunciation": "/dʒʊˈlaɪ/",
+      "partOfSpeech": "noun",
+      "definition": "the seventh month of the year, after June",
+      "translation": "temmuz",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "We go on holiday to the coast in July."
+    },
+    {
+      "term": "jump",
+      "pronunciation": "/dʒʌmp/",
+      "partOfSpeech": "verb",
+      "definition": "to push yourself up into the air with your legs",
+      "translation": "zıplamak, atlamak",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "The cat can jump onto the kitchen table."
+    },
+    {
+      "term": "June",
+      "pronunciation": "/dʒun/",
+      "partOfSpeech": "noun",
+      "definition": "the sixth month of the year, after May",
+      "translation": "haziran",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "School finishes at the end of June."
+    },
+    {
+      "term": "key",
+      "pronunciation": "/ki/",
+      "partOfSpeech": "noun",
+      "definition": "a small metal object that opens a lock",
+      "translation": "anahtar",
+      "level": "A1",
+      "category": "Home",
+      "exampleSentence": "I can't find the key to the front door."
+    },
+    {
+      "term": "kid",
+      "pronunciation": "/kɪd/",
+      "partOfSpeech": "noun",
+      "definition": "a young boy or girl; a child",
+      "translation": "çocuk",
+      "level": "A1",
+      "category": "People & Family",
+      "exampleSentence": "Every kid in the class has a pencil case."
+    },
+    {
+      "term": "kind",
+      "pronunciation": "/kaɪnd/",
+      "partOfSpeech": "adjective",
+      "definition": "friendly, caring, and helpful to other people",
+      "translation": "nazik, iyi kalpli",
+      "level": "A1",
+      "category": "Personality",
+      "exampleSentence": "Our neighbor is very kind to everyone."
+    },
+    {
+      "term": "king",
+      "pronunciation": "/kɪŋ/",
+      "partOfSpeech": "noun",
+      "definition": "a man who rules a country",
+      "translation": "kral",
+      "level": "A1",
+      "category": "Society",
+      "exampleSentence": "The king lives in a big castle."
+    },
+    {
+      "term": "kiss",
+      "pronunciation": "/kɪs/",
+      "partOfSpeech": "verb",
+      "definition": "to touch someone with your lips to show love",
+      "translation": "öpmek",
+      "level": "A1",
+      "category": "People & Family",
+      "exampleSentence": "Parents often kiss their children goodnight."
+    },
+    {
+      "term": "kitchen",
+      "pronunciation": "/ˈkɪtʃən/",
+      "partOfSpeech": "noun",
+      "definition": "the room where you cook food",
+      "translation": "mutfak",
+      "level": "A1",
+      "category": "Home",
+      "exampleSentence": "Mom is making breakfast in the kitchen."
+    },
+    {
+      "term": "knife",
+      "pronunciation": "/naɪf/",
+      "partOfSpeech": "noun",
+      "definition": "a tool with a sharp edge for cutting",
+      "translation": "bıçak",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "Be careful, that knife is very sharp."
+    },
+    {
+      "term": "know",
+      "pronunciation": "/noʊ/",
+      "partOfSpeech": "verb",
+      "definition": "to have information about something in your mind",
+      "translation": "bilmek",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Do you know the name of this song?"
+    },
+    {
+      "term": "lake",
+      "pronunciation": "/leɪk/",
+      "partOfSpeech": "noun",
+      "definition": "a large area of water with land all around it",
+      "translation": "göl",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "We go fishing on the lake with my uncle."
+    },
+    {
+      "term": "lamp",
+      "pronunciation": "/læmp/",
+      "partOfSpeech": "noun",
+      "definition": "an object that gives light in a room",
+      "translation": "lamba",
+      "level": "A1",
+      "category": "Home",
+      "exampleSentence": "There is a small lamp next to my bed."
+    },
+    {
+      "term": "language",
+      "pronunciation": "/ˈlæŋɡwɪdʒ/",
+      "partOfSpeech": "noun",
+      "definition": "the system of words people use to speak and write",
+      "translation": "dil",
+      "level": "A1",
+      "category": "Academic",
+      "exampleSentence": "English is a useful language to learn."
+    },
+    {
+      "term": "late",
+      "pronunciation": "/leɪt/",
+      "partOfSpeech": "adverb",
+      "definition": "after the usual or expected time",
+      "translation": "geç",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "Hurry up, or we will arrive late!"
+    },
+    {
+      "term": "laugh",
+      "pronunciation": "/læf/",
+      "partOfSpeech": "verb",
+      "definition": "to make happy sounds because something is funny",
+      "translation": "gülmek",
+      "level": "A1",
+      "category": "Personality",
+      "exampleSentence": "The children laugh at the clown's jokes."
+    },
+    {
+      "term": "learn",
+      "pronunciation": "/lɜrn/",
+      "partOfSpeech": "verb",
+      "definition": "to get new knowledge or a new skill",
+      "translation": "öğrenmek",
+      "level": "A1",
+      "category": "Academic",
+      "exampleSentence": "Children learn very quickly at this age."
+    },
+    {
+      "term": "leave",
+      "pronunciation": "/liv/",
+      "partOfSpeech": "verb",
+      "definition": "to go away from a place",
+      "translation": "ayrılmak, çıkmak",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "I leave home at eight every morning."
+    },
+    {
+      "term": "left",
+      "pronunciation": "/lɛft/",
+      "partOfSpeech": "adjective",
+      "definition": "on the side of your body where your heart is",
+      "translation": "sol",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "I write with my left hand."
+    },
+    {
+      "term": "leg",
+      "pronunciation": "/lɛɡ/",
+      "partOfSpeech": "noun",
+      "definition": "one of the long body parts you walk and stand on",
+      "translation": "bacak",
+      "level": "A1",
+      "category": "Health",
+      "exampleSentence": "My leg hurts after the long run."
+    },
+    {
+      "term": "lesson",
+      "pronunciation": "/ˈlɛsən/",
+      "partOfSpeech": "noun",
+      "definition": "a period of time when someone teaches you something",
+      "translation": "ders",
+      "level": "A1",
+      "category": "Academic",
+      "exampleSentence": "We have an English lesson every Monday morning."
+    },
+    {
+      "term": "letter",
+      "pronunciation": "/ˈlɛtɚ/",
+      "partOfSpeech": "noun",
+      "definition": "one of the signs like A, B, or C used in writing",
+      "translation": "harf",
+      "level": "A1",
+      "category": "Academic",
+      "exampleSentence": "The word cat starts with the letter C."
+    },
+    {
+      "term": "library",
+      "pronunciation": "/ˈlaɪˌbrɛri/",
+      "partOfSpeech": "noun",
+      "definition": "a place where you can read or borrow books",
+      "translation": "kütüphane",
+      "level": "A1",
+      "category": "Academic",
+      "exampleSentence": "I study for my exams at the library."
+    },
+    {
+      "term": "life",
+      "pronunciation": "/laɪf/",
+      "partOfSpeech": "noun",
+      "definition": "the time when a person is alive",
+      "translation": "hayat, yaşam",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "My grandmother had a long and happy life."
+    },
+    {
+      "term": "light",
+      "pronunciation": "/laɪt/",
+      "partOfSpeech": "adjective",
+      "definition": "not weighing much; easy to lift",
+      "translation": "hafif",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "The box is light, so I can carry it."
+    },
+    {
+      "term": "like",
+      "pronunciation": "/laɪk/",
+      "partOfSpeech": "verb",
+      "definition": "to think something is nice or good",
+      "translation": "hoşlanmak, beğenmek",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "I like apples, but I don't like bananas."
+    },
+    {
+      "term": "line",
+      "pronunciation": "/laɪn/",
+      "partOfSpeech": "noun",
+      "definition": "a long thin mark on a surface",
+      "translation": "çizgi",
+      "level": "A1",
+      "category": "Academic",
+      "exampleSentence": "Draw a straight line under your name."
+    },
+    {
+      "term": "lion",
+      "pronunciation": "/ˈlaɪən/",
+      "partOfSpeech": "noun",
+      "definition": "a large wild cat from Africa with yellow fur",
+      "translation": "aslan",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "The lion is sleeping under a tree."
+    },
+    {
+      "term": "lip",
+      "pronunciation": "/lɪp/",
+      "partOfSpeech": "noun",
+      "definition": "one of the two soft edges of your mouth",
+      "translation": "dudak",
+      "level": "A1",
+      "category": "Health",
+      "exampleSentence": "She has a small cut on her lip."
+    },
+    {
+      "term": "listen",
+      "pronunciation": "/ˈlɪsən/",
+      "partOfSpeech": "verb",
+      "definition": "to pay attention to sounds or to someone speaking",
+      "translation": "dinlemek",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Please listen carefully to the teacher."
+    },
+    {
+      "term": "live",
+      "pronunciation": "/lɪv/",
+      "partOfSpeech": "verb",
+      "definition": "to have your home in a certain place",
+      "translation": "yaşamak",
+      "level": "A1",
+      "category": "Home",
+      "exampleSentence": "We live in a small apartment near the sea."
+    },
+    {
+      "term": "long",
+      "pronunciation": "/lɔŋ/",
+      "partOfSpeech": "adjective",
+      "definition": "measuring a great distance from one end to the other",
+      "translation": "uzun",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "This is a very long road."
+    },
+    {
+      "term": "look",
+      "pronunciation": "/lʊk/",
+      "partOfSpeech": "verb",
+      "definition": "to turn your eyes toward something",
+      "translation": "bakmak",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Look at the beautiful birds in that tree!"
+    },
+    {
+      "term": "lose",
+      "pronunciation": "/luz/",
+      "partOfSpeech": "verb",
+      "definition": "to not be able to find something anymore",
+      "translation": "kaybetmek",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Don't lose your ticket before the trip."
+    },
+    {
+      "term": "loud",
+      "pronunciation": "/laʊd/",
+      "partOfSpeech": "adjective",
+      "definition": "making a lot of noise",
+      "translation": "gürültülü, yüksek sesli",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "The music at the party was too loud."
+    },
+    {
+      "term": "love",
+      "pronunciation": "/lʌv/",
+      "partOfSpeech": "verb",
+      "definition": "to care about someone or something very much",
+      "translation": "sevmek",
+      "level": "A1",
+      "category": "Personality",
+      "exampleSentence": "I love my family very much."
+    },
+    {
+      "term": "lunch",
+      "pronunciation": "/lʌntʃ/",
+      "partOfSpeech": "noun",
+      "definition": "the meal you eat in the middle of the day",
+      "translation": "öğle yemeği",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "The students eat lunch at twelve o'clock."
+    },
+    {
+      "term": "make",
+      "pronunciation": "/meɪk/",
+      "partOfSpeech": "verb",
+      "definition": "to create or produce something",
+      "translation": "yapmak",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Let's make a cake for Dad's birthday."
+    },
+    {
+      "term": "man",
+      "pronunciation": "/mæn/",
+      "partOfSpeech": "noun",
+      "definition": "an adult male person",
+      "translation": "adam, erkek",
+      "level": "A1",
+      "category": "People & Family",
+      "exampleSentence": "A tall man is waiting at the bus stop."
+    },
+    {
+      "term": "March",
+      "pronunciation": "/mɑrtʃ/",
+      "partOfSpeech": "noun",
+      "definition": "the third month of the year, after February",
+      "translation": "mart",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "In many countries, spring starts in March."
+    },
+    {
+      "term": "market",
+      "pronunciation": "/ˈmɑrkɪt/",
+      "partOfSpeech": "noun",
+      "definition": "a place, often outside, where people sell food and other things",
+      "translation": "pazar yeri, çarşı",
+      "level": "A1",
+      "category": "Shopping & Money",
+      "exampleSentence": "We buy fresh vegetables at the market every week."
+    },
+    {
+      "term": "May",
+      "pronunciation": "/meɪ/",
+      "partOfSpeech": "noun",
+      "definition": "the fifth month of the year, after April",
+      "translation": "mayıs",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "The flowers in our garden open in May."
+    },
+    {
+      "term": "meal",
+      "pronunciation": "/mil/",
+      "partOfSpeech": "noun",
+      "definition": "food that you eat at one time, like breakfast or lunch",
+      "translation": "öğün, yemek",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "Dinner is my favorite meal of the day."
+    },
+    {
+      "term": "meat",
+      "pronunciation": "/mit/",
+      "partOfSpeech": "noun",
+      "definition": "the parts of an animal that people cook and eat",
+      "translation": "et",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "My brother does not eat meat."
+    },
+    {
+      "term": "medicine",
+      "pronunciation": "/ˈmɛdəsən/",
+      "partOfSpeech": "noun",
+      "definition": "something you take to get better when you are ill",
+      "translation": "ilaç",
+      "level": "A1",
+      "category": "Health",
+      "exampleSentence": "Take this medicine twice a day after meals."
+    },
+    {
+      "term": "meet",
+      "pronunciation": "/mit/",
+      "partOfSpeech": "verb",
+      "definition": "to come together with someone at a place",
+      "translation": "buluşmak, tanışmak",
+      "level": "A1",
+      "category": "People & Family",
+      "exampleSentence": "Let's meet in front of the cinema at six."
+    },
+    {
+      "term": "menu",
+      "pronunciation": "/ˈmɛnju/",
+      "partOfSpeech": "noun",
+      "definition": "a list of the food you can order in a restaurant",
+      "translation": "menü, yemek listesi",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "Can we see the menu, please?"
+    },
+    {
+      "term": "milk",
+      "pronunciation": "/mɪlk/",
+      "partOfSpeech": "noun",
+      "definition": "the white drink that comes from cows",
+      "translation": "süt",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "The children drink milk with their breakfast."
+    },
+    {
+      "term": "minute",
+      "pronunciation": "/ˈmɪnɪt/",
+      "partOfSpeech": "noun",
+      "definition": "a period of sixty seconds",
+      "translation": "dakika",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "Please wait a minute, I am almost ready."
+    },
+    {
+      "term": "mirror",
+      "pronunciation": "/ˈmɪrɚ/",
+      "partOfSpeech": "noun",
+      "definition": "a piece of special glass where you can see yourself",
+      "translation": "ayna",
+      "level": "A1",
+      "category": "Home",
+      "exampleSentence": "She looks in the mirror and fixes her hair."
+    },
+    {
+      "term": "mom",
+      "pronunciation": "/mɑm/",
+      "partOfSpeech": "noun",
+      "definition": "an informal word for mother",
+      "translation": "anne",
+      "level": "A1",
+      "category": "People & Family",
+      "exampleSentence": "My mom reads me a story every night."
+    },
+    {
+      "term": "Monday",
+      "pronunciation": "/ˈmʌndeɪ/",
+      "partOfSpeech": "noun",
+      "definition": "the day after Sunday and before Tuesday",
+      "translation": "pazartesi",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "I start my new job on Monday."
+    },
+    {
+      "term": "money",
+      "pronunciation": "/ˈmʌni/",
+      "partOfSpeech": "noun",
+      "definition": "coins and paper notes used to buy things",
+      "translation": "para",
+      "level": "A1",
+      "category": "Shopping & Money",
+      "exampleSentence": "I keep my money in a small wallet."
+    },
+    {
+      "term": "monkey",
+      "pronunciation": "/ˈmʌŋki/",
+      "partOfSpeech": "noun",
+      "definition": "a clever animal with a long tail that climbs trees",
+      "translation": "maymun",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "The monkey is jumping from tree to tree."
+    },
+    {
+      "term": "month",
+      "pronunciation": "/mʌnθ/",
+      "partOfSpeech": "noun",
+      "definition": "one of the twelve parts of a year, like May or June",
+      "translation": "ay",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "My aunt is coming to visit next month."
+    },
+    {
+      "term": "moon",
+      "pronunciation": "/mun/",
+      "partOfSpeech": "noun",
+      "definition": "the large round object that shines in the night sky",
+      "translation": "ay",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "The moon looks very bright and big tonight."
+    },
+    {
+      "term": "morning",
+      "pronunciation": "/ˈmɔrnɪŋ/",
+      "partOfSpeech": "noun",
+      "definition": "the early part of the day, before twelve o'clock",
+      "translation": "sabah",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "My dad drinks coffee every morning before work."
+    },
+    {
+      "term": "mother",
+      "pronunciation": "/ˈmʌðɚ/",
+      "partOfSpeech": "noun",
+      "definition": "a woman who has a child",
+      "translation": "anne",
+      "level": "A1",
+      "category": "People & Family",
+      "exampleSentence": "My mother works at a small bakery near our house."
+    },
+    {
+      "term": "mountain",
+      "pronunciation": "/ˈmaʊntən/",
+      "partOfSpeech": "noun",
+      "definition": "a very high hill, often with snow on top",
+      "translation": "dağ",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "There is snow on the top of the mountain."
+    },
+    {
+      "term": "mouse",
+      "pronunciation": "/maʊs/",
+      "partOfSpeech": "noun",
+      "definition": "a very small animal with a long thin tail",
+      "translation": "fare",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "I think there is a mouse in the kitchen!"
+    },
+    {
+      "term": "mouth",
+      "pronunciation": "/maʊθ/",
+      "partOfSpeech": "noun",
+      "definition": "the part of the face you eat and speak with",
+      "translation": "ağız",
+      "level": "A1",
+      "category": "Health",
+      "exampleSentence": "Don't talk with food in your mouth."
+    },
+    {
+      "term": "move",
+      "pronunciation": "/muv/",
+      "partOfSpeech": "verb",
+      "definition": "to go to live in a different home or place",
+      "translation": "taşınmak",
+      "level": "A1",
+      "category": "Home",
+      "exampleSentence": "We want to move to a bigger house next year."
+    },
+    {
+      "term": "movie",
+      "pronunciation": "/ˈmuvi/",
+      "partOfSpeech": "noun",
+      "definition": "a story shown with moving pictures on a screen",
+      "translation": "film",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "Let's watch a funny movie together tonight."
+    },
+    {
+      "term": "museum",
+      "pronunciation": "/mjuˈziəm/",
+      "partOfSpeech": "noun",
+      "definition": "a building where you can look at old or important objects",
+      "translation": "müze",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "The museum has a lot of dinosaur bones."
+    },
+    {
+      "term": "music",
+      "pronunciation": "/ˈmjuzɪk/",
+      "partOfSpeech": "noun",
+      "definition": "nice sounds made by voices or instruments",
+      "translation": "müzik",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "I listen to music on the way to school."
+    },
+    {
+      "term": "name",
+      "pronunciation": "/neɪm/",
+      "partOfSpeech": "noun",
+      "definition": "the word that people call you or something by",
+      "translation": "isim, ad",
+      "level": "A1",
+      "category": "People & Family",
+      "exampleSentence": "What is the name of your dog?"
+    },
+    {
+      "term": "need",
+      "pronunciation": "/nid/",
+      "partOfSpeech": "verb",
+      "definition": "to require something because it is necessary",
+      "translation": "ihtiyaç duymak",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Plants need water and sunlight to grow."
+    },
+    {
+      "term": "never",
+      "pronunciation": "/ˈnɛvɚ/",
+      "partOfSpeech": "adverb",
+      "definition": "not at any time; not even once",
+      "translation": "asla, hiçbir zaman",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "My father never drinks coffee at night."
+    },
+    {
+      "term": "new",
+      "pronunciation": "/nu/",
+      "partOfSpeech": "adjective",
+      "definition": "recently made, bought, or started",
+      "translation": "yeni",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "I got a new bike for my birthday."
+    },
+    {
+      "term": "nice",
+      "pronunciation": "/naɪs/",
+      "partOfSpeech": "adjective",
+      "definition": "pleasant and enjoyable to do or have",
+      "translation": "güzel, keyifli",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "We had a nice day at the beach."
+    },
+    {
+      "term": "night",
+      "pronunciation": "/naɪt/",
+      "partOfSpeech": "noun",
+      "definition": "the dark time when most people sleep",
+      "translation": "gece",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "You can see the stars at night."
+    },
+    {
+      "term": "nine",
+      "pronunciation": "/naɪn/",
+      "partOfSpeech": "number",
+      "definition": "the number 9, which comes after 8",
+      "translation": "dokuz",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "There are nine players on the field."
+    },
+    {
+      "term": "north",
+      "pronunciation": "/nɔrθ/",
+      "partOfSpeech": "noun",
+      "definition": "the direction toward the top of a map",
+      "translation": "kuzey",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "It is very cold in the north of the country."
+    },
+    {
+      "term": "nose",
+      "pronunciation": "/noʊz/",
+      "partOfSpeech": "noun",
+      "definition": "the part of the face you smell and breathe with",
+      "translation": "burun",
+      "level": "A1",
+      "category": "Health",
+      "exampleSentence": "The clown has a big red nose."
+    },
+    {
+      "term": "notebook",
+      "pronunciation": "/ˈnoʊtbʊk/",
+      "partOfSpeech": "noun",
+      "definition": "a small book with empty pages for writing notes",
+      "translation": "defter",
+      "level": "A1",
+      "category": "Academic",
+      "exampleSentence": "She writes new English words in her notebook."
+    },
+    {
+      "term": "November",
+      "pronunciation": "/noʊˈvɛmbɚ/",
+      "partOfSpeech": "noun",
+      "definition": "the eleventh month of the year, after October",
+      "translation": "kasım",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "My brother was born in November."
+    },
+    {
+      "term": "now",
+      "pronunciation": "/naʊ/",
+      "partOfSpeech": "adverb",
+      "definition": "at this moment, not before or after",
+      "translation": "şimdi",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "I am busy now, but I can call you later."
+    },
+    {
+      "term": "number",
+      "pronunciation": "/ˈnʌmbɚ/",
+      "partOfSpeech": "noun",
+      "definition": "a word or sign like 1, 2 or 3 that shows how many",
+      "translation": "sayı, numara",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "Please write the number eight on the board."
+    },
+    {
+      "term": "nurse",
+      "pronunciation": "/nɝs/",
+      "partOfSpeech": "noun",
+      "definition": "a person who looks after sick people in a hospital",
+      "translation": "hemşire",
+      "level": "A1",
+      "category": "Health",
+      "exampleSentence": "The nurse gives the boy some water."
+    },
+    {
+      "term": "October",
+      "pronunciation": "/ɑkˈtoʊbɚ/",
+      "partOfSpeech": "noun",
+      "definition": "the tenth month of the year, after September",
+      "translation": "ekim",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "The leaves turn red and yellow in October."
+    },
+    {
+      "term": "office",
+      "pronunciation": "/ˈɔfɪs/",
+      "partOfSpeech": "noun",
+      "definition": "a room or building where people work at desks",
+      "translation": "ofis, büro",
+      "level": "A1",
+      "category": "Work",
+      "exampleSentence": "Her office is on the fifth floor."
+    },
+    {
+      "term": "often",
+      "pronunciation": "/ˈɔfən/",
+      "partOfSpeech": "adverb",
+      "definition": "many times; again and again",
+      "translation": "sık sık",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "We often eat lunch in the school garden."
+    },
+    {
+      "term": "old",
+      "pronunciation": "/oʊld/",
+      "partOfSpeech": "adjective",
+      "definition": "made or used a long time ago; not new",
+      "translation": "eski",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "My grandfather drives an old red car."
+    },
+    {
+      "term": "one",
+      "pronunciation": "/wʌn/",
+      "partOfSpeech": "number",
+      "definition": "the number 1, which comes before 2",
+      "translation": "bir",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "I have one brother and two sisters."
+    },
+    {
+      "term": "only",
+      "pronunciation": "/ˈoʊnli/",
+      "partOfSpeech": "adverb",
+      "definition": "no more than; just",
+      "translation": "sadece, yalnızca",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "I only have five minutes before the bus comes."
+    },
+    {
+      "term": "open",
+      "pronunciation": "/ˈoʊpən/",
+      "partOfSpeech": "verb",
+      "definition": "to move a door, window, or lid so it is not shut",
+      "translation": "açmak",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Can you open the window, please?"
+    },
+    {
+      "term": "orange",
+      "pronunciation": "/ˈɔrɪndʒ/",
+      "partOfSpeech": "noun",
+      "definition": "a round sweet fruit with a thick bright skin",
+      "translation": "portakal",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "Would you like an orange or an apple?"
+    },
+    {
+      "term": "outside",
+      "pronunciation": "/ˌaʊtˈsaɪd/",
+      "partOfSpeech": "adverb",
+      "definition": "not in a building; in the open air",
+      "translation": "dışarıda, dışarı",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "The kids are playing outside in the garden."
+    },
+    {
+      "term": "page",
+      "pronunciation": "/peɪdʒ/",
+      "partOfSpeech": "noun",
+      "definition": "one side of a sheet in a book or notebook",
+      "translation": "sayfa",
+      "level": "A1",
+      "category": "Academic",
+      "exampleSentence": "Open your books and look at page ten."
+    },
+    {
+      "term": "paint",
+      "pronunciation": "/peɪnt/",
+      "partOfSpeech": "verb",
+      "definition": "to make a picture using colors and a brush",
+      "translation": "resim yapmak, boyamak",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "She likes to paint flowers and trees."
+    },
+    {
+      "term": "pan",
+      "pronunciation": "/pæn/",
+      "partOfSpeech": "noun",
+      "definition": "a flat metal dish with a handle for frying food",
+      "translation": "tava",
+      "level": "A1",
+      "category": "Home",
+      "exampleSentence": "Put the eggs in the hot pan."
+    },
+    {
+      "term": "pants",
+      "pronunciation": "/pænts/",
+      "partOfSpeech": "noun",
+      "definition": "a piece of clothing that covers each leg separately",
+      "translation": "pantolon",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "These pants are too long for me."
+    },
+    {
+      "term": "paper",
+      "pronunciation": "/ˈpeɪpɚ/",
+      "partOfSpeech": "noun",
+      "definition": "thin white material that you write or print on",
+      "translation": "kâğıt",
+      "level": "A1",
+      "category": "Academic",
+      "exampleSentence": "I need a piece of paper for my notes."
+    },
+    {
+      "term": "parent",
+      "pronunciation": "/ˈpɛrənt/",
+      "partOfSpeech": "noun",
+      "definition": "a mother or a father",
+      "translation": "ebeveyn",
+      "level": "A1",
+      "category": "People & Family",
+      "exampleSentence": "Each parent can come to the school concert on Friday."
+    },
+    {
+      "term": "party",
+      "pronunciation": "/ˈpɑrti/",
+      "partOfSpeech": "noun",
+      "definition": "a social event where people meet to have fun",
+      "translation": "parti",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "We are having a party for Mom's birthday."
+    },
+    {
+      "term": "pay",
+      "pronunciation": "/peɪ/",
+      "partOfSpeech": "verb",
+      "definition": "to give money for something you get",
+      "translation": "ödemek",
+      "level": "A1",
+      "category": "Shopping & Money",
+      "exampleSentence": "Can I pay with a card here?"
+    },
+    {
+      "term": "pen",
+      "pronunciation": "/pɛn/",
+      "partOfSpeech": "noun",
+      "definition": "a thin tool for writing with ink",
+      "translation": "tükenmez kalem, kalem",
+      "level": "A1",
+      "category": "Academic",
+      "exampleSentence": "Can I borrow your pen for a minute?"
+    },
+    {
+      "term": "pencil",
+      "pronunciation": "/ˈpɛnsəl/",
+      "partOfSpeech": "noun",
+      "definition": "a thin wooden tool for writing or drawing that you can erase",
+      "translation": "kurşun kalem",
+      "level": "A1",
+      "category": "Academic",
+      "exampleSentence": "Please write your name with a pencil."
+    },
+    {
+      "term": "people",
+      "pronunciation": "/ˈpipəl/",
+      "partOfSpeech": "noun",
+      "definition": "men, women and children; more than one human",
+      "translation": "insanlar, kişiler",
+      "level": "A1",
+      "category": "People & Family",
+      "exampleSentence": "Many people visit this park on the weekend."
+    },
+    {
+      "term": "person",
+      "pronunciation": "/ˈpɝsən/",
+      "partOfSpeech": "noun",
+      "definition": "one man, woman or child",
+      "translation": "kişi, insan",
+      "level": "A1",
+      "category": "People & Family",
+      "exampleSentence": "She is a very kind person."
+    },
+    {
+      "term": "phone",
+      "pronunciation": "/foʊn/",
+      "partOfSpeech": "noun",
+      "definition": "a device you use to talk to people far away",
+      "translation": "telefon",
+      "level": "A1",
+      "category": "Technology",
+      "exampleSentence": "Please turn off your phone during the lesson."
+    },
+    {
+      "term": "photo",
+      "pronunciation": "/ˈfoʊtoʊ/",
+      "partOfSpeech": "noun",
+      "definition": "a picture taken with a camera",
+      "translation": "fotoğraf",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "Can you take a photo of us?"
+    },
+    {
+      "term": "piano",
+      "pronunciation": "/piˈænoʊ/",
+      "partOfSpeech": "noun",
+      "definition": "a large musical instrument with black and white keys",
+      "translation": "piyano",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "She practices the piano every afternoon."
+    },
+    {
+      "term": "picnic",
+      "pronunciation": "/ˈpɪknɪk/",
+      "partOfSpeech": "noun",
+      "definition": "a meal you eat outdoors, often in a park",
+      "translation": "piknik",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "We had a picnic by the lake on Sunday."
+    },
+    {
+      "term": "picture",
+      "pronunciation": "/ˈpɪktʃɚ/",
+      "partOfSpeech": "noun",
+      "definition": "a painting, drawing or photo",
+      "translation": "resim, fotoğraf",
+      "level": "A1",
+      "category": "Home",
+      "exampleSentence": "Look at this picture of my family at the beach."
+    },
+    {
+      "term": "pig",
+      "pronunciation": "/pɪɡ/",
+      "partOfSpeech": "noun",
+      "definition": "a farm animal with a flat nose and a short curly tail",
+      "translation": "domuz",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "The little pig is playing in the mud."
+    },
+    {
+      "term": "pink",
+      "pronunciation": "/pɪŋk/",
+      "partOfSpeech": "adjective",
+      "definition": "having a pale red color",
+      "translation": "pembe",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "The baby has a pink blanket."
+    },
+    {
+      "term": "place",
+      "pronunciation": "/pleɪs/",
+      "partOfSpeech": "noun",
+      "definition": "a particular area, building, or town",
+      "translation": "yer",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "This is a nice place for a picnic."
+    },
+    {
+      "term": "plane",
+      "pronunciation": "/pleɪn/",
+      "partOfSpeech": "noun",
+      "definition": "a machine with wings that flies people through the sky",
+      "translation": "uçak",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "Our plane lands in London at noon."
+    },
+    {
+      "term": "plate",
+      "pronunciation": "/pleɪt/",
+      "partOfSpeech": "noun",
+      "definition": "a flat round dish that you put food on",
+      "translation": "tabak",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "Put the cake on a clean plate."
+    },
+    {
+      "term": "play",
+      "pronunciation": "/pleɪ/",
+      "partOfSpeech": "verb",
+      "definition": "to have fun with toys or games",
+      "translation": "oynamak",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "Children play outside when the weather is good."
+    },
+    {
+      "term": "player",
+      "pronunciation": "/ˈpleɪɚ/",
+      "partOfSpeech": "noun",
+      "definition": "a person who takes part in a game or sport",
+      "translation": "oyuncu",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "He is the best player on our football team."
+    },
+    {
+      "term": "playground",
+      "pronunciation": "/ˈpleɪˌɡraʊnd/",
+      "partOfSpeech": "noun",
+      "definition": "an outdoor area where children can play",
+      "translation": "oyun parkı, çocuk parkı",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "The kids are on the swings at the playground."
+    },
+    {
+      "term": "police",
+      "pronunciation": "/pəˈlis/",
+      "partOfSpeech": "noun",
+      "definition": "the people whose job is to keep a place safe and stop crime",
+      "translation": "polis",
+      "level": "A1",
+      "category": "Society",
+      "exampleSentence": "Call the police if you see a car accident."
+    },
+    {
+      "term": "pool",
+      "pronunciation": "/pul/",
+      "partOfSpeech": "noun",
+      "definition": "a large area filled with water for swimming",
+      "translation": "havuz, yüzme havuzu",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "The hotel has a big pool for children."
+    },
+    {
+      "term": "poor",
+      "pronunciation": "/pʊr/",
+      "partOfSpeech": "adjective",
+      "definition": "having very little money",
+      "translation": "fakir, yoksul",
+      "level": "A1",
+      "category": "Shopping & Money",
+      "exampleSentence": "Many poor families need help in winter."
+    },
+    {
+      "term": "popcorn",
+      "pronunciation": "/ˈpɑpˌkɔrn/",
+      "partOfSpeech": "noun",
+      "definition": "corn seeds heated until they burst open",
+      "translation": "patlamış mısır",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "We eat popcorn when we watch movies at home."
+    },
+    {
+      "term": "postcard",
+      "pronunciation": "/ˈpoʊstˌkɑrd/",
+      "partOfSpeech": "noun",
+      "definition": "a card with a picture that you mail without an envelope",
+      "translation": "kartpostal",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "Send me a postcard from your trip!"
+    },
+    {
+      "term": "pot",
+      "pronunciation": "/pɑt/",
+      "partOfSpeech": "noun",
+      "definition": "a deep round container for cooking food",
+      "translation": "tencere",
+      "level": "A1",
+      "category": "Home",
+      "exampleSentence": "Mom is cooking pasta in a big pot."
+    },
+    {
+      "term": "potato",
+      "pronunciation": "/pəˈteɪtoʊ/",
+      "partOfSpeech": "noun",
+      "definition": "a round vegetable that grows under the ground",
+      "translation": "patates",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "He puts a baked potato on his plate."
+    },
+    {
+      "term": "pretty",
+      "pronunciation": "/ˈprɪti/",
+      "partOfSpeech": "adjective",
+      "definition": "nice to look at, often in a gentle way",
+      "translation": "hoş, güzel",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "She is wearing a pretty blue dress."
+    },
+    {
+      "term": "price",
+      "pronunciation": "/praɪs/",
+      "partOfSpeech": "noun",
+      "definition": "the amount of money you pay for something",
+      "translation": "fiyat",
+      "level": "A1",
+      "category": "Shopping & Money",
+      "exampleSentence": "What is the price of this jacket?"
+    },
+    {
+      "term": "prince",
+      "pronunciation": "/prɪns/",
+      "partOfSpeech": "noun",
+      "definition": "the son of a king or queen",
+      "translation": "prens",
+      "level": "A1",
+      "category": "Society",
+      "exampleSentence": "The young prince rode a white horse."
+    },
+    {
+      "term": "princess",
+      "pronunciation": "/ˈprɪnsɛs/",
+      "partOfSpeech": "noun",
+      "definition": "the daughter of a king or queen",
+      "translation": "prenses",
+      "level": "A1",
+      "category": "Society",
+      "exampleSentence": "My daughter wants to be a princess for the party."
+    },
+    {
+      "term": "problem",
+      "pronunciation": "/ˈprɑbləm/",
+      "partOfSpeech": "noun",
+      "definition": "something that is difficult and needs a solution",
+      "translation": "sorun, problem",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "There is a problem with my computer."
+    },
+    {
+      "term": "purple",
+      "pronunciation": "/ˈpɝpəl/",
+      "partOfSpeech": "adjective",
+      "definition": "having a color made by mixing red and blue",
+      "translation": "mor",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "There are purple flowers in the park."
+    },
+    {
+      "term": "put",
+      "pronunciation": "/pʊt/",
+      "partOfSpeech": "verb",
+      "definition": "to move something into a certain place",
+      "translation": "koymak",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Put your shoes next to the door, please."
+    },
+    {
+      "term": "quarter",
+      "pronunciation": "/ˈkwɔrtɚ/",
+      "partOfSpeech": "noun",
+      "definition": "one of four equal parts of something",
+      "translation": "çeyrek",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "The movie starts at a quarter past seven."
+    },
+    {
+      "term": "queen",
+      "pronunciation": "/kwin/",
+      "partOfSpeech": "noun",
+      "definition": "a woman who rules a country, or the wife of a king",
+      "translation": "kraliçe",
+      "level": "A1",
+      "category": "Society",
+      "exampleSentence": "In the story, the queen wears a golden crown."
+    },
+    {
+      "term": "question",
+      "pronunciation": "/ˈkwɛstʃən/",
+      "partOfSpeech": "noun",
+      "definition": "something you ask when you want to know something",
+      "translation": "soru",
+      "level": "A1",
+      "category": "Academic",
+      "exampleSentence": "Can I ask you a question about the lesson?"
+    },
+    {
+      "term": "quiet",
+      "pronunciation": "/ˈkwaɪət/",
+      "partOfSpeech": "adjective",
+      "definition": "making little or no noise",
+      "translation": "sessiz",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Please be quiet in the library."
+    },
+    {
+      "term": "rabbit",
+      "pronunciation": "/ˈræbɪt/",
+      "partOfSpeech": "noun",
+      "definition": "a small soft animal with long ears that jumps",
+      "translation": "tavşan",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "My sister has a white rabbit as a pet."
+    },
+    {
+      "term": "radio",
+      "pronunciation": "/ˈreɪdioʊ/",
+      "partOfSpeech": "noun",
+      "definition": "a device you listen to for music and news",
+      "translation": "radyo",
+      "level": "A1",
+      "category": "Technology",
+      "exampleSentence": "My grandmother listens to the radio every morning."
+    },
+    {
+      "term": "rain",
+      "pronunciation": "/reɪn/",
+      "partOfSpeech": "noun",
+      "definition": "water that falls from the sky in drops",
+      "translation": "yağmur",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "We stayed at home because of the heavy rain."
+    },
+    {
+      "term": "rainy",
+      "pronunciation": "/ˈreɪni/",
+      "partOfSpeech": "adjective",
+      "definition": "with a lot of water falling from the sky",
+      "translation": "yağmurlu",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "On rainy days, I read books at home."
+    },
+    {
+      "term": "read",
+      "pronunciation": "/rid/",
+      "partOfSpeech": "verb",
+      "definition": "to look at written words and understand them",
+      "translation": "okumak",
+      "level": "A1",
+      "category": "Academic",
+      "exampleSentence": "I like to read in bed before I sleep."
+    },
+    {
+      "term": "ready",
+      "pronunciation": "/ˈrɛdi/",
+      "partOfSpeech": "adjective",
+      "definition": "prepared to do something",
+      "translation": "hazır",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Are you ready to go to school?"
+    },
+    {
+      "term": "really",
+      "pronunciation": "/ˈriəli/",
+      "partOfSpeech": "adverb",
+      "definition": "truly; used to show a strong feeling",
+      "translation": "gerçekten",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "I really like your new haircut."
+    },
+    {
+      "term": "red",
+      "pronunciation": "/rɛd/",
+      "partOfSpeech": "adjective",
+      "definition": "having the color of blood or a ripe tomato",
+      "translation": "kırmızı",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "She has a red umbrella for rainy days."
+    },
+    {
+      "term": "remember",
+      "pronunciation": "/rɪˈmɛmbɚ/",
+      "partOfSpeech": "verb",
+      "definition": "to keep or bring something back into your mind",
+      "translation": "hatırlamak",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "I can't remember her phone number."
+    },
+    {
+      "term": "restaurant",
+      "pronunciation": "/ˈrɛstərɑnt/",
+      "partOfSpeech": "noun",
+      "definition": "a place where you buy and eat a meal",
+      "translation": "restoran, lokanta",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "There is a nice Italian restaurant near the station."
+    },
+    {
+      "term": "rice",
+      "pronunciation": "/raɪs/",
+      "partOfSpeech": "noun",
+      "definition": "small white or brown grains that you cook and eat",
+      "translation": "pirinç, pilav",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "We often have rice with chicken for dinner."
+    },
+    {
+      "term": "rich",
+      "pronunciation": "/rɪtʃ/",
+      "partOfSpeech": "adjective",
+      "definition": "having a lot of money",
+      "translation": "zengin",
+      "level": "A1",
+      "category": "Shopping & Money",
+      "exampleSentence": "The rich man gave money to the school."
+    },
+    {
+      "term": "ride",
+      "pronunciation": "/raɪd/",
+      "partOfSpeech": "verb",
+      "definition": "to sit on a bike or horse and travel on it",
+      "translation": "binmek",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "I ride my bike to the park on weekends."
+    },
+    {
+      "term": "right",
+      "pronunciation": "/raɪt/",
+      "partOfSpeech": "adjective",
+      "definition": "correct or true; not wrong",
+      "translation": "doğru",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Yes, that is the right answer!"
+    },
+    {
+      "term": "river",
+      "pronunciation": "/ˈrɪvɚ/",
+      "partOfSpeech": "noun",
+      "definition": "a long line of water that flows to the sea",
+      "translation": "nehir, ırmak",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "A long river runs through the middle of the city."
+    },
+    {
+      "term": "road",
+      "pronunciation": "/roʊd/",
+      "partOfSpeech": "noun",
+      "definition": "a hard surface that cars use to go from place to place",
+      "translation": "yol",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "Look both ways before you cross the road."
+    },
+    {
+      "term": "room",
+      "pronunciation": "/rum/",
+      "partOfSpeech": "noun",
+      "definition": "one of the separate spaces inside a building, with walls and a door",
+      "translation": "oda",
+      "level": "A1",
+      "category": "Home",
+      "exampleSentence": "My room is small but very bright."
+    },
+    {
+      "term": "round",
+      "pronunciation": "/raʊnd/",
+      "partOfSpeech": "adjective",
+      "definition": "shaped like a circle or a ball",
+      "translation": "yuvarlak",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "We have a round table in the kitchen."
+    },
+    {
+      "term": "ruler",
+      "pronunciation": "/ˈrulɚ/",
+      "partOfSpeech": "noun",
+      "definition": "a flat stick used to measure and draw straight lines",
+      "translation": "cetvel",
+      "level": "A1",
+      "category": "Academic",
+      "exampleSentence": "Use a ruler to draw a straight line."
+    },
+    {
+      "term": "run",
+      "pronunciation": "/rʌn/",
+      "partOfSpeech": "verb",
+      "definition": "to move very quickly on your feet",
+      "translation": "koşmak",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Dogs love to run in the park."
+    },
+    {
+      "term": "sad",
+      "pronunciation": "/sæd/",
+      "partOfSpeech": "adjective",
+      "definition": "unhappy because something bad happened",
+      "translation": "üzgün",
+      "level": "A1",
+      "category": "Personality",
+      "exampleSentence": "He is sad because his best friend moved away."
+    },
+    {
+      "term": "salad",
+      "pronunciation": "/ˈsæləd/",
+      "partOfSpeech": "noun",
+      "definition": "a cold dish of mixed raw vegetables",
+      "translation": "salata",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "I would like a salad with tomatoes, please."
+    },
+    {
+      "term": "salt",
+      "pronunciation": "/sɔlt/",
+      "partOfSpeech": "noun",
+      "definition": "a white powder that gives food a stronger taste",
+      "translation": "tuz",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "Could you please pass me the salt?"
+    },
+    {
+      "term": "same",
+      "pronunciation": "/seɪm/",
+      "partOfSpeech": "adjective",
+      "definition": "exactly like another thing; not different",
+      "translation": "aynı",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "My friend and I have the same backpack."
+    },
+    {
+      "term": "sandwich",
+      "pronunciation": "/ˈsænwɪtʃ/",
+      "partOfSpeech": "noun",
+      "definition": "two pieces of bread with food between them",
+      "translation": "sandviç",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "He makes a cheese sandwich for lunch."
+    },
+    {
+      "term": "Saturday",
+      "pronunciation": "/ˈsætɚdeɪ/",
+      "partOfSpeech": "noun",
+      "definition": "the day after Friday and before Sunday",
+      "translation": "cumartesi",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "I visit my grandparents every Saturday."
+    },
+    {
+      "term": "sausage",
+      "pronunciation": "/ˈsɔsɪdʒ/",
+      "partOfSpeech": "noun",
+      "definition": "a long thin tube of chopped meat with spices",
+      "translation": "sosis",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "I had a sausage and eggs for breakfast."
+    },
+    {
+      "term": "say",
+      "pronunciation": "/seɪ/",
+      "partOfSpeech": "verb",
+      "definition": "to speak words to someone",
+      "translation": "demek, söylemek",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "What did you say to your brother?"
+    },
+    {
+      "term": "school",
+      "pronunciation": "/skul/",
+      "partOfSpeech": "noun",
+      "definition": "a place where children go to learn",
+      "translation": "okul",
+      "level": "A1",
+      "category": "Academic",
+      "exampleSentence": "I walk to school with my brother."
+    },
+    {
+      "term": "sea",
+      "pronunciation": "/si/",
+      "partOfSpeech": "noun",
+      "definition": "the large area of salty water that covers much of the earth",
+      "translation": "deniz",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "The water in the sea is warm in August."
+    },
+    {
+      "term": "season",
+      "pronunciation": "/ˈsizən/",
+      "partOfSpeech": "noun",
+      "definition": "one of the four parts of the year, like summer or winter",
+      "translation": "mevsim",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "Which season do you like best?"
+    },
+    {
+      "term": "second",
+      "pronunciation": "/ˈsɛkənd/",
+      "partOfSpeech": "number",
+      "definition": "coming next after the first one in order",
+      "translation": "ikinci",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "Our classroom is on the second floor."
+    },
+    {
+      "term": "see",
+      "pronunciation": "/si/",
+      "partOfSpeech": "verb",
+      "definition": "to notice things with your eyes",
+      "translation": "görmek",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "I can see the mountains from my window."
+    },
+    {
+      "term": "sell",
+      "pronunciation": "/sɛl/",
+      "partOfSpeech": "verb",
+      "definition": "to give something to someone in return for money",
+      "translation": "satmak",
+      "level": "A1",
+      "category": "Shopping & Money",
+      "exampleSentence": "They sell fresh bread at the corner shop."
+    },
+    {
+      "term": "send",
+      "pronunciation": "/sɛnd/",
+      "partOfSpeech": "verb",
+      "definition": "to make a letter or message go to someone",
+      "translation": "göndermek, yollamak",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "I will send you a message tonight."
+    },
+    {
+      "term": "sentence",
+      "pronunciation": "/ˈsɛntəns/",
+      "partOfSpeech": "noun",
+      "definition": "a group of words that expresses a complete idea",
+      "translation": "cümle",
+      "level": "A1",
+      "category": "Academic",
+      "exampleSentence": "Please read the first sentence out loud."
+    },
+    {
+      "term": "September",
+      "pronunciation": "/sɛpˈtɛmbɚ/",
+      "partOfSpeech": "noun",
+      "definition": "the ninth month of the year, after August",
+      "translation": "eylül",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "The new school year begins in September."
+    },
+    {
+      "term": "seven",
+      "pronunciation": "/ˈsɛvən/",
+      "partOfSpeech": "number",
+      "definition": "the number 7, which comes after 6",
+      "translation": "yedi",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "There are seven days in a week."
+    },
+    {
+      "term": "sheep",
+      "pronunciation": "/ʃip/",
+      "partOfSpeech": "noun",
+      "definition": "a farm animal with a thick coat of wool",
+      "translation": "koyun",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "The farmer has one black sheep and many white ones."
+    },
+    {
+      "term": "ship",
+      "pronunciation": "/ʃɪp/",
+      "partOfSpeech": "noun",
+      "definition": "a very large boat that carries people or goods across the sea",
+      "translation": "gemi",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "The ship sails from the port every evening."
+    },
+    {
+      "term": "shirt",
+      "pronunciation": "/ʃɝt/",
+      "partOfSpeech": "noun",
+      "definition": "a piece of clothing for the top of the body, often with buttons",
+      "translation": "gömlek",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "He wears a white shirt to work."
+    },
+    {
+      "term": "shoe",
+      "pronunciation": "/ʃu/",
+      "partOfSpeech": "noun",
+      "definition": "a strong covering that you wear on your foot",
+      "translation": "ayakkabı",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "I can't find my other shoe anywhere!"
+    },
+    {
+      "term": "shop",
+      "pronunciation": "/ʃɑp/",
+      "partOfSpeech": "noun",
+      "definition": "a place where you go to buy things",
+      "translation": "dükkân",
+      "level": "A1",
+      "category": "Shopping & Money",
+      "exampleSentence": "The shop on the corner sells fresh fruit."
+    },
+    {
+      "term": "short",
+      "pronunciation": "/ʃɔrt/",
+      "partOfSpeech": "adjective",
+      "definition": "not long in length or time",
+      "translation": "kısa",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "My sister has short black hair and brown eyes."
+    },
+    {
+      "term": "show",
+      "pronunciation": "/ʃoʊ/",
+      "partOfSpeech": "verb",
+      "definition": "to let someone see something",
+      "translation": "göstermek",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Can you show me your new shoes?"
+    },
+    {
+      "term": "shower",
+      "pronunciation": "/ˈʃaʊɚ/",
+      "partOfSpeech": "noun",
+      "definition": "a place where water falls on you so you can wash",
+      "translation": "duş",
+      "level": "A1",
+      "category": "Home",
+      "exampleSentence": "I take a quick shower every morning."
+    },
+    {
+      "term": "sick",
+      "pronunciation": "/sɪk/",
+      "partOfSpeech": "adjective",
+      "definition": "not well; having an illness",
+      "translation": "hasta",
+      "level": "A1",
+      "category": "Health",
+      "exampleSentence": "Tom is sick, so he is staying at home today."
+    },
+    {
+      "term": "sing",
+      "pronunciation": "/sɪŋ/",
+      "partOfSpeech": "verb",
+      "definition": "to make music with your voice",
+      "translation": "şarkı söylemek",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "Let's sing a song for Grandma."
+    },
+    {
+      "term": "singer",
+      "pronunciation": "/ˈsɪŋɚ/",
+      "partOfSpeech": "noun",
+      "definition": "a person who sings, often as a job",
+      "translation": "şarkıcı",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "She wants to be a famous singer one day."
+    },
+    {
+      "term": "sister",
+      "pronunciation": "/ˈsɪstɚ/",
+      "partOfSpeech": "noun",
+      "definition": "a girl or woman who has the same parents as you",
+      "translation": "kız kardeş, abla",
+      "level": "A1",
+      "category": "People & Family",
+      "exampleSentence": "I have one sister and she is ten years old."
+    },
+    {
+      "term": "sit",
+      "pronunciation": "/sɪt/",
+      "partOfSpeech": "verb",
+      "definition": "to rest your body on a chair or seat",
+      "translation": "oturmak",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Please sit next to me on the sofa."
+    },
+    {
+      "term": "six",
+      "pronunciation": "/sɪks/",
+      "partOfSpeech": "number",
+      "definition": "the number 6, which comes after 5",
+      "translation": "altı",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "Can I have six eggs, please?"
+    },
+    {
+      "term": "skirt",
+      "pronunciation": "/skɝt/",
+      "partOfSpeech": "noun",
+      "definition": "a piece of clothing for women that hangs from the waist",
+      "translation": "etek",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "My sister wears a long skirt in summer."
+    },
+    {
+      "term": "sky",
+      "pronunciation": "/skaɪ/",
+      "partOfSpeech": "noun",
+      "definition": "the space above the earth where you see clouds and the sun",
+      "translation": "gökyüzü",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "The sky is blue and clear this morning."
+    },
+    {
+      "term": "sleep",
+      "pronunciation": "/slip/",
+      "partOfSpeech": "verb",
+      "definition": "to rest with your eyes closed, usually at night",
+      "translation": "uyumak",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Babies sleep for many hours each day."
+    },
+    {
+      "term": "sleepy",
+      "pronunciation": "/ˈslipi/",
+      "partOfSpeech": "adjective",
+      "definition": "tired and wanting to sleep",
+      "translation": "uykulu",
+      "level": "A1",
+      "category": "Health",
+      "exampleSentence": "The baby is sleepy after her bottle of milk."
+    },
+    {
+      "term": "slow",
+      "pronunciation": "/sloʊ/",
+      "partOfSpeech": "adjective",
+      "definition": "taking a long time to move or do something",
+      "translation": "yavaş",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "The old bus is very slow."
+    },
+    {
+      "term": "small",
+      "pronunciation": "/smɔl/",
+      "partOfSpeech": "adjective",
+      "definition": "little in size or amount",
+      "translation": "küçük",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "My cat sleeps in a small basket."
+    },
+    {
+      "term": "smile",
+      "pronunciation": "/smaɪl/",
+      "partOfSpeech": "verb",
+      "definition": "to make a happy face by turning up the corners of your mouth",
+      "translation": "gülümsemek",
+      "level": "A1",
+      "category": "Personality",
+      "exampleSentence": "Please smile when I take your photo."
+    },
+    {
+      "term": "snake",
+      "pronunciation": "/sneɪk/",
+      "partOfSpeech": "noun",
+      "definition": "a long thin animal with no legs",
+      "translation": "yılan",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "Be careful, there is a snake in the grass!"
+    },
+    {
+      "term": "snow",
+      "pronunciation": "/snoʊ/",
+      "partOfSpeech": "noun",
+      "definition": "soft white pieces of frozen water that fall in winter",
+      "translation": "kar",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "The children played in the snow all afternoon."
+    },
+    {
+      "term": "snowy",
+      "pronunciation": "/ˈsnoʊi/",
+      "partOfSpeech": "adjective",
+      "definition": "with a lot of snow falling or on the ground",
+      "translation": "karlı",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "We built a snowman on a snowy morning."
+    },
+    {
+      "term": "soap",
+      "pronunciation": "/soʊp/",
+      "partOfSpeech": "noun",
+      "definition": "something you use with water to wash your body",
+      "translation": "sabun",
+      "level": "A1",
+      "category": "Home",
+      "exampleSentence": "Wash your hands with soap and warm water."
+    },
+    {
+      "term": "sock",
+      "pronunciation": "/sɑk/",
+      "partOfSpeech": "noun",
+      "definition": "a soft piece of clothing you wear on your foot inside a shoe",
+      "translation": "çorap",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "There is a hole in my sock."
+    },
+    {
+      "term": "sofa",
+      "pronunciation": "/ˈsoʊfə/",
+      "partOfSpeech": "noun",
+      "definition": "a long soft seat for two or more people",
+      "translation": "kanepe, koltuk",
+      "level": "A1",
+      "category": "Home",
+      "exampleSentence": "We sit on the sofa and watch a film."
+    },
+    {
+      "term": "sometimes",
+      "pronunciation": "/ˈsʌmˌtaɪmz/",
+      "partOfSpeech": "adverb",
+      "definition": "on some occasions, but not always",
+      "translation": "bazen",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "I sometimes walk to school with my friends."
+    },
+    {
+      "term": "son",
+      "pronunciation": "/sʌn/",
+      "partOfSpeech": "noun",
+      "definition": "a male child of a mother or father",
+      "translation": "oğul",
+      "level": "A1",
+      "category": "People & Family",
+      "exampleSentence": "Their son is a student at the local university."
+    },
+    {
+      "term": "song",
+      "pronunciation": "/sɔŋ/",
+      "partOfSpeech": "noun",
+      "definition": "a short piece of music with words",
+      "translation": "şarkı",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "This is my favorite song from the movie."
+    },
+    {
+      "term": "soon",
+      "pronunciation": "/sun/",
+      "partOfSpeech": "adverb",
+      "definition": "in a short time from now",
+      "translation": "yakında, birazdan",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "The bus will be here soon."
+    },
+    {
+      "term": "soup",
+      "pronunciation": "/sup/",
+      "partOfSpeech": "noun",
+      "definition": "a hot liquid food made with vegetables or meat",
+      "translation": "çorba",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "A bowl of hot soup is perfect on a cold day."
+    },
+    {
+      "term": "south",
+      "pronunciation": "/saʊθ/",
+      "partOfSpeech": "noun",
+      "definition": "the direction toward the bottom of a map",
+      "translation": "güney",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "Many birds fly to the south in winter."
+    },
+    {
+      "term": "speak",
+      "pronunciation": "/spik/",
+      "partOfSpeech": "verb",
+      "definition": "to say words with your voice",
+      "translation": "konuşmak",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Can you speak a little more slowly, please?"
+    },
+    {
+      "term": "spell",
+      "pronunciation": "/spɛl/",
+      "partOfSpeech": "verb",
+      "definition": "to say or write the letters of a word in order",
+      "translation": "harf harf söylemek, yazılışını söylemek",
+      "level": "A1",
+      "category": "Academic",
+      "exampleSentence": "How do you spell your last name?"
+    },
+    {
+      "term": "spoon",
+      "pronunciation": "/spun/",
+      "partOfSpeech": "noun",
+      "definition": "a small tool with a round end for eating soup",
+      "translation": "kaşık",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "The baby can eat with a spoon now."
+    },
+    {
+      "term": "sport",
+      "pronunciation": "/spɔrt/",
+      "partOfSpeech": "noun",
+      "definition": "a physical activity or game, like football or tennis",
+      "translation": "spor",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "Swimming is a great sport for your health."
+    },
+    {
+      "term": "spring",
+      "pronunciation": "/sprɪŋ/",
+      "partOfSpeech": "noun",
+      "definition": "the season after winter when plants start to grow",
+      "translation": "ilkbahar, bahar",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "The trees get new leaves in spring."
+    },
+    {
+      "term": "square",
+      "pronunciation": "/skwɛr/",
+      "partOfSpeech": "noun",
+      "definition": "a shape with four equal sides and four corners",
+      "translation": "kare",
+      "level": "A1",
+      "category": "Academic",
+      "exampleSentence": "Draw a square in the middle of the page."
+    },
+    {
+      "term": "stadium",
+      "pronunciation": "/ˈsteɪdiəm/",
+      "partOfSpeech": "noun",
+      "definition": "a large place where people watch sports",
+      "translation": "stadyum, stat",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "Thousands of fans came to the stadium."
+    },
+    {
+      "term": "stand",
+      "pronunciation": "/stænd/",
+      "partOfSpeech": "verb",
+      "definition": "to be on your feet in an upright position",
+      "translation": "ayakta durmak",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "There are no free seats, so we have to stand."
+    },
+    {
+      "term": "star",
+      "pronunciation": "/stɑr/",
+      "partOfSpeech": "noun",
+      "definition": "a small bright point of light in the night sky",
+      "translation": "yıldız",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "I can see one bright star above our house."
+    },
+    {
+      "term": "start",
+      "pronunciation": "/stɑrt/",
+      "partOfSpeech": "verb",
+      "definition": "to do or begin the first part of something",
+      "translation": "başlamak, başlatmak",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "The film will start in ten minutes."
+    },
+    {
+      "term": "station",
+      "pronunciation": "/ˈsteɪʃən/",
+      "partOfSpeech": "noun",
+      "definition": "a place where trains or buses stop for passengers",
+      "translation": "istasyon, gar",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "The train station is ten minutes from here."
+    },
+    {
+      "term": "stay",
+      "pronunciation": "/steɪ/",
+      "partOfSpeech": "verb",
+      "definition": "to remain in a place for some time",
+      "translation": "kalmak",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "We will stay at a hotel near the beach."
+    },
+    {
+      "term": "stomach",
+      "pronunciation": "/ˈstʌmək/",
+      "partOfSpeech": "noun",
+      "definition": "the organ inside your body where food goes after you eat",
+      "translation": "mide, karın",
+      "level": "A1",
+      "category": "Health",
+      "exampleSentence": "I have a pain in my stomach."
+    },
+    {
+      "term": "stop",
+      "pronunciation": "/stɑp/",
+      "partOfSpeech": "verb",
+      "definition": "to no longer move or do something",
+      "translation": "durmak, durdurmak",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "The bus will stop in front of the school."
+    },
+    {
+      "term": "store",
+      "pronunciation": "/stɔr/",
+      "partOfSpeech": "noun",
+      "definition": "a large place that sells many kinds of things",
+      "translation": "mağaza",
+      "level": "A1",
+      "category": "Shopping & Money",
+      "exampleSentence": "I buy my school clothes at that store."
+    },
+    {
+      "term": "story",
+      "pronunciation": "/ˈstɔri/",
+      "partOfSpeech": "noun",
+      "definition": "words that tell about real or imagined events",
+      "translation": "hikâye, öykü",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "Grandma tells us a funny story every evening."
+    },
+    {
+      "term": "street",
+      "pronunciation": "/strit/",
+      "partOfSpeech": "noun",
+      "definition": "a road in a town with houses or shops along it",
+      "translation": "sokak, cadde",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "There is a bakery at the end of our street."
+    },
+    {
+      "term": "strong",
+      "pronunciation": "/strɔŋ/",
+      "partOfSpeech": "adjective",
+      "definition": "having a powerful body",
+      "translation": "güçlü",
+      "level": "A1",
+      "category": "Health",
+      "exampleSentence": "My dad is strong enough to lift the sofa."
+    },
+    {
+      "term": "student",
+      "pronunciation": "/ˈstudənt/",
+      "partOfSpeech": "noun",
+      "definition": "a person who is learning at a school or university",
+      "translation": "öğrenci",
+      "level": "A1",
+      "category": "Academic",
+      "exampleSentence": "Each student must bring a pen and a notebook."
+    },
+    {
+      "term": "study",
+      "pronunciation": "/ˈstʌdi/",
+      "partOfSpeech": "verb",
+      "definition": "to spend time learning about a subject",
+      "translation": "ders çalışmak",
+      "level": "A1",
+      "category": "Academic",
+      "exampleSentence": "I study English for one hour every day."
+    },
+    {
+      "term": "sugar",
+      "pronunciation": "/ˈʃʊɡɚ/",
+      "partOfSpeech": "noun",
+      "definition": "a sweet white or brown powder you put in food and drinks",
+      "translation": "şeker",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "Do you take sugar in your tea?"
+    },
+    {
+      "term": "summer",
+      "pronunciation": "/ˈsʌmɚ/",
+      "partOfSpeech": "noun",
+      "definition": "the hottest season of the year, between spring and autumn",
+      "translation": "yaz",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "We swim in the lake every summer."
+    },
+    {
+      "term": "sun",
+      "pronunciation": "/sʌn/",
+      "partOfSpeech": "noun",
+      "definition": "the bright star in the sky that gives us light and heat",
+      "translation": "güneş",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "The sun is very hot at noon."
+    },
+    {
+      "term": "Sunday",
+      "pronunciation": "/ˈsʌndeɪ/",
+      "partOfSpeech": "noun",
+      "definition": "the day after Saturday and before Monday",
+      "translation": "pazar",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "The shops open late on Sunday."
+    },
+    {
+      "term": "sunny",
+      "pronunciation": "/ˈsʌni/",
+      "partOfSpeech": "adjective",
+      "definition": "bright with a lot of light from the sun",
+      "translation": "güneşli",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "It is a sunny day, so let's go to the park."
+    },
+    {
+      "term": "supermarket",
+      "pronunciation": "/ˈsupɚˌmɑrkɪt/",
+      "partOfSpeech": "noun",
+      "definition": "a large shop that sells food and other things",
+      "translation": "süpermarket, market",
+      "level": "A1",
+      "category": "Shopping & Money",
+      "exampleSentence": "We buy fruit at the supermarket on Saturdays."
+    },
+    {
+      "term": "sure",
+      "pronunciation": "/ʃʊr/",
+      "partOfSpeech": "adjective",
+      "definition": "certain that something is true",
+      "translation": "emin",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Are you sure the shop is open today?"
+    },
+    {
+      "term": "sweater",
+      "pronunciation": "/ˈswɛtɚ/",
+      "partOfSpeech": "noun",
+      "definition": "a warm piece of clothing, often made of wool, for the top of the body",
+      "translation": "kazak",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Grandma knits a red sweater for me every winter."
+    },
+    {
+      "term": "swim",
+      "pronunciation": "/swɪm/",
+      "partOfSpeech": "verb",
+      "definition": "to move through water using your arms and legs",
+      "translation": "yüzmek",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "My little brother is learning to swim this summer."
+    },
+    {
+      "term": "table",
+      "pronunciation": "/ˈteɪbəl/",
+      "partOfSpeech": "noun",
+      "definition": "a piece of furniture with a flat top and legs",
+      "translation": "masa",
+      "level": "A1",
+      "category": "Home",
+      "exampleSentence": "Put the plates on the table, please."
+    },
+    {
+      "term": "take",
+      "pronunciation": "/teɪk/",
+      "partOfSpeech": "verb",
+      "definition": "to get and hold something with your hands",
+      "translation": "almak",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "You can take one apple from the bowl."
+    },
+    {
+      "term": "talk",
+      "pronunciation": "/tɔk/",
+      "partOfSpeech": "verb",
+      "definition": "to have a conversation with someone",
+      "translation": "sohbet etmek, konuşmak",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "My friends and I talk on the phone every evening."
+    },
+    {
+      "term": "tall",
+      "pronunciation": "/tɔl/",
+      "partOfSpeech": "adjective",
+      "definition": "higher than most people or things",
+      "translation": "uzun boylu, yüksek",
+      "level": "A1",
+      "category": "People & Family",
+      "exampleSentence": "My brother is very tall for his age."
+    },
+    {
+      "term": "taxi",
+      "pronunciation": "/ˈtæksi/",
+      "partOfSpeech": "noun",
+      "definition": "a car with a driver that you pay to take you somewhere",
+      "translation": "taksi",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "It is late, so let's take a taxi home."
+    },
+    {
+      "term": "tea",
+      "pronunciation": "/ti/",
+      "partOfSpeech": "noun",
+      "definition": "a hot drink made with dried leaves and water",
+      "translation": "çay",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "My grandparents drink tea every afternoon."
+    },
+    {
+      "term": "teach",
+      "pronunciation": "/titʃ/",
+      "partOfSpeech": "verb",
+      "definition": "to help someone learn something",
+      "translation": "öğretmek",
+      "level": "A1",
+      "category": "Academic",
+      "exampleSentence": "My mother will teach me to cook pasta."
+    },
+    {
+      "term": "teacher",
+      "pronunciation": "/ˈtitʃɚ/",
+      "partOfSpeech": "noun",
+      "definition": "a person whose job is to help students learn",
+      "translation": "öğretmen",
+      "level": "A1",
+      "category": "Work",
+      "exampleSentence": "Our English teacher gives us homework every day."
+    },
+    {
+      "term": "team",
+      "pronunciation": "/tim/",
+      "partOfSpeech": "noun",
+      "definition": "a group of people who play or work together",
+      "translation": "takım",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "Our team won the match on Saturday."
+    },
+    {
+      "term": "television",
+      "pronunciation": "/ˈtɛləˌvɪʒən/",
+      "partOfSpeech": "noun",
+      "definition": "a machine with a screen that shows programs and films",
+      "translation": "televizyon",
+      "level": "A1",
+      "category": "Technology",
+      "exampleSentence": "We don't watch television during dinner."
+    },
+    {
+      "term": "tell",
+      "pronunciation": "/tɛl/",
+      "partOfSpeech": "verb",
+      "definition": "to give information or a story to someone",
+      "translation": "anlatmak",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Please tell me about your new school."
+    },
+    {
+      "term": "ten",
+      "pronunciation": "/tɛn/",
+      "partOfSpeech": "number",
+      "definition": "the number 10, which comes after 9",
+      "translation": "on",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "I can count from one to ten in English."
+    },
+    {
+      "term": "terrible",
+      "pronunciation": "/ˈtɛrəbəl/",
+      "partOfSpeech": "adjective",
+      "definition": "very bad or unpleasant",
+      "translation": "berbat, korkunç",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "The food at that place was terrible."
+    },
+    {
+      "term": "test",
+      "pronunciation": "/tɛst/",
+      "partOfSpeech": "noun",
+      "definition": "a set of questions to check what you know",
+      "translation": "sınav, test",
+      "level": "A1",
+      "category": "Academic",
+      "exampleSentence": "We have a math test on Friday."
+    },
+    {
+      "term": "theater",
+      "pronunciation": "/ˈθiətɚ/",
+      "partOfSpeech": "noun",
+      "definition": "a building where people watch plays and shows on a stage",
+      "translation": "tiyatro",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "Our class is going to the theater to see a play."
+    },
+    {
+      "term": "there",
+      "pronunciation": "/ðɛr/",
+      "partOfSpeech": "adverb",
+      "definition": "in or to that place",
+      "translation": "orada, oraya",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Put your bag over there, please."
+    },
+    {
+      "term": "thing",
+      "pronunciation": "/θɪŋ/",
+      "partOfSpeech": "noun",
+      "definition": "an object that you do not name exactly",
+      "translation": "şey",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "What is that thing on the table?"
+    },
+    {
+      "term": "think",
+      "pronunciation": "/θɪŋk/",
+      "partOfSpeech": "verb",
+      "definition": "to use your mind to have an idea or opinion",
+      "translation": "düşünmek",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "I think it will rain this afternoon."
+    },
+    {
+      "term": "third",
+      "pronunciation": "/θɝd/",
+      "partOfSpeech": "number",
+      "definition": "coming next after the second one in order",
+      "translation": "üçüncü",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "She finished third in the race."
+    },
+    {
+      "term": "thirsty",
+      "pronunciation": "/ˈθɝsti/",
+      "partOfSpeech": "adjective",
+      "definition": "wanting or needing to drink",
+      "translation": "susamış",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "After the game, the players are very thirsty."
+    },
+    {
+      "term": "thousand",
+      "pronunciation": "/ˈθaʊzənd/",
+      "partOfSpeech": "number",
+      "definition": "the number 1,000, which is ten times 100",
+      "translation": "bin",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "About a thousand people live in this village."
+    },
+    {
+      "term": "three",
+      "pronunciation": "/θri/",
+      "partOfSpeech": "number",
+      "definition": "the number 3, which comes after 2",
+      "translation": "üç",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "The shop is three minutes from my house."
+    },
+    {
+      "term": "thumb",
+      "pronunciation": "/θʌm/",
+      "partOfSpeech": "noun",
+      "definition": "the short thick finger on the side of your hand",
+      "translation": "başparmak",
+      "level": "A1",
+      "category": "Health",
+      "exampleSentence": "I hurt my thumb when I closed the door."
+    },
+    {
+      "term": "Thursday",
+      "pronunciation": "/ˈθɝzdeɪ/",
+      "partOfSpeech": "noun",
+      "definition": "the day after Wednesday and before Friday",
+      "translation": "perşembe",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "Can we meet for coffee on Thursday?"
+    },
+    {
+      "term": "ticket",
+      "pronunciation": "/ˈtɪkɪt/",
+      "partOfSpeech": "noun",
+      "definition": "a small piece of paper that lets you travel or enter a place",
+      "translation": "bilet",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "How much is a ticket to the museum?"
+    },
+    {
+      "term": "tiger",
+      "pronunciation": "/ˈtaɪɡɚ/",
+      "partOfSpeech": "noun",
+      "definition": "a large wild cat with orange fur and black stripes",
+      "translation": "kaplan",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "Can you see the tiger behind the rocks?"
+    },
+    {
+      "term": "time",
+      "pronunciation": "/taɪm/",
+      "partOfSpeech": "noun",
+      "definition": "what we measure in seconds, minutes, hours and years",
+      "translation": "zaman, vakit",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "Sorry, I don't have time to talk now."
+    },
+    {
+      "term": "tired",
+      "pronunciation": "/ˈtaɪɚd/",
+      "partOfSpeech": "adjective",
+      "definition": "needing rest or sleep",
+      "translation": "yorgun",
+      "level": "A1",
+      "category": "Health",
+      "exampleSentence": "I am very tired after a long day at work."
+    },
+    {
+      "term": "today",
+      "pronunciation": "/təˈdeɪ/",
+      "partOfSpeech": "adverb",
+      "definition": "on this day, not yesterday or tomorrow",
+      "translation": "bugün",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "It is very sunny and warm today."
+    },
+    {
+      "term": "together",
+      "pronunciation": "/təˈɡɛðɚ/",
+      "partOfSpeech": "adverb",
+      "definition": "with each other; in a group",
+      "translation": "birlikte, beraber",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "We always eat dinner together as a family."
+    },
+    {
+      "term": "tomato",
+      "pronunciation": "/təˈmeɪtoʊ/",
+      "partOfSpeech": "noun",
+      "definition": "a soft round red fruit often eaten in salads",
+      "translation": "domates",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "Cut the tomato into small pieces for the salad."
+    },
+    {
+      "term": "tomorrow",
+      "pronunciation": "/təˈmɑroʊ/",
+      "partOfSpeech": "adverb",
+      "definition": "on the day after this one",
+      "translation": "yarın",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "We have a math test tomorrow."
+    },
+    {
+      "term": "too",
+      "pronunciation": "/tu/",
+      "partOfSpeech": "adverb",
+      "definition": "more than is needed or wanted",
+      "translation": "fazla, aşırı",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "This tea is too hot to drink."
+    },
+    {
+      "term": "tooth",
+      "pronunciation": "/tuθ/",
+      "partOfSpeech": "noun",
+      "definition": "one of the hard white things in your mouth for biting",
+      "translation": "diş",
+      "level": "A1",
+      "category": "Health",
+      "exampleSentence": "My little sister has a loose tooth."
+    },
+    {
+      "term": "toothbrush",
+      "pronunciation": "/ˈtuθˌbrʌʃ/",
+      "partOfSpeech": "noun",
+      "definition": "a small brush for cleaning your teeth",
+      "translation": "diş fırçası",
+      "level": "A1",
+      "category": "Health",
+      "exampleSentence": "Don't forget to pack your toothbrush!"
+    },
+    {
+      "term": "towel",
+      "pronunciation": "/ˈtaʊəl/",
+      "partOfSpeech": "noun",
+      "definition": "a piece of thick soft cloth for drying your body",
+      "translation": "havlu",
+      "level": "A1",
+      "category": "Home",
+      "exampleSentence": "Don't forget to take a towel to the pool."
+    },
+    {
+      "term": "town",
+      "pronunciation": "/taʊn/",
+      "partOfSpeech": "noun",
+      "definition": "a place with many houses and shops, smaller than a city",
+      "translation": "kasaba",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "My grandparents live in a quiet town near the sea."
+    },
+    {
+      "term": "toy",
+      "pronunciation": "/tɔɪ/",
+      "partOfSpeech": "noun",
+      "definition": "an object that children play with",
+      "translation": "oyuncak",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "The baby is holding a soft toy rabbit."
+    },
+    {
+      "term": "train",
+      "pronunciation": "/treɪn/",
+      "partOfSpeech": "noun",
+      "definition": "a long vehicle that runs on rails",
+      "translation": "tren",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "The train to Ankara leaves at nine."
+    },
+    {
+      "term": "travel",
+      "pronunciation": "/ˈtrævəl/",
+      "partOfSpeech": "verb",
+      "definition": "to go from one place to another, often far away",
+      "translation": "seyahat etmek, yolculuk yapmak",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "I want to travel around the world one day."
+    },
+    {
+      "term": "tree",
+      "pronunciation": "/tri/",
+      "partOfSpeech": "noun",
+      "definition": "a tall plant with a wooden trunk and branches",
+      "translation": "ağaç",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "There is a big apple tree in our garden."
+    },
+    {
+      "term": "triangle",
+      "pronunciation": "/ˈtraɪˌæŋɡəl/",
+      "partOfSpeech": "noun",
+      "definition": "a shape with three straight sides",
+      "translation": "üçgen",
+      "level": "A1",
+      "category": "Academic",
+      "exampleSentence": "Can you draw a triangle on the board?"
+    },
+    {
+      "term": "trip",
+      "pronunciation": "/trɪp/",
+      "partOfSpeech": "noun",
+      "definition": "a short journey to a place and back again",
+      "translation": "gezi",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "Our class is going on a trip to the zoo."
+    },
+    {
+      "term": "true",
+      "pronunciation": "/tru/",
+      "partOfSpeech": "adjective",
+      "definition": "based on facts; not false",
+      "translation": "gerçek, doğru",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Is it true that you have a new puppy?"
+    },
+    {
+      "term": "try",
+      "pronunciation": "/traɪ/",
+      "partOfSpeech": "verb",
+      "definition": "to taste or test something to see if you like it",
+      "translation": "denemek",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Try this soup; it is very tasty!"
+    },
+    {
+      "term": "Tuesday",
+      "pronunciation": "/ˈtuzdeɪ/",
+      "partOfSpeech": "noun",
+      "definition": "the day after Monday and before Wednesday",
+      "translation": "salı",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "We have a swimming lesson every Tuesday."
+    },
+    {
+      "term": "turn",
+      "pronunciation": "/tɜrn/",
+      "partOfSpeech": "verb",
+      "definition": "to change direction when you are walking or driving",
+      "translation": "dönmek",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "Turn right at the next corner."
+    },
+    {
+      "term": "twelve",
+      "pronunciation": "/twɛlv/",
+      "partOfSpeech": "number",
+      "definition": "the number 12, which comes after 11",
+      "translation": "on iki",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "There are twelve months in a year."
+    },
+    {
+      "term": "twenty",
+      "pronunciation": "/ˈtwɛnti/",
+      "partOfSpeech": "number",
+      "definition": "the number 20, which is two times 10",
+      "translation": "yirmi",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "There are twenty students in my class."
+    },
+    {
+      "term": "two",
+      "pronunciation": "/tu/",
+      "partOfSpeech": "number",
+      "definition": "the number 2, which comes after 1",
+      "translation": "iki",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "We have two cats at home."
+    },
+    {
+      "term": "ugly",
+      "pronunciation": "/ˈʌɡli/",
+      "partOfSpeech": "adjective",
+      "definition": "not nice to look at",
+      "translation": "çirkin",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "I think that old sofa is ugly."
+    },
+    {
+      "term": "uncle",
+      "pronunciation": "/ˈʌŋkəl/",
+      "partOfSpeech": "noun",
+      "definition": "the brother of your mother or father, or your aunt's husband",
+      "translation": "amca, dayı, enişte",
+      "level": "A1",
+      "category": "People & Family",
+      "exampleSentence": "Is your uncle a doctor or a teacher?"
+    },
+    {
+      "term": "university",
+      "pronunciation": "/ˌjunəˈvɝsəti/",
+      "partOfSpeech": "noun",
+      "definition": "a place where people study after they finish high school",
+      "translation": "üniversite",
+      "level": "A1",
+      "category": "Academic",
+      "exampleSentence": "My cousin studies music at university."
+    },
+    {
+      "term": "use",
+      "pronunciation": "/juz/",
+      "partOfSpeech": "verb",
+      "definition": "to do something with a tool or object",
+      "translation": "kullanmak",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "You can use my phone to call your mom."
+    },
+    {
+      "term": "usually",
+      "pronunciation": "/ˈjuʒuəli/",
+      "partOfSpeech": "adverb",
+      "definition": "in most cases; most of the time",
+      "translation": "genellikle, çoğunlukla",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "He usually goes to bed before eleven."
+    },
+    {
+      "term": "vacation",
+      "pronunciation": "/veɪˈkeɪʃən/",
+      "partOfSpeech": "noun",
+      "definition": "a time when you travel or rest away from work or school",
+      "translation": "tatil",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "We are going to the mountains for our summer vacation."
+    },
+    {
+      "term": "vegetable",
+      "pronunciation": "/ˈvɛdʒtəbəl/",
+      "partOfSpeech": "noun",
+      "definition": "a plant you eat, like a carrot or a potato",
+      "translation": "sebze",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "Which vegetable do you like best?"
+    },
+    {
+      "term": "very",
+      "pronunciation": "/ˈvɛri/",
+      "partOfSpeech": "adverb",
+      "definition": "used to make an adjective or adverb stronger",
+      "translation": "çok",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "It is very cold outside this morning."
+    },
+    {
+      "term": "village",
+      "pronunciation": "/ˈvɪlɪdʒ/",
+      "partOfSpeech": "noun",
+      "definition": "a very small place with houses in the countryside",
+      "translation": "köy",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "Everyone in the village knows each other."
+    },
+    {
+      "term": "visit",
+      "pronunciation": "/ˈvɪzɪt/",
+      "partOfSpeech": "verb",
+      "definition": "to go and spend time with a person or at a place",
+      "translation": "ziyaret etmek",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "We visit our grandparents every summer."
+    },
+    {
+      "term": "wait",
+      "pronunciation": "/weɪt/",
+      "partOfSpeech": "verb",
+      "definition": "to stay somewhere until something happens",
+      "translation": "beklemek",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "We wait for the bus at the corner."
+    },
+    {
+      "term": "waiter",
+      "pronunciation": "/ˈweɪtɚ/",
+      "partOfSpeech": "noun",
+      "definition": "a person who brings food to tables in a restaurant",
+      "translation": "garson",
+      "level": "A1",
+      "category": "Work",
+      "exampleSentence": "The waiter brings us two glasses of water."
+    },
+    {
+      "term": "wake",
+      "pronunciation": "/weɪk/",
+      "partOfSpeech": "verb",
+      "definition": "to stop sleeping and open your eyes",
+      "translation": "uyanmak",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "I usually wake up at seven o'clock."
+    },
+    {
+      "term": "walk",
+      "pronunciation": "/wɔk/",
+      "partOfSpeech": "verb",
+      "definition": "to move on foot at a normal speed",
+      "translation": "yürümek",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "I walk to work when the weather is nice."
+    },
+    {
+      "term": "wall",
+      "pronunciation": "/wɔl/",
+      "partOfSpeech": "noun",
+      "definition": "one of the flat sides of a room or building",
+      "translation": "duvar",
+      "level": "A1",
+      "category": "Home",
+      "exampleSentence": "There is a big map on the wall of our classroom."
+    },
+    {
+      "term": "want",
+      "pronunciation": "/wɑnt/",
+      "partOfSpeech": "verb",
+      "definition": "to wish to have or do something",
+      "translation": "istemek",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Do you want some tea with breakfast?"
+    },
+    {
+      "term": "warm",
+      "pronunciation": "/wɔrm/",
+      "partOfSpeech": "adjective",
+      "definition": "a little hot in a pleasant way",
+      "translation": "ılık, sıcacık",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "The water in the lake is warm in summer."
+    },
+    {
+      "term": "wash",
+      "pronunciation": "/wɑʃ/",
+      "partOfSpeech": "verb",
+      "definition": "to clean something with water and soap",
+      "translation": "yıkamak",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Please wash your hands before you eat."
+    },
+    {
+      "term": "watch",
+      "pronunciation": "/wɑtʃ/",
+      "partOfSpeech": "verb",
+      "definition": "to look at something for a period of time",
+      "translation": "izlemek, seyretmek",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "We watch cartoons together on Saturday mornings."
+    },
+    {
+      "term": "water",
+      "pronunciation": "/ˈwɔtɚ/",
+      "partOfSpeech": "noun",
+      "definition": "the clear liquid that falls as rain and that we drink",
+      "translation": "su",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "Can I have a glass of water, please?"
+    },
+    {
+      "term": "weak",
+      "pronunciation": "/wik/",
+      "partOfSpeech": "adjective",
+      "definition": "not having much power in your body",
+      "translation": "güçsüz, zayıf",
+      "level": "A1",
+      "category": "Health",
+      "exampleSentence": "She felt weak after a long illness."
+    },
+    {
+      "term": "wear",
+      "pronunciation": "/wɛr/",
+      "partOfSpeech": "verb",
+      "definition": "to have clothes, shoes or glasses on your body",
+      "translation": "giymek, takmak",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "I wear a uniform at school."
+    },
+    {
+      "term": "weather",
+      "pronunciation": "/ˈwɛðɚ/",
+      "partOfSpeech": "noun",
+      "definition": "how hot, cold, wet, or sunny it is outside",
+      "translation": "hava durumu, hava",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "What is the weather like in your city today?"
+    },
+    {
+      "term": "Wednesday",
+      "pronunciation": "/ˈwɛnzdeɪ/",
+      "partOfSpeech": "noun",
+      "definition": "the day after Tuesday and before Thursday",
+      "translation": "çarşamba",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "The museum is closed on Wednesday."
+    },
+    {
+      "term": "week",
+      "pronunciation": "/wik/",
+      "partOfSpeech": "noun",
+      "definition": "a period of seven days, often from Monday to Sunday",
+      "translation": "hafta",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "We have English lessons three times a week."
+    },
+    {
+      "term": "weekend",
+      "pronunciation": "/ˈwikˌɛnd/",
+      "partOfSpeech": "noun",
+      "definition": "the days Saturday and Sunday, when many people do not work",
+      "translation": "hafta sonu",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "What are you doing this weekend?"
+    },
+    {
+      "term": "well",
+      "pronunciation": "/wɛl/",
+      "partOfSpeech": "adverb",
+      "definition": "in a good or skillful way",
+      "translation": "iyi, güzel",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "My sister speaks English very well."
+    },
+    {
+      "term": "west",
+      "pronunciation": "/wɛst/",
+      "partOfSpeech": "noun",
+      "definition": "the direction where the sun goes down",
+      "translation": "batı",
+      "level": "A1",
+      "category": "Travel",
+      "exampleSentence": "The sun sets in the west."
+    },
+    {
+      "term": "white",
+      "pronunciation": "/waɪt/",
+      "partOfSpeech": "adjective",
+      "definition": "having the color of snow or milk",
+      "translation": "beyaz",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "The walls in my bedroom are white."
+    },
+    {
+      "term": "wife",
+      "pronunciation": "/waɪf/",
+      "partOfSpeech": "noun",
+      "definition": "the woman a man is married to",
+      "translation": "eş, hanım",
+      "level": "A1",
+      "category": "People & Family",
+      "exampleSentence": "He and his wife live in a small flat."
+    },
+    {
+      "term": "wind",
+      "pronunciation": "/wɪnd/",
+      "partOfSpeech": "noun",
+      "definition": "air that moves quickly outside",
+      "translation": "rüzgâr",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "The wind is very strong near the sea today."
+    },
+    {
+      "term": "window",
+      "pronunciation": "/ˈwɪndoʊ/",
+      "partOfSpeech": "noun",
+      "definition": "an opening in a wall with glass that lets light in",
+      "translation": "pencere",
+      "level": "A1",
+      "category": "Home",
+      "exampleSentence": "Can you open the window? It is hot in here."
+    },
+    {
+      "term": "windy",
+      "pronunciation": "/ˈwɪndi/",
+      "partOfSpeech": "adjective",
+      "definition": "with a lot of strong moving air",
+      "translation": "rüzgârlı",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "It's very windy, so hold on to your hat."
+    },
+    {
+      "term": "winter",
+      "pronunciation": "/ˈwɪntɚ/",
+      "partOfSpeech": "noun",
+      "definition": "the coldest season of the year, between autumn and spring",
+      "translation": "kış",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "In winter we wear warm coats and hats."
+    },
+    {
+      "term": "woman",
+      "pronunciation": "/ˈwʊmən/",
+      "partOfSpeech": "noun",
+      "definition": "an adult female person",
+      "translation": "kadın",
+      "level": "A1",
+      "category": "People & Family",
+      "exampleSentence": "The woman in the red coat is my teacher."
+    },
+    {
+      "term": "wonderful",
+      "pronunciation": "/ˈwʌndɚfəl/",
+      "partOfSpeech": "adjective",
+      "definition": "extremely good and pleasant",
+      "translation": "muhteşem, şahane",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Thank you for the wonderful dinner!"
+    },
+    {
+      "term": "word",
+      "pronunciation": "/wɜrd/",
+      "partOfSpeech": "noun",
+      "definition": "a group of letters that has a meaning",
+      "translation": "kelime, sözcük",
+      "level": "A1",
+      "category": "Academic",
+      "exampleSentence": "I don't know this word; can you help me?"
+    },
+    {
+      "term": "work",
+      "pronunciation": "/wɜrk/",
+      "partOfSpeech": "verb",
+      "definition": "to do a job, usually for money",
+      "translation": "çalışmak",
+      "level": "A1",
+      "category": "Work",
+      "exampleSentence": "My parents work in a big hospital."
+    },
+    {
+      "term": "worker",
+      "pronunciation": "/ˈwɝkɚ/",
+      "partOfSpeech": "noun",
+      "definition": "a person who does a job, often with their hands",
+      "translation": "işçi, çalışan",
+      "level": "A1",
+      "category": "Work",
+      "exampleSentence": "Every worker at the factory wears a helmet."
+    },
+    {
+      "term": "world",
+      "pronunciation": "/wɜrld/",
+      "partOfSpeech": "noun",
+      "definition": "the earth and all the people and countries on it",
+      "translation": "dünya",
+      "level": "A1",
+      "category": "Nature",
+      "exampleSentence": "Mount Everest is the highest mountain in the world."
+    },
+    {
+      "term": "write",
+      "pronunciation": "/raɪt/",
+      "partOfSpeech": "verb",
+      "definition": "to put words on paper or a screen",
+      "translation": "yazmak",
+      "level": "A1",
+      "category": "Academic",
+      "exampleSentence": "Please write your name at the top of the page."
+    },
+    {
+      "term": "wrong",
+      "pronunciation": "/rɔŋ/",
+      "partOfSpeech": "adjective",
+      "definition": "not correct or not true",
+      "translation": "yanlış",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Sorry, I think you have the wrong number."
+    },
+    {
+      "term": "year",
+      "pronunciation": "/jɪr/",
+      "partOfSpeech": "noun",
+      "definition": "a period of twelve months or 365 days",
+      "translation": "yıl, sene",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "We go to the beach every year in July."
+    },
+    {
+      "term": "yellow",
+      "pronunciation": "/ˈjɛloʊ/",
+      "partOfSpeech": "adjective",
+      "definition": "having the color of a lemon or the sun",
+      "translation": "sarı",
+      "level": "A1",
+      "category": "Daily Life",
+      "exampleSentence": "Taxis in New York are yellow."
+    },
+    {
+      "term": "yesterday",
+      "pronunciation": "/ˈjɛstɚdeɪ/",
+      "partOfSpeech": "adverb",
+      "definition": "on the day before this one",
+      "translation": "dün",
+      "level": "A1",
+      "category": "Time & Numbers",
+      "exampleSentence": "It rained all day yesterday, so we stayed inside."
+    },
+    {
+      "term": "yogurt",
+      "pronunciation": "/ˈjoʊɡɚt/",
+      "partOfSpeech": "noun",
+      "definition": "a thick white food made from milk",
+      "translation": "yoğurt",
+      "level": "A1",
+      "category": "Food & Drink",
+      "exampleSentence": "I eat yogurt with fruit every morning."
+    },
+    {
+      "term": "young",
+      "pronunciation": "/jʌŋ/",
+      "partOfSpeech": "adjective",
+      "definition": "not having lived for many years",
+      "translation": "genç",
+      "level": "A1",
+      "category": "People & Family",
+      "exampleSentence": "My mom looks very young in this photo."
+    },
+    {
+      "term": "zoo",
+      "pronunciation": "/zu/",
+      "partOfSpeech": "noun",
+      "definition": "a place where people can go to see wild animals",
+      "translation": "hayvanat bahçesi",
+      "level": "A1",
+      "category": "Entertainment",
+      "exampleSentence": "The children love the monkeys at the zoo."
+    }
+  ]
+}

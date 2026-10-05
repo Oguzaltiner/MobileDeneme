@@ -28,7 +28,8 @@ public sealed class PlacementTestService(EnglishLearningDbContext db) : IPlaceme
             var correct = type == PlacementQuestionType.Translation ? word.Translation : word.Term;
             var candidates = words.Where(x => x.Id != word.Id)
                 .Select(x => type == PlacementQuestionType.Translation ? x.Translation : x.Term)
-                .Where(x => x != correct).Distinct().OrderBy(_ => Guid.NewGuid()).Take(3).ToList();
+                .Where(x => !string.IsNullOrWhiteSpace(x) && !x.Equals(correct, StringComparison.OrdinalIgnoreCase))
+                .Distinct(StringComparer.OrdinalIgnoreCase).OrderBy(_ => Guid.NewGuid()).Take(3).ToList();
             if (candidates.Count < 3) return null;
             candidates.Add(correct);
             var question = new PlacementTestQuestion

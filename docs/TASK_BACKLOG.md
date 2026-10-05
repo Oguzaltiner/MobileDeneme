@@ -124,7 +124,9 @@ Bu dosya, ürün kararlarını uygulanabilir dikey dilimlere çeviren ortak sır
 
 ### Vocabulary catalog genişletme
 
-**Durum:** Quality fix applied — doğrulanmamış indeks eşleşmeleri yayından taslağa alındı; yalnızca doğrulanmış çiftler yayınlanıyor. Hedef 1.000+ çift, admin reviewer onayıyla kademeli büyütülecek.
+**Durum:** Done — 2.500 yayınlanmış kelime (A1 574, A2 684, B1 774, B2 468); 146 kelime `content/vocabulary/publish-reserve.json` ile İncelemede yedek.
 
-- Yeni kelimeler migration gerektirmeden development seeding ile ekleniyor.
-- Hedef kalite sınırı 2.500 yayınlanmış kelime; sonraki içerikler doğrulanmış kaynak + admin studio/reviewer akışından gelmeli.
+- İçerik `content/vocabulary/{a1,a2,b1,b2}.json` paketlerinde; `node scripts/validate-vocabulary.mjs` ile doğrulanır, `node scripts/import-vocabulary.mjs --publish` veya admin "Toplu içe aktar" ekranıyla yüklenir (`POST /api/v1/admin/content/vocabulary/import`, upsert, her şey-ya-hiç doğrulama).
+- İçerik yapay zekâ ile yazıldı ve ikinci bir yapay zekâ incelemesinden geçti; insan editör örneklem kontrolü önerilir.
+- Eski indeks eşleşmeli listeden kalan 346 taslak (fonksiyon kelimeleri vb.) yayına alınmayacak; admin katalogdan temizlenebilir.
+- Sonraki adım: C1 paketi ve kapasitenin yeniden değerlendirilmesi; insan editör onayı için admin'de örneklem inceleme akışı.

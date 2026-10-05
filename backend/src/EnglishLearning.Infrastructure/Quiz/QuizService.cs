@@ -19,11 +19,12 @@ public sealed class QuizService(EnglishLearningDbContext db, IEntitlementService
         if (!string.IsNullOrWhiteSpace(request.Level)) query = query.Where(x => x.Level == request.Level);
         if (!string.IsNullOrWhiteSpace(request.Category)) query = query.Where(x => x.Category == request.Category);
         var targetLevel = BandToLevel(adaptiveDifficulty);
-        var words = await query.Where(x => x.Level == targetLevel).OrderBy(_ => Guid.NewGuid()).Take(count).ToListAsync(ct);
+        var words = await query.Where(x => x.Level == targetLevel).OrderBy(_ => EF.Functions.Random()).Take(count).ToListAsync(ct);
         if (words.Count < count)
-            words = await query.OrderBy(_ => Guid.NewGuid()).Take(count).ToListAsync(ct);
+            words = await query.OrderBy(_ => EF.Functions.Random()).Take(count).ToListAsync(ct);
         if (words.Count < count) return null;
-        var all = await db.VocabularyWords.AsNoTracking().Where(x => x.PublicationStatus == Domain.VocabularyPublicationStatus.Published).ToListAsync(ct);
+        var all = await db.VocabularyWords.AsNoTracking().Where(x => x.PublicationStatus == Domain.VocabularyPublicationStatus.Published)
+            .Select(x => new { x.Id, x.Term, x.Translation, x.Level }).ToListAsync(ct);
         var session = new QuizSession { UserId = userId, Level = request.Level, Category = request.Category, QuestionCount = count };
         for (var i = 0; i < words.Count; i++)
         {
@@ -32,8 +33,12 @@ public sealed class QuizService(EnglishLearningDbContext db, IEntitlementService
             // Writing/matching/ordering still use option-based grading in the MVP contract;
             // the type lets clients render the richer interaction and keeps the answer API stable.
             var correct = type == QuizQuestionType.Translation ? word.Translation : word.Term;
-            var candidates = all.Where(x => x.Id != word.Id && (type == QuizQuestionType.Translation ? x.Translation != correct : x.Term != correct))
-                .OrderBy(_ => Guid.NewGuid()).Take(3).Select(x => type == QuizQuestionType.Translation ? x.Translation : x.Term).ToList();
+            // Distractors are unique, never another spelling of the answer, and prefer the target's level.
+            var candidates = all.Where(x => x.Id != word.Id)
+                .Select(x => new { x.Level, Text = type == QuizQuestionType.Translation ? x.Translation : x.Term })
+                .Where(x => !string.IsNullOrWhiteSpace(x.Text) && !x.Text.Equals(correct, StringComparison.OrdinalIgnoreCase))
+                .OrderBy(x => x.Level == word.Level ? 0 : 1).ThenBy(_ => Random.Shared.Next())
+                .Select(x => x.Text).Distinct(StringComparer.OrdinalIgnoreCase).Take(3).ToList();
             if (candidates.Count < 3) return null;
             candidates.Add(correct);
             var skill = type switch
@@ -93,7 +98,22 @@ public sealed class QuizService(EnglishLearningDbContext db, IEntitlementService
     }
 
     private IQueryable<QuizSession> Load(Guid userId, Guid id) => db.QuizSessions.Include(x => x.Questions).ThenInclude(x => x.Options).Include(x => x.Questions).ThenInclude(x => x.VocabularyWord).Where(x => x.Id == id && x.UserId == userId);
-    private static QuizSessionDto Map(QuizSession s) => new(s.Id, s.Status, s.QuestionCount, s.Questions.Count(x => x.Answered), s.CorrectCount, s.Questions.OrderBy(x => x.Order).Select(q => new QuizQuestionDto(q.Id, q.Order, q.Type, q.Difficulty, q.Skill, q.Answered ? q.Explanation : null, q.Answered ? q.ErrorTag : null, q.Type == QuizQuestionType.Translation ? q.VocabularyWord.Term : q.Type == QuizQuestionType.Definition ? q.VocabularyWord.Definition : q.Type == QuizQuestionType.Writing ? q.VocabularyWord.Translation : $"{q.VocabularyWord.ExampleSentence ?? q.VocabularyWord.Definition}", q.Options.OrderBy(x => x.Key).Select(o => new QuizOptionDto(o.Key, o.Text)).ToList(), q.Answered, q.Answered ? q.IsCorrect : null)).ToList());
+    private static QuizSessionDto Map(QuizSession s) => new(s.Id, s.Status, s.QuestionCount, s.Questions.Count(x => x.Answered), s.CorrectCount, s.Questions.OrderBy(x => x.Order).Select(q => new QuizQuestionDto(q.Id, q.Order, q.Type, q.Difficulty, q.Skill, q.Answered ? q.Explanation : null, q.Answered ? q.ErrorTag : null, Prompt(q.Type, q.VocabularyWord), q.Options.OrderBy(x => x.Key).Select(o => new QuizOptionDto(o.Key, o.Text)).ToList(), q.Answered, q.Answered ? q.IsCorrect : null)).ToList());
+
+    // Term-answered prompts never show the term. Listening is spoken (the client hides its text),
+    // so it carries the full sentence, or just the term when the sentence lacks the whole word.
+    private static string Prompt(QuizQuestionType type, VocabularyWord word)
+    {
+        var hasSentence = VocabularyQuality.ContainsWholeWord(word.ExampleSentence, word.Term);
+        return type switch
+        {
+            QuizQuestionType.Translation => word.Term,
+            QuizQuestionType.Writing => word.Translation,
+            QuizQuestionType.Listening => hasSentence ? word.ExampleSentence! : word.Term,
+            QuizQuestionType.Definition => VocabularyQuality.BlankWholeWord(word.Definition, word.Term),
+            _ => VocabularyQuality.BlankWholeWord(hasSentence ? word.ExampleSentence! : word.Definition, word.Term)
+        };
+    }
 
     private async Task<int> GetAdaptiveDifficultyAsync(Guid userId, CancellationToken ct)
     {

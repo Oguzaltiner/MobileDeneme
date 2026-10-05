@@ -55,36 +55,22 @@ public static class VocabularyCatalogSeeder
         ("valuable", "/ˈvæljuəbəl/", "adjective", "useful or important", "değerli", "B1", "Academic", "Your feedback is valuable.")
     ];
 
-    private static IEnumerable<(string Term, string Pronunciation, string PartOfSpeech, string Definition, string Translation, string Level, string Category, string Example)> BuildExpandedCatalog()
-    {
-        var count = Math.Min(VocabularyCatalogData.English.Length, VocabularyCatalogData.Turkish.Length);
-        return Enumerable.Range(0, count)
-            .Where(i => VocabularyCatalogData.English[i].All(char.IsLetter) && VocabularyCatalogData.English[i].Length >= 2)
-            .Select(i =>
-            {
-                var term = VocabularyCatalogData.English[i].ToLowerInvariant();
-                var level = i < 250 ? "A1" : i < 500 ? "A2" : i < 750 ? "B1" : "B2";
-                var category = (i % 5) switch { 0 => "Daily Life", 1 => "Travel", 2 => "Work", 3 => "Academic", _ => "General" };
-                return (term, "", "word", "Common English word used in everyday context.", VocabularyCatalogData.Turkish[i], level, category, $"Learn to use {term} in context.");
-            });
-    }
-
     public static async Task SeedAsync(EnglishLearningDbContext db, CancellationToken ct = default)
     {
-        // The old bootstrap paired two independent frequency lists by index.
-        // Those rows are not trustworthy translations, so keep them recoverable
-        // as drafts until they are reviewed in the admin content studio.
-        var verifiedTerms = Catalog.Select(x => x.Term).ToHashSet(StringComparer.OrdinalIgnoreCase);
-        var importedTerms = VocabularyCatalogData.English.ToHashSet(StringComparer.OrdinalIgnoreCase);
-        var unsafeRows = await db.VocabularyWords.Where(x => importedTerms.Contains(x.Term) && !verifiedTerms.Contains(x.Term) && x.PublicationStatus == VocabularyPublicationStatus.Published).ToListAsync(ct);
+        // Rows that still carry the old bootstrap content are not trustworthy
+        // translations, so keep them recoverable as drafts until they are reviewed
+        // in the admin content studio. Reviewed or imported words never match.
+        var unsafeRows = await db.VocabularyWords.Where(x => x.PublicationStatus == VocabularyPublicationStatus.Published && x.Definition == VocabularyQuality.UnverifiedBootstrapDefinition).ToListAsync(ct);
         foreach (var row in unsafeRows)
         {
             row.PublicationStatus = VocabularyPublicationStatus.Draft;
-            row.Translation = "Çeviri inceleme bekliyor";
-            row.Definition = "Bu kelimenin Türkçe karşılığı içerik ekibi tarafından doğrulanıyor.";
+            row.Translation = VocabularyQuality.PendingTranslationPlaceholder;
+            row.Definition = VocabularyQuality.PendingDefinitionPlaceholder;
             row.ExampleSentence = null;
         }
         var existing = await db.VocabularyWords.AsNoTracking().Select(x => x.Term).ToListAsync(ct);
+        // Re-added curated words go live only while the publishing capacity allows it.
+        var capacity = VocabularyLimits.MaxPublishedWords - await db.VocabularyWords.CountAsync(x => x.PublicationStatus == VocabularyPublicationStatus.Published, ct);
         var missing = Catalog
             .GroupBy(x => x.Term, StringComparer.OrdinalIgnoreCase)
             .Select(group => group.First())
@@ -93,9 +79,10 @@ public static class VocabularyCatalogSeeder
             {
                 Term = x.Term, Pronunciation = x.Pronunciation, PartOfSpeech = x.PartOfSpeech,
                 Definition = x.Definition, Translation = x.Translation, Level = x.Level,
-                Category = x.Category, ExampleSentence = x.Example, PublicationStatus = VocabularyPublicationStatus.Published,
-                PublishedAtUtc = DateTime.UtcNow
+                Category = x.Category, ExampleSentence = x.Example,
+                PublicationStatus = capacity-- > 0 ? VocabularyPublicationStatus.Published : VocabularyPublicationStatus.InReview
             }).ToList();
+        foreach (var word in missing.Where(x => x.PublicationStatus == VocabularyPublicationStatus.Published)) word.PublishedAtUtc = DateTime.UtcNow;
         if (missing.Count > 0) db.VocabularyWords.AddRange(missing);
         if (missing.Count > 0 || unsafeRows.Count > 0) await db.SaveChangesAsync(ct);
     }
