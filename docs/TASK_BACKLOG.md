@@ -81,6 +81,10 @@ Bu dosya, ürün kararlarını uygulanabilir dikey dilimlere çeviren ortak sır
 - Reklam ve abonelik deneyimi gizlilik/consent gereksinimleriyle birlikte tasarlanmış.
 - Fiyatlar ve mağaza komisyonları yayına almadan önce güncel resmi kaynaklarla doğrulanmış.
 
+## Kalite altyapısı — Backend test projesi
+
+**Durum:** Done — `backend/tests/EnglishLearning.Tests` (xUnit v3): içerik kalite kuralları, import, yayın limiti ve roller, quiz bütünlüğü ve IDOR, entitlement limitleri, Günlük Görev. Entegrasyon testleri yerel PostgreSQL üzerinde geçici veritabanı açar (`TEST_POSTGRES`, bkz. `backend/tests/README.md`).
+
 ## Diğer sıralı işler
 
 ## Yeni ürün dilimi — Gramer laboratuvarı ve oyun merkezi
@@ -101,6 +105,8 @@ Bu dosya, ürün kararlarını uygulanabilir dikey dilimlere çeviren ortak sır
 6. Admin web uygulaması, içerik yayınlama ve audit.
 
 ## Ürünleşme notu — Personal Coach başlangıcı
+
+**Durum:** Done — Günlük Görev (Daily Mission) sunucu kontrollü akış olarak eklendi: tekrar → yeni kelime → hatırlama → dinleme → sonuç; XP tek sefer, görev serisi, sabitlenmiş saat dilimi, dünkü görevi bitirme ve ana sayfa kartı. Sözleşme: `docs/DAILY_MISSION.md`.
 
 İlk öğrenme döngüsünü satılabilir bir “kişisel koç” deneyimine taşımak için dashboard artık gerçek review verilerinden günlük ilerleme, öğrenilen kelime, bekleyen tekrar ve önerilen seans boyutu üretiyor. Mobil ana sayfa bu veriyi kişisel koç kartında gösteriyor. Sonraki adım: bu öneriyi dinleme + recall + review adımlarından oluşan tek bir Daily Mission akışına bağlamak.
 

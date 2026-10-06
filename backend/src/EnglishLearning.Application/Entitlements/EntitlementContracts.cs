@@ -24,6 +24,9 @@ public sealed record EntitlementDto(
 
 public sealed class DailyLimitExceededException(string message) : Exception(message);
 
+/// <summary>Maps to HTTP 403: the requested level is outside the user's plan.</summary>
+public sealed class LevelLockedException(string message) : Exception(message);
+
 public interface IEntitlementService
 {
     Task<EntitlementDto> GetAsync(Guid userId, CancellationToken ct);

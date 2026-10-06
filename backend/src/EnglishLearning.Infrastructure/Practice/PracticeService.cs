@@ -25,7 +25,7 @@ public sealed class PracticeService(EnglishLearningDbContext db) : IPracticeServ
         };
         var steps = new List<PracticeStep>
         {
-            new("review", "Hızlı tekrar", "Zamanı gelen kelimeleri hatırla.", "DailyMission", 3),
+            new("review", "Hızlı tekrar", "Zamanı gelen kelimeleri hatırla.", "Learn", 3),
             new("sentence", "Cümleyi tamamla", "Kelimeyi gerçek bağlamda seç.", "SentenceChallenge", 2),
             new("matching", "Eşleştirme", "İngilizce kelimeyi doğru anlamla eşleştir.", "MatchingChallenge", 1),
             new("writing", "Yazarak hatırla", "Tanımdan kelimeyi üret.", "WritingChallenge", 2),
@@ -63,7 +63,8 @@ public sealed class PracticeService(EnglishLearningDbContext db) : IPracticeServ
     {
         var session = await Load(userId, sessionId).SingleOrDefaultAsync(ct);
         var step = session?.Steps.SingleOrDefault(x => x.Id == stepId);
-        if (session is null || step is null || session.Status != PracticeSessionStatus.InProgress) return null;
+        // Daily mission sessions are graded by the missions API only.
+        if (session is null || step is null || session.Status != PracticeSessionStatus.InProgress || session.PathKey == DailyMission.PracticePathKey) return null;
         // Completion is intentionally idempotent: mobile retries and offline replay must
         // not award XP or create duplicate learning events.
         if (step.Completed) return Map(session);
@@ -82,7 +83,7 @@ public sealed class PracticeService(EnglishLearningDbContext db) : IPracticeServ
     public async Task<PracticeSessionDto?> CompleteAsync(Guid userId, Guid sessionId, CancellationToken ct)
     {
         var session = await Load(userId, sessionId).SingleOrDefaultAsync(ct);
-        if (session is null || session.Status != PracticeSessionStatus.InProgress) return null;
+        if (session is null || session.Status != PracticeSessionStatus.InProgress || session.PathKey == DailyMission.PracticePathKey) return null;
         session.Status = PracticeSessionStatus.Completed; session.CompletedAtUtc = DateTime.UtcNow;
         await db.SaveChangesAsync(ct);
         return Map(session);

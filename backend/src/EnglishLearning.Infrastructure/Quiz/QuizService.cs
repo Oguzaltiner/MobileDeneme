@@ -2,6 +2,7 @@ using EnglishLearning.Application.Quiz;
 using EnglishLearning.Application.Entitlements;
 using EnglishLearning.Domain;
 using EnglishLearning.Infrastructure.Persistence;
+using EnglishLearning.Infrastructure.Reviews;
 using Microsoft.EntityFrameworkCore;
 
 namespace EnglishLearning.Infrastructure.Quiz;
@@ -11,12 +12,13 @@ public sealed class QuizService(EnglishLearningDbContext db, IEntitlementService
     public async Task<QuizSessionDto?> CreateAsync(Guid userId, CreateQuizRequest request, CancellationToken ct)
     {
         var count = request.QuestionCount is 10 ? 10 : 5;
-        if (!await entitlements.CanAccessLevelAsync(userId, request.Level, ct)) return null;
+        var level = string.IsNullOrWhiteSpace(request.Level) ? null : request.Level.Trim().ToUpperInvariant();
+        if (!await entitlements.CanAccessLevelAsync(userId, level, ct)) throw new LevelLockedException("Bu seviye Premium üyelikte açılır.");
         var adaptiveDifficulty = request.Difficulty is >= 1 and <= 4 ? request.Difficulty.Value : await GetAdaptiveDifficultyAsync(userId, ct);
         var query = db.VocabularyWords.AsNoTracking().Where(x => x.PublicationStatus == Domain.VocabularyPublicationStatus.Published).AsQueryable();
         var entitlement = await entitlements.GetAsync(userId, ct);
         if (!entitlement.IsPremium) query = query.Where(x => x.Level == "A1" || x.Level == "A2");
-        if (!string.IsNullOrWhiteSpace(request.Level)) query = query.Where(x => x.Level == request.Level);
+        if (level is not null) query = query.Where(x => x.Level == level);
         if (!string.IsNullOrWhiteSpace(request.Category)) query = query.Where(x => x.Category == request.Category);
         var targetLevel = BandToLevel(adaptiveDifficulty);
         var words = await query.Where(x => x.Level == targetLevel).OrderBy(_ => EF.Functions.Random()).Take(count).ToListAsync(ct);
@@ -25,7 +27,7 @@ public sealed class QuizService(EnglishLearningDbContext db, IEntitlementService
         if (words.Count < count) return null;
         var all = await db.VocabularyWords.AsNoTracking().Where(x => x.PublicationStatus == Domain.VocabularyPublicationStatus.Published)
             .Select(x => new { x.Id, x.Term, x.Translation, x.Level }).ToListAsync(ct);
-        var session = new QuizSession { UserId = userId, Level = request.Level, Category = request.Category, QuestionCount = count };
+        var session = new QuizSession { UserId = userId, Level = level, Category = request.Category, QuestionCount = count };
         for (var i = 0; i < words.Count; i++)
         {
             var word = words[i];
@@ -62,20 +64,20 @@ public sealed class QuizService(EnglishLearningDbContext db, IEntitlementService
 
     public async Task<QuizAnswerResult?> AnswerAsync(Guid userId, Guid sessionId, Guid questionId, SubmitAnswerRequest request, CancellationToken ct)
     {
-        var session = await Load(userId, sessionId).SingleOrDefaultAsync(ct);
+        var session = await Load(userId, sessionId).AsNoTracking().SingleOrDefaultAsync(ct);
         var question = session?.Questions.SingleOrDefault(x => x.Id == questionId);
         if (session is null || question is null || session.Status != QuizSessionStatus.InProgress || question.Answered) return null;
         var selected = question.Options.SingleOrDefault(x => x.Key.Equals(request.OptionKey, StringComparison.OrdinalIgnoreCase));
         if (selected is null) return null;
-        question.Answered = true; question.IsCorrect = selected.IsCorrect;
-        session.CorrectCount = session.Questions.Count(x => x.Answered && x.IsCorrect);
+        await using var transaction = await db.Database.BeginTransactionAsync(ct);
+        // Claim the question atomically: parallel submits race on this row and only one flips it.
+        var claimed = await db.QuizQuestions.Where(x => x.Id == questionId && x.SessionId == sessionId && !x.Answered)
+            .ExecuteUpdateAsync(s => s.SetProperty(x => x.Answered, true).SetProperty(x => x.IsCorrect, selected.IsCorrect), ct);
+        if (claimed == 0) return null;
+        if (selected.IsCorrect)
+            await db.QuizSessions.Where(x => x.Id == sessionId).ExecuteUpdateAsync(s => s.SetProperty(x => x.CorrectCount, x => x.CorrectCount + 1), ct);
         var rating = selected.IsCorrect ? ReviewRating.Good : ReviewRating.Again;
-        var progress = await db.UserWordProgress.SingleOrDefaultAsync(x => x.UserId == userId && x.VocabularyWordId == question.VocabularyWordId, ct);
-        if (progress is null)
-        {
-            progress = new UserWordProgress { UserId = userId, VocabularyWordId = question.VocabularyWordId };
-            db.UserWordProgress.Add(progress);
-        }
+        var progress = await WordProgressStore.LockOrCreateAsync(db, userId, question.VocabularyWordId, ct);
         progress.TotalReviews++;
         progress.LastRating = rating;
         if (selected.IsCorrect) progress.CorrectReviews++; else { progress.Lapses++; progress.Repetition = 0; }
@@ -85,7 +87,10 @@ public sealed class QuizService(EnglishLearningDbContext db, IEntitlementService
         progress.DueAtUtc = progress.LastReviewedAtUtc.Value.AddDays(selected.IsCorrect ? Math.Max(1, progress.IntervalDays) : 1);
         db.ReviewEvents.Add(new ReviewEvent { UserId = userId, VocabularyWordId = question.VocabularyWordId, Rating = rating, ClientEventId = $"quiz:{sessionId}:{questionId}" });
         await db.SaveChangesAsync(ct);
-        return new(question.Id, selected.IsCorrect, question.Options.Single(x => x.IsCorrect).Key, session.CorrectCount, session.Questions.Count(x => x.Answered));
+        var correctCount = await db.QuizSessions.Where(x => x.Id == sessionId).Select(x => x.CorrectCount).SingleAsync(ct);
+        var answeredCount = await db.QuizQuestions.CountAsync(x => x.SessionId == sessionId && x.Answered, ct);
+        await transaction.CommitAsync(ct);
+        return new(question.Id, selected.IsCorrect, question.Options.Single(x => x.IsCorrect).Key, correctCount, answeredCount);
     }
 
     public async Task<QuizResultDto?> CompleteAsync(Guid userId, Guid sessionId, CancellationToken ct)

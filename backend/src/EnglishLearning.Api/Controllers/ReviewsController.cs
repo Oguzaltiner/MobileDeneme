@@ -28,5 +28,6 @@ public sealed class ReviewsController(IReviewService reviews) : ControllerBase
             return result is null ? NotFound() : Ok(result);
         }
         catch (DailyLimitExceededException ex) { return StatusCode(StatusCodes.Status429TooManyRequests, new { message = ex.Message }); }
+        catch (InvalidReviewRequestException ex) { return BadRequest(new { message = ex.Message }); }
     }
 }

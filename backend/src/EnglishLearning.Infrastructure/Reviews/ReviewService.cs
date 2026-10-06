@@ -9,6 +9,8 @@ namespace EnglishLearning.Infrastructure.Reviews;
 
 public sealed class ReviewService(EnglishLearningDbContext db, IEntitlementService entitlements) : IReviewService
 {
+    private const string MissionEventPrefix = "mission:";
+
     public async Task<IReadOnlyList<VocabularyWordDto>> GetDueAsync(Guid userId, int limit, CancellationToken ct)
     {
         var size = Math.Clamp(limit, 1, 50);
@@ -38,25 +40,36 @@ public sealed class ReviewService(EnglishLearningDbContext db, IEntitlementServi
         var wordExists = await db.VocabularyWords.AnyAsync(x => x.Id == request.WordId && x.PublicationStatus == Domain.VocabularyPublicationStatus.Published, ct);
         if (!wordExists) return null;
 
-        var existingEvent = await db.ReviewEvents.AsNoTracking()
-            .SingleOrDefaultAsync(x => x.UserId == userId && x.ClientEventId == request.ClientEventId, ct);
-        if (existingEvent is not null)
+        if (await ReplayAsync(userId, request.ClientEventId, ct) is { } replay) return replay.Result;
+        // "mission:" ids are reserved for server-graded mission answers (see DailyMissionService).
+        if (request.ClientEventId.StartsWith(MissionEventPrefix, StringComparison.OrdinalIgnoreCase))
+            throw new InvalidReviewRequestException("This client event id is reserved.");
+        // Validate the session step before consuming quota: the key must be one of the session's
+        // steps; daily mission sessions only accept their word steps.
+        string? practiceStepKey = null;
+        if (request.PracticeSessionId is not null)
         {
-            var existingProgress = await db.UserWordProgress.AsNoTracking()
-                .SingleOrDefaultAsync(x => x.UserId == userId && x.VocabularyWordId == existingEvent.VocabularyWordId, ct);
-            if (existingProgress is null) return null;
-            var existingEntitlement = await entitlements.GetAsync(userId, ct);
-            return new(existingEvent.VocabularyWordId, existingEvent.Rating, existingProgress.Repetition, existingProgress.IntervalDays, existingProgress.DueAtUtc, existingEntitlement.DailyWordsUsed, existingEntitlement.DailyWordLimit, existingProgress.MasteryScore, existingProgress.TotalReviews, existingProgress.Lapses);
+            var session = await db.PracticeSessions.AsNoTracking()
+                .Where(x => x.Id == request.PracticeSessionId && x.UserId == userId)
+                .Select(x => new { x.PathKey, StepKeys = x.Steps.Select(s => s.Key).ToList() })
+                .SingleOrDefaultAsync(ct);
+            if (session is not null)
+            {
+                // Step keys are compared and stored in lower case.
+                practiceStepKey = string.IsNullOrWhiteSpace(request.PracticeStepKey) ? "review" : request.PracticeStepKey.Trim().ToLowerInvariant();
+                var stepAllowed = practiceStepKey.Length <= 40
+                    && (request.PracticeStepKey is null || session.StepKeys.Any(x => string.Equals(x, practiceStepKey, StringComparison.OrdinalIgnoreCase)))
+                    && (session.PathKey != DailyMission.PracticePathKey || practiceStepKey is "review" or "new-words");
+                if (!stepAllowed) throw new InvalidReviewRequestException("The practice step does not belong to this session.");
+            }
         }
+        // Quota and review rows commit together: a duplicate that loses the unique-index race rolls
+        // back its quota increment and returns the stored result instead of a 500.
+        await using var transaction = await db.Database.BeginTransactionAsync(ct);
         if (!await entitlements.TryConsumeWordAsync(userId, ct))
             throw new DailyLimitExceededException("Daily word limit reached. Upgrade to Premium for unlimited learning.");
 
-        var progress = await db.UserWordProgress.SingleOrDefaultAsync(x => x.UserId == userId && x.VocabularyWordId == request.WordId, ct);
-        if (progress is null)
-        {
-            progress = new UserWordProgress { UserId = userId, VocabularyWordId = request.WordId };
-            db.UserWordProgress.Add(progress);
-        }
+        var progress = await WordProgressStore.LockOrCreateAsync(db, userId, request.WordId, ct);
         var previousEase = progress.EaseFactor;
         var interval = request.Rating switch
         {
@@ -78,14 +91,36 @@ public sealed class ReviewService(EnglishLearningDbContext db, IEntitlementServi
         progress.LastReviewedAtUtc = DateTime.UtcNow;
         progress.DueAtUtc = progress.LastReviewedAtUtc.Value.AddDays(interval);
         db.ReviewEvents.Add(new ReviewEvent { UserId = userId, VocabularyWordId = request.WordId, Rating = request.Rating, ClientEventId = request.ClientEventId });
-        if (request.PracticeSessionId is not null)
+        if (request.PracticeSessionId is not null && practiceStepKey is not null)
+            db.PracticeEvents.Add(new PracticeEvent { UserId = userId, SessionId = request.PracticeSessionId.Value, VocabularyWordId = request.WordId, StepKey = practiceStepKey, Rating = request.Rating, IsCorrect = request.IsCorrect ?? request.Rating != ReviewRating.Again, ClientEventId = request.ClientEventId });
+        try
         {
-            var sessionExists = await db.PracticeSessions.AnyAsync(x => x.Id == request.PracticeSessionId && x.UserId == userId, ct);
-            if (sessionExists)
-                db.PracticeEvents.Add(new PracticeEvent { UserId = userId, SessionId = request.PracticeSessionId.Value, VocabularyWordId = request.WordId, StepKey = request.PracticeStepKey ?? "review", Rating = request.Rating, IsCorrect = request.IsCorrect ?? request.Rating != ReviewRating.Again, ClientEventId = request.ClientEventId });
+            await db.SaveChangesAsync(ct);
+            await transaction.CommitAsync(ct);
         }
-        await db.SaveChangesAsync(ct);
+        catch (DbUpdateException ex) when (DbErrors.IsUniqueViolation(ex))
+        {
+            await transaction.RollbackAsync(ct);
+            db.ChangeTracker.Clear();
+            return (await ReplayAsync(userId, request.ClientEventId, ct))?.Result
+                   ?? throw new InvalidOperationException("Duplicate review could not be resolved.", ex);
+        }
         var entitlement = await entitlements.GetAsync(userId, ct);
         return new(request.WordId, request.Rating, progress.Repetition, progress.IntervalDays, progress.DueAtUtc, entitlement.DailyWordsUsed, entitlement.DailyWordLimit, progress.MasteryScore, progress.TotalReviews, progress.Lapses);
     }
+
+    /// <summary>Idempotent replay: the stored result for an already processed client event id.</summary>
+    private async Task<Replay?> ReplayAsync(Guid userId, string clientEventId, CancellationToken ct)
+    {
+        var existingEvent = await db.ReviewEvents.AsNoTracking()
+            .SingleOrDefaultAsync(x => x.UserId == userId && x.ClientEventId == clientEventId, ct);
+        if (existingEvent is null) return null;
+        var existingProgress = await db.UserWordProgress.AsNoTracking()
+            .SingleOrDefaultAsync(x => x.UserId == userId && x.VocabularyWordId == existingEvent.VocabularyWordId, ct);
+        if (existingProgress is null) return new Replay(null);
+        var existingEntitlement = await entitlements.GetAsync(userId, ct);
+        return new Replay(new(existingEvent.VocabularyWordId, existingEvent.Rating, existingProgress.Repetition, existingProgress.IntervalDays, existingProgress.DueAtUtc, existingEntitlement.DailyWordsUsed, existingEntitlement.DailyWordLimit, existingProgress.MasteryScore, existingProgress.TotalReviews, existingProgress.Lapses));
+    }
+
+    private sealed record Replay(ReviewResult? Result);
 }

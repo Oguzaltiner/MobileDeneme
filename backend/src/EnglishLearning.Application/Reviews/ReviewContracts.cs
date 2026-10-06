@@ -11,3 +11,6 @@ public interface IReviewService
     Task<ReviewResult?> SubmitAsync(Guid userId, SubmitReviewRequest request, CancellationToken ct);
     Task<IReadOnlyList<VocabularyWordDto>> GetDueAsync(Guid userId, int limit, CancellationToken ct);
 }
+
+/// <summary>Maps to HTTP 400, e.g. a practice step key that does not belong to the session.</summary>
+public sealed class InvalidReviewRequestException(string message) : Exception(message);

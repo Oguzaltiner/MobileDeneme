@@ -1,9 +1,22 @@
-import { useQuery } from '@tanstack/react-query';
+import { useFocusEffect } from '@react-navigation/native';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useCallback, useRef } from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { api } from '../../lib/api';
 import { useAuthStore } from '../../store/auth-store';
+import { MissionHomeCard } from '../learning/daily-mission/MissionHomeCard';
 
 export function HomeScreen({ navigation }: { navigation: { navigate: (route: 'Vocabulary' | 'Learn' | 'DailyMission' | 'SentenceChallenge' | 'WritingChallenge' | 'MatchingChallenge' | 'PracticeSession' | 'Leaderboard' | 'LearningPaths' | 'QuizStart' | 'Premium' | 'GrammarLab' | 'GameCenter') => void } }) {
+  const insets = useSafeAreaInsets();
+  const queryClient = useQueryClient();
+  // Returning to Home (e.g. from the mission) refreshes progress; the first focus is the initial mount fetch.
+  const firstFocus = useRef(true);
+  useFocusEffect(useCallback(() => {
+    if (firstFocus.current) { firstFocus.current = false; return; }
+    void queryClient.invalidateQueries({ queryKey: ['dashboard'] });
+    void queryClient.invalidateQueries({ queryKey: ['daily-mission'] });
+  }, [queryClient]));
   const user = useAuthStore((state) => state.user);
   const signOut = useAuthStore((state) => state.signOut);
   const dashboard = useQuery({ queryKey: ['dashboard'], queryFn: api.dashboard });
@@ -12,11 +25,12 @@ export function HomeScreen({ navigation }: { navigation: { navigate: (route: 'Vo
   const data = dashboard.data;
   const progress = data && data.dailyGoal > 0 ? Math.min(1, data.todayProgress / data.dailyGoal) : 0;
   const firstName = user?.displayName || user?.email?.split('@')[0] || 'Öğrenci';
-  const startCoachAction = () => { const route = data?.coachRoute; if (route === 'WritingChallenge') return navigation.navigate('WritingChallenge'); if (route === 'QuizStart') return navigation.navigate('QuizStart'); if (route === 'PracticeSession') return navigation.navigate('PracticeSession'); return navigation.navigate('DailyMission'); };
-  return <ScrollView className="flex-1 bg-background px-5 pt-14" contentContainerStyle={{ paddingBottom: 48 }}>
+  const startCoachAction = () => { const route = data?.coachRoute; if (route === 'WritingChallenge') return navigation.navigate('WritingChallenge'); if (route === 'QuizStart') return navigation.navigate('QuizStart'); if (route === 'PracticeSession') return navigation.navigate('PracticeSession'); if (route === 'Learn') return navigation.navigate('Learn'); return navigation.navigate('DailyMission'); };
+  return <ScrollView className="flex-1 bg-background px-5" contentContainerStyle={{ paddingTop: Math.max(insets.top + 12, 56), paddingBottom: insets.bottom + 48 }}>
     <View className="flex-row items-center justify-between"><View className="flex-row items-center"><View className="h-12 w-12 items-center justify-center rounded-2xl bg-primary"><Text className="text-lg font-bold text-white">{firstName.slice(0, 1).toUpperCase()}</Text></View><View className="ml-3"><Text className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Hoş geldin</Text><Text className="mt-1 text-xl font-bold text-foreground">{firstName}</Text></View></View><Pressable accessibilityRole="button" accessibilityLabel="Oturumu kapat" onPress={() => void signOut()} className="rounded-full bg-surface px-4 py-2"><Text className="text-sm font-semibold text-muted-foreground">Çıkış</Text></Pressable></View>
+    <MissionHomeCard onOpen={() => navigation.navigate('DailyMission')} />
     {dashboard.isError ? <Text accessibilityRole="alert" className="mt-5 rounded-2xl bg-red-50 p-4 text-red-700">İstatistikler yüklenemedi.</Text> : null}
-    <View className="mt-7 overflow-hidden rounded-3xl bg-foreground p-6"><View className="flex-row items-center justify-between"><Text className="text-xs font-bold uppercase tracking-widest text-blue-200">Bugünün ritmi</Text><Text className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-white">{data?.currentLevel ?? 'Seviye seçilmedi'}</Text></View><Text className="mt-4 text-4xl font-bold text-white">{data?.todayProgress ?? 0} <Text className="text-2xl text-white/50">/ {data?.dailyGoal ?? '—'}</Text></Text><Text className="mt-1 text-sm text-white/65">kelime hedefi tamamlandı</Text><View className="mt-5 h-2 overflow-hidden rounded-full bg-white/15"><View className="h-2 rounded-full bg-blue-400" style={{ width: `${progress * 100}%` }} /></View><Text className="mt-3 text-sm text-white/70">{Math.round(progress * 100)}% tamamlandı</Text></View>
+    <View className="mt-4 overflow-hidden rounded-3xl bg-foreground p-6"><View className="flex-row items-center justify-between"><Text className="text-xs font-bold uppercase tracking-widest text-blue-200">Bugünün ritmi</Text><Text className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-white">{data?.currentLevel ?? 'Seviye seçilmedi'}</Text></View><Text className="mt-4 text-4xl font-bold text-white">{data?.todayProgress ?? 0} <Text className="text-2xl text-white/50">/ {data?.dailyGoal ?? '—'}</Text></Text><Text className="mt-1 text-sm text-white/65">kelime hedefi tamamlandı</Text><View className="mt-5 h-2 overflow-hidden rounded-full bg-white/15"><View className="h-2 rounded-full bg-blue-400" style={{ width: `${progress * 100}%` }} /></View><Text className="mt-3 text-sm text-white/70">{Math.round(progress * 100)}% tamamlandı</Text></View>
     <View className="mt-4 flex-row gap-2"><View className="flex-1 rounded-2xl border border-border bg-surface p-4"><Text className="text-2xl font-bold text-foreground">{data?.dueReviewCount ?? 0}</Text><Text className="mt-1 text-xs font-medium text-muted-foreground">Bekleyen tekrar</Text></View><View className="flex-1 rounded-2xl border border-border bg-surface p-4"><Text className="text-2xl font-bold text-foreground">{data?.totalWordsLearned ?? 0}</Text><Text className="mt-1 text-xs font-medium text-muted-foreground">Öğrenilen</Text></View><View className="flex-1 rounded-2xl border border-amber-200 bg-amber-50 p-4"><Text className="text-2xl font-bold text-amber-700">{data?.currentStreak ?? 0}🔥</Text><Text className="mt-1 text-xs font-medium text-amber-700">Günlük seri</Text></View></View>
     <Pressable accessibilityRole="button" accessibilityLabel="Öğrenme rotalarını aç" onPress={() => navigation.navigate('LearningPaths')} className="mt-4 flex-row items-center rounded-2xl border border-border bg-surface p-5"><Text className="mr-4 text-3xl">🧭</Text><View className="flex-1"><Text className="text-lg font-bold text-foreground">Kendi rotanı seç</Text><Text className="mt-1 text-sm leading-5 text-muted-foreground">Seyahat, iş, akademik veya sınav hedefinden ilerle.</Text></View><Text className="text-xl text-primary">→</Text></Pressable>
     <Pressable accessibilityRole="button" accessibilityLabel="Kişisel pratik seansını aç" onPress={() => navigation.navigate('PracticeSession')} className="mt-4 flex-row items-center rounded-3xl bg-primary-soft p-5"><Text className="mr-4 text-3xl">⚡</Text><View className="flex-1"><Text className="text-lg font-bold text-foreground">Kişisel pratik seansı</Text><Text className="mt-1 text-sm leading-5 text-muted-foreground">Tek akışta tekrar, cümle, eşleştirme ve yazma.</Text></View><Text className="text-xl text-primary">→</Text></Pressable>

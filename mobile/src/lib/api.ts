@@ -1,4 +1,5 @@
-export type ApiError = { status: number; message: string };
+// `body` carries the parsed JSON error payload (e.g. `incompleteSteps` on a 409 from mission completion).
+export type ApiError = { status: number; message: string; body?: Record<string, unknown> };
 export const apiConfig = { baseUrl: process.env.EXPO_PUBLIC_API_BASE_URL ?? 'http://localhost:5057/api/v1' };
 export type AuthUser = { id: string; email: string; displayName?: string | null; onboardingCompleted: boolean };
 export type AuthResponse = { accessToken: string; refreshToken: string; accessTokenExpiresAtUtc: string; user: AuthUser };
@@ -22,7 +23,7 @@ export type SentenceChallenge = { wordId: string; sentence: string; answer: stri
 export type WritingChallenge = { wordId: string; prompt: string; answer: string; translation: string; hint: string };
 export type MatchingChallenge = { wordId: string; term: string; answer: string; options: string[] };
 export type LeaderboardEntry = { rank: number; displayName: string; points: number; isCurrentUser: boolean };
-export type LeaderboardSummary = { league: string; periodEndsAtUtc: string; entries: LeaderboardEntry[]; currentUserRank: number; currentUserPoints: number; xpBreakdown: { reviewXp: number; quizXp: number; reviewCount: number; quizCount: number }; reward: { title: string; description: string }; personalBestPoints: number; isClosingSoon: boolean; seasonKey: string; promotionCutoff: number; demotionCutoff: number; rewardTier: string };
+export type LeaderboardSummary = { league: string; periodEndsAtUtc: string; entries: LeaderboardEntry[]; currentUserRank: number; currentUserPoints: number; xpBreakdown: { reviewXp: number; quizXp: number; reviewCount: number; quizCount: number; missionXp?: number; missionCount?: number }; reward: { title: string; description: string }; personalBestPoints: number; isClosingSoon: boolean; seasonKey: string; promotionCutoff: number; demotionCutoff: number; rewardTier: string };
 export type LearningPath = { key: string; title: string; description: string; purpose: string; recommended: boolean };
 export type PracticePlan = { pathKey: string; pathTitle: string; estimatedMinutes: number; steps: { key: string; title: string; description: string; route: string; estimatedMinutes: number }[] };
 export type PracticeSession = { id: string; pathKey: string; status: number; startedAtUtc: string; completedAtUtc?: string | null; steps: { id: string; order: number; key: string; title: string; estimatedMinutes: number; completed: boolean }[] };
@@ -38,6 +39,22 @@ export type FeatureFlags = { version: string; flags: Record<string, boolean> };
 export type GrammarRule = { title: string; explanation: string; focus: string };
 export type GrammarExercise = { prompt: string; options: string[]; answer: string; explanation: string };
 export type GrammarLesson = { key: string; title: string; level: string; summary: string; contrastNote: string; rules: GrammarRule[]; exercises: GrammarExercise[] };
+// Daily mission contract: docs/DAILY_MISSION.md (backend is authoritative).
+export type MissionStatus = 'notStarted' | 'inProgress' | 'completed';
+export type MissionStepKey = 'review' | 'new-words' | 'recall' | 'listening';
+export type MissionWordStepKey = Extract<MissionStepKey, 'review' | 'new-words'>;
+export type MissionQuestionStepKey = Extract<MissionStepKey, 'recall' | 'listening'>;
+export type MissionTimeZone = { timeZone?: string; utcOffsetMinutes: number };
+export type MissionStep = { key: MissionStepKey; order: number; title: string; required: number; done: number; completed: boolean };
+// No word id before answering; `speakText` is set only when the prompt shows the English term (never the answer).
+export type MissionRecallQuestion = { id: string; prompt: string; speakText?: string | null; options: QuizOption[]; answered: boolean; isCorrect?: boolean | null };
+export type MissionListening = { id: string; title: string; level: string; prompt: string; transcript: string; options: QuizOption[]; answered: boolean; isCorrect?: boolean | null };
+export type MissionResult = { missionId: string; xpAwarded: number; xpBreakdown: { base: number; items: number; accuracy: number; streakBonus: number }; correctAnswers: number; totalAnswers: number; reviewedWords: number; newWords: number; streak: { current: number; longest: number; extended: boolean }; alreadyCompleted: boolean; tomorrow: { date: string; dueReviewCount: number; newWordCount: number; estimatedMinutes: number } };
+export type DailyMission = { id: string; practiceSessionId: string; missionDate: string; status: Exclude<MissionStatus, 'notStarted'>; estimatedMinutes: number; steps: MissionStep[]; reviewWords: VocabularyWord[]; newWords: VocabularyWord[]; recallQuestions: MissionRecallQuestion[]; listening?: MissionListening | null; result?: MissionResult | null };
+export type DailyMissionToday = { missionDate: string; status: MissionStatus; mission?: DailyMission | null; pendingMission?: DailyMission | null;preview: { estimatedMinutes: number; reviewCount: number; newWordCount: number; hasListening: boolean }; streak: { current: number; longest: number; completedToday: boolean }; limits: { isPremium: boolean; dailyWordsRemaining: number } };
+export type MissionAnswerRequest = { stepKey: MissionQuestionStepKey; questionId: string; optionKey: string };
+export type MissionAnswerResult = { questionId: string; isCorrect: boolean; correctOptionKey: string; explanation?: string | null; wordId?: string | null; term?: string | null; translation?: string | null;step: { key: MissionStepKey; done: number; required: number; completed: boolean } };
+export type SubmitReviewRequest = { wordId: string; rating: 0 | 1 | 2 | 3; clientEventId: string; practiceSessionId?: string; practiceStepKey?: MissionWordStepKey };
 let accessToken: string | null = null;
 export function setAccessToken(token: string | null) { accessToken = token; }
 async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
@@ -48,7 +65,7 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
   try { response = await fetch(`${apiConfig.baseUrl}${path}`, { ...init, headers, signal: controller.signal }); }
   catch (error) { throw { status: 0, message: (error as { name?: string }).name === 'AbortError' ? 'Sunucu yanıt vermedi. API adresini ve bağlantıyı kontrol edin.' : 'Sunucuya bağlanılamadı.' } satisfies ApiError; }
   finally { clearTimeout(timeout); }
-  if (!response.ok) { let message = 'İstek başarısız oldu.'; try { message = ((await response.json()) as { message?: string }).message ?? message; } catch { /* empty */ } throw { status: response.status, message } satisfies ApiError; }
+  if (!response.ok) { let message = 'İstek başarısız oldu.'; let body: Record<string, unknown> | undefined; try { const parsed: unknown = await response.json(); if (parsed && typeof parsed === 'object') { body = parsed as Record<string, unknown>; if (typeof body.message === 'string') message = body.message; } } catch { /* empty */ } throw { status: response.status, message, body } satisfies ApiError; }
   return response.status === 204 ? (undefined as T) : await response.json() as T;
 }
 export const api = {
@@ -78,7 +95,8 @@ export const api = {
   completePlacement: (attemptId: string) => request<PlacementResult>(`/placement/sessions/${attemptId}/complete`, { method: 'POST' }),
   entitlement: () => request<Entitlement>('/me/entitlement'),
   verifyGooglePurchase: (body: { productId: string; purchaseToken: string }) => request<Entitlement>('/billing/google-play/verify', { method: 'POST', body: JSON.stringify(body) }),
-  submitReview: (body: { wordId: string; rating: 0 | 1 | 2 | 3; clientEventId: string }) => request<ReviewResult>('/reviews', { method: 'POST', body: JSON.stringify(body) }),
+  // Only contract fields are sent; queued items also carry local bookkeeping (retryCount, lastError).
+  submitReview: ({ wordId, rating, clientEventId, practiceSessionId, practiceStepKey }: SubmitReviewRequest) => request<ReviewResult>('/reviews', { method: 'POST', body: JSON.stringify({ wordId, rating, clientEventId, practiceSessionId, practiceStepKey }) }),
   weeklyStats: () => request<WeeklyLearningStats>('/statistics/weekly'),
   dueWords: (limit = 20) => request<VocabularyWord[]>(`/reviews/due?limit=${Math.min(Math.max(limit, 1), 50)}`),
   sentenceChallenge: () => request<SentenceChallenge>('/vocabulary/sentence-challenge'),
@@ -100,4 +118,12 @@ export const api = {
   features: () => request<FeatureFlags>('/features'),
   grammarLessons: (level?: string) => request<GrammarLesson[]>(`/grammar/lessons${level ? `?level=${encodeURIComponent(level)}` : ''}`),
   grammarLesson: (key: string) => request<GrammarLesson>(`/grammar/lessons/${encodeURIComponent(key)}`),
+  missionToday: ({ timeZone, utcOffsetMinutes }: MissionTimeZone) => {
+    const query = new URLSearchParams({ utcOffsetMinutes: String(utcOffsetMinutes) });
+    if (timeZone) query.set('timeZone', timeZone);
+    return request<DailyMissionToday>(`/missions/today?${query.toString()}`);
+  },
+  startMission: (body: MissionTimeZone) => request<DailyMission>('/missions/today', { method: 'POST', body: JSON.stringify(body) }),
+  answerMission: (missionId: string, body: MissionAnswerRequest) => request<MissionAnswerResult>(`/missions/${encodeURIComponent(missionId)}/answers`, { method: 'POST', body: JSON.stringify(body) }),
+  completeMission: (missionId: string) => request<MissionResult>(`/missions/${encodeURIComponent(missionId)}/complete`, { method: 'POST' }),
 };

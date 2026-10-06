@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 import { api } from '../../lib/api';
 
-type Route = 'DailyMission' | 'SentenceChallenge' | 'MatchingChallenge' | 'WritingChallenge' | 'ConversationPractice' | 'ListeningLab';
+type Route = 'DailyMission' | 'Learn' | 'SentenceChallenge' | 'MatchingChallenge' | 'WritingChallenge' | 'ConversationPractice' | 'ListeningLab';
 type Navigation = { goBack: () => void; navigate: (route: Route) => void };
 
 export function PracticeSessionScreen({ navigation }: { navigation: Navigation }) {

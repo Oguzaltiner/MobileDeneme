@@ -171,6 +171,75 @@ namespace EnglishLearning.Infrastructure.Persistence.Migrations
                     b.ToTable("community_submissions", (string)null);
                 });
 
+            modelBuilder.Entity("EnglishLearning.Domain.DailyMission", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("CompletedAtUtc")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("CorrectAnswers")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("CreatedAtUtc")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateOnly>("MissionDate")
+                        .HasColumnType("date");
+
+                    b.Property<int>("NewWordsLearned")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("PayloadJson")
+                        .IsRequired()
+                        .HasColumnType("jsonb");
+
+                    b.Property<Guid>("PracticeSessionId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("ReviewedWords")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.Property<string>("TimeZone")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)");
+
+                    b.Property<int>("TotalAnswers")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("WordStepsCapped")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("XpAwarded")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompletedAtUtc")
+                        .HasFilter("\"Status\" = 'Completed'");
+
+                    NpgsqlIndexBuilderExtensions.IncludeProperties(b.HasIndex("CompletedAtUtc"), new[] { "UserId", "XpAwarded" });
+
+                    b.HasIndex("PracticeSessionId")
+                        .IsUnique();
+
+                    b.HasIndex("UserId", "MissionDate")
+                        .IsUnique();
+
+                    b.ToTable("daily_missions", (string)null);
+                });
+
             modelBuilder.Entity("EnglishLearning.Domain.DailyUsage", b =>
                 {
                     b.Property<Guid>("UserId")
@@ -859,6 +928,13 @@ namespace EnglishLearning.Infrastructure.Persistence.Migrations
                         .HasColumnType("integer")
                         .HasDefaultValue(19);
 
+                    b.Property<string>("TimeZone")
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)");
+
+                    b.Property<DateTime?>("TimeZoneUpdatedAtUtc")
+                        .HasColumnType("timestamp with time zone");
+
                     b.HasKey("UserId");
 
                     b.ToTable("user_settings", (string)null);
@@ -1120,6 +1196,25 @@ namespace EnglishLearning.Infrastructure.Persistence.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("EnglishLearning.Domain.DailyMission", b =>
+                {
+                    b.HasOne("EnglishLearning.Domain.PracticeSession", "PracticeSession")
+                        .WithOne()
+                        .HasForeignKey("EnglishLearning.Domain.DailyMission", "PracticeSessionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EnglishLearning.Domain.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PracticeSession");
 
                     b.Navigation("User");
                 });

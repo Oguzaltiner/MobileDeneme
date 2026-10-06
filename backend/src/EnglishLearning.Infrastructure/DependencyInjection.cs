@@ -26,6 +26,8 @@ using EnglishLearning.Infrastructure.Quiz;
 using EnglishLearning.Infrastructure.Practice;
 using EnglishLearning.Application.Placement;
 using EnglishLearning.Infrastructure.Placement;
+using EnglishLearning.Application.Missions;
+using EnglishLearning.Infrastructure.Missions;
 
 namespace EnglishLearning.Infrastructure;
 
@@ -58,6 +60,7 @@ public static class DependencyInjection
         services.AddSingleton<IConversationAiProvider, FallbackConversationAiProvider>();
         services.AddSingleton<ITranscriptionProvider, FallbackTranscriptionProvider>();
         services.AddScoped<IPlacementTestService, PlacementTestService>();
+        services.AddScoped<IDailyMissionService, DailyMissionService>();
 
         return services;
     }

@@ -16,6 +16,7 @@ public sealed class QuizController(IQuizService quiz) : ControllerBase
         QuizSessionDto? result;
         try { result = await quiz.CreateAsync(userId, request, ct); }
         catch (DailyLimitExceededException ex) { return StatusCode(StatusCodes.Status429TooManyRequests, new { message = ex.Message }); }
+        catch (LevelLockedException ex) { return StatusCode(StatusCodes.Status403Forbidden, new { message = ex.Message }); }
         return result is null ? BadRequest(new { message = "Not enough vocabulary for this quiz." }) : Ok(result);
     }
 

@@ -1,10 +1,10 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { focusManager, QueryClientProvider } from '@tanstack/react-query';
 import { StatusBar } from 'expo-status-bar';
 import { Text, View } from 'react-native';
 import { useEffect } from 'react';
-import { AppState } from 'react-native';
+import { AppState, Platform } from 'react-native';
 
 import './global.css';
 import { useAuthStore } from './src/store/auth-store';
@@ -36,10 +36,16 @@ import { AppErrorBoundary } from './src/components/AppErrorBoundary';
 import { api } from './src/lib/api';
 import { flushReviewQueue } from './src/lib/offline-review-queue';
 import { scheduleLocalReminder } from './src/lib/notification-scheduler';
+import { queryClient } from './src/lib/query-client';
 
 export type RootStackParamList = { Login: undefined; Register: undefined; Onboarding: undefined; PlacementTest: undefined; Home: undefined; Vocabulary: undefined; WordDetail: { id: string }; Learn: undefined; DailyMission: undefined; SentenceChallenge: undefined; WritingChallenge: undefined; MatchingChallenge: undefined; PracticeSession: undefined; ConversationPractice: undefined; ListeningLab: undefined; GrammarLab: undefined; GameCenter: undefined; MillionaireGame: undefined; Leaderboard: undefined; LearningPaths: undefined; QuizStart: undefined; QuizQuestion: { sessionId: string }; QuizResult: { sessionId: string }; Premium: undefined };
 const Stack = createNativeStackNavigator<RootStackParamList>();
-const queryClient = new QueryClient();
+// React Native has no window focus: map app foreground/background to TanStack Query focus so stale
+// queries (daily mission, dashboard) refetch when the user returns to the app.
+if (Platform.OS !== 'web') focusManager.setEventListener((handleFocus) => {
+  const subscription = AppState.addEventListener('change', (state) => handleFocus(state === 'active'));
+  return () => subscription.remove();
+});
 
 export default function App() {
   const { user, booting, restore } = useAuthStore();

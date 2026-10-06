@@ -2,7 +2,6 @@ using EnglishLearning.Application.Entitlements;
 using EnglishLearning.Domain;
 using EnglishLearning.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
-using System.Data;
 
 namespace EnglishLearning.Infrastructure.Entitlements;
 
@@ -30,32 +29,25 @@ public sealed class EntitlementService(EnglishLearningDbContext db) : IEntitleme
     {
         var entitlement = await GetAsync(userId, ct);
         if (entitlement.IsPremium) return true;
-        return await TryConsumeAsync(userId, entitlement.DailyQuizLimit, static usage => usage.QuizzesStarted++, static usage => usage.QuizzesStarted, ct);
+        var today = DateOnly.FromDateTime(DateTime.UtcNow);
+        var limit = entitlement.DailyQuizLimit;
+        return await db.DailyUsages.Where(x => x.UserId == userId && x.DateUtc == today && x.QuizzesStarted < limit)
+            .ExecuteUpdateAsync(s => s.SetProperty(x => x.QuizzesStarted, x => x.QuizzesStarted + 1), ct) == 1;
     }
 
     public async Task<bool> TryConsumeWordAsync(Guid userId, CancellationToken ct)
     {
         var entitlement = await GetAsync(userId, ct);
         if (entitlement.IsPremium) return true;
-        return await TryConsumeAsync(userId, entitlement.DailyWordLimit, static usage => usage.WordsUsed++, static usage => usage.WordsUsed, ct);
+        var today = DateOnly.FromDateTime(DateTime.UtcNow);
+        var limit = entitlement.DailyWordLimit;
+        return await db.DailyUsages.Where(x => x.UserId == userId && x.DateUtc == today && x.WordsUsed < limit)
+            .ExecuteUpdateAsync(s => s.SetProperty(x => x.WordsUsed, x => x.WordsUsed + 1), ct) == 1;
     }
 
-    private async Task<bool> TryConsumeAsync(Guid userId, int limit, Action<DailyUsage> increment, Func<DailyUsage, int> read, CancellationToken ct)
-    {
-        // Serialize the read-modify-write against concurrent requests for this user/day.
-        // This prevents parallel mobile retries from bypassing the free plan quota.
-        await using var transaction = await db.Database.BeginTransactionAsync(IsolationLevel.Serializable, ct);
-        var usage = await GetUsageAsync(userId, ct);
-        if (read(usage) >= limit)
-        {
-            await transaction.RollbackAsync(ct);
-            return false;
-        }
-        increment(usage);
-        await db.SaveChangesAsync(ct);
-        await transaction.CommitAsync(ct);
-        return true;
-    }
+    // Quota consumption is one conditional UPDATE (the usage row exists after GetAsync): parallel
+    // requests serialize on the row lock, so the free plan limit cannot be exceeded. It also joins a
+    // caller's transaction, so a rolled-back caller (e.g. a duplicate review) does not burn quota.
 
     public async Task<bool> HasFeatureAsync(Guid userId, string featureKey, CancellationToken ct)
     {
@@ -76,12 +68,13 @@ public sealed class EntitlementService(EnglishLearningDbContext db) : IEntitleme
     private async Task<DailyUsage> GetUsageAsync(Guid userId, CancellationToken ct)
     {
         var today = DateOnly.FromDateTime(DateTime.UtcNow);
-        var usage = await db.DailyUsages.SingleOrDefaultAsync(x => x.UserId == userId && x.DateUtc == today, ct);
+        var usage = await db.DailyUsages.AsNoTracking().SingleOrDefaultAsync(x => x.UserId == userId && x.DateUtc == today, ct);
         if (usage is not null) return usage;
-        usage = new DailyUsage { UserId = userId, DateUtc = today };
-        db.DailyUsages.Add(usage);
-        await db.SaveChangesAsync(ct);
-        return usage;
+        // Insert-on-read races with parallel requests: ON CONFLICT keeps it idempotent and, unlike a
+        // caught unique violation, does not abort a surrounding transaction.
+        await db.Database.ExecuteSqlInterpolatedAsync(
+            $"INSERT INTO daily_usage (\"UserId\", \"DateUtc\", \"WordsUsed\", \"QuizzesStarted\") VALUES ({userId}, {today}, 0, 0) ON CONFLICT DO NOTHING", ct);
+        return await db.DailyUsages.AsNoTracking().SingleAsync(x => x.UserId == userId && x.DateUtc == today, ct);
     }
 
     private static EntitlementDto Free() => new(SubscriptionPlan.Free, false, "A2", 20, 1, true, 0, 0,

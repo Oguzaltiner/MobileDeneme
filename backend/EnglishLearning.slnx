@@ -5,4 +5,7 @@
     <Project Path="src/EnglishLearning.Domain/EnglishLearning.Domain.csproj" />
     <Project Path="src/EnglishLearning.Infrastructure/EnglishLearning.Infrastructure.csproj" />
   </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/EnglishLearning.Tests/EnglishLearning.Tests.csproj" />
+  </Folder>
 </Solution>

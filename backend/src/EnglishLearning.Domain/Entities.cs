@@ -23,6 +23,9 @@ public sealed class UserSettings
     public int ReminderHour { get; set; } = 19;
     public int QuietHoursStart { get; set; } = 22;
     public int QuietHoursEnd { get; set; } = 8;
+    /// <summary>Pinned mission time zone: IANA id, fixed offset such as "UTC+03:00", or "UTC".</summary>
+    public string? TimeZone { get; set; }
+    public DateTime? TimeZoneUpdatedAtUtc { get; set; }
     public AppUser User { get; set; } = null!;
 }
 

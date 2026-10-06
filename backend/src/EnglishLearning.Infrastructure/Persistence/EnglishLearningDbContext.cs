@@ -24,6 +24,7 @@ public sealed class EnglishLearningDbContext(DbContextOptions<EnglishLearningDbC
     public DbSet<PracticeSession> PracticeSessions => Set<PracticeSession>();
     public DbSet<PracticeSessionStep> PracticeSessionSteps => Set<PracticeSessionStep>();
     public DbSet<PracticeEvent> PracticeEvents => Set<PracticeEvent>();
+    public DbSet<DailyMission> DailyMissions => Set<DailyMission>();
     public DbSet<CommunitySubmission> CommunitySubmissions => Set<CommunitySubmission>();
     public DbSet<CommunityFeedback> CommunityFeedback => Set<CommunityFeedback>();
     public DbSet<MediaAsset> MediaAssets => Set<MediaAsset>();
@@ -50,6 +51,7 @@ public sealed class EnglishLearningDbContext(DbContextOptions<EnglishLearningDbC
             entity.Property(x => x.ReminderHour).HasDefaultValue(19);
             entity.Property(x => x.QuietHoursStart).HasDefaultValue(22);
             entity.Property(x => x.QuietHoursEnd).HasDefaultValue(8);
+            entity.Property(x => x.TimeZone).HasMaxLength(64);
         });
         modelBuilder.Entity<UserEntitlement>(entity =>
         {
@@ -159,6 +161,20 @@ public sealed class EnglishLearningDbContext(DbContextOptions<EnglishLearningDbC
             entity.HasOne(x => x.User).WithMany().HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Cascade);
             entity.HasOne(x => x.Session).WithMany().HasForeignKey(x => x.SessionId).OnDelete(DeleteBehavior.Cascade);
             entity.HasOne(x => x.VocabularyWord).WithMany().HasForeignKey(x => x.VocabularyWordId).OnDelete(DeleteBehavior.SetNull);
+        });
+        modelBuilder.Entity<DailyMission>(entity =>
+        {
+            entity.ToTable("daily_missions"); entity.HasKey(x => x.Id);
+            entity.Property(x => x.MissionDate).HasColumnType("date");
+            entity.Property(x => x.TimeZone).HasMaxLength(64).IsRequired();
+            entity.Property(x => x.Status).HasConversion<string>().HasMaxLength(20).IsRequired();
+            entity.Property(x => x.PayloadJson).HasColumnType("jsonb").IsRequired();
+            entity.HasIndex(x => new { x.UserId, x.MissionDate }).IsUnique();
+            // Weekly leaderboard: completed missions by completion time.
+            entity.HasIndex(x => x.CompletedAtUtc).HasFilter("\"Status\" = 'Completed'").IncludeProperties(x => new { x.UserId, x.XpAwarded });
+            entity.HasIndex(x => x.PracticeSessionId).IsUnique();
+            entity.HasOne(x => x.User).WithMany().HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Cascade);
+            entity.HasOne(x => x.PracticeSession).WithOne().HasForeignKey<DailyMission>(x => x.PracticeSessionId).OnDelete(DeleteBehavior.Cascade);
         });
         modelBuilder.Entity<RefreshToken>(entity =>
         {

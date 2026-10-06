@@ -37,13 +37,20 @@ public sealed class SyncController(EnglishLearningDbContext db) : ControllerBase
         if (inputs.Count != request.Events.Count || inputs.Select(x => x.ClientEventId).Distinct(StringComparer.Ordinal).Count() != inputs.Count)
             return BadRequest(new { message = "Client event ids must be unique and non-empty." });
 
+        // "mission:" ids are reserved for server-graded daily mission answers.
+        if (inputs.Any(x => x.ClientEventId.StartsWith("mission:", StringComparison.OrdinalIgnoreCase)))
+            return BadRequest(new { message = "Client event ids starting with 'mission:' are reserved." });
+
         var sessionIds = inputs.Select(x => x.SessionId).Distinct().ToArray();
         var ownedSessions = await db.PracticeSessions.AsNoTracking()
             .Where(x => x.UserId == userId && sessionIds.Contains(x.Id))
-            .Select(x => new { x.Id, StepKeys = x.Steps.Select(step => step.Key) })
+            .Select(x => new { x.Id, x.PathKey, StepKeys = x.Steps.Select(step => step.Key) })
             .ToListAsync(ct);
         if (ownedSessions.Count != sessionIds.Length)
             return BadRequest(new { message = "One or more practice sessions do not belong to this user." });
+        // Daily mission progress is server-graded (POST /reviews and /missions/{id}/answers); raw events would bypass it.
+        if (ownedSessions.Any(x => x.PathKey == DailyMission.PracticePathKey))
+            return BadRequest(new { message = "Daily mission sessions do not accept synced practice events." });
         var sessionSteps = ownedSessions.ToDictionary(x => x.Id, x => x.StepKeys.ToHashSet(StringComparer.OrdinalIgnoreCase));
         if (inputs.Any(x => !sessionSteps.TryGetValue(x.SessionId, out var steps) || !steps.Contains(x.StepKey)))
             return BadRequest(new { message = "One or more practice steps do not belong to the session." });
