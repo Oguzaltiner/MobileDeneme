@@ -6,7 +6,7 @@
     "@expo/cli": "^57.0.27",
     "@react-native-async-storage/async-storage": "2.2.0",
     "@react-navigation/native": "^7.4.1",
-    "@react-navigation/native-stack": "^7.19.2",
+    "@react-navigation/native-stack": "^7.20.0",
     "@tanstack/react-query": "^5.104.0",
     "expo": "~57.0.25",
     "expo-iap": "^5.8.1",
