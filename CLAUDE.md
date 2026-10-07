@@ -1,5 +1,7 @@
 @AGENTS.md
 
+Start every session by reading `docs/HANDOFF.md` (current state, how to run the stack locally). The project is continued from several Claude accounts and devices, so keep that file current when the state changes; work on the `dev` branch.
+
 ## Claude Code mapping
 
 `AGENTS.md` names roles the Codex way (`snake_case`). In Claude Code they are subagents in `.claude/agents/` and skills in `.claude/skills/`:
