@@ -5,7 +5,7 @@ Bu proje farklı Claude hesaplarından ve cihazlardan devam ettirilebilsin diye,
 ## Geçmiş
 
 - Proje 26 Eylül – 5 Ekim 2026 arasında Codex ile geliştirildi, sonra Claude Code'a taşındı. Ajan ve beceri tanımları her iki araç için de repoda (`.claude/` ve `.codex/`, eşleme `CLAUDE.md`'de).
-- Çalışma branch'i **`dev`**. `main` eski kalmıştır; yeni işler `dev`'e gider.
+- Çalışma branch'i **`dev`**; yeni işler `dev`'e gider. `main` kararlı branch'tir ve kullanıcı istediğinde `dev`'den ileri sarılarak güncellenir (7 Ekim 2026'da eşitlendi).
 - Kullanıcı Türkçe yazar ve her adımda onay beklemeden task listesinin bitirilmesini ister. İnceleme ve güvenlik adımları atlanmaz.
 
 ## Son durum (7 Ekim 2026)
