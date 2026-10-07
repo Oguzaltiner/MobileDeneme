@@ -9,7 +9,7 @@
     "@react-navigation/native-stack": "^7.19.2",
     "@tanstack/react-query": "^5.104.0",
     "expo": "~57.0.25",
-    "expo-iap": "^5.8.1",
+    "expo-iap": "^5.8.2",
     "expo-secure-store": "~57.0.4",
     "expo-speech": "~57.0.3",
     "expo-status-bar": "~57.0.1",
